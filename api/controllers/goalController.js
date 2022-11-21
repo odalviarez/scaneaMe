@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+//cambiar esto a const { Router } = require("express");
 
 const Goal = require('../models/goalModel');
 const User = require('../models/userModel');
