@@ -1,1 +1,0 @@
-comentarios sobre el backen y la BDD
