@@ -6,6 +6,9 @@ import Catalogue from './pages/catalogue/Catalogue'
 import ContactForm from './pages/contactForm/ContactForm'
 import Cart from './pages/cart/Cart'
 import Detail from './pages/detail/Detail'
+import About from './pages/about/About'
+import Register from './pages/register/Register'
+import Login from './pages/login/Login'
 import './App.css';
 
 function App() {
@@ -17,6 +20,9 @@ function App() {
         <Route exact path={"/detail"} component={Detail}/>
         <Route exact path={"/cart"} component={Cart}/>
         <Route exact path={"/contact"} component={ContactForm}/>
+        <Route exact path={"/about"} component={About}/>
+        <Route exact path={"/register"} element={Register} />
+        <Route exact path={"/login"} element={Login} />
       </Switch>
     </div>
   );
