@@ -1,3 +1,4 @@
+import NavBar from '../../components/navBar/NavBar.jsx'
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -33,9 +34,9 @@ export default function Catalogue() {
 
   return (
     <div>
-    
+      <NavBar />
+      <h1>Catalogue</h1>
       <Cards/>
-    
     </div>
   )
 }
