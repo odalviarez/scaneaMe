@@ -15,6 +15,7 @@ function App() {
         <Route exact path={"/home"} component={Home}/>
         <Route exact path={"/catalogue"} component={Catalogue}/>
         <Route exact path={"/detail"} component={Detail}/>
+        {/* <Route exact path={"/detail:id"} component={Detail}/> */}
         <Route exact path={"/cart"} component={Cart}/>
         <Route exact path={"/contact"} component={ContactForm}/>
       </Switch>
