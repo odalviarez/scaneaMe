@@ -6,7 +6,7 @@ const connectDB = async () => {
           process.env.MONGO_URI || "mongodb://localhost:27017/scaneame"
         );
     
-        console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
+        console.log(`MongoDB Connected: ${conn.connection.host}`)
     } catch (error) {
         console.log(error); {
             console.log(error);
