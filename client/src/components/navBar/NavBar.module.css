@@ -11,14 +11,14 @@ body{
   color:antiquewhite;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 2rem;
   padding: 0 1rem;
 }
 
 .logo{
-  height: 50px;
-  width:50px;
+  height: 75px;
+  width:75px;
   object-fit: cover;;
 }
 
@@ -32,4 +32,34 @@ body{
 
 .nav .anchor{
   color: inherit;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: .25rem;
+}
+
+.cart{
+  height: 50px;
+  width: 50px;
+  background-color: antiquewhite;
+  border-radius: 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.cart:hover{
+  background-color: rgb(249, 216, 173);
+}
+
+.nav li.active{
+  background-color: #555;
+}
+
+.nav li:hover{
+  background-color: #777;
 }

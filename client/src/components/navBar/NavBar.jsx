@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './NavBar.module.css'
 import logo from '../../Logo/LogoQR.png'
+import cart from '../../Logo/cart.png'
+import profile from '../../Logo/profile.png'
 
 export default function Navbar() {
   return (
@@ -11,16 +13,24 @@ export default function Navbar() {
       </Link>
       <ul>
         <li>
-          <Link to={'/catalogue'}>Catalogue</Link>
+          <Link to={'/cart'}>
+            <img src={cart} className={styles.cart} alt='cart' />
+          </Link>
         </li>
         <li>
-          <Link to={'/about'}>About us</Link>
+          <Link to={'/catalogue'} className={styles.anchor}>Catalogue</Link>
         </li>
         <li>
-          <Link to={'/contact'}>Contact</Link>
+          <Link to={'/about'} className={styles.anchor}>About us</Link>
         </li>
         <li>
-          <Link to={'/cart'}>Cart</Link>
+          <Link to={'/contact'} className={styles.anchor}>Contact</Link>
+        </li>
+        <li>
+          <Link to={'/login'} className={styles.anchor}>login</Link>
+        </li>
+        <li>
+          <Link to={'/register'} className={styles.anchor}>Register</Link>
         </li>
       </ul>
     </nav>

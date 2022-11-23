@@ -21,8 +21,8 @@ function App() {
         <Route exact path={"/cart"} component={Cart}/>
         <Route exact path={"/contact"} component={ContactForm}/>
         <Route exact path={"/about"} component={About}/>
-        <Route exact path={"/register"} element={Register} />
-        <Route exact path={"/login"} element={Login} />
+        <Route exact path={"/register"} component={Register} />
+        <Route exact path={"/login"} component={Login} />
       </Switch>
     </div>
   );

@@ -1,7 +1,11 @@
 import React from 'react'
+import NavBar from '../../components/navBar/NavBar.jsx'
 
-export default function Cart() {
+export default function Detail() {
   return (
-    <div>Cart</div>
+    <div>
+      <NavBar />
+      <h1>Cart</h1>
+    </div>
   )
 }

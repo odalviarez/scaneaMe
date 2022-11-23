@@ -1,7 +1,12 @@
 import React from 'react'
+import NavBar from '../../components/navBar/NavBar.jsx'
 
-export default function ContactForm() {
+export default function Detail() {
   return (
-    <div>ContactForm</div>
+    <div>
+      <NavBar />
+      <h1>Contact</h1>
+    </div>
   )
 }
+

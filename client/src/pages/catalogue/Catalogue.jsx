@@ -1,7 +1,11 @@
 import React from 'react'
+import NavBar from '../../components/navBar/NavBar.jsx'
 
-export default function Catalogue() {
+export default function Detail() {
   return (
-    <div>Catalogue</div>
+    <div>
+      <NavBar />
+      <h1>Catalogue</h1>
+    </div>
   )
 }
