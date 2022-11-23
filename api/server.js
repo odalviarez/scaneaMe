@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const dotenv = require('dotenv').config();
 const routes = require("./routes/index.js");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 5000;
