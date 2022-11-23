@@ -13,7 +13,7 @@ const products = [
     ],
     price: 100,
     image:
-      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667593738/fdk1ul9ryzcefuyrb9zb.jpg",
+      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1666969305/cld-sample-5.jpg",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const products = [
     ],
     price: 250,
     image:
-      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667593738/fdk1ul9ryzcefuyrb9zb.jpg",
+      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667588997/pkttnzunfr96itkoiknl.jpg",
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const products = [
     ],
     price: 10,
     image:
-      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667593738/fdk1ul9ryzcefuyrb9zb.jpg",
+      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667589327/lrpdpjqmm4xphba56rps.jpg",
   },
 ];
 
