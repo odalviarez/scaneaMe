@@ -32,6 +32,12 @@ export default function Navbar() {
         <li>
           <Link to={'/register'} className={styles.anchor}>Register</Link>
         </li>
+        <li>
+          <Link to={'/login'}>login</Link>
+        </li>
+        <li>
+          <Link to={'/register'}>Register</Link>
+        </li>
       </ul>
     </nav>
   )
