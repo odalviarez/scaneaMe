@@ -1,8 +1,9 @@
 const products = [
   {
     id: 1,
-    name: "RemeraQR moderna",
+    name: "RemeraQR moderna negra",
     type: "shirt",
+    color: "red",
     stock: [
       { size: "xs", quantity: 10 },
       { size: "s", quantity: 5 },
@@ -19,6 +20,7 @@ const products = [
     id: 2,
     name: "RemeraQR fachera",
     type: "shirt",
+    color: "black",
     stock: [
       { size: "xs", quantity: 0 },
       { size: "s", quantity: 3 },
@@ -34,6 +36,7 @@ const products = [
   {
     id: 3,
     name: "Pantalon turro",
+    color: "blue",
     type: "pants",
     stock: [
       { size: "xs", quantity: 0 },
@@ -46,6 +49,23 @@ const products = [
     price: 10,
     image:
       "https://res.cloudinary.com/dxfksb8ua/image/upload/v1667589327/lrpdpjqmm4xphba56rps.jpg",
+  },
+  {
+    id: 4,
+    name: "RemeraQR moderna",
+    color: "white",
+    type: "shirt",
+    stock: [
+      { size: "xs", quantity: 10 },
+      { size: "s", quantity: 5 },
+      { size: "m", quantity: 3 },
+      { size: "l", quantity: 12 },
+      { size: "xl", quantity: 0 },
+      { size: "xxl", quantity: 18 },
+    ],
+    price: 100,
+    image:
+      "https://res.cloudinary.com/dxfksb8ua/image/upload/v1666969305/cld-sample-5.jpg",
   },
 ];
 
