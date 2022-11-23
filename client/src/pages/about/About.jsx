@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../../components/navBar/NavBar.jsx'
 
-export default function Detail() {
+export default function About() {
   return (
     <div>
       <NavBar />
