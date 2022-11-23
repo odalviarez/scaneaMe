@@ -28,7 +28,12 @@ const userSchema = mongoose.Schema(
       required: false,
       ref: "Product",
     },
+    isAdmin: {
+      type: Boolean, 
+      default: false
+    }
   },
+  
   {
     timestamps: true,
   }
