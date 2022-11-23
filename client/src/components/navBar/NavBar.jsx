@@ -11,16 +11,22 @@ export default function Navbar() {
       </Link>
       <ul>
         <li>
-          <Link to={'/catalogue'}>Catalogue</Link>
+          <Link to={'/catalogue'} className={styles.anchor}>Catalogue</Link>
         </li>
         <li>
-          <Link to={'/about'}>About us</Link>
+          <Link to={'/about'} className={styles.anchor}>About us</Link>
         </li>
         <li>
-          <Link to={'/contact'}>Contact</Link>
+          <Link to={'/contact'} className={styles.anchor}>Contact</Link>
         </li>
         <li>
           <Link to={'/cart'}>Cart</Link>
+        </li>
+        <li>
+          <Link to={'/login'}>login</Link>
+        </li>
+        <li>
+          <Link to={'/register'}>Register</Link>
         </li>
       </ul>
     </nav>
