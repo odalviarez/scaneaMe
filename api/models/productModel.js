@@ -14,6 +14,10 @@ const productSchema = mongoose.Schema(
       type: Array,
       require: [true, "Please add a array value"],
     },
+    color: {
+      type: String,
+      required: [true, "Please add a text value"],
+    },
     price: {
       type: Number,
       require: [true, "Please add a price value"],
