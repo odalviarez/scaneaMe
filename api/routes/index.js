@@ -8,7 +8,6 @@ const router = Router();
 
 router.use("/register", userControl);
 router.use("/products", productControl);
-//router.post('/login', loginUser);
-//router.get('/me', protect, getMe);
+
 
 module.exports = router;
