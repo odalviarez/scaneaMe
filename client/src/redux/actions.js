@@ -7,6 +7,7 @@ export const SORT_PRODUCTS = 'SORT_PRODUCTS';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
 export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
+export const GET_PRODUCT_DETAILS = 'GET_PRODUCT_DETAILS'
 
 
 export const getAllProducts = () => { 
@@ -35,6 +36,21 @@ export const sortProducts = (payload) => {
 export const filterProducts = (payload) => { 
     return { type: FILTER_PRODUCTS, payload: payload }
 };
+
+export const getProductDetails = (id) => {
+    return async (dispatch) => {
+        try {
+            const product = await axios(`/products/${id}`);
+            return dispatch({
+                type: GET_PRODUCT_DETAILS,
+                payload: product.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
 
 
 
