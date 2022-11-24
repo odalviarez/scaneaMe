@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import Cards from '../../components/cards/Cards'
 import NavBar from '../../components/navBar/NavBar'
 import Footer from '../../components/footer/Footer'
