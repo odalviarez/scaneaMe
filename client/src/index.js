@@ -6,9 +6,11 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import axios from "axios"
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+axios.defaults.baseURL = 'http://localhost:5000'
 
 root.render(
   <React.StrictMode>
