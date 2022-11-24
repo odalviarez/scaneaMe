@@ -116,7 +116,7 @@ export default function Cards() {
       </div>
 
       <div className={styles.filtersApplied}>{filters.filtersApplied?.map((f, index) => 
-      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>{f.valor}</p>
+      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>X {f.valor}</p>
       )}
       </div>
 
@@ -135,6 +135,7 @@ export default function Cards() {
           <li value='black' onClick={(e) => handleFilters(e)}>Negro</li>
           <li value='red' onClick={(e) => handleFilters(e)}>Rojo</li>
           <li value='blue' onClick={(e) => handleFilters(e)}>Azul</li>
+          <li value='green' onClick={(e) => handleFilters(e)}>Verde</li>
         </ul>
   
     
