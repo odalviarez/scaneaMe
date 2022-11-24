@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import products from '../../productos'
 import Card from '../card/Card'
 import { useLocalStorage } from '../../useLocalStorage'
@@ -16,11 +15,21 @@ export default function Cards() {
 
   const [sort, setSort] = useState('');
 
-  const [filter, setFilter] = useState({
+  const [filters, setFilters] = useState({
     filtersApplied: []
   });
 
   const productsLoaded = useSelector((state) => state.products)
+  const productsOnStore = useSelector((state) => state.allProducts)
+  
+  useEffect( () => {
+    if(productsOnStore.length === 0){
+    dispatch(getAllProducts())}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+  
+
   
 
   const handleAddCart = function (e) {
@@ -34,36 +43,55 @@ export default function Cards() {
   }
 
   const handleSorts = function (e) {
-    e.preventDefault();
+    e.preventDefault(e);
     dispatch(sortProducts(e.target.value))
     setSort(e.target.value)
   }
 
 
   const handleFilters = function (e) {
-    e.preventDefault();
-    let payload = {
+    e.preventDefault(e);
+    let filtersUsed = [ ...filters.filtersApplied, {
       filter : e.target.parentNode.attributes.value.value,
-      value : e.target.attributes.value.value
+      value : e.target.attributes.value.value,
+      valor: e.target.innerHTML
+    } ]
+    let filterUsed = {
+      filter : e.target.parentNode.attributes.value.value,
+      value : e.target.attributes.value.value,
+      valor: e.target.innerHTML
     }
-    if (filter.filtersApplied.includes(payload.value) === false){
-      dispatch(filterProducts(payload))
-      setFilter({
-        filtersApplied: [...filter.filtersApplied, e.target.attributes.value.value]
-      })
+    if (filters.filtersApplied.length > 0) {
+        if (filters.filtersApplied.find(f => f.value === (filterUsed.value)) === undefined) {
+          setFilters((filters) => ({
+            filtersApplied: [...filters.filtersApplied, filterUsed]
+          }))
+          dispatch(filterProducts(filtersUsed))
+        }
+    } else {
+      setFilters((filters) => ({
+        filtersApplied: [filterUsed]}))
+        dispatch(filterProducts([filterUsed]))
     }
   }
+  
+  
 
   const removeFilter = function (e) {
     e.preventDefault();
-    
+    let newFilters = filters.filtersApplied.filter(filter => filter.value !== e.target.attributes.value.value)
+    console.log(newFilters);
+    setFilters((filters) => ({
+      filtersApplied: newFilters}))
+      if (newFilters.length === 0) {
+        dispatch(loadAllProducts())
+      } else {
+        dispatch(filterProducts(newFilters))
+      }
   }
 
 
-  useEffect(() => {
-    dispatch(getAllProducts())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
 
   // useEffect(() => {
   //   if (productsLoaded.length === 0) {
@@ -87,8 +115,8 @@ export default function Cards() {
           </select>
       </div>
 
-      <div className={styles.filtersApplied}>{filter.filtersApplied?.map((f, index) => 
-      <p key={index} className={styles.filter} value={f}>{f}</p>
+      <div className={styles.filtersApplied}>{filters.filtersApplied?.map((f, index) => 
+      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>{f.valor}</p>
       )}
       </div>
 
