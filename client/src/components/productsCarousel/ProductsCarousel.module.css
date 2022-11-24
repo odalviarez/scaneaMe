@@ -2,13 +2,12 @@
   display: flex;
   background-color: rgb(0, 0, 0);
   width: 60%;
-  height: 400px;
+  height: 500px;
   border-radius: 0px;
   position:relative;
   left:20%;
   align-items: center;
   justify-content: center;
-  margin-bottom: 50px;
 }
 
 .img{
