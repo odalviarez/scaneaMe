@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import products from '../../productos'
 import Card from '../card/Card'
 import { useLocalStorage } from '../../useLocalStorage'
 import { filterProducts, getAllProducts, loadAllProducts, sortProducts } from '../../redux/actions'
@@ -9,9 +8,10 @@ export default function Cards() {
 
   const dispatch = useDispatch();
 
-  const [cart, setCart] = useLocalStorage('cartProducts', {
-    cartProducts: []
+  const [cart, setCart] = useLocalStorage("cartProducts", {
+    cartProducts: [],
   });
+
 
   const [sort, setSort] = useState('');
 
@@ -20,6 +20,7 @@ export default function Cards() {
   });
 
   const productsLoaded = useSelector((state) => state.products)
+
   const productsOnStore = useSelector((state) => state.allProducts)
   
   useEffect( () => {
@@ -27,19 +28,17 @@ export default function Cards() {
     dispatch(getAllProducts())}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  
-
-  
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
-    console.log(e.target.value);
-    const newProduct = products.find(p => p.id === Number(e.target.value))
+    const newProduct = productsLoaded.find((p) => p.id === e.target.value);
     console.log('este es newProduct', newProduct);
     setCart({
-      cartProducts: [...cart.cartProducts, newProduct]
-    })
+      cartProducts: [
+        ...cart.cartProducts,
+        { ...newProduct, cartTotalQuantity: 1, cartTotalAmount: 0 },
+      ],
+    });
   }
 
   const handleSorts = function (e) {
