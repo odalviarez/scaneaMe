@@ -11,6 +11,7 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_ALL_PRODUCTS:
+            console.log('Se hizo un GET a la base de datos');
             return {
             ...state,
             products: action.payload,
@@ -39,18 +40,26 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case FILTER_PRODUCTS:
+
             let productsFiltered = []
 
-            for (let i = 0; i < state.products.length; i++) {
-                const product = state.products[i];   
-                if (action.payload.filter === 'type'){
-                    if (product.type === action.payload.value){
-                        productsFiltered.push(product)
+            console.log(action.payload);
+            
+            for (let i = 0; i < action.payload.length; i++) {
+                let filter = action.payload[i]
+                for (let i = 0; i < state.allProducts.length; i++) {
+                    const product = state.allProducts[i];   
+                    if (filter.filter === 'type'){
+                        if (product.type === filter.value){
+                            if (productsFiltered.includes(product) === false){
+                            productsFiltered.push(product)}
+                        }
                     }
-                }
-                if (action.payload.filter === 'color'){
-                    if (product.color === action.payload.value){
-                        productsFiltered.push(product)
+                    if (filter.filter === 'color'){
+                        if (product.color === filter.value){
+                            if (productsFiltered.includes(product) === false){
+                            productsFiltered.push(product)}
+                        }
                     }
                 }
             }
