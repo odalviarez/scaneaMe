@@ -13,7 +13,7 @@ export default function CartComponent() {
   return (
     <div>
       {cart.cartProducts.map(p => 
-      <div>
+      <div key={Math.floor(Math.random()*100*(Number(p.id) + 21))}>
         {p.name}
       </div>)}
     </div>
