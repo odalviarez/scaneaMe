@@ -12,7 +12,7 @@ export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
 export const getAllProducts = () => { 
     return async function (dispatch) {
         try {
-            const json = await axios.get("/products/test")
+            const json = await axios.get("/products")
             return dispatch({
                 type: GET_ALL_PRODUCTS,
                 payload: json.data,
