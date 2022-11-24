@@ -4,3 +4,13 @@
     justify-content: center;
 }
 
+.filtersApplied{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.filter{
+    margin-right: 5px;
+}

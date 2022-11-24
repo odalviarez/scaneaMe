@@ -46,11 +46,17 @@ export default function Cards() {
       filter : e.target.parentNode.attributes.value.value,
       value : e.target.attributes.value.value
     }
-    dispatch(filterProducts(payload))
-    setFilter({
-      filtersApplied: [...filter.filtersApplied, e.target.attributes.value.value]
-    })
+    if (filter.filtersApplied.includes(payload.value) === false){
+      dispatch(filterProducts(payload))
+      setFilter({
+        filtersApplied: [...filter.filtersApplied, e.target.attributes.value.value]
+      })
+    }
+  }
 
+  const removeFilter = function (e) {
+    e.preventDefault();
+    
   }
 
 
@@ -59,11 +65,11 @@ export default function Cards() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (productsLoaded.length === 0) {
-    dispatch(loadAllProducts())}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productsLoaded]);
+  // useEffect(() => {
+  //   if (productsLoaded.length === 0) {
+  //   dispatch(loadAllProducts())}
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [productsLoaded]);
 
 
 
@@ -79,6 +85,11 @@ export default function Cards() {
             <option value='priceUp'>Menor precio</option>
             <option value='priceDown'>Mayor precio</option>
           </select>
+      </div>
+
+      <div className={styles.filtersApplied}>{filter.filtersApplied?.map((f, index) => 
+      <p key={index} className={styles.filter} value={f}>{f}</p>
+      )}
       </div>
 
         <ul> Temporada
