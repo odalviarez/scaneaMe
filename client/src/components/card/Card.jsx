@@ -6,10 +6,6 @@ export default function Card({name, img, id, price, type, color, handleAddCart})
 
 
 
-
-
-
-
   return (
     <div className={styles.card} >
         <Link to={`/detail/${id}`}><h2>{name}</h2></Link>
