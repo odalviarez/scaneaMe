@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Cards from '../../components/cards/Cards'
 import NavBar from '../../components/navBar/NavBar'
 import Footer from '../../components/footer/Footer'
+import style from './Catalogue.module.css'
 
 export default function Catalogue() {
 
@@ -34,9 +35,9 @@ export default function Catalogue() {
 
 
   return (
-    <div>
+    <div >
       <NavBar/>
-      <Cards/>
+      <div className={style.body}><Cards /></div>
       <Footer/>
     </div>
   )
