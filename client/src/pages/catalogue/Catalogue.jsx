@@ -23,17 +23,6 @@ export default function Catalogue() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div >
       <NavBar/>
