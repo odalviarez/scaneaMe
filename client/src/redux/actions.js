@@ -9,24 +9,33 @@ export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
 export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
 
 
-// export const getAllProducts = () => { 
-//     return async function (dispatch) {
-//         try {
-//             const json = await axios.get("http://localhost:3001/recipes")
-//             return dispatch({
-//                 type: GET_ALL_PRODUCTS,
-//                 payload: json.data,
-//             })
-//         } catch (error) {
-//             alert ('Could not get products')
-//             console.log(error)
-//         }
-//     }
-// };
+export const getAllProducts = () => { 
+    return async function (dispatch) {
+        try {
+            const json = await axios.get("/products/test")
+            return dispatch({
+                type: GET_ALL_PRODUCTS,
+                payload: json.data,
+            })
+        } catch (error) {
+            alert ('Could not get products')
+            console.log(error)
+        }
+    }
+};
 
-// export const loadAllProducts = (payload) => { 
-//     return { type: LOAD_ALL_PRODUCTS, payload: payload }
-// };
+export const loadAllProducts = (payload) => { 
+    return { type: LOAD_ALL_PRODUCTS, payload: payload }
+};
+
+export const sortProducts = (payload) => { 
+    return { type: SORT_PRODUCTS, payload: payload }
+};
+
+export const filterProducts = (payload) => { 
+    return { type: FILTER_PRODUCTS, payload: payload }
+};
+
 
 
 
@@ -44,18 +53,14 @@ export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
 // }
 
 
-// export const filterRecipeDiets = (payload) => { 
-//     return { type: FILTER_RECIPE_DIETS, payload: payload }
-// };
+
 
 // export const cleanRecipeDetail = (payload) => { 
 //     return { type: 'CLEAN_RECIPE', payload: payload }
 // };
 
 
-// export const sortRecipes = (payload) => { 
-//     return { type: SORT_RECIPES, payload: payload }
-// };
+
 
 // export const createRecipe = (payload) => { 
 //     return async function () { 

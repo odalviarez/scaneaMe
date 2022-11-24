@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, LOAD_ALL_PRODUCTS } from "./actions";
+import { FILTER_PRODUCTS, GET_ALL_PRODUCTS, LOAD_ALL_PRODUCTS, SORT_PRODUCTS } from "./actions";
 
 
 const initialState = {
@@ -21,9 +21,42 @@ const rootReducer = (state = initialState, action) => {
             let allproduct = state.allProducts
             return {
             ...state,
-            products: allproduct,
+            products: allproduct
         }
 
+        case SORT_PRODUCTS:
+            const sortedProducts = state.products
+            if (action.payload === 'priceUp') {
+                sortedProducts.sort((a, b) => a.price - b.price )
+            }
+            if (action.payload === 'priceDown') {
+                sortedProducts.sort((a, b) => b.price - a.price )
+            }
+            return {
+            ...state,
+            products: sortedProducts
+        }
+
+        case FILTER_PRODUCTS:
+            let productsFiltered = []
+
+            for (let i = 0; i < state.products.length; i++) {
+                const product = state.products[i];   
+                if (action.payload.filter === 'type'){
+                    if (product.type === action.payload.value){
+                        productsFiltered.push(product)
+                    }
+                }
+                if (action.payload.filter === 'color'){
+                    if (product.color === action.payload.value){
+                        productsFiltered.push(product)
+                    }
+                }
+            }
+            return {
+            ...state,
+            products: productsFiltered
+        }
 
         default:
             return { 

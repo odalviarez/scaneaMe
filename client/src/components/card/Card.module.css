@@ -1,0 +1,15 @@
+.card {
+    height: 280px;
+    width: 220px;
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card img {
+    height: 140px;
+    width: 140px;
+}
