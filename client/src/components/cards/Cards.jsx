@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import products from '../../productos'
+// products from '../../productos'
 import Card from '../card/Card'
 import { useLocalStorage } from '../../useLocalStorage'
 import { filterProducts, getAllProducts, loadAllProducts, sortProducts } from '../../redux/actions'
@@ -10,9 +10,10 @@ export default function Cards() {
 
   const dispatch = useDispatch();
 
-  const [cart, setCart] = useLocalStorage('cartProducts', {
-    cartProducts: []
+  const [cart, setCart] = useLocalStorage("cartProducts", {
+    cartProducts: [],
   });
+
 
   const [sort, setSort] = useState('');
 
@@ -21,16 +22,18 @@ export default function Cards() {
   });
 
   const productsLoaded = useSelector((state) => state.products)
-  
+  const products = useSelector((state) => state.products);
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
-    console.log(e.target.value);
-    const newProduct = products.find(p => p.id === Number(e.target.value))
+    const newProduct = products.find(p => p.id === e.target.value)
     console.log('este es newProduct', newProduct);
     setCart({
-      cartProducts: [...cart.cartProducts, newProduct]
-    })
+      cartProducts: [
+        ...cart.cartProducts,
+        { ...newProduct, cartTotalQuantity: 1, cartTotalAmount: 0 },
+      ],
+    });
   }
 
   const handleSorts = function (e) {
