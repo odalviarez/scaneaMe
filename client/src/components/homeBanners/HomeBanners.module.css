@@ -38,7 +38,7 @@
 
 .buttonPrev{
   color:antiquewhite;
-  background-color: #eb118a;
+  background-color: #161616;
   height: 100%;
   padding: 8px;
   margin: 0 5px;
@@ -53,7 +53,7 @@
 
 .buttonNext{
   color:antiquewhite;
-  background-color: #eb118a;
+  background-color: #161616;
   height: 100%;
   padding: 8px;
   margin: 0 5px;
@@ -61,7 +61,7 @@
   border: 0;
   cursor: pointer;
   position: absolute;
-  right: -30px;
+  right: -20px;
   top: 50%;
   transform: translate(-50%, -50%);
 }

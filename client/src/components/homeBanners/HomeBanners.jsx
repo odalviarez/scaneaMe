@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react'
 import products from '../../productos'
 import styles from './HomeBanners.module.css'
 
-export default function HomeBanners(autoPlay=true) {
+export default function HomeBanners() {
   const images = products.map(e => [e.image])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [selectedImage, setSelectedImage] = useState(images[0])
   const [loaded, setLoaded] = useState(false)
+  const autoPlay = true
 
   useEffect(() => {
     if (autoPlay) {
@@ -54,10 +55,10 @@ export default function HomeBanners(autoPlay=true) {
       />
       <div className={styles.btnContainer}>
         <button onClick={previous} className={styles.buttonPrev}>
-          {'<'}
+          {' '}
         </button>
         <button onClick={next} className={styles.buttonNext}>
-          {'>'}
+          {' '}
         </button>
       </div>
     </div>
