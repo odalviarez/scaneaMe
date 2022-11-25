@@ -1,15 +1,22 @@
 .card {
-    height: 280px;
-    width: 220px;
+    height: 400px;
+    width: 30vw;
     font-size: large;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
 
 }
 
-.card img {
-    height: 140px;
-    width: 140px;
+.card p{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.imageContainer img {
+    height: 180px;
+    width: 180px;
+    object-fit: contain;
 }

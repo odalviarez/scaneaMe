@@ -1,0 +1,13 @@
+.pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding-left: 0%;
+}
+
+.paginationPage {
+    border : 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
