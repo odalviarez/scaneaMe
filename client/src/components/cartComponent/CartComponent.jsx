@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
 import "./CartComponent.css";
@@ -10,9 +10,15 @@ export default function CartComponent() {
   });
 
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
-    setTimeout(() => {
-      setCartTotalAmount(5);
-    }, 2000);
+
+    useEffect(() =>{
+      let cartCopy = [0, ...cart];
+      let totalAmount = cartCopy.reduce((acc, currentValue) => {
+        let total = currentValue.price * currentValue.cartTotalQuantity;
+        return acc + total;
+      });
+      setCartTotalAmount(totalAmount);
+    }, [cart])
     
   const handleAddToCart = (id) => {
     let cartModified = cart.map((elem) => {
