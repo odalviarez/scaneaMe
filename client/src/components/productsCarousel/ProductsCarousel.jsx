@@ -11,7 +11,11 @@ export default function HomeBanners() {
   const dispatch = useDispatch()
 
   const allProducts = useSelector(state => state.allProducts)
-  const product = allProducts.map(e => ({ image: e.image, price: e.price, id: e.id }))
+  const product = allProducts.map(e => ({
+    image: e.image,
+    price: e.price,
+    id: e.id,
+  }))
 
   useEffect(() => {
     if (allProducts.length === 0) {
@@ -21,19 +25,21 @@ export default function HomeBanners() {
 
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
+      breakpoint: { max: 4000, min: 1600 },
       items: 5,
+      slidesToSlide: 2,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      breakpoint: { max: 1600, min: 1024 },
+      items: 3,
+      slidesToSlide: 2,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 689 },
       items: 2,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 689, min: 0 },
       items: 1,
     },
   }
@@ -43,8 +49,16 @@ export default function HomeBanners() {
   ))
 
   return (
-    <div>
-      <Carousel responsive={responsive}>{productCard}</Carousel>
+    <div className={styles.container}>
+      <Carousel
+        className={styles.carru}
+        responsive={responsive}
+        showDots={true}
+        infinite={true}
+        renderDotsOutside={true}
+      >
+        {productCard}
+      </Carousel>
     </div>
   )
 }
