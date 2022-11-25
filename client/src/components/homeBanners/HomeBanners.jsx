@@ -2,9 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import products from '../../productos'
 import styles from './HomeBanners.module.css'
+import banner1 from '../../Logo/banner1.jpg'
+import banner2 from '../../Logo/banner2.jpg'
+import banner3 from '../../Logo/banner3.jpg'
 
 export default function HomeBanners() {
-  const images = products.map(e => [e.image])
+  
+  const images = [banner1, banner2, banner3]
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [selectedImage, setSelectedImage] = useState(images[0])
   const [loaded, setLoaded] = useState(false)

@@ -14,9 +14,8 @@
 .img{
   display:flex;
   height: 350px;
-  width: 300px;
   object-fit: cover;
-  border-radius: 5%;  
+  border-radius: 15px;  
   opacity: 0;
   transition: 400ms;
   position:absolute;
