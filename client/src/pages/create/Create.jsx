@@ -68,9 +68,16 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log(stock);
+        console.log({
+            name,
+            color,
+            type,
+            price,
+            stock,
+            image: productImg,
+        });
     
-        dispatch(productsCreate({
+        await dispatch(productsCreate({
         name,
         color,
         type,

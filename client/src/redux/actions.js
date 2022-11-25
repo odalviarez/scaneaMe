@@ -56,7 +56,7 @@ export const getProductDetails = (id) => {
 export const productsCreate = (payload) => { 
     return async function () { 
     try {
-        const res = await axios.post('/', payload);
+        const res = await axios.post('/products', payload);
         return res;
     } catch (error) {
         alert('No se pudo crear el producto')
