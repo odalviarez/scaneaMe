@@ -15,12 +15,7 @@ export default function Cards() {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentCards = productsLoaded.slice(
-      indexOfFirstCard,
-      indexOfLastCard
-    );
+
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
   const [currentPage, setcurrentPage] = useState(1);
@@ -31,13 +26,20 @@ export default function Cards() {
     setcurrentPage(pageNumber);
   };
 
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = productsLoaded.slice(
+      indexOfFirstCard,
+      indexOfLastCard
+    );
+
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
-    setcurrentPage(1);
   }, [dispatch, productsOnStore, filters]);
 
+  
   const handleAddCart = function (e) {
     e.preventDefault(e);
     //verificamos que el id del producto exista en los productos cargados y traemos toda la info

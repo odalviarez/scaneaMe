@@ -5,9 +5,7 @@ import "./CartComponent.css";
 
 export default function CartComponent() {
 
-  const [cart, setCart] = useLocalStorage("cartProducts", {
-    cartProducts: [],
-  });
+  const [cart, setCart] = useLocalStorage("cartProducts", []);
 
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
 
