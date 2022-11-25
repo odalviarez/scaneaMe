@@ -4,35 +4,40 @@ import Card from '../card/Card'
 import { useLocalStorage } from '../../useLocalStorage'
 import { filterProducts, getAllProducts, loadAllProducts, sortProducts } from '../../redux/actions'
 import styles from './Cards.module.css'
+import Pagination from '../pagination/Pagination'
+
+
 export default function Cards() {
 
   const dispatch = useDispatch();
-
-  const [cart, setCart] = useLocalStorage("cartProducts", {
-    cartProducts: [],
-  });
-
-
+  const [cart, setCart] = useLocalStorage("cartProducts", {cartProducts: [],});
   const [sort, setSort] = useState('');
-
-  const [filters, setFilters] = useState({
-    filtersApplied: []
-  });
-
+  const [filters, setFilters] = useState({filtersApplied: []});
+  const [currentPage, setcurrentPage] = useState(1);
+  const [cardsPerPage, setCardsPerPage] = useState(9);
   const productsLoaded = useSelector((state) => state.products)
-
   const productsOnStore = useSelector((state) => state.allProducts)
+  const pagination = (pageNumber) => {setcurrentPage(pageNumber)}
   
+
+
   useEffect( () => {
     if(productsOnStore.length === 0){
-    dispatch(getAllProducts())}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      dispatch(getAllProducts())}
+
+      setcurrentPage(1)
+
+    }, [filters]);
+
+
+    
+    const indexOfLastCard = currentPage * cardsPerPage
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage
+    const currentCards = productsLoaded.slice(indexOfFirstCard, indexOfLastCard)
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
     const newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    console.log('este es newProduct', newProduct);
     setCart({
       cartProducts: [
         ...cart.cartProducts,
@@ -74,12 +79,9 @@ export default function Cards() {
     }
   }
   
-  
-
   const removeFilter = function (e) {
     e.preventDefault();
     let newFilters = filters.filtersApplied.filter(filter => filter.value !== e.target.attributes.value.value)
-    console.log(newFilters);
     setFilters((filters) => ({
       filtersApplied: newFilters}))
       if (newFilters.length === 0) {
@@ -89,18 +91,13 @@ export default function Cards() {
       }
   }
 
-
-
-
-  // useEffect(() => {
-  //   if (productsLoaded.length === 0) {
-  //   dispatch(loadAllProducts())}
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [productsLoaded]);
-
-
-
-
+  const scrollToTop = (e) =>{
+    e.preventDefault();
+    window.scrollTo({
+    top: 0,
+    behavior:'smooth'
+    })
+};
 
 
   return (
@@ -115,7 +112,7 @@ export default function Cards() {
       </div>
 
       <div className={styles.filtersApplied}>{filters.filtersApplied?.map((f, index) => 
-      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>{f.valor}</p>
+      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>X {f.valor}</p>
       )}
       </div>
 
@@ -134,11 +131,14 @@ export default function Cards() {
           <li value='black' onClick={(e) => handleFilters(e)}>Negro</li>
           <li value='red' onClick={(e) => handleFilters(e)}>Rojo</li>
           <li value='blue' onClick={(e) => handleFilters(e)}>Azul</li>
+          <li value='green' onClick={(e) => handleFilters(e)}>Verde</li>
+          <li value='yellow' onClick={(e) => handleFilters(e)}>Amarillo</li>
         </ul>
   
+        <Pagination cardsPerPage={cardsPerPage} productsTotal={productsLoaded.length} pagination={pagination}/>
     
       <div className={styles.cards}>
-        {productsLoaded.length? productsLoaded.map(p => {
+        {currentCards? currentCards.map(p => {
           return <Card 
           key={p.id}
           id={p.id}
@@ -152,8 +152,9 @@ export default function Cards() {
         }) : 'No product was found'}
       </div>
     
-    
-    
+      <Pagination cardsPerPage={cardsPerPage} productsTotal={productsLoaded.length} pagination={pagination}/>
+
+      <button onClick={(e) => scrollToTop(e)}>Back to top</button>
     </div>
 
   )

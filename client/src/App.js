@@ -9,6 +9,7 @@ import Detail from './pages/detail/Detail'
 import About from './pages/about/About'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
+import Create from './pages/create/Create'
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route exact path={"/about"} component={About}/>
         <Route exact path={"/register"} component={Register} />
         <Route exact path={"/login"} component={Login} />
+        <Route exact path={"/create"} component={Create} />
       </Switch>
     </div>
   )

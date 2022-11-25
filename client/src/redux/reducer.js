@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_ALL_PRODUCTS:
-            console.log('Se hizo un GET a la base de datos');
+
             return {
             ...state,
             products: action.payload,
@@ -42,8 +42,6 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_PRODUCTS:
 
             let productsFiltered = []
-
-            console.log(action.payload);
             
             for (let i = 0; i < action.payload.length; i++) {
                 let filter = action.payload[i]
