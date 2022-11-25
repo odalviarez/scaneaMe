@@ -12,8 +12,39 @@ const Create = () => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [type, setType] = useState("");
-    const [stock, setStock] = useState("");
-    
+    const [stockXS, setStockXS] = useState(0);
+    const [stockS, setStockS] = useState(0);
+    const [stockM, setStockM] = useState(0);
+    const [stockL, setStockL] = useState(0);
+    const [stockXL, setStockXL] = useState(0);
+    const [stockXXL, setStockXXL] = useState(0);
+    const [stock, setStock] = useState([])
+
+    const createStockArray = (e) => {
+        e.preventDefault()
+        setStock([
+            {
+                size: "xs",
+                quantity: stockXS
+            },{            
+                size: "s",
+                quantity: stockS
+            },{            
+                size: "m",
+                quantity: stockM
+            },{            
+                size: "l",
+                quantity: stockL
+            },{            
+                size: "xl",
+                quantity: stockXL
+            },{            
+                size: "xxl",
+                quantity: stockXXL
+            }
+        ])
+    }
+
     
     const handleProductImageUpload = (e) => {
         const file = e.target.files[0];
@@ -36,6 +67,8 @@ const Create = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        console.log(stock);
     
         dispatch(productsCreate({
         name,
@@ -67,6 +100,8 @@ const Create = () => {
                 <option value="blue">Azul</option>
                 <option value="white">Blanco</option>
                 <option value="black">Negro</option>
+                <option value="yellow">Amarillo</option>
+                <option value="green">Verde</option>
             </select>
             <input 
                 type="text" 
@@ -74,12 +109,58 @@ const Create = () => {
                 placeholder="Name" 
                 onChange={(e) => setName(e.target.value)} 
             />
+            <select onChange={(e) => setType(e.target.value)} required>
+                <option value="">Select Type</option>
+                <option value="shirt">Remera</option>
+                <option value="pants">Pantalon</option>
+            </select>
             <input 
                 type="number" 
                 required 
                 placeholder="Price" 
                 onChange={(e) => setPrice(e.target.value)} 
             />
+
+            <div>
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-xs" 
+                onChange={(e) => setStockXS(e.target.value)} 
+            />
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-s" 
+                onChange={(e) => setStockS(e.target.value)} 
+            />
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-m" 
+                onChange={(e) => setStockM(e.target.value)} 
+            />
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-l" 
+                onChange={(e) => setStockL(e.target.value)} 
+            />
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-xl" 
+                onChange={(e) => setStockXL(e.target.value)} 
+            />
+            <input 
+                type="number" 
+                required 
+                placeholder="stock-xxl" 
+                onChange={(e) => setStockXXL(e.target.value)} 
+            />
+            </div>
+            <button onClick={(e) => createStockArray(e)}>CARGAR STOCK</button>
+
             <button type="submit">
                 Submit
             </button>

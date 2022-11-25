@@ -32,7 +32,6 @@ export default function Cards() {
   const handleAddCart = function (e) {
     e.preventDefault(e);
     const newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    console.log('este es newProduct', newProduct);
     setCart({
       cartProducts: [
         ...cart.cartProducts,
@@ -79,7 +78,6 @@ export default function Cards() {
   const removeFilter = function (e) {
     e.preventDefault();
     let newFilters = filters.filtersApplied.filter(filter => filter.value !== e.target.attributes.value.value)
-    console.log(newFilters);
     setFilters((filters) => ({
       filtersApplied: newFilters}))
       if (newFilters.length === 0) {
