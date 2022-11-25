@@ -15,7 +15,12 @@ export default function Cards() {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = productsLoaded.slice(
+      indexOfFirstCard,
+      indexOfLastCard
+    );
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
   const [currentPage, setcurrentPage] = useState(1);
@@ -30,6 +35,7 @@ export default function Cards() {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
+    setcurrentPage(1);
   }, [dispatch, productsOnStore, filters]);
 
   const handleAddCart = function (e) {
