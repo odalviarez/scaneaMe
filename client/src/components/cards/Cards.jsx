@@ -32,7 +32,6 @@ export default function Cards() {
   const handleAddCart = function (e) {
     e.preventDefault(e);
     const newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    console.log('este es newProduct', newProduct);
     setCart({
       cartProducts: [
         ...cart.cartProducts,
@@ -79,7 +78,6 @@ export default function Cards() {
   const removeFilter = function (e) {
     e.preventDefault();
     let newFilters = filters.filtersApplied.filter(filter => filter.value !== e.target.attributes.value.value)
-    console.log(newFilters);
     setFilters((filters) => ({
       filtersApplied: newFilters}))
       if (newFilters.length === 0) {
@@ -115,7 +113,7 @@ export default function Cards() {
       </div>
 
       <div className={styles.filtersApplied}>{filters.filtersApplied?.map((f, index) => 
-      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>{f.valor}</p>
+      <p key={index} className={styles.filter} onClick={removeFilter} value={f.value}>X {f.valor}</p>
       )}
       </div>
 
@@ -134,6 +132,7 @@ export default function Cards() {
           <li value='black' onClick={(e) => handleFilters(e)}>Negro</li>
           <li value='red' onClick={(e) => handleFilters(e)}>Rojo</li>
           <li value='blue' onClick={(e) => handleFilters(e)}>Azul</li>
+          <li value='green' onClick={(e) => handleFilters(e)}>Verde</li>
         </ul>
   
     
