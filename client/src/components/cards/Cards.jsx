@@ -103,6 +103,7 @@ export default function Cards() {
   return (
     <div>
 
+      <h1 class="text-3xl font-bold underline">Prueba TailWind</h1>
 
       <div> Ordenar por
           <select onChange={(e) => handleSorts(e)}>
