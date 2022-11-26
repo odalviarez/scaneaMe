@@ -1,38 +1,58 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styles from './NavBar.module.css'
-import logo from '../../Logo/LogoQR.png'
-import cart from '../../Logo/cart.png'
-import profile from '../../Logo/profile.png'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./NavBar.module.css";
+import logo from "../../Logo/LogoQR.png";
+import cartImg from "../../Logo/cart.png";
+import profile from "../../Logo/profile.png";
+import { useLocalStorage } from "../../useLocalStorage";
 
 export default function Navbar() {
+  const [cart, setCart] = useLocalStorage("cartProducts", []);
+  const [totalItems, setTotalItems] = useState("");
+
+ useEffect(
+   () => {
+     setTotalItems(cart.length);
+   },[cart, totalItems],);
+
   return (
     <nav className={styles.nav}>
-      <Link to={'/home'}>
-        <img src={logo} className={styles.logo} alt='logo' />
+      <Link to={"/home"}>
+        <img src={logo} className={styles.logo} alt="logo" />
       </Link>
       <ul>
         <li>
-          <Link to={'/cart'}>
-            <img src={cart} className={styles.cart} alt='cart' />
+          <p>{totalItems}</p>
+          <Link to={"/cart"}>
+            <img src={cartImg} className={styles.cart} alt="cart" />
           </Link>
         </li>
         <li>
-          <Link to={'/catalogue'} className={styles.anchor}>Catalogue</Link>
+          <Link to={"/catalogue"} className={styles.anchor}>
+            Catalogue
+          </Link>
         </li>
         <li>
-          <Link to={'/about'} className={styles.anchor}>About us</Link>
+          <Link to={"/about"} className={styles.anchor}>
+            About us
+          </Link>
         </li>
         <li>
-          <Link to={'/contact'} className={styles.anchor}>Contact</Link>
+          <Link to={"/contact"} className={styles.anchor}>
+            Contact
+          </Link>
         </li>
         <li>
-          <Link to={'/login'} className={styles.anchor}>login</Link>
+          <Link to={"/login"} className={styles.anchor}>
+            login
+          </Link>
         </li>
         <li>
-          <Link to={'/register'} className={styles.anchor}>Register</Link>
+          <Link to={"/register"} className={styles.anchor}>
+            Register
+          </Link>
         </li>
       </ul>
     </nav>
-  )
+  );
 }
