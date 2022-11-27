@@ -1,33 +1,52 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { useLocalStorage } from '../../useLocalStorage'
-import "./CartComponent.css"
+import React, { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+import { useLocalStorage } from "../../useLocalStorage";
+import "./CartComponent.css";
 
 export default function CartComponent() {
 
-  const [cart, setCart] = useLocalStorage("cartProducts", {
-    cartProducts: [],
-  });
+  const [cart, setCart] = useLocalStorage("cartProducts", []);
 
-  console.log(cart);
-    const handleAddToCart = (product) => {
-      console.log(product.cartTotalQuantity);
-      //setCart([...cart, product]);
-    };
-    const handleDecreaseCart = (product) => {
-      //dispatch(decreaseCart(product));
-    };
-    const handleRemoveFromCart = (product) => {
-      //setCart(cart.filter((elem) => elem.id !== product.id))
-    };
-    const handleClearCart = () => {
-      setCart({cartProducts:[]});
-    };
+    const [cartTotalAmount, setCartTotalAmount] = useState(0);
 
+    useEffect(() =>{
+      let cartCopy = [0, ...cart];
+      let totalAmount = cartCopy.reduce((acc, currentValue) => {
+        let total = currentValue.price * currentValue.cartTotalQuantity;
+        return acc + total;
+      });
+      setCartTotalAmount(totalAmount);
+    }, [cart])
+    
+  const handleAddToCart = (id) => {
+    let cartModified = cart.map((elem) => {
+      if (elem.id === id) {
+        elem.cartTotalQuantity++;
+      }
+      return elem;
+    });
+    setCart(cartModified);
+  };
+  const handleDecreaseCart = (id) => {
+    let cartModified = cart.map((elem) => {
+      if (elem.id === id) {
+        if (elem.cartTotalQuantity > 0) elem.cartTotalQuantity--;
+      }
+      return elem;
+    });
+    setCart(cartModified);
+  };
+  const handleRemoveFromCart = (id) => {
+    setCart(cart.filter((elem) => elem.id !== id))
+  };
+  const handleClearCart = () => {
+    setCart([]);
+  };
+  
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
-      {cart.cartProducts.length === 0 ? (
+      {cart.length === 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
           <div className="start-shopping">
@@ -58,27 +77,29 @@ export default function CartComponent() {
             <h3 className="total">Total</h3>
           </div>
           <div className="cart-items">
-            {cart?.cartProducts?.map((cartItem) => (
+            {cart?.map((cartItem) => (
               <div className="cart-item" key={cartItem.id}>
                 <div className="cart-product">
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
                     <h3>{cartItem.name}</h3>
-                    <button onClick={() => handleRemoveFromCart(cartItem)}>
+                    <button onClick={() => handleRemoveFromCart(cartItem.id)}>
                       Remove
                     </button>
                   </div>
                 </div>
                 <div className="cart-product-price">${cartItem.price}</div>
                 <div className="cart-product-quantity">
-                  <button onClick={() => handleDecreaseCart(cartItem)}>
+                  <button onClick={() => handleDecreaseCart(cartItem.id)}>
                     -
                   </button>
                   <div className="count">{cartItem.cartTotalQuantity}</div>
-                  <button onClick={() => handleAddToCart(cartItem)}>+</button>
+                  <button onClick={() => handleAddToCart(cartItem.id)}>
+                    +
+                  </button>
                 </div>
                 <div className="cart-product-total-price">
-                  ${cartItem.price * cartItem.cartQuantity}
+                  ${cartItem.price * cartItem.cartTotalQuantity}
                 </div>
               </div>
             ))}
@@ -90,7 +111,7 @@ export default function CartComponent() {
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
-                <span className="amount">${cart.cartTotalAmount}</span>
+                <span className="amount">${cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
               <div className="continue-shopping">
@@ -118,10 +139,9 @@ export default function CartComponent() {
     </div>
   );
 
-
   // return (
   //   <div>
-  //     {cart.cartProducts.map(p => 
+  //     {cart.cartProducts.map(p =>
   //     <div key={Math.floor(Math.random()*100*(Number(p.id) + 21))}>
   //       {p.name}
   //     </div>)}
