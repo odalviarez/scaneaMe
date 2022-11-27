@@ -11,6 +11,7 @@ import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Create from './pages/create/Create'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
