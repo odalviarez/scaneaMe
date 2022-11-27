@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import { useLocalStorage } from "../../useLocalStorage";
-import {
-  filterProducts,
-  getAllProducts,
-  loadAllProducts,
-  sortProducts,
-} from "../../redux/actions";
+import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts,} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
 
@@ -22,22 +17,19 @@ export default function Cards() {
   const [cardsPerPage, setCardsPerPage] = useState(9);
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
-  const pagination = (pageNumber) => {
-    setcurrentPage(pageNumber);
+  const pagination = (pageNumber) => {setcurrentPage(pageNumber);
   };
 
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentCards = productsLoaded.slice(
-      indexOfFirstCard,
-      indexOfLastCard
-    );
+    const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
 
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
-  }, [dispatch, productsOnStore, filters]);
+
+  }, [dispatch, productsOnStore, filters, currentPage]);
 
   
   const handleAddCart = function (e) {
@@ -124,13 +116,12 @@ export default function Cards() {
 
   return (
     <div>
-      <div>
-        {" "}
-        Ordenar por
-        <select onChange={(e) => handleSorts(e)}>
-          <option value="priceUp">Menor precio</option>
-          <option value="priceDown">Mayor precio</option>
-        </select>
+
+      <div> Ordenar por
+          <select onChange={(e) => handleSorts(e)}>
+            <option value='priceUp'>Menor precio</option>
+            <option value='priceDown'>Mayor precio</option>
+          </select>
       </div>
 
       <div className={styles.filtersApplied}>
@@ -184,9 +175,15 @@ export default function Cards() {
         </li>
       </ul>
 
+      <Pagination
+        cardsPerPage={cardsPerPage}
+        productsTotal={productsLoaded.length}
+        pagination={pagination}
+      />
+
       <div className={styles.cards}>
-        {productsLoaded.length
-          ? productsLoaded.map((p) => {
+        {currentCards.length
+          ? currentCards.map((p) => {
               return (
                 <Card
                   key={p.id}
