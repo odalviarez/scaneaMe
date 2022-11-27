@@ -116,12 +116,12 @@ export default function Cards() {
 
   return (
     <div>
-
-      <div> Ordenar por
-          <select onChange={(e) => handleSorts(e)}>
-            <option value='priceUp'>Menor precio</option>
-            <option value='priceDown'>Mayor precio</option>
-          </select>
+      <div>
+        Ordenar por
+        <select onChange={(e) => handleSorts(e)}>
+          <option value="priceUp">Menor precio</option>
+          <option value="priceDown">Mayor precio</option>
+        </select>
       </div>
 
       <div className={styles.filtersApplied}>
@@ -138,15 +138,13 @@ export default function Cards() {
       </div>
 
       <ul>
-        {" "}
-        Temporada
+        <h3>Temporada</h3>
         <li>Verano / Primavera</li>
         <li>Invierno / Otoño</li>
       </ul>
 
       <ul value="type">
-        {" "}
-        Tipo de ropa
+        <h3>Tipo de ropa</h3>
         <li value="shirt" onClick={(e) => handleFilters(e)}>
           Remera
         </li>
@@ -156,8 +154,7 @@ export default function Cards() {
       </ul>
 
       <ul value="color">
-        {" "}
-        Color
+        <h3>Color</h3>
         <li value="white" onClick={(e) => handleFilters(e)}>
           Blanco
         </li>
