@@ -22,7 +22,7 @@ export default function Navbar() {
       </Link>
       <ul>
         <li>
-          <p>{totalItems}</p>
+          <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />
           </Link>

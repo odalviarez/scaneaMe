@@ -24,4 +24,5 @@
 .price{
   color:rgb(54, 68, 30);
   font-weight: 600;
+  text-decoration: none;
 }
