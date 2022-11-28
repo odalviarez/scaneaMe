@@ -7,16 +7,28 @@ import styles from './SeasonalBanner.module.css'
 
 export default function SeasonalBanner() {
   return (
-    <div>
-      <div>
-        <img src={estaciones} />
-      </div>
-      <div>
-        <img src={primaverVerano} />
-      </div>
-      <div>
-        <img src={otoñoInvierno} />
-      </div>
+    <div className={styles.container}>
+      <Link to={"/catalogue"} className={styles.estacionesLink}>
+      <img
+        src={estaciones}
+        className={styles.estacionesImg}
+        alt='All year catalogue'
+      />
+      </Link>
+      <Link to={"/catalogue"} className={styles.primaveraLink}>
+      <img
+        src={primaverVerano}
+        className={styles.primaveraImg}
+        alt='Spring summer catalogue'
+      />
+      </Link>
+      <Link to={"/catalogue"} className={styles.otoñoLink}>
+      <img
+        src={otoñoInvierno}
+        className={styles.otoñoImg}
+        alt='Fall winter catalogue'
+      />
+      </Link>
     </div>
   )
 }
