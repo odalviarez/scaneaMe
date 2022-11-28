@@ -115,95 +115,106 @@ export default function Cards() {
   };
 
   return (
-    <div>
-      <div>
-        Ordenar por
-        <select onChange={(e) => handleSorts(e)}>
-          <option value="priceUp">Menor precio</option>
-          <option value="priceDown">Mayor precio</option>
-        </select>
+    <div className={styles.CatalogueParent}>
+
+
+      <div className={styles.filtersList}>
+        <ul>
+          <h3>Temporada</h3>
+          <li>Verano / Primavera</li>
+          <li>Invierno / Otoño</li>
+        </ul>
+
+        <ul value="type">
+          <h3>Tipo de ropa</h3>
+          <li value="shirt" onClick={(e) => handleFilters(e)}>
+            Remera
+          </li>
+          <li value="pants" onClick={(e) => handleFilters(e)}>
+            Pantalon
+          </li>
+        </ul>
+
+        <ul value="color">
+          <h3>Color</h3>
+          <li value="white" onClick={(e) => handleFilters(e)}>
+            Blanco
+          </li>
+          <li value="black" onClick={(e) => handleFilters(e)}>
+            Negro
+          </li>
+          <li value="red" onClick={(e) => handleFilters(e)}>
+            Rojo
+          </li>
+          <li value="blue" onClick={(e) => handleFilters(e)}>
+            Azul
+          </li>
+          <li value="green" onClick={(e) => handleFilters(e)}>
+            Verde
+          </li>
+          <li value="yellow" onClick={(e) => handleFilters(e)}>
+            Amarillo
+          </li>
+        </ul>
       </div>
 
       <div className={styles.filtersApplied}>
+
+        <div>
+          <select onChange={(e) => handleSorts(e)}>
+            <option value="priceUp">Menor precio</option>
+            <option value="priceDown">Mayor precio</option>
+          </select>
+        </div>
+
         {filters.filtersApplied?.map((f, index) => (
           <p
             key={index}
-            className={styles.filter}
             onClick={removeFilter}
             value={f.value}
           >
             X {f.valor}
           </p>
         ))}
+
       </div>
 
-      <ul>
-        <h3>Temporada</h3>
-        <li>Verano / Primavera</li>
-        <li>Invierno / Otoño</li>
-      </ul>
 
-      <ul value="type">
-        <h3>Tipo de ropa</h3>
-        <li value="shirt" onClick={(e) => handleFilters(e)}>
-          Remera
-        </li>
-        <li value="pants" onClick={(e) => handleFilters(e)}>
-          Pantalon
-        </li>
-      </ul>
+      <div className={styles.cardsPagination}>
+        <Pagination
+          cardsPerPage={cardsPerPage}
+          productsTotal={productsLoaded.length}
+          pagination={pagination}
+        />
 
-      <ul value="color">
-        <h3>Color</h3>
-        <li value="white" onClick={(e) => handleFilters(e)}>
-          Blanco
-        </li>
-        <li value="black" onClick={(e) => handleFilters(e)}>
-          Negro
-        </li>
-        <li value="red" onClick={(e) => handleFilters(e)}>
-          Rojo
-        </li>
-        <li value="blue" onClick={(e) => handleFilters(e)}>
-          Azul
-        </li>
-        <li value="green" onClick={(e) => handleFilters(e)}>
-          Verde
-        </li>
-      </ul>
+        <div className={styles.CatalogueCards}>
+          {currentCards.length
+            ? currentCards.map((p) => {
+                return (
+                  <Card
+                    key={p.id}
+                    id={p.id}
+                    name={p.name}
+                    img={p.image}
+                    price={p.price}
+                    type={p.type}
+                    color={p.color}
+                    handleAddCart={handleAddCart}
+                  />
+                );
+              })
+            : "No product was found"}
+        </div>
 
-      <Pagination
-        cardsPerPage={cardsPerPage}
-        productsTotal={productsLoaded.length}
-        pagination={pagination}
-      />
-
-      <div className={styles.cards}>
-        {currentCards.length
-          ? currentCards.map((p) => {
-              return (
-                <Card
-                  key={p.id}
-                  id={p.id}
-                  name={p.name}
-                  img={p.image}
-                  price={p.price}
-                  type={p.type}
-                  color={p.color}
-                  handleAddCart={handleAddCart}
-                />
-              );
-            })
-          : "No product was found"}
+        <Pagination
+          cardsPerPage={cardsPerPage}
+          productsTotal={productsLoaded.length}
+          pagination={pagination}
+        />
+        <button onClick={(e) => scrollToTop(e)}>Back to top</button>
       </div>
 
-      <Pagination
-        cardsPerPage={cardsPerPage}
-        productsTotal={productsLoaded.length}
-        pagination={pagination}
-      />
 
-      <button onClick={(e) => scrollToTop(e)}>Back to top</button>
     </div>
   );
 }
