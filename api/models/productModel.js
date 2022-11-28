@@ -10,6 +10,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a text value"],
     },
+    season: {
+      type: String,
+      default: "allyear"
+    },
     stock: {
       type: Array,
       require: [true, "Please add a array value"],

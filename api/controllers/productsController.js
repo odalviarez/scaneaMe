@@ -23,6 +23,7 @@ router.get("/", async (req, res) => {
             name: e.name,
             color: e.color,
             type: e.type,
+            season: e.season,
             price: e.price,
             image: e.image,
           };
@@ -38,7 +39,7 @@ router.get("/", async (req, res) => {
 
 //crea un producto
 router.post("/", async (req, res) => {
-  const { name, color, type, price, image, stock } = req.body;
+  const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -52,9 +53,11 @@ router.post("/", async (req, res) => {
         color,
         type,
         price,
+        season,
         image,
         stock,
       });
+      console.log(productCreate);
       let saved = await productCreate.save();
       res.json(saved);
     } else {
@@ -99,7 +102,7 @@ router.delete("/:id", async (req, res) => {
 //actualiza un producto existente
 router.put("/:id", async (req, res) => {
   let { id } = req.params;
-  const { name, color, type, price, image, stock } = req.body;
+  const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -111,6 +114,7 @@ router.put("/:id", async (req, res) => {
         name,
         color,
         type,
+        season,
         price,
         image,
         stock,
