@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router'
+import { Route, Routes } from 'react-router-dom'
 //import { Counter } from './features/counter/Counter';
 import Home from './pages/home/Home'
 import Catalogue from './pages/catalogue/Catalogue'
@@ -16,17 +16,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className='App'>
-      <Switch>
-        <Route exact path={"/home"} component={Home}/>
-        <Route exact path={"/catalogue"} component={Catalogue}/>
-        <Route exact path={"/detail/:id"} component={Detail}/>
-        <Route exact path={"/cart"} component={Cart}/>
-        <Route exact path={"/contact"} component={ContactForm}/>
-        <Route exact path={"/about"} component={About}/>
-        <Route exact path={"/register"} component={Register} />
-        <Route exact path={"/login"} component={Login} />
-        <Route exact path={"/create"} component={Create} />
-      </Switch>
+      <Routes>
+        <Route path="/home" element={<Home />}/>
+        <Route path="/catalogue" element={<Catalogue />}/>
+        <Route path="/detail/:id" element={<Detail />}/>
+        <Route path="/cart" element={<Cart />}/>
+        <Route path="/contact" element={<ContactForm />}/>
+        <Route path="/about" element={<About />}/>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/create" element={<Create />} />
+      </Routes>
     </div>
   )
 }

@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
-    firtsName: {
+    name: {
       type: String,
       required: [true, "Please add a first name"],
     },
-    lastName: {
-      type: String,
-      required: [true, "Please add a last name"],
-    },
+    //lastName: {
+      //type: String,
+      //required: [true, "Please add a last name"],
+    //},
     email: {
       type: String,
       required: [true, "Please add an email"],
@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
-    adress: {
-      type: String,
-      required: [true, "Please add an adress"],
-    },
+    //address: {
+    //  type: String,
+     // required: [true, "Please add an adress"],
+    //},
     products: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
