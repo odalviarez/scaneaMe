@@ -13,10 +13,9 @@
 
 .img{
   display:flex;
-  height: 350px;
-  width: 300px;
+  height: 80%;
   object-fit: cover;
-  border-radius: 5%;  
+  border-radius: 15px;  
   opacity: 0;
   transition: 400ms;
   position:absolute;
@@ -41,8 +40,8 @@
   color:antiquewhite;
   background-color: #161616;
   height: 100%;
-  padding: 8px;
-  margin: 0 5px;
+  padding-left: 15px;
+  margin: 0 0px;
   border-radius: 0%;
   border: 0;
   cursor: pointer;
@@ -56,8 +55,8 @@
   color:antiquewhite;
   background-color: #161616;
   height: 100%;
-  padding: 8px;
-  margin: 0 5px;
+  padding-right: 15px;
+  margin: 0 0px;
   border-radius: 0%;
   border: 0;
   cursor: pointer;
