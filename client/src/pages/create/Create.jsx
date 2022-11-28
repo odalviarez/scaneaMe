@@ -9,6 +9,7 @@ const Create = () => {
     
     const [productImg, setProductImg] = useState("");
     const [color, setColor] = useState("");
+    const [season, setSeason] = useState("allyear");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [type, setType] = useState("");
@@ -72,6 +73,7 @@ const Create = () => {
             name,
             color,
             type,
+            season,
             price,
             stock,
             image: productImg,
@@ -81,6 +83,7 @@ const Create = () => {
         name,
         color,
         type,
+        season,
         price,
         stock,
         image: productImg,
@@ -89,99 +92,104 @@ const Create = () => {
     };
     
     return (
-        <div>
-        <NavBar/>
+      <div>
+        <NavBar />
         <StyledCreateProduct>
-            <StyledForm onSubmit={handleSubmit}>
+          <StyledForm onSubmit={handleSubmit}>
             <h3>Create a Product</h3>
-            <input 
-                id="imgUpload"
-                accept="image/*" 
-                type="file" 
-                onChange={handleProductImageUpload}
-                required
+            <input
+              id="imgUpload"
+              accept="image/*"
+              type="file"
+              onChange={handleProductImageUpload}
+              required
             />
             <select onChange={(e) => setColor(e.target.value)} required>
-                <option value="">Select Color</option>
-                <option value="red">Rojo</option>
-                <option value="blue">Azul</option>
-                <option value="white">Blanco</option>
-                <option value="black">Negro</option>
-                <option value="yellow">Amarillo</option>
-                <option value="green">Verde</option>
+              <option value="">Select Color</option>
+              <option value="red">Rojo</option>
+              <option value="blue">Azul</option>
+              <option value="white">Blanco</option>
+              <option value="black">Negro</option>
+              <option value="yellow">Amarillo</option>
+              <option value="green">Verde</option>
             </select>
-            <input 
-                type="text" 
-                required 
-                placeholder="Name" 
-                onChange={(e) => setName(e.target.value)} 
+            <input
+              type="text"
+              required
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
             />
             <select onChange={(e) => setType(e.target.value)} required>
-                <option value="">Select Type</option>
-                <option value="shirt">Remera</option>
-                <option value="pants">Pantalon</option>
+              <option value="">Select Type</option>
+              <option value="shirt">Remera</option>
+              <option value="pants">Pantalon</option>
             </select>
-            <input 
-                type="number" 
-                required 
-                placeholder="Price" 
-                onChange={(e) => setPrice(e.target.value)} 
+            <select onChange={(e) => setSeason(e.target.value)} required>
+              <option value="allyear">Select Season</option>
+              <option value="allyear">Todo el año</option>
+              <option value="fall">Otoño/Invierno</option>
+              <option value="spring">Primavera/Verano</option>
+            </select>
+            <input
+              type="number"
+              required
+              placeholder="Price"
+              onChange={(e) => setPrice(e.target.value)}
             />
 
             <div>
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-xs" 
-                onChange={(e) => setStockXS(e.target.value)} 
-            />
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-s" 
-                onChange={(e) => setStockS(e.target.value)} 
-            />
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-m" 
-                onChange={(e) => setStockM(e.target.value)} 
-            />
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-l" 
-                onChange={(e) => setStockL(e.target.value)} 
-            />
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-xl" 
-                onChange={(e) => setStockXL(e.target.value)} 
-            />
-            <input 
-                type="number" 
-                required 
-                placeholder="stock-xxl" 
-                onChange={(e) => setStockXXL(e.target.value)} 
-            />
+              <input
+                type="number"
+                required
+                placeholder="stock-xs"
+                onChange={(e) => setStockXS(e.target.value)}
+              />
+              <input
+                type="number"
+                required
+                placeholder="stock-s"
+                onChange={(e) => setStockS(e.target.value)}
+              />
+              <input
+                type="number"
+                required
+                placeholder="stock-m"
+                onChange={(e) => setStockM(e.target.value)}
+              />
+              <input
+                type="number"
+                required
+                placeholder="stock-l"
+                onChange={(e) => setStockL(e.target.value)}
+              />
+              <input
+                type="number"
+                required
+                placeholder="stock-xl"
+                onChange={(e) => setStockXL(e.target.value)}
+              />
+              <input
+                type="number"
+                required
+                placeholder="stock-xxl"
+                onChange={(e) => setStockXXL(e.target.value)}
+              />
             </div>
             <button onClick={(e) => createStockArray(e)}>CARGAR STOCK</button>
 
-            <button type="submit">
-                Submit
-            </button>
-            </StyledForm>
-            <ImagePreview>
-                {productImg ? ( <>
-                    <img src={productImg} alt="product!" />
-                    </>
-                ) : (
-                    <p>Image preview will appear here!</p>
-                )}
-            </ImagePreview>
+            <button type="submit">Submit</button>
+          </StyledForm>
+          <ImagePreview>
+            {productImg ? (
+              <>
+                <img src={productImg} alt="product!" />
+              </>
+            ) : (
+              <p>Image preview will appear here!</p>
+            )}
+          </ImagePreview>
         </StyledCreateProduct>
-        </div>
+      </div>
     );
 }
 
