@@ -1,13 +1,17 @@
 .card {
     height: 400px;
-    width: 30vw;
+    width: 20vw;
     font-size: large;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-
+    margin-bottom: 40px;
+    border-width: 5px;
+    border-color: aquamarine;
+    border-radius: 5px;
+    border-style: solid;
+    padding: 10px 0px 10px 0px;
 }
 
 .card p{
