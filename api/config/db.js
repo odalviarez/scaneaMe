@@ -1,13 +1,12 @@
 //const { MongoServerClosedError } = require('mongodb');
 const mongoose = require('mongoose');
-const MONGOHOST = "scaneame.ermgdf6.mongodb.net";
-const MONGOPASSWORD = "1234";
-const MONGOPORT = "6434";
-const MONGOUSER = "scaneaMe";
+
+const { MONGOHOST, MONGOPASSWORD, MONGOPORT, MONGOUSER } = process.env;
+
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(
+        const conn = await mongoose.connect( //MONGO_URI no existe asi que la vamos a sacar
           process.env.MONGO_URI ||
             `mongodb+srv://${MONGOUSER}:${MONGOPASSWORD}@${MONGOHOST}/scaneaMe`
         );
