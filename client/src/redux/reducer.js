@@ -1,5 +1,10 @@
-import { FILTER_PRODUCTS, GET_ALL_PRODUCTS, LOAD_ALL_PRODUCTS, SORT_PRODUCTS, GET_PRODUCT_DETAILS } from "./actions";
-
+import { 
+    FILTER_PRODUCTS, 
+    GET_ALL_PRODUCTS, 
+    LOAD_ALL_PRODUCTS, 
+    SORT_PRODUCTS, 
+    GET_PRODUCT_DETAILS,
+ } from "./actions";
 
 const initialState = {
     products: [],
@@ -9,7 +14,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-
         case GET_ALL_PRODUCTS:
 
             return {
@@ -17,15 +21,12 @@ const rootReducer = (state = initialState, action) => {
             products: action.payload,
             allProducts: action.payload
         }
-
-
         case LOAD_ALL_PRODUCTS:
             let allproduct = state.allProducts
             return {
             ...state,
             products: allproduct
         }
-
         case SORT_PRODUCTS:
             const sortedProducts = state.products
             if (action.payload === 'priceUp') {
@@ -38,7 +39,6 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             products: sortedProducts
         }
-
         case FILTER_PRODUCTS:
 
             let productsFiltered = []

@@ -7,11 +7,9 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     const schema = Joi.object({
-        firtsName: Joi.string().min(3).max(30).required(),
-        lastName: Joi.string().min(3).max(30).required(),
+        name: Joi.string().min(3).max(30).required(),
         email: Joi.string().min(3).max(200).required().email(),
         password: Joi.string().min(6).max(200).required(), 
-        adress:Joi.string().min(10).max(150).required(),
     });
 
     const { error } = schema.validate(req.body);
@@ -23,14 +21,14 @@ router.post("/", async (req, res) => {
 
     console.log("here");
 
-    const { firtsName, lastName, email, password, adress } = req.body;
+    const { name, email, password } = req.body;
 
     user = new User({
-        firtsName,
-        lastName,
+        name,
+        //lastName,
         email,
         password,
-        adress,
+        //address,
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -47,19 +45,3 @@ module.exports = router;
 
 
 
-/*
-const express = require('express');
-//const router = express.Router();
-const {protect} = require('../middleware/auth');
-const registerControl = require("../controllers/registersController");
-const server = express();
-const router = express.Router();
-
-//server.use("/register", registerControl);
-
-router.route('/register', registerControl)
-
-
-//module.exports = server;
-module.exports = router;
-*/
