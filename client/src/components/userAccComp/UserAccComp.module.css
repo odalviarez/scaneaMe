@@ -1,0 +1,34 @@
+.UserAccCompContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+}
+
+.UserAccCompContainer h1{
+    margin-bottom: 20px;
+}
+
+.UserAccCompItem {
+    width: 400px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
+
+
+.UserAccCompContainer input{
+    width: 200px;
+    position:absolute;
+    left: 45%;
+
+}
+
+.UserAccCompItem button{
+    height: fit-content;
+}

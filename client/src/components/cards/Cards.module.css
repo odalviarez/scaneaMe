@@ -19,17 +19,33 @@
     margin-right: 20px;
 }
 
+.filtersList li:hover{
+    color: blue;
+    cursor: default;
+    text-decoration: underline;
+    background-color: aliceblue;
+}
+
 .filtersApplied{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     grid-area: 1 / 2 / 2 / 3;
     align-items: flex-start;
-    height: 40px
+    height: 40px;
+
 }
 
 .filtersApplied p{
     margin-left: 10px;
+    background-color: gainsboro; 
+    border-radius: 8px;
+    padding: 1px 4px 1px 4px;
+}
+
+.filtersApplied p:hover{
+    color: blue;
+    cursor: default;
 }
 
 
