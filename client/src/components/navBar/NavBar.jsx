@@ -33,6 +33,11 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
+          <Link to={"/profile"} className={styles.anchor}>
+            Profile
+          </Link>
+        </li>
+        <li>
           <Link to={"/about"} className={styles.anchor}>
             About us
           </Link>

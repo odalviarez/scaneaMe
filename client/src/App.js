@@ -10,6 +10,7 @@ import About from './pages/about/About'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Create from './pages/create/Create'
+import Profile from './pages/profile/Profile'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,6 +27,7 @@ function App() {
         <Route exact path={"/register"} component={Register} />
         <Route exact path={"/login"} component={Login} />
         <Route exact path={"/create"} component={Create} />
+        <Route exact path={"/profile"} component={Profile} />
       </Switch>
     </div>
   )
