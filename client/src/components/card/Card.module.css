@@ -8,8 +8,8 @@
     align-items: center;
     margin-bottom: 40px;
     border-width: 5px;
-    border-color: aquamarine;
-    border-radius: 5px;
+    border-color: rgba(0, 27, 146, 0.218);
+    border-radius: 9px;
     border-style: solid;
     padding: 10px 0px 10px 0px;
 }
@@ -17,6 +17,16 @@
 .card p{
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+}
+
+.card h5{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    color: black;
+}
+
+.card h5:hover{
+    color: blue
 }
 
 .imageContainer img {

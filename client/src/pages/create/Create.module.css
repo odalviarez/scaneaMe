@@ -1,0 +1,5 @@
+.CreateComponent {
+    display: flex;
+    min-height: 80vh;
+    flex-direction: column;
+}

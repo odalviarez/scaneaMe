@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 //import { Counter } from './features/counter/Counter';
 import Home from './pages/home/Home'
 import Catalogue from './pages/catalogue/Catalogue'
@@ -10,6 +10,7 @@ import About from './pages/about/About'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Create from './pages/create/Create'
+import UserAccount from './pages/userAccount/UserAccount'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/user/account" element={<UserAccount/>} /> 
       </Routes>
     </div>
   )
