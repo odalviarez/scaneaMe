@@ -30,7 +30,7 @@ export default function Cards() {
       dispatch(getAllProducts());
     }
 
-  }, [dispatch, productsOnStore, filters, currentPage]);
+  }, []);
 
   useEffect(() => {
 
@@ -47,19 +47,6 @@ export default function Cards() {
     }
     
   }, [productsOnStore]);
-
-
-  // useEffect(() => {
-
-  //   if (filters.filtersApplied.length === 0 && location.state !== null) {
-  //     console.log("se ejecutó esto");
-  //     setFilters((filters) => ({
-  //       filtersApplied: [location.state],
-  //     }));
-  //     dispatch(filterProducts([location.state]))
-  //   }
-    
-  // }, []);
 
   
   const handleAddCart = function (e) {
