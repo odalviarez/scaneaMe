@@ -14,6 +14,8 @@ import { getConfig } from "./config";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+
 axios.defaults.baseURL = 'http://localhost:5000'
 
 const config = getConfig();

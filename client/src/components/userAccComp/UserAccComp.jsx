@@ -6,7 +6,7 @@ import style from "./UserAccComp.module.css"
 
 export default function UserAccComp() {
 
-
+    
 
     return (
         <div className={style.UserAccCompContainer}>

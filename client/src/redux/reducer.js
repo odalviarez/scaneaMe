@@ -11,6 +11,7 @@ const initialState = {
     products: [],
     allProducts: [],
     productDetail:{},
+    userDB: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -41,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
             products: sortedProducts
         }
         case FILTER_PRODUCTS:
-
+            console.log('se despacho accion');
             let productsFiltered = []
             
             for (let i = 0; i < action.payload.length; i++) {
@@ -56,6 +57,12 @@ const rootReducer = (state = initialState, action) => {
                     }
                     if (filter.filter === 'color'){
                         if (product.color === filter.value){
+                            if (productsFiltered.includes(product) === false){
+                            productsFiltered.push(product)}
+                        }
+                    }
+                    if (filter.filter === 'season'){
+                        if (product.season === filter.value){
                             if (productsFiltered.includes(product) === false){
                             productsFiltered.push(product)}
                         }
@@ -77,7 +84,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_USER:{
             return{
                 ...state,
-                user: action.payload
+                userDB: action.payload
             }
         }
 
