@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import { useLocalStorage } from "../../useLocalStorage";
-import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts,} from "../../redux/actions";
+import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
 
@@ -29,7 +29,9 @@ export default function Cards() {
       dispatch(getAllProducts());
     }
 
-  }, [dispatch, productsOnStore, filters, currentPage]);
+    if (cart) dispatch(getTotalProducts(cart.length));
+
+  }, [dispatch, productsOnStore, filters, currentPage, cart]);
 
   
   const handleAddCart = function (e) {
@@ -51,6 +53,7 @@ export default function Cards() {
       setCart([...cart, { ...newProduct }]);
     }
   };
+
 
   const handleSorts = function (e) {
     e.preventDefault(e);

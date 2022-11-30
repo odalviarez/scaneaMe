@@ -1,17 +1,19 @@
-import { 
-    FILTER_PRODUCTS, 
-    GET_ALL_PRODUCTS, 
-    LOAD_ALL_PRODUCTS, 
-    SORT_PRODUCTS, 
-    GET_PRODUCT_DETAILS,
-    GET_USER,
- } from "./actions";
+import {
+  FILTER_PRODUCTS,
+  GET_ALL_PRODUCTS,
+  LOAD_ALL_PRODUCTS,
+  SORT_PRODUCTS,
+  GET_PRODUCT_DETAILS,
+  GET_USER,
+  GET_TOTAL_PRODUCTS,
+} from "./actions";
 
 const initialState = {
     products: [],
     allProducts: [],
     productDetail:{},
-    userDB: {}
+    userDB: {},
+    totalProducts: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -80,6 +82,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 userDB: action.payload
             }
+        }
+        case GET_TOTAL_PRODUCTS:{
+            return {
+              ...state,
+              totalProducts: action.payload,
+            };
         }
 
         default:

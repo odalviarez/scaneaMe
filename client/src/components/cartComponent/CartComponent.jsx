@@ -1,19 +1,24 @@
 import React, { useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
+import { getTotalProducts } from "../../redux/actions";
 import PayButton from "./PayButton";
 import "./CartComponent.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import {
+  Button,
+} from "reactstrap";
 
 export default function CartComponent() {
 
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
 
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
+    const dispatch = useDispatch();
 
-
-    const auth = useSelector((state) => state.auth);
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     useEffect(() =>{
       let cartCopy = [0, ...cart];
@@ -22,7 +27,8 @@ export default function CartComponent() {
         return acc + total;
       });
       setCartTotalAmount(totalAmount);
-    }, [cart])
+      if (cart) dispatch(getTotalProducts(cart.length));
+    }, [cart, dispatch])
     
   const handleAddToCart = (id) => {
     let cartModified = cart.map((elem) => {
@@ -120,15 +126,17 @@ export default function CartComponent() {
                 <span className="amount">${cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              {/*auth.id*/Boolean("true") ? (
+              {isAuthenticated ? (
                 <PayButton cartItems={cart} />
               ) : (
-                <button
-                  className="cart-login"
-                  onClick={() => navigate("/login")}
+                <Button
+                  id="qsLoginBtn"
+                  color="primary"
+                  className="btn-margin"
+                  onClick={() => loginWithRedirect()}
                 >
-                  Login to Check out
-                </button>
+                  Log in to checkout
+                </Button>
               )}
               <div className="continue-shopping">
                 <Link to="/catalogue">
