@@ -5,7 +5,7 @@ axios.defaults.baseURL = "http://localhost:5000"; //ver esto porque no debe llam
 const PayButton = ( cartProp ) => {
     console.log(cartProp);
     const user = useSelector((state) => state.auth);
-    
+    console.log(user);
     const handleCheckout = () => {
         axios
           .post(`/stripe/create-checkout-session`, {

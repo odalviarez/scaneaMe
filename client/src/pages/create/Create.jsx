@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../../components/navBar/NavBar'
+import NavBar from '../../components/navBar/NavBarAuth0'
 import Footer from '../../components/footer/Footer'
 import CreateComponent from '../../components/createComponent/createComponent'
 import style from './Create.module.css'
