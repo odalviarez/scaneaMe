@@ -1,14 +1,4 @@
-.container{
-  width: 200px;
-  height: 200px;
-  border-radius: 40px;
-  background-color: rgb(253, 234, 253);
-  position: relative;
-  left: 15%;
-  margin: 0;
-  padding: 0;
-  
-}
+a
 
 .image{
   position: relative;
