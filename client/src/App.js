@@ -11,6 +11,7 @@ import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Create from './pages/create/Create'
 import UserAccount from './pages/userAccount/UserAccount'
+import Profile from './pages/profile/Profile'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
         <Route path="/user/account" element={<UserAccount />} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
     </div>
   );
