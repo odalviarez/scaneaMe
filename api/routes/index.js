@@ -4,7 +4,7 @@ const cors = require("cors");
 const router = express.Router();
 const productControl = require("../controllers/productsController");
 //const ordersControl = require("../controllers/ordersController");
-const loginControl = require("../controllers/loginController");
+const userControl = require("../controllers/usersController")
 
 
 const server = express();
@@ -15,7 +15,7 @@ router.use(cors())
 
 router.use("/products", productControl);
 //router.use("/order", ordersControl);
-router.use("/login", loginControl);
+router.use("/user", userControl);
 
 
 module.exports = router;

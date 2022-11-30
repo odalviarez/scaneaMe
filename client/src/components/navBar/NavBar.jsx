@@ -22,17 +22,25 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import {getUser} from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
+
+
+  const dispatch = useDispatch();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const [totalItems, setTotalItems] = useState("");
+const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
     setTotalItems(cart.length);
-  }, [cart, totalItems]);
+    if (user) dispatch(getUser(user.email));
+  }, [cart, totalItems, dispatch]);
 
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  
+  console.log(user);
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>

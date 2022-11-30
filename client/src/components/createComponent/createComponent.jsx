@@ -1,4 +1,4 @@
-import NavBar from '../navBar/NavBarAuth0.jsx'
+import NavBar from '../navBar/NavBar.jsx'
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { productsCreate } from '../../redux/actions.js';
