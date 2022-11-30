@@ -35,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/catalogue" element={<Catalogue />} />
         <Route path="/detail/:id" element={<Detail />} />
@@ -45,7 +46,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
         <Route path="/user/account" element={<UserAccount />} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
