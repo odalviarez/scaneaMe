@@ -3,7 +3,6 @@ const { Router } = require("express");
 const cors = require("cors");
 const router = express.Router();
 const productControl = require("../controllers/productsController");
-//const ordersControl = require("../controllers/ordersController");
 const loginControl = require("../controllers/loginController");
 
 
