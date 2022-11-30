@@ -1,0 +1,43 @@
+.container{
+  background-color: antiquewhite;
+  display:flex;
+  justify-content: center;
+  width:30%;
+  height: auto;
+  min-height: 600px;
+  border-radius: 40px;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  left:35%;
+  box-shadow: 12px 15px 18px -3px rgba(210, 121, 121, 0.3)
+}
+
+.userImg{
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  position:absolute
+}
+
+.descriptionSocials{
+  position: absolute;
+  bottom: 5%;
+  
+  padding: 0px;
+  width: 100%;
+}
+.socialsContainer{
+    margin-top: 50px;
+}
+
+.description{
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.description:hover{
+  opacity: 1;
+}

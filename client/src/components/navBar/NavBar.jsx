@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../Logo/LogoQR.png";
 import cartImg from "../../Logo/cart.png";
-import profile from "../../Logo/profile.png";
 import { useLocalStorage } from "../../useLocalStorage";
 
 export default function Navbar() {
@@ -30,6 +29,11 @@ export default function Navbar() {
         <li>
           <Link to={"/catalogue"} className={styles.anchor}>
             Catalogue
+          </Link>
+        </li>
+        <li>
+          <Link to={"/profile"} className={styles.anchor}>
+            Profile
           </Link>
         </li>
         <li>

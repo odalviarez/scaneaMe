@@ -8,6 +8,7 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
 export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
 export const GET_PRODUCT_DETAILS = 'GET_PRODUCT_DETAILS';
+export const GET_USER = 'GET_USER'
 // export const LOGIN = 'LOGIN';
 
 export const getAllProducts = () => { 
@@ -64,6 +65,20 @@ export const productsCreate = (payload) => {
     }
 }
 
+export const getUser = (user) =>{
+    return async function (dispatch) {
+        try {
+            const json = await axios.get(`/user/${user}`)
+            return dispatch({
+                type: GET_USER,
+                payload: json.data,
+            })
+        } catch (error) {
+            alert ('Could not get user')
+            console.log(error)
+        }
+    }
+}
 
 
 // export const getRecipeDetail = (id) => { 
