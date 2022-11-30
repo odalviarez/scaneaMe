@@ -87,6 +87,17 @@ export const getTotalProducts = (products) => {
       payload: products,
     };
 };
+export const userUpdate = (payload, user) => { 
+    return async function () { 
+    try {
+        const res = await axios.post(`/user/${user}`, payload);
+        return res;
+    } catch (error) {
+        alert('No se pudo actualizar los datos del usuario')
+        console.log(error)}  
+    }
+}
+
 
 // export const getRecipeDetail = (id) => { 
 //     return async function(dispatch) {

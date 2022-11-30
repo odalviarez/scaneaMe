@@ -8,12 +8,12 @@ export default function Card({name, img, id, price, type, color, handleAddCart})
 
   return (
     <div className={styles.card} >
-        <Link to={`/detail/${id}`}><h5>{name}</h5></Link>
         
         <div className={styles.imageContainer}>
           <img src={img} alt="imagen" />
         </div>
   
+        <Link to={`/detail/${id}`} className={styles.title}>{name}</Link>
         <p>${price}</p>
         <p>{type}</p>
         <p>{color}</p>
