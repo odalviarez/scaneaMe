@@ -19,6 +19,13 @@
     margin-right: 20px;
 }
 
+.filtersList li:hover {
+    color: blue;
+    cursor: default;
+    background-color: rgba(127, 255, 212, 0.385);
+    text-decoration: underline
+}
+
 
 .filtersApplied{
     display: flex;

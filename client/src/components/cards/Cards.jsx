@@ -5,18 +5,19 @@ import { useLocalStorage } from "../../useLocalStorage";
 import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts,} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
+import { useLocation } from 'react-router-dom';
 
 export default function Cards() {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
   const [currentPage, setcurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(9);
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
+  let location = useLocation()
   const pagination = (pageNumber) => {setcurrentPage(pageNumber);
   };
 
@@ -30,6 +31,35 @@ export default function Cards() {
     }
 
   }, [dispatch, productsOnStore, filters, currentPage]);
+
+  useEffect(() => {
+
+    if (filters.filtersApplied.length === 0 && location.state !== null && productsOnStore.length > 0) {
+      console.log("se ejecutó esto");
+      setFilters((filters) => ({
+        filtersApplied: [location.state],
+      }));
+      dispatch(filterProducts([location.state]))
+    }
+
+    return () => {
+      dispatch(loadAllProducts())
+    }
+    
+  }, [productsOnStore]);
+
+
+  // useEffect(() => {
+
+  //   if (filters.filtersApplied.length === 0 && location.state !== null) {
+  //     console.log("se ejecutó esto");
+  //     setFilters((filters) => ({
+  //       filtersApplied: [location.state],
+  //     }));
+  //     dispatch(filterProducts([location.state]))
+  //   }
+    
+  // }, []);
 
   
   const handleAddCart = function (e) {
@@ -58,6 +88,7 @@ export default function Cards() {
     setSort(e.target.value);
   };
 
+
   const handleFilters = function (e) {
     e.preventDefault(e);
     let filtersUsed = [
@@ -81,12 +112,14 @@ export default function Cards() {
         setFilters((filters) => ({
           filtersApplied: [...filters.filtersApplied, filterUsed],
         }));
+        setcurrentPage(1)
         dispatch(filterProducts(filtersUsed));
       }
     } else {
       setFilters((filters) => ({
         filtersApplied: [filterUsed],
       }));
+      setcurrentPage(1)
       dispatch(filterProducts([filterUsed]));
     }
   };
@@ -117,10 +150,11 @@ export default function Cards() {
     return (
       <div className={styles.CatalogueParent}>
         <div className={styles.filtersList}>
-          <ul>
+          <ul value="season">
             <h3>Temporada</h3>
-            <li>Verano / Primavera</li>
-            <li>Invierno / Otoño</li>
+            <li value="allyear" onClick={(e) => handleFilters(e)} >Todo el año</li>
+            <li value="spring" onClick={(e) => handleFilters(e)}>Primavera / Verano</li>
+            <li value="fall" onClick={(e) => handleFilters(e)}>Otoño / Invierno</li>
           </ul>
 
           <ul value="type">
