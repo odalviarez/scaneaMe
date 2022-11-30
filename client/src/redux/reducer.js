@@ -11,6 +11,7 @@ const initialState = {
     products: [],
     allProducts: [],
     productDetail:{},
+    userDB: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -83,7 +84,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_USER:{
             return{
                 ...state,
-                user: action.payload
+                userDB: action.payload
             }
         }
 
