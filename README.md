@@ -2,6 +2,9 @@ Las rutas son las siguientes:
 GET http://localhost:5000/products
 GET http://localhost:5000/products/:id
 DELETE http://localhost:5000/products/:id
+
+GET http://localhost:5000/user/:email
+
 POST http://localhost:5000/products
 
 body:
