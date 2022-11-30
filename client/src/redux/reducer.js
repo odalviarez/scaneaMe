@@ -4,6 +4,7 @@ import {
     LOAD_ALL_PRODUCTS, 
     SORT_PRODUCTS, 
     GET_PRODUCT_DETAILS,
+    GET_USER,
  } from "./actions";
 
 const initialState = {
@@ -71,6 +72,13 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				productDetail: action.payload
 			};
+        }
+
+        case GET_USER:{
+            return{
+                ...state,
+                user: action.payload
+            }
         }
 
         default:
