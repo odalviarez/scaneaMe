@@ -1,5 +1,5 @@
 .CatalogueParent {
-    display: grid inline;
+    display: grid ;
     grid-template-columns: fit-content(0.3fr) 1fr;
     grid-template-rows: fit-content(0.1fr) 1fr;
     grid-column-gap: 0px;
@@ -14,9 +14,10 @@
 .filtersList ul {
     list-style: none;
     text-align: left;
-    margin-top: 50px;
+    margin-top: 80px;
     padding: 0 0 0 0;
     margin-right: 20px;
+    margin-left: 40px;
 }
 
 .filtersList li:hover {
@@ -31,10 +32,11 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 2 / 1 / 2 / 2;
     align-items: flex-start;
     height: 40px;
-
+    margin-left: 40px;
+    
 }
 
 .filtersApplied p {
