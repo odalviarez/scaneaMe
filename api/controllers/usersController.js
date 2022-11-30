@@ -8,19 +8,19 @@ const User = require('../models/userModel')
 // @route  POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password, socials, info } = req.body
     
     if(!name || !email || !password) {
-        res.status(400)
-        throw new Error('Please add all fields')
+        res.status(400);
+        throw new Error('Please add all fields');
     }
 
     // Check if user exists
-    const userExists = await User.findOne({ email })
+    const userExists = await User.findOne({ email });
     
     if(userExists) {
-        res.status(400)
-        throw new Error('User already exists')
+        res.status(400);
+        throw new Error('User already exists');
     }
 
     // Hash password
@@ -33,7 +33,9 @@ const registerUser = asyncHandler(async (req, res) => {
         lastName,
         email,
         password: hashedPassword,
-        adress
+        address,
+        socials,
+        info
     })
 
     if(user) {
@@ -46,8 +48,8 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
-        throw new Error('Invalid user data')
+        res.status(400);
+        throw new Error('Invalid user data');
     }
 })
 
@@ -117,7 +119,6 @@ router.post("/", async (req, res) => {
     password: Joi.string().min(6).max(200).required(),
     adress: Joi.string().min(3).max(40).required(),
   });
-
     //Verificamos que la validacion no contenga errores
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -142,7 +143,6 @@ router.post("/", async (req, res) => {
 
   res.send(user);
 });
-
 module.exports = router
 
 */

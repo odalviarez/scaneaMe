@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please add a first name"],
     },
     //lastName: {
-      //type: String,
-      //required: [true, "Please add a last name"],
+    //type: String,
+    //required: [true, "Please add a last name"],
     //},
     email: {
       type: String,
@@ -21,19 +21,35 @@ const userSchema = new mongoose.Schema(
     },
     //address: {
     //  type: String,
-     // required: [true, "Please add an adress"],
+    // required: [true, "Please add an adress"],
     //},
     products: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
       ref: "Product",
     },
+    image: {
+      type: String,
+      required: false,
+    },
+    info: {
+      type: String,
+      required: false,
+    },
+    socials: {
+      type: Object,
+      default: { instagram: '', facebook: '', linkedin: '', twitter: '' },
+    },
     isAdmin: {
-      type: Boolean, 
-      default: false
-    }
+      type: Boolean,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  
+
   {
     timestamps: true,
   }

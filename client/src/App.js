@@ -15,24 +15,41 @@ import Profile from './pages/profile/Profile'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Loading from "./components/Loading";
+import { useAuth0 } from "@auth0/auth0-react";
+
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
+
 function App() {
+    const { isLoading, error } = useAuth0();
+
+    if (error) {
+      return <div>Oops... {error.message}</div>;
+    }
+
+    if (isLoading) {
+      return <Loading />;
+    }
   return (
-    <div className='App'>
+    <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />}/>
-        <Route path="/catalogue" element={<Catalogue />}/>
-        <Route path="/detail/:id" element={<Detail />}/>
-        <Route path="/cart" element={<Cart />}/>
-        <Route path="/contact" element={<ContactForm />}/>
-        <Route path="/about" element={<About />}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/catalogue" element={<Catalogue />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/user/account" element={<UserAccount/>} /> 
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/user/account" element={<UserAccount />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App

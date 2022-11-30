@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
+import PayButton from "./PayButton";
 import "./CartComponent.css";
 
 export default function CartComponent() {
@@ -8,6 +10,10 @@ export default function CartComponent() {
   const [cart, setCart] = useLocalStorage("cartProducts", []);
 
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
+
+
+    const auth = useSelector((state) => state.auth);
+    const navigate = useNavigate();
 
     useEffect(() =>{
       let cartCopy = [0, ...cart];
@@ -114,6 +120,16 @@ export default function CartComponent() {
                 <span className="amount">${cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
+              {/*auth.id*/Boolean("true") ? (
+                <PayButton cartItems={cart} />
+              ) : (
+                <button
+                  className="cart-login"
+                  onClick={() => navigate("/login")}
+                >
+                  Login to Check out
+                </button>
+              )}
               <div className="continue-shopping">
                 <Link to="/catalogue">
                   <svg
