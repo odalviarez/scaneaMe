@@ -33,13 +33,9 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   useEffect(() => {
 
     if (cart) dispatch(getTotalProducts(cart.length));
-    if (user) {
-      console.log(user);
-      dispatch(getUser(user.email))
-    };
+    if (user) dispatch(getUser(user.email, user));
     
   }, [cart, dispatch, user]);
-
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
