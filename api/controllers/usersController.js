@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/:email", async (req, res) => {
   const { email } = req.params;
-  console.log("body ",req.body);
+  console.log("body ", req.body);
   const {
     firtsName,
     lastName,
@@ -41,7 +41,7 @@ router.post("/:email", async (req, res) => {
 
         userData = await userData.save();
         res.json(userData);
-      }else{
+      } else {
         res.send({ message: "data is required" });
       }
     }
