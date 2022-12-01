@@ -63,7 +63,7 @@ router.get("/:email", async (req, res) => {
 //       email,
 //       address,
 //       email_verified,
-//       social,
+//       socials,
 //       info,
 //     });
 
