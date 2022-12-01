@@ -6,7 +6,7 @@ import style from "./UserAccComp.module.css"
 
 export default function UserAccComp() {
 
-    
+    const userDB = useSelector((state) => state.userDB )
 
     return (
         <div className={style.UserAccCompContainer}>
@@ -14,21 +14,45 @@ export default function UserAccComp() {
 
             <div className={style.UserAccCompItem}> 
                 <label>Email:</label>
-                <input type="email" value="nombre.apellido@mail.com"/>
+                <input type="email" value={userDB.email}/>
             </div>
             <form className={style.UserAccCompItem}> 
                 <label>Change Email:</label>
                 <input type="email"/>
                 <button type="submit">SUBMIT</button>
             </form>
+            <form >
             <div className={style.UserAccCompItem}>
-                <label>Password:</label>
-                <input type="password" value="123"/>
+                <label>New password:</label>
+                <input type="password"/>
             </div>
-            <form className={style.UserAccCompItem}>
-                <label>Change Password:</label>
+            <div className={style.UserAccCompItem}>
+                <label>Repeat password:</label>
                 <input type="password"/>
                 <button type="submit">SUBMIT</button>
+            </div>
+            </form>
+
+            <form >
+            <div className={style.UserAccCompItem}>
+                <label>Instagram:</label>
+                <input type="text" value={userDB.socials.instagram} />
+            </div>
+            <div className={style.UserAccCompItem}>
+                <label>Facebook:</label>
+                <input type="text" value={userDB.socials.facebook}/>
+
+            </div>
+            <div className={style.UserAccCompItem}>
+                <label>LinkedIn:</label>
+                <input type="text"  value={userDB.socials.linkedin}/>
+
+            </div>
+            <div className={style.UserAccCompItem}>
+                <label>Twitter:</label>
+                <input type="text"  value={userDB.socials.twitter}/>
+                <button type="text">SUBMIT</button>
+            </div>
             </form>
 
             <button> DELETE ACCOUNT </button>

@@ -32,7 +32,7 @@ export default function Cards() {
 
     if (cart) dispatch(getTotalProducts(cart.length));
 
-  }, [dispatch, productsOnStore, filters, currentPage, cart]);
+  }, [cart]);
 
   useEffect(() => {
 
@@ -49,19 +49,6 @@ export default function Cards() {
     }
     
   }, [productsOnStore]);
-
-
-  // useEffect(() => {
-
-  //   if (filters.filtersApplied.length === 0 && location.state !== null) {
-  //     console.log("se ejecutó esto");
-  //     setFilters((filters) => ({
-  //       filtersApplied: [location.state],
-  //     }));
-  //     dispatch(filterProducts([location.state]))
-  //   }
-    
-  // }, []);
 
   
   const handleAddCart = function (e) {
