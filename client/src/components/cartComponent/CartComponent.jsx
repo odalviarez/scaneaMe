@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
-import { getTotalProducts } from "../../redux/actions";
+import { getTotalProducts, getUser } from "../../redux/actions";
 import PayButton from "./PayButton";
 import "./CartComponent.css";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,7 +14,7 @@ export default function CartComponent() {
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-
+  console.log("auth0 ",user);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const dispatch = useDispatch();
 
@@ -28,8 +28,10 @@ export default function CartComponent() {
       });
       setCartTotalAmount(totalAmount);
       if (cart) dispatch(getTotalProducts(cart.length));
+      if (user) dispatch(getUser(user.email));
     }, [cart, dispatch])
-    
+    let userDB = useSelector((state) => state.userDB);
+    console.log("DBB ",userDB);
   const handleAddToCart = (id) => {
     let cartModified = cart.map((elem) => {
       if (elem.id === id) {

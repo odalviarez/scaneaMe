@@ -16,6 +16,7 @@ router.get("/:email", async (req, res) => {
         socials,
         info,
         sub,
+        picture,
       } = req.body;
 
   if (!email) {
@@ -35,6 +36,7 @@ router.get("/:email", async (req, res) => {
       socials,
       info,
       sub,
+      image: picture,
     });
 
     userData = await userData.save();
@@ -63,7 +65,7 @@ router.put("/:email", async (req, res) => {
       
 
   //   // updatedUser = await user.save();
-  //   console.log("este es el user actualizado", user);
+  //   console.log("este es el user actualsizado", user);
 
   //   res.status(200).send(user);
 
