@@ -83,14 +83,15 @@ export const getUser = (user) =>{
 
 export const getTotalProducts = (products) => {
     return {
-      type: GET_TOTAL_PRODUCTS,
-      payload: products,
+        type: GET_TOTAL_PRODUCTS,
+        payload: products,
     };
 };
 export const userUpdate = (payload, user) => { 
     return async function () { 
     try {
-        const res = await axios.post(`/user/${user}`, payload);
+        console.log(payload, user);
+        const res = await axios.put(`/user/${user}`, payload);
         return res;
     } catch (error) {
         alert('No se pudo actualizar los datos del usuario')
