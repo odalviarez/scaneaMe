@@ -31,10 +31,15 @@ export default function Navbar() {
 const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
+
     if (cart) dispatch(getTotalProducts(cart.length));
-    if (user) dispatch(getUser(user.email));
+    if (user) {
+      console.log(user);
+      dispatch(getUser(user.email))
+    };
     
   }, [cart, dispatch, user]);
+
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
@@ -80,9 +85,17 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 <DropdownItem header>{user.name}</DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
+                  to="/user/account"
+                  className="dropdown-profile"
+                  activeclassname="router-link-exact-active"
+                >
+                  <FontAwesomeIcon icon="tools" className="mr-3" /> Account
+                </DropdownItem>
+                <DropdownItem
+                  tag={RouterNavLink}
                   to="/profile"
                   className="dropdown-profile"
-                  activeClassName="router-link-exact-active"
+                  activeclassname="router-link-exact-active"
                 >
                   <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                 </DropdownItem>
@@ -128,10 +141,19 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
               </span>
             </NavItem>
             <NavItem>
+            <FontAwesomeIcon icon="tools" className="mr-3" />
+              <RouterNavLink
+                to="/user/account"
+                activeclassname="router-link-exact-active"
+              >
+                Account
+              </RouterNavLink>
+            </NavItem>
+            <NavItem>
               <FontAwesomeIcon icon="user" className="mr-3" />
               <RouterNavLink
                 to="/profile"
-                activeClassName="router-link-exact-active"
+                activeclassname="router-link-exact-active"
               >
                 Profile
               </RouterNavLink>
