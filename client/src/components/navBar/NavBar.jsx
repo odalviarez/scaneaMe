@@ -3,26 +3,23 @@ import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../Logo/LogoQR.png";
 import cartImg from "../../Logo/cart.png";
-import profile from "../../Logo/profile.png";
+//import profile from "../../Logo/profile.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Collapse,
   Container,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import {getUser} from "../../redux/actions";
+import {getUser, getTotalProducts} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
@@ -30,17 +27,21 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-  const [totalItems, setTotalItems] = useState("");
+
 const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
-    setTotalItems(cart.length);
+
+    if (cart) dispatch(getTotalProducts(cart.length));
     if (user) {
       console.log(user);
       dispatch(getUser(user.email))
     };
-  }, [cart, totalItems, dispatch]);
+    
+  }, [cart, dispatch, user]);
 
+
+  const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
   
   const toggle = () => setIsOpen(!isOpen);

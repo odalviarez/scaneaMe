@@ -14,22 +14,23 @@ router.post('/create-checkout-session', async (req, res) => {
       userId: req.body.userId,
     },
   });
-  
-  const line_items = req.body.cartItems.map((item) => {
+  let {cartItems} = req.body
+  console.log(cartItems);
+  const line_items = cartItems.map((item) => {
     return {
       price_data: {
-        currency: 'usd',
+        currency: "usd",
         product_data: {
           name: item.name,
-          images: [item.image.url],
-          description: item.desc,
+          images: [item.image],
+          description: item.name,
           metadata: {
             id: item.id,
           },
         },
         unit_amount: item.price * 100,
       },
-      quantity: item.cartQuantity,
+      quantity: item.cartTotalQuantity,
     };
   });
   

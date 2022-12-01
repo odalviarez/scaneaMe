@@ -8,7 +8,8 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
 export const CLEAN_PRODUCT_DETAIL = 'CLEAN_PRODUCT_DETAIL';
 export const GET_PRODUCT_DETAILS = 'GET_PRODUCT_DETAILS';
-export const GET_USER = 'GET_USER'
+export const GET_USER = 'GET_USER';
+export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 // export const LOGIN = 'LOGIN';
 
 export const getAllProducts = () => { 
@@ -77,6 +78,23 @@ export const getUser = (user) =>{
             alert ('Could not get user')
             console.log(error)
         }
+    }
+}
+
+export const getTotalProducts = (products) => {
+    return {
+      type: GET_TOTAL_PRODUCTS,
+      payload: products,
+    };
+};
+export const userUpdate = (payload, user) => { 
+    return async function () { 
+    try {
+        const res = await axios.post(`/user/${user}`, payload);
+        return res;
+    } catch (error) {
+        alert('No se pudo actualizar los datos del usuario')
+        console.log(error)}  
     }
 }
 
