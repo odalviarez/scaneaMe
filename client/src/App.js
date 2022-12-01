@@ -34,6 +34,7 @@ function App() {
     }
   return (
     <div className="App">
+      {console.log("estoy en APP.js")}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />

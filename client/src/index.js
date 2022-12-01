@@ -32,7 +32,9 @@ const providerConfig = {
 const root = createRoot(document.getElementById("root"));
 
 root.render(
+  
   <React.StrictMode>
+    {console.log("estoy en index.js")}
     <Provider store={store}>
       <BrowserRouter>
         <Auth0Provider {...providerConfig}>
