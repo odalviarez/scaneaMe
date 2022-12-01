@@ -5,6 +5,11 @@
     justify-content: flex-start;
     align-items: center;
     align-content: stretch;
+    position: absolute;
+    left:35%;
+    top: 150px;
+    width: 500px
+    
 }
 
 .UserAccCompContainer h1{
@@ -31,4 +36,6 @@
 
 .UserAccCompItem button{
     height: fit-content;
+    position:absolute;
+    right: 0px;
 }

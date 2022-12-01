@@ -1,24 +1,43 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router'
+import { getUser } from '../../redux/actions'
 import igLogo from '../../Logo/instagram.png'
 import twLogo from '../../Logo/twitter.png'
 import linkedinLogo from '../../Logo/linkedin.png'
 import fbLogo from '../../Logo/facebook.png'
 import styles from './Socials.module.css'
+import { useState } from 'react'
 
 export default function Socials() {
-  const userIg = 'octa_navarro'
-  const userFb = 'octavio.navarro.794'
-  const userTw = 'navarroocta'
-  const userLi = 'octa-nav-tech'
+  const dispatch = useDispatch()
+  const { email } = useParams()
+  const userDB = useSelector(state => state.userDB)
+
+  useEffect(() => {
+    console.log('email', email)
+    if (email && userDB === '') dispatch(getUser(email))
+    if (userDB) setSocials(userDB.socials)
+  }, [dispatch, userDB])
+
+  console.log('usuarioDB: x', userDB)
+
+  const [socials, setSocials] = useState({
+    facebook: '',
+    linkedin: '',
+    twitter: '',
+    instagram: '',
+  })
 
   return (
     <div>
       <div className={styles.container}>
-        {userIg.length > 0 ? (
+        {socials?.instagram.length > 0 ? (
           <div className={styles.igDiv}>
             <a
-              href={`http://www.instagram.com/${userIg}`}
+              href={`http://www.instagram.com/${socials.instagram}`}
               rel='noopener noreferrer'
               target='_blank'
             >
@@ -29,10 +48,10 @@ export default function Socials() {
           <></>
         )}
 
-        {userTw.length > 0 ? (
+        {socials?.twitter.length > 0 ? (
           <div className={styles.twDiv}>
             <a
-              href={`http://www.twitter.com/${userTw}`}
+              href={`http://www.twitter.com/${socials.twitter}`}
               rel='noopener noreferrer'
               target='_blank'
             >
@@ -43,27 +62,33 @@ export default function Socials() {
           <></>
         )}
 
-          {userLi.length > 0 ? (
-        <div className={styles.liDiv}>
-          <a
-            href={`http://www.linkedin.com//in/${userLi}`}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            <img src={linkedinLogo} alt='LinkedIn link' />
-          </a>
-        </div>) : (<></>)}
+        {socials?.linkedin.length > 0 ? (
+          <div className={styles.liDiv}>
+            <a
+              href={`http://www.linkedin.com//in/${socials.linkedin}`}
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              <img src={linkedinLogo} alt='LinkedIn link' />
+            </a>
+          </div>
+        ) : (
+          <></>
+        )}
 
-          {userFb.length > 0 ? (  
-        <div className={styles.fbDiv}>
-          <a
-            href={`http://www.facebook.com/${userFb}`}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            <img src={fbLogo} alt='Facebook link' />
-          </a>
-        </div>) : (<></>)}
+        {socials?.facebook.length > 0 ? (
+          <div className={styles.fbDiv}>
+            <a
+              href={`http://www.facebook.com/${socials.facebook}`}
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              <img src={fbLogo} alt='Facebook link' />
+            </a>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   )
