@@ -16,6 +16,7 @@ router.get("/:email", async (req, res) => {
         socials,
         info,
         sub,
+        picture,
       } = req.body;
 
   if (!email) {
@@ -35,6 +36,7 @@ router.get("/:email", async (req, res) => {
       socials,
       info,
       sub,
+      image: picture,
     });
 
     userData = await userData.save();
