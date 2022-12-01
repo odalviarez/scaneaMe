@@ -20,9 +20,10 @@ router.get("/:email", async (req, res) => {
     return res.status(400).send("Sorry!, Email is required");
   }
   //busca el usuario por el email y si existe retorna la informacion, de lo contrario lo crea
+  try {
   let userData = await User.findOne({ email });
-  if (userData) res.json(userData);
-  else {
+  if (userData) {res.json(userData);
+  } else {
     userData = new User({
       firtsName,
       lastName,
@@ -34,8 +35,9 @@ router.get("/:email", async (req, res) => {
     });
 
     userData = await userData.save();
-
     res.json(userData);
+  } } catch (error){
+    res.status(400).send("Could not create user", error.message)
   }
 });
 
