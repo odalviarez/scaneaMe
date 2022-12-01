@@ -3,26 +3,23 @@ import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../Logo/LogoQR.png";
 import cartImg from "../../Logo/cart.png";
-import profile from "../../Logo/profile.png";
+//import profile from "../../Logo/profile.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Collapse,
   Container,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import {getUser} from "../../redux/actions";
+import {getUser, getTotalProducts} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
@@ -30,17 +27,23 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-  const [totalItems, setTotalItems] = useState("");
+
 const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
-    setTotalItems(cart.length);
-    if (user) dispatch(getUser(user.email));
-  }, [cart, totalItems, dispatch]);
 
+    if (cart) dispatch(getTotalProducts(cart.length));
+    if (user) {
+      console.log(user);
+      dispatch(getUser(user.email))
+    };
+    
+  }, [cart, dispatch, user]);
+
+
+  const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
   
-  console.log(user);
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
@@ -82,9 +85,17 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 <DropdownItem header>{user.name}</DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
+                  to="/user/account"
+                  className="dropdown-profile"
+                  activeclassname="router-link-exact-active"
+                >
+                  <FontAwesomeIcon icon="tools" className="mr-3" /> Account
+                </DropdownItem>
+                <DropdownItem
+                  tag={RouterNavLink}
                   to="/profile"
                   className="dropdown-profile"
-                  activeClassName="router-link-exact-active"
+                  activeclassname="router-link-exact-active"
                 >
                   <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                 </DropdownItem>
@@ -130,10 +141,19 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
               </span>
             </NavItem>
             <NavItem>
+            <FontAwesomeIcon icon="tools" className="mr-3" />
+              <RouterNavLink
+                to="/user/account"
+                activeclassname="router-link-exact-active"
+              >
+                Account
+              </RouterNavLink>
+            </NavItem>
+            <NavItem>
               <FontAwesomeIcon icon="user" className="mr-3" />
               <RouterNavLink
                 to="/profile"
-                activeClassName="router-link-exact-active"
+                activeclassname="router-link-exact-active"
               >
                 Profile
               </RouterNavLink>
