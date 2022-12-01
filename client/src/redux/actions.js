@@ -72,10 +72,11 @@ export const getTotalProducts = (products) => {
   };
 };
 
-export const getUser = (email, data) => {
+export const getUser = (email, payload) => {
   return async function (dispatch) {
     try {
-      const json = await axios.get(`/user/${email}`, data);
+      console.log(payload);
+      const json = await axios.post(`/user/${email}`, payload);
       return dispatch({
         type: GET_USER,
         payload: json.data,

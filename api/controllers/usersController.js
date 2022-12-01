@@ -3,8 +3,9 @@ const express = require("express");
 const { db } = require("../models/userModel");
 const router = express.Router();
 
-router.get("/:email", async (req, res) => {
+router.post("/:email", async (req, res) => {
   const { email } = req.params;
+  console.log("body ",req.body);
   const {
     firtsName,
     lastName,
@@ -16,7 +17,6 @@ router.get("/:email", async (req, res) => {
     sub,
     picture,
   } = req.body;
-  console.log("body ",req.body);
   if (!email) {
     return res.status(400).send("Sorry!, Email is required");
   }
