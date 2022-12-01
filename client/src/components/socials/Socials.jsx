@@ -15,14 +15,13 @@ export default function Socials() {
   const dispatch = useDispatch()
   const { email } = useParams()
   const userDB = useSelector(state => state.userDB)
+  console.log('usuarioDB: ', userDB)
 
   useEffect(() => {
     console.log('email', email)
-    if (email && userDB === '') dispatch(getUser(email))
-    if (userDB) setSocials(userDB.socials)
+    if (!userDB.hasOwnProperty('socials')) dispatch(getUser(email))
+    setSocials(userDB.socials)
   }, [dispatch, userDB])
-
-  console.log('usuarioDB: x', userDB)
 
   const [socials, setSocials] = useState({
     facebook: '',
