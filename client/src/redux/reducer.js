@@ -91,8 +91,8 @@ const rootReducer = (state = initialState, action) => {
         }
         case GET_TOTAL_PRODUCTS:{
             return {
-              ...state,
-              totalProducts: action.payload,
+                ...state,
+                totalProducts: action.payload,
             };
         }
 

@@ -1,5 +1,6 @@
 const User = require('../models/userModel')
 const express = require("express");
+const { db } = require('../models/userModel');
 const router = express.Router();
 
 
@@ -14,6 +15,7 @@ router.get("/:email", async (req, res) => {
         email_verified,
         socials,
         info,
+        sub,
       } = req.body;
 
   if (!email) {
@@ -32,6 +34,7 @@ router.get("/:email", async (req, res) => {
       email_verified,
       socials,
       info,
+      sub,
     });
 
     userData = await userData.save();
@@ -41,41 +44,37 @@ router.get("/:email", async (req, res) => {
   }
 });
 
-// router.post("/", async (req, res) => {
-//     const {
-//       firtsName,
-//       lastName,
-//       email,
-//       address,
-//       email_verified,
-//       social,
-//       info,
-//     } = req.body;
+router.put("/:email", async (req, res) => {
+  const { email } = req.params;
+    const {
+      socials
+    } = req.body;
 
-//     //verificamos que el usuario no exista ya en la BDD
-//   let user = await User.findOne({ email });
-//   if (user) return res.status(202).send("User already exist...");
+    try{
+ // verificamos que el usuario no exista ya en la BDD
+  // let user = await User.findOne({ email });
+  // console.log("este es el user sin actualizar", user);
+  // if (!user) return res.status(202).send("User not found...");
 
-//   if(email){
-//     user = new User({
-//       firtsName,
-//       lastName,
-//       email,
-//       address,
-//       email_verified,
-//       socials,
-//       info,
-//     });
+  // if(user){
+    // let updateUser = await db.scaneaMe.users.updateOne ({email: email},
+    //   {
+    //     $set: { socials: socials} })
+      
 
-//     user = await user.save();
+  //   // updatedUser = await user.save();
+  //   console.log("este es el user actualsizado", user);
 
-//     res.send(user);
-//   }
-//   else {
-//     res.send({message: "the email is required"});
-//   }
+  //   res.status(200).send(user);
 
-// });
+  const updateUser = await User.updateOne({email}, {socials: socials})
+  console.log('este es el console log', updateUser);
+  res.json(updateUser);
+
+  } catch (error) {
+    res.status(400).send("Could not update user", error.message)
+  }
+});
 
 
 

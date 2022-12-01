@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    sub: {
+      type: String,
+      required: false,
+    },
     email_verified: {
       type: Boolean,
       required: false,
