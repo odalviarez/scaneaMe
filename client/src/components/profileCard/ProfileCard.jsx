@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Socials from '../socials/Socials'
 import styles from './ProfileCard.module.css'
 import userImg from '../../Logo/userImg.jpeg'

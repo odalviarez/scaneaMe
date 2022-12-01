@@ -46,7 +46,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
         <Route path="/user/account" element={<UserAccount />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/:email" element={<Profile />} />
       </Routes>
     </div>
   );
