@@ -11,6 +11,7 @@
   background-color: rgb(253, 234, 253);
   position: relative;
   margin-top: 40px;
+  box-shadow: 11px 13px 7px -9px rgba(175, 49, 49, 0.6)
 }
 
 .card p{

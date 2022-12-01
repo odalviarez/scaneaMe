@@ -52,7 +52,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
       <Link to={"/home"}>
         <img src={logo} className={styles.logo} alt="logo" />
       </Link>
-      <Container>
+      <Container className={styles.desplegable}>
         <NavbarToggler onClick={toggle} />
         <Nav className="d-none d-md-block" navbar>
           {!isAuthenticated && (
