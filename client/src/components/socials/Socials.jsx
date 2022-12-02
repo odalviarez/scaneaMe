@@ -1,9 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-import { getUser } from '../../redux/actions'
 import igLogo from '../../Logo/instagram.png'
 import twLogo from '../../Logo/twitter.png'
 import linkedinLogo from '../../Logo/linkedin.png'
@@ -11,32 +6,16 @@ import fbLogo from '../../Logo/facebook.png'
 import styles from './Socials.module.css'
 import { useState } from 'react'
 
-export default function Socials() {
-  const dispatch = useDispatch()
-  const { email } = useParams()
-  const userDB = useSelector(state => state.userDB)
-  console.log('usuarioDB: ', userDB)
-
-  useEffect(() => {
-    console.log('email', email)
-    if (!userDB.hasOwnProperty('socials')) dispatch(getUser(email))
-    setSocials(userDB.socials)
-  }, [dispatch, userDB])
-
-  const [socials, setSocials] = useState({
-    facebook: '',
-    linkedin: '',
-    twitter: '',
-    instagram: '',
-  })
+export default function Socials(facebook, instagram, twitter, linkedin) {
+  console.log('insta: ',instagram)
 
   return (
     <div>
       <div className={styles.container}>
-        {socials?.instagram.length > 0 ? (
+        {instagram?.length > 0 ? (
           <div className={styles.igDiv}>
             <a
-              href={`http://www.instagram.com/${socials.instagram}`}
+              href={`http://www.instagram.com/${instagram}`}
               rel='noopener noreferrer'
               target='_blank'
             >
@@ -47,10 +26,10 @@ export default function Socials() {
           <></>
         )}
 
-        {socials?.twitter.length > 0 ? (
+        {twitter?.length > 0 ? (
           <div className={styles.twDiv}>
             <a
-              href={`http://www.twitter.com/${socials.twitter}`}
+              href={`http://www.twitter.com/${twitter}`}
               rel='noopener noreferrer'
               target='_blank'
             >
@@ -61,10 +40,10 @@ export default function Socials() {
           <></>
         )}
 
-        {socials?.linkedin.length > 0 ? (
+        {linkedin?.length > 0 ? (
           <div className={styles.liDiv}>
             <a
-              href={`http://www.linkedin.com//in/${socials.linkedin}`}
+              href={`http://www.linkedin.com//in/${linkedin}`}
               rel='noopener noreferrer'
               target='_blank'
             >
@@ -75,10 +54,10 @@ export default function Socials() {
           <></>
         )}
 
-        {socials?.facebook.length > 0 ? (
+        {facebook?.length > 0 ? (
           <div className={styles.fbDiv}>
             <a
-              href={`http://www.facebook.com/${socials.facebook}`}
+              href={`http://www.facebook.com/${facebook}`}
               rel='noopener noreferrer'
               target='_blank'
             >
