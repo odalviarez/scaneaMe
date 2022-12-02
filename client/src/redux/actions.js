@@ -10,6 +10,7 @@ export const CLEAN_PRODUCT_DETAIL = "CLEAN_PRODUCT_DETAIL";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const GET_USER = "GET_USER";
 export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
+export const GET_USER_LOGIN = "GET_USER_LOGIN";
 // export const LOGIN = 'LOGIN';
 
 export const getAllProducts = () => {
@@ -72,11 +73,10 @@ export const getTotalProducts = (products) => {
   };
 };
 
-export const getUser = (email, payload) => {
+export const getUser = (email) => {
   return async function (dispatch) {
     try {
-      console.log(payload);
-      const json = await axios.post(`/user/${email}`, payload);
+      const json = await axios.get(`/user/${email}`);
       return dispatch({
         type: GET_USER,
         payload: json.data,
@@ -86,6 +86,22 @@ export const getUser = (email, payload) => {
     }
   };
 };
+
+
+export const getUserLogin = (email, payload) => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.post(`/user/login/${email}`, payload);
+      return dispatch({
+        type: GET_USER_LOGIN,
+        payload: json.data,
+      });
+    } catch (error) {
+      alert("Could not get user");
+    }
+  };
+};
+
 export const userUpdate = (payload, user) => {
   return async function () {
     try {

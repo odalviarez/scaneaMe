@@ -3,9 +3,9 @@ const express = require("express");
 const { db } = require("../models/userModel");
 const router = express.Router();
 
-router.post("/:email", async (req, res) => {
+router.post("/login/:email", async (req, res) => {
   const { email } = req.params;
-  console.log("body ",req.body);
+  console.log("body ", req.body);
   const {
     firtsName,
     lastName,
@@ -25,7 +25,8 @@ router.post("/:email", async (req, res) => {
     let userData = await User.findOne({ email });
     if (userData) {
       res.json(userData);
-    } else {
+    } 
+    else {
       if (sub) {
         userData = new User({
           firtsName,
@@ -41,9 +42,27 @@ router.post("/:email", async (req, res) => {
 
         userData = await userData.save();
         res.json(userData);
-      }else{
+      } else {
         res.send({ message: "data is required" });
       }
+    }
+  } catch (error) {
+    res.status(400).send("Could not create user", error.message);
+  }
+});
+
+router.get("/:email", async (req, res) => {
+  const { email } = req.params;
+  if (!email) {
+    return res.status(400).send("Sorry!, Email is required");
+  }
+  //busca el usuario por el email y si existe retorna la informacion, de lo contrario lo crea
+  try {
+    let userData = await User.findOne({ email });
+    if (userData) {
+      res.json(userData);
+    } else {
+      res.json({message: "profile not found"});
     }
   } catch (error) {
     res.status(400).send("Could not create user", error.message);
