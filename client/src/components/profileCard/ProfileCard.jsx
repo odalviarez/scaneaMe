@@ -16,13 +16,14 @@ export default function ProfileCard() {
   const { email } = useParams()
   const userDB = useSelector(state => state.userDB)
   
+  console.log('estoy en ProfileCard email: ', email)
 
   useEffect(() => {
     
     if (!userDB.hasOwnProperty('socials')) dispatch(getUser(email))
     setSocials(userDB.socials)
     setUserImg(userDB.image)
-  }, [dispatch, userDB])
+  }, [])
 
   const [socials, setSocials] = useState({
     facebook: '',
@@ -31,6 +32,8 @@ export default function ProfileCard() {
     instagram: '',
   })
 
+  console.log('estoy en ProfileCard socials: ', socials)
+  console.log('estoy en ProfileCard userDB: ', userDB)
   const [userImg, setUserImg] = useState(imgPlaceholder)
 
   return (
@@ -39,12 +42,13 @@ export default function ProfileCard() {
       <div className={styles.descriptionSocials}>
         <div className={styles.description}>{description}</div>
         <div className={styles.socialsContainer}>
-          <Socials
+          {socials ? (<Socials
             facebook={socials.facebook}
             instagram={socials.instagram}
             twitter={socials.twitter}
             linkedin={socials.linkedin}
-          />
+          />) : <></>}
+          
         </div>
       </div>
     </div>
