@@ -1,3 +1,4 @@
+
 import React from 'react'
 import igLogo from '../../Logo/instagram.png'
 import twLogo from '../../Logo/twitter.png'
@@ -9,6 +10,7 @@ import { useState } from 'react'
 export default function Socials(facebook, instagram, twitter, linkedin) {
   console.log('insta: ',instagram)
 
+
   return (
     <div>
       <div className={styles.container}>
@@ -19,7 +21,7 @@ export default function Socials(facebook, instagram, twitter, linkedin) {
               rel='noopener noreferrer'
               target='_blank'
             >
-              <img src={igLogo} alt='Instagram link' />
+              <img src={igLogo} alt="Instagram link" />
             </a>
           </div>
         ) : (
@@ -33,7 +35,7 @@ export default function Socials(facebook, instagram, twitter, linkedin) {
               rel='noopener noreferrer'
               target='_blank'
             >
-              <img src={twLogo} alt='Twitter link' />
+              <img src={twLogo} alt="Twitter link" />
             </a>
           </div>
         ) : (
@@ -47,7 +49,7 @@ export default function Socials(facebook, instagram, twitter, linkedin) {
               rel='noopener noreferrer'
               target='_blank'
             >
-              <img src={linkedinLogo} alt='LinkedIn link' />
+              <img src={linkedinLogo} alt="LinkedIn link" />
             </a>
           </div>
         ) : (
@@ -61,7 +63,7 @@ export default function Socials(facebook, instagram, twitter, linkedin) {
               rel='noopener noreferrer'
               target='_blank'
             >
-              <img src={fbLogo} alt='Facebook link' />
+              <img src={fbLogo} alt="Facebook link" />
             </a>
           </div>
         ) : (
@@ -69,5 +71,5 @@ export default function Socials(facebook, instagram, twitter, linkedin) {
         )}
       </div>
     </div>
-  )
+  );
 }

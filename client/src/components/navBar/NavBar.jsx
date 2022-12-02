@@ -19,7 +19,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import {getUser, getTotalProducts} from "../../redux/actions";
+import {getUserLogin, getTotalProducts} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
@@ -33,7 +33,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   useEffect(() => {
 
     if (cart) dispatch(getTotalProducts(cart.length));
-    if (user) dispatch(getUser(user.email, user));
+    if (user) dispatch(getUserLogin(user.email, user));
     
   }, [cart, dispatch, user]);
 
