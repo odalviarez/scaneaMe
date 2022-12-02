@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import { useLocalStorage } from "../../useLocalStorage";
-import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts,} from "../../redux/actions";
+import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
+import { useLocation } from 'react-router-dom';
 
 export default function Cards() {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
   const [currentPage, setcurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(9);
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
+  let location = useLocation()
   const pagination = (pageNumber) => {setcurrentPage(pageNumber);
   };
 
@@ -29,7 +30,25 @@ export default function Cards() {
       dispatch(getAllProducts());
     }
 
-  }, [dispatch, productsOnStore, filters, currentPage]);
+    if (cart) dispatch(getTotalProducts(cart.length));
+
+  }, [cart]);
+
+  useEffect(() => {
+
+    if (filters.filtersApplied.length === 0 && location.state !== null && productsOnStore.length > 0) {
+      console.log("se ejecutó esto");
+      setFilters((filters) => ({
+        filtersApplied: [location.state],
+      }));
+      dispatch(filterProducts([location.state]))
+    }
+
+    return () => {
+      dispatch(loadAllProducts())
+    }
+    
+  }, [productsOnStore]);
 
   
   const handleAddCart = function (e) {
@@ -52,11 +71,13 @@ export default function Cards() {
     }
   };
 
+
   const handleSorts = function (e) {
     e.preventDefault(e);
     dispatch(sortProducts(e.target.value));
     setSort(e.target.value);
   };
+
 
   const handleFilters = function (e) {
     e.preventDefault(e);
@@ -81,12 +102,14 @@ export default function Cards() {
         setFilters((filters) => ({
           filtersApplied: [...filters.filtersApplied, filterUsed],
         }));
+        setcurrentPage(1)
         dispatch(filterProducts(filtersUsed));
       }
     } else {
       setFilters((filters) => ({
         filtersApplied: [filterUsed],
       }));
+      setcurrentPage(1)
       dispatch(filterProducts([filterUsed]));
     }
   };
@@ -114,107 +137,97 @@ export default function Cards() {
     });
   };
 
-  return (
-    <div className={styles.CatalogueParent}>
+    return (
+      <div className={styles.CatalogueParent}>
+        <div className={styles.filtersList}>
+          <ul value="season">
+            <h3>Temporada</h3>
+            <li value="allyear" onClick={(e) => handleFilters(e)} >Todo el año</li>
+            <li value="spring" onClick={(e) => handleFilters(e)}>Primavera / Verano</li>
+            <li value="fall" onClick={(e) => handleFilters(e)}>Otoño / Invierno</li>
+          </ul>
 
+          <ul value="type">
+            <h3>Tipo de ropa</h3>
+            <li value="shirt" onClick={(e) => handleFilters(e)}>
+              Remera
+            </li>
+            <li value="pants" onClick={(e) => handleFilters(e)}>
+              Pantalon
+            </li>
+          </ul>
 
-      <div className={styles.filtersList}>
-        <ul>
-          <h3>Temporada</h3>
-          <li>Verano / Primavera</li>
-          <li>Invierno / Otoño</li>
-        </ul>
-
-        <ul value="type">
-          <h3>Tipo de ropa</h3>
-          <li value="shirt" onClick={(e) => handleFilters(e)}>
-            Remera
-          </li>
-          <li value="pants" onClick={(e) => handleFilters(e)}>
-            Pantalon
-          </li>
-        </ul>
-
-        <ul value="color">
-          <h3>Color</h3>
-          <li value="white" onClick={(e) => handleFilters(e)}>
-            Blanco
-          </li>
-          <li value="black" onClick={(e) => handleFilters(e)}>
-            Negro
-          </li>
-          <li value="red" onClick={(e) => handleFilters(e)}>
-            Rojo
-          </li>
-          <li value="blue" onClick={(e) => handleFilters(e)}>
-            Azul
-          </li>
-          <li value="green" onClick={(e) => handleFilters(e)}>
-            Verde
-          </li>
-          <li value="yellow" onClick={(e) => handleFilters(e)}>
-            Amarillo
-          </li>
-        </ul>
-      </div>
-
-      <div className={styles.filtersApplied}>
-
-        <div>
-          <select onChange={(e) => handleSorts(e)}>
-            <option value="priceUp">Menor precio</option>
-            <option value="priceDown">Mayor precio</option>
-          </select>
+          <ul value="color">
+            <h3>Color</h3>
+            <li value="white" onClick={(e) => handleFilters(e)}>
+              Blanco
+            </li>
+            <li value="black" onClick={(e) => handleFilters(e)}>
+              Negro
+            </li>
+            <li value="red" onClick={(e) => handleFilters(e)}>
+              Rojo
+            </li>
+            <li value="blue" onClick={(e) => handleFilters(e)}>
+              Azul
+            </li>
+            <li value="green" onClick={(e) => handleFilters(e)}>
+              Verde
+            </li>
+            <li value="yellow" onClick={(e) => handleFilters(e)}>
+              Amarillo
+            </li>
+          </ul>
         </div>
 
-        {filters.filtersApplied?.map((f, index) => (
-          <p
-            key={index}
-            onClick={removeFilter}
-            value={f.value}
-          >
-            X {f.valor}
-          </p>
-        ))}
+        <div className={styles.filtersApplied}>
+          <div>
+            <select onChange={(e) => handleSorts(e)}>
+              <option value="priceUp">Menor precio</option>
+              <option value="priceDown">Mayor precio</option>
+            </select>
+          </div>
 
-      </div>
-
-
-      <div className={styles.cardsPagination}>
-        <Pagination
-          cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
-          pagination={pagination}
-        />
-
-        <div className={styles.CatalogueCards}>
-          {currentCards.length
-            ? currentCards.map((p) => {
-                return (
-                  <Card
-                    key={p.id}
-                    id={p.id}
-                    name={p.name}
-                    img={p.image}
-                    price={p.price}
-                    type={p.type}
-                    color={p.color}
-                    handleAddCart={handleAddCart}
-                  />
-                );
-              })
-            : "No product was found"}
+          {filters.filtersApplied?.map((f, index) => (
+            <p key={index} onClick={removeFilter} value={f.value}>
+              X {f.valor}
+            </p>
+          ))}
         </div>
 
-        <Pagination
-          cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
-          pagination={pagination}
-        />
-        <button onClick={(e) => scrollToTop(e)}>Back to top</button>
+        <div className={styles.cardsPagination}>
+          <Pagination
+            cardsPerPage={cardsPerPage}
+            productsTotal={productsLoaded.length}
+            pagination={pagination}
+          />
+
+          <div className={styles.CatalogueCards}>
+            {currentCards.length
+              ? currentCards.map((p) => {
+                  return (
+                    <Card
+                      key={p.id}
+                      id={p.id}
+                      name={p.name}
+                      img={p.image}
+                      price={p.price}
+                      type={p.type}
+                      color={p.color}
+                      handleAddCart={handleAddCart}
+                    />
+                  );
+                })
+              : "No product was found"}
+          </div>
+
+          <Pagination
+            cardsPerPage={cardsPerPage}
+            productsTotal={productsLoaded.length}
+            pagination={pagination}
+          />
+          <button onClick={(e) => scrollToTop(e)}>Back to top</button>
+        </div>
       </div>
-
-
-    </div>
-  );
+    );
 }

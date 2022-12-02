@@ -1,46 +1,69 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please add a first name"],
+      required: false,
     },
-    //lastName: {
-      //type: String,
-      //required: [true, "Please add a last name"],
-    //},
+    firtsName: {
+      type: String,
+      required: false,
+    },
+    lastName: {
+      type: String,
+      required: false,
+    },
     email: {
       type: String,
       required: [true, "Please add an email"],
       unique: true,
     },
-    password: {
+    address: {
       type: String,
-      required: [true, "Please add a password"],
+      required: false,
     },
-    //address: {
-    //  type: String,
-     // required: [true, "Please add an adress"],
-    //},
     products: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
       ref: "Product",
     },
+    image: {
+      type: String,
+      required: false,
+    },
+    sub: {
+      type: String,
+      required: false,
+    },
+    email_verified: {
+      type: Boolean,
+      required: false,
+    },
+    info: {
+      type: String,
+      required: false,
+    },
+    socials: {
+      type: Object,
+      default: { instagram: "", facebook: "", linkedin: "", twitter: "" },
+    },
     isAdmin: {
-      type: Boolean, 
-      default: false
-    }
+      type: Boolean,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  
   {
     timestamps: true,
   }
 );
 
-// module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)
 
-const User = mongoose.model("User", userSchema);
+// const User = mongoose.model("User", userSchema);
 
-exports.User = User;
+// exports.User = User;

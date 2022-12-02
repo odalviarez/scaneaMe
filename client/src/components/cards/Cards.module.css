@@ -1,42 +1,45 @@
 .CatalogueParent {
-    display: grid inline;
+    display: grid ;
     grid-template-columns: fit-content(0.3fr) 1fr;
     grid-template-rows: fit-content(0.1fr) 1fr;
     grid-column-gap: 0px;
-    grid-row-gap: 0px; 
+    grid-row-gap: 0px;
 }
 
-.filtersList{
+.filtersList {
     grid-area: 1 / 1 / 3 / 2;
 
 }
 
-.filtersList ul{
+.filtersList ul {
     list-style: none;
     text-align: left;
-    margin-top: 50px;
+    margin-top: 80px;
     padding: 0 0 0 0;
     margin-right: 20px;
+    margin-left: 40px;
 }
 
-.filtersList li:hover{
+.filtersList li:hover {
     color: blue;
     cursor: default;
-    text-decoration: underline;
-    background-color: aliceblue;
+    background-color: rgba(127, 255, 212, 0.385);
+    text-decoration: underline
 }
+
 
 .filtersApplied{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 2 / 1 / 2 / 2;
     align-items: flex-start;
     height: 40px;
-
+    margin-left: 40px;
+    
 }
 
-.filtersApplied p{
+.filtersApplied p {
     margin-left: 10px;
     background-color: gainsboro; 
     border-radius: 8px;
@@ -49,7 +52,7 @@
 }
 
 
-.cardsPagination{
+.cardsPagination {
     grid-area: 2 / 2 / 3 / 3;
 }
 
@@ -61,4 +64,3 @@
     margin: 10px 30px 10px 30px;
     width: 70vw;
 }
-

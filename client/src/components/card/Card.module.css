@@ -1,36 +1,62 @@
+
 .card {
-    height: 400px;
-    width: 20vw;
-    font-size: large;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-    border-width: 5px;
-    border-color: rgba(0, 27, 146, 0.218);
-    border-radius: 9px;
-    border-style: solid;
-    padding: 10px 0px 10px 0px;
+  height: 450px;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 40px;
+  background-color: rgb(253, 234, 253);
+  position: relative;
+  margin-top: 40px;
+  box-shadow: 11px 13px 7px -9px rgba(175, 49, 49, 0.6)
 }
 
 .card p{
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
 
 .card h5{
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    color: black;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  color: black;
 }
 
 .card h5:hover{
-    color: blue
+  color: blue
 }
 
 .imageContainer img {
-    height: 180px;
-    width: 180px;
-    object-fit: contain;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 20vw;
+  height:  200px;
+  object-fit: cover;
+  border-top-left-radius:40px;
+  border-top-right-radius:40px;
 }
+
+.title{
+    text-decoration: none;
+    color: rgb(250, 158, 37);
+    font-size: 1.5em;
+}
+
+.card button{
+  background-color: aquamarine;
+  border: solid 1px rgb(255, 219, 178);
+  border-radius: 5px;
+  padding:5px;
+  color: rgb(252, 164, 49);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.card p{
+  font-weight: 700;
+  margin: 5px
+} 

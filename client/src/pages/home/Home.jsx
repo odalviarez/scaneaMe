@@ -5,6 +5,7 @@ import ProdCarru from '../../components/productsCarousel/ProductsCarousel'
 import Footer from '../../components/footer/Footer'
 import SeasonalBanner from '../../components/homeBanners/SeasonalBanner.jsx'
 
+
 export default function Home() {
   return (
     <div>
