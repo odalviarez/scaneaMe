@@ -1,26 +1,21 @@
-import React from 'react';
-import { createRoot } from "react-dom/client";
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import App from './App';
-import {BrowserRouter} from 'react-router-dom'
-import reportWebVitals from './reportWebVitals';
-import './index.css';
-import axios from "axios"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import * as serviceWorker from "./serviceWorker";
+import React from "react";
+import reportWebVitals from "./reportWebVitals";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import * as serviceWorker from "./serviceWorker";
+import axios from "axios";
+import { store } from "./redux/store";
 import { getConfig } from "./config";
+import "./index.css";
+import App from "./App";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = "https://scanea-me-production.up.railway.app/";
 
 const config = getConfig();
-// const onRedirectCallback = (appState) => {
-//   history.push(
-//     appState && appState.returnTo ? appState.returnTo : window.location.pathname
-//   );
-// };
 
 const providerConfig = {
   domain: config.domain,
@@ -29,12 +24,9 @@ const providerConfig = {
   redirectUri: window.location.origin,
   //onRedirectCallback,
 };
-const root = createRoot(document.getElementById("root"));
 
 root.render(
-  
   <React.StrictMode>
-    {console.log("estoy en index.js")}
     <Provider store={store}>
       <BrowserRouter>
         <Auth0Provider {...providerConfig}>
@@ -44,8 +36,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-
 serviceWorker.unregister();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
