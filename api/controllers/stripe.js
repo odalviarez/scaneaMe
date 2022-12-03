@@ -143,7 +143,7 @@ const createOrder = async (customer, data, lineItems) => {
 
 router.post(
   "/webhook",
-  express.raw({ type: "application/json" }),
+  express.json({ type: "application/json" }),
   (req, res) => {
     const sig = req.headers["stripe-signature"];
     console.log("sig: ",sig);
