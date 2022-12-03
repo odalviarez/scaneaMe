@@ -10,7 +10,16 @@ const stripe = require('../controllers/stripe')
 const server = express()
 // const router = Router();
 
-router.use(express.json())
+router.use((req, res, next) => {
+  if (req.originalUrl === "/stripe/webhook") {
+    next(); // Do nothing with the body because I need it in a raw state.
+  } else {
+    express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
+  }
+});
+
+
+//router.use(express.json())
 router.use(cors())
 
 router.use('/products', productControl)
