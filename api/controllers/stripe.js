@@ -89,7 +89,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    success_url: `${process.env.CLIENT_URL}/checkout-success`, //checkout-success
+    success_url: `${process.env.CLIENT_URL}/`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
 
@@ -130,7 +130,7 @@ router.post(
     console.log("entro en webhook");
     // Check if webhook signing is configured.
     let endpointSecret;
-    //endpointSecret = process.env.STRIPE_WEB_HOOK;
+    endpointSecret = process.env.STRIPE_WEB_HOOK;
 
     if (endpointSecret) {
       // Retrieve the event by verifying the signature using the raw body and secret.
