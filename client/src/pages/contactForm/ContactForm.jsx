@@ -1,22 +1,22 @@
 import React from 'react'
 import NavBar from '../../components/navBar/NavBar.jsx'
-import FormComponent from '../../components/FormComponent/FormComponent.jsx'
-import Footer from '../../components/footer/Footer.jsx'
+import Footer from '../../components/footer/Footer'
+import ContactMe from '../../components/contactMe/Contact'
+import style from './Contact.module.css'
 
-
-
-
-
-
-
-export default function Form() {
+export default function ContactForm() {
   return (
     <div>
       <NavBar />
-      <h1>Contact us</h1>
-      <FormComponent/>
-      <Footer/>
+      <div className={style.body}><ContactMe /></div>
+      <Footer />
     </div>
   )
 }
+
+
+
+
+
+
 
