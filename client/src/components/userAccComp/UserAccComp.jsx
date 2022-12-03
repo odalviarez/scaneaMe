@@ -8,6 +8,7 @@ export default function UserAccComp() {
     const { user, isAuthenticated} = useAuth0();
   const dispatch = useDispatch();
   
+  const userLogin = useSelector((state) => state.userLogin);
   const [email, setEmail] = useState("");
   const [socials, setSocials] = useState({
     facebook: "",
@@ -18,20 +19,13 @@ export default function UserAccComp() {
   
   useEffect(() => {
     if (user) dispatch(getUserLogin(user.email));
-    if (!userLogin.hasOwnProperty("socials")) setSocials(userLogin.socials);
-  }, [dispatch, user]);
+    if (userLogin.hasOwnProperty("socials")) setSocials(userLogin.socials);
+  }, [dispatch]);
 
-  const userLogin = useSelector((state) => state.userLogin);
+
+
   console.log(userLogin);
-  // const handleSubmitEmail = async (e) => {
-  //     e.preventdefault()
-  //     console.log("nuevo email:", email);
 
-  //     await dispatch(userUpdate({
-  //         email
-  //     },userLogin.email))
-
-  // }
 
   const handleChangeSocials = (e) => {
     setSocials({
