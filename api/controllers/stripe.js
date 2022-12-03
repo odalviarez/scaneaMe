@@ -119,6 +119,7 @@ const createOrder = async (customer, data, lineItems) => {
   }
 };
 
+
 // router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
 //   const sig = req.headers["stripe-signature"];
 
@@ -139,30 +140,25 @@ const createOrder = async (customer, data, lineItems) => {
 //   res.json({ received: true });
 // });
 
+
 router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (req, res) => {
     const sig = req.headers["stripe-signature"];
-    console.log("sig: ", sig);
+    console.log("sig: ",sig);
     let data;
     let eventType;
-
-    const stripePayload = req.rawBody || req.body;
 
     // Check if webhook signing is configured.
     let endpointSecret;
     endpointSecret = process.env.STRIPE_WEB_HOOK;
-    console.log("endpoint: ", endpointSecret);
+    console.log("endpoint: ",endpointSecret);
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(
-        stripePayload,
-        sig?.toString(),
-        endpointSecret
-      );
-      console.log("event: ", event);
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      console.log("event: ", event)
     } catch (err) {
       console.log(`❌ Webhook Error: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
