@@ -120,73 +120,75 @@ const createOrder = async (customer, data, lineItems) => {
 };
 
 
-router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
-  const sig = req.headers["stripe-signature"];
+// router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
+//   const sig = req.headers["stripe-signature"];
 
-  let event;
+//   let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
-  } catch (err) {
-    // On error, log and return the error message
-    console.log(`❌ Error message: ${err.message}`);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  // Successfully constructed event
-  console.log("✅ Success:", event.id);
-
-  // Return a response to acknowledge receipt of the event
-  res.json({ received: true });
-});
-
-// router.post(
-//   "/webhook",
-//   express.raw({ type: "application/json" }),
-//   (req, res) => {
-//     const sig = req.headers["stripe-signature"];
-//     console.log(sig);
-//     let data;
-//     let eventType;
-
-//     // Check if webhook signing is configured.
-//     let endpointSecret;
-//     endpointSecret = process.env.STRIPE_WEB_HOOK;
-//     console.log(endpointSecret);
-//     let event;
-
-//     try {
-//       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-//     } catch (err) {
-//       console.log(`Webhook Error: ${err.message}`);
-//       res.status(400).send(`Webhook Error: ${err.message}`);
-//       return;
-//     }
-//     // Extract the object from the event.
-//     data = event.data.object;
-//     eventType = event.type;
-
-//     // Handle the event
-//     if (eventType === "checkout.session.completed") {
-//       stripe.customers
-//         .retrieve(data.customer)
-//         .then((customer) => {
-//           stripe.checkout.sessions.listLineItems(
-//             data.id,
-//             {},
-//             function (err, lineItems) {
-//               console.log("Line_items", lineItems);
-//               createOrder(customer, data, lineItems);
-//             }
-//           );
-//         })
-//         .catch((err) => console.log(err.message));
-//     }
-
-//     // Return a 200 res to acknowledge receipt of the event
-//     //res.send().end();
-//     res.json({ received: true });
+//   try {
+//     event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+//   } catch (err) {
+//     // On error, log and return the error message
+//     console.log(`❌ Error message: ${err.message}`);
+//     return res.status(400).send(`Webhook Error: ${err.message}`);
 //   }
-// );
+
+//   // Successfully constructed event
+//   console.log("✅ Success:", event.id);
+
+//   // Return a response to acknowledge receipt of the event
+//   res.json({ received: true });
+// });
+
+
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    console.log("sig: ",sig);
+    let data;
+    let eventType;
+
+    // Check if webhook signing is configured.
+    let endpointSecret;
+    endpointSecret = process.env.STRIPE_WEB_HOOK;
+    console.log("endpoint: ",endpointSecret);
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      console.log("event: ", event)
+    } catch (err) {
+      console.log(`❌ Webhook Error: ${err.message}`);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
+    // Extract the object from the event.
+    data = event.data.object;
+    eventType = event.type;
+
+    // Handle the event
+    if (eventType === "checkout.session.completed") {
+      stripe.customers
+        .retrieve(data.customer)
+        .then((customer) => {
+          stripe.checkout.sessions.listLineItems(
+            data.id,
+            {},
+            function (err, lineItems) {
+              console.log("Line_items", lineItems);
+              createOrder(customer, data, lineItems);
+            }
+          );
+        })
+        .catch((err) => console.log(err.message));
+    }
+
+    // Return a 200 res to acknowledge receipt of the event
+    //res.send().end();
+    res.json({ received: true });
+  }
+);
 
 module.exports = router;
