@@ -20,7 +20,7 @@ export default function Register() {
     // set configurations
     const configuration = {
       method: "post",
-      url: "http://localhost:5000/register",
+      url: process.env.REACT_APP_API+"/register" || "http://localhost:5000/register",
       data: {
         name,
         email,

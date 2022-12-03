@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post("/login/:email", async (req, res) => {
   const { email } = req.params;
-  console.log("body ", req.body);
   const {
     firtsName,
     lastName,
@@ -72,7 +71,6 @@ router.get("/:email", async (req, res) => {
 router.put("/:email", async (req, res) => {
   const { email } = req.params;
   const { socials } = req.body;
-  console.log(req.body);
   try {
     // verificamos que el usuario no exista ya en la BDD
     // let user = await User.findOne({ email });

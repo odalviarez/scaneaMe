@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const dotenv = require('dotenv').config();
 const routes = require("./routes/index.js");
@@ -13,8 +13,8 @@ const port = process.env.PORT || 5000;
 const server = express();
 
 server.name = "API";
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+//server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+//server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
