@@ -5,6 +5,7 @@ const Order = require("../models/orderModel");
 require("dotenv").config();
 
 const stripe = Stripe(process.env.STRIPE_KEY);
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const router = express.Router();
 
