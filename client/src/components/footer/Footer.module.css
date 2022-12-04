@@ -4,18 +4,21 @@
   width: 100%;
   height: 100px;
   color: aliceblue;
+  
+}
+
+h3 {
+  font-size: 14px;
 }
 
 ul { 
-  margin-top: 1em;
   list-style: none;
   list-style-type: none; 
 }
 
 li {
-  display: flex;
   float: right;
-  align-items: center;
+  text-align: center;
   width: 3em;
 }
 
