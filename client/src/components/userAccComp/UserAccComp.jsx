@@ -6,6 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify'
 
 export default function UserAccComp() {
+
   const { user, isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
@@ -23,6 +24,7 @@ export default function UserAccComp() {
     dispatch(getUserLogin(user.email))
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
   }, [dispatch])
+
 
   const handleChangeSocials = e => {
     setSocials({

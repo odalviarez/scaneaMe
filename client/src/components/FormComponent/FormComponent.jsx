@@ -3,19 +3,22 @@ import { useState } from "react";
 import { Row, Container } from "react-bootstrap";
 import InputField from "./InputField"
 import TextareaField from "./TextareaField";
+import emailjs from '@emailjs/browser';
+import { Link } from 'react-router-dom'
+
 
 
 export default function Contact () {
   const [values, setValues] = useState({
     from_name: '',
     email: '',
-    role: '',
     message: ''
   });
   const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+     emailjs.sendForm('service_4awspmm','template_ll1g194',e.target,'kI0d_Ad7od4cni90h')
       .then(response => {
         console.log('SUCCESS!', response);
         setValues({
@@ -23,7 +26,7 @@ export default function Contact () {
           email: '',
           message: ''
         });
-        setStatus('SUCCESS');
+        setStatus('Su consulta fue enviada con exito!');
       }, error => {
         console.log('FAILED...', error);
       });
@@ -43,10 +46,12 @@ export default function Contact () {
         <h4 className="text-info">Nombre Completo</h4>
           <InputField value={values.from_name} handleChange={handleChange} name="from_name" type="text" placeholder="John Doe" />
         <h4 className="text-info">E-Mail</h4>
-          <InputField value={values.email} handleChange={handleChange}  name="email" type="email" placeholder="jphn@example.com" />
-        <h4 className="text-info">Tu mensaje aqui</h4>
+          <InputField value={values.email} handleChange={handleChange}  name="email" type="email" placeholder="jphn@example.com" />        <h4 className="text-info">Tu mensaje aqui</h4>
           <TextareaField value={values.message} handleChange={handleChange} name="message"/>
-        <button type="submit" className="fork-btn-inner bg-primary">Enviar</button>
+        <button type="submit" className="fork-btn-inner bg-primary">Enviar</button> 
+        <Link onClick={() => dispatch()} to='/home' > 
+                    BACK HOME
+                  </Link> 
       </form>
     </Container>
    
