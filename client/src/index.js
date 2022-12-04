@@ -13,7 +13,7 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:5000/";
 
 const config = getConfig();
 

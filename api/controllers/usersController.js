@@ -4,9 +4,8 @@ const { db } = require('../models/userModel')
 const router = express.Router()
 const cloudinary = require('../Utils/cloudinary')
 
-router.post('/login/:email', async (req, res) => {
-  const { email } = req.params
-  console.log('body ', req.body)
+router.post("/login/:email", async (req, res) => {
+  const { email } = req.params;
   const {
     firtsName,
     lastName,
