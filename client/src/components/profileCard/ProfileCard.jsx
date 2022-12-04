@@ -12,15 +12,17 @@ export default function ProfileCard() {
   const description =
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium saepe enim, animi tempore nemo nihil quas distinctio nulla commodi molestiae in quisquam consequatur, praesentium eum quidem ullam laborum tempora quo!";
 
-  const dispatch = useDispatch();
-  const { email } = useParams();
-  const userDB = useSelector((state) => state.userDB);
+  const dispatch = useDispatch()
+  const { email } = useParams()
+  const userDB = useSelector(state => state.userDB)
 
   useEffect(() => {
-    if (!userDB.hasOwnProperty("socials")) dispatch(getUser(email));
-    setSocials(userDB.socials);
-    setUserImg(userDB.image);
-  }, [dispatch, userDB]);
+    if (!userDB.hasOwnProperty('socials')) dispatch(getUser(email))
+    setSocials(userDB.socials)
+    setUserImg(userDB.image?.url)
+  }, [dispatch, userDB])
+
+  console.log('userDB: ', userDB)
 
   const [socials, setSocials] = useState({
     facebook: "",

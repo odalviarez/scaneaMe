@@ -8,8 +8,7 @@ import styles from './Socials.module.css'
 import { useState } from 'react'
 
 export default function Socials({facebook, instagram, twitter, linkedin}) {
-
-
+  
   return (
     <div>
       <div className={styles.container}>
