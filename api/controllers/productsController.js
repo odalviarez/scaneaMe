@@ -2,6 +2,7 @@ const express = require("express");
 //const Product = require("../models/productModel");
 const ProductosHardcode = require("../productos");
 const Products = require("../models/productModel");
+const cloudinary = require('../Utils/cloudinary')
 
 const router = express.Router();
 

@@ -13,7 +13,7 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-axios.defaults.baseURL = "https://scanea-me-production.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:5000/";
 
 const config = getConfig();
 

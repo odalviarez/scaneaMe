@@ -9,9 +9,6 @@ import { useState } from 'react'
 
 export default function Socials({facebook, instagram, twitter, linkedin}) {
   
-  console.log('estoy en Socials facebook: ', facebook)
-
-
   return (
     <div>
       <div className={styles.container}>
