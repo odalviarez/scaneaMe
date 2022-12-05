@@ -78,7 +78,7 @@ router.put('/:email', async (req, res) => {
     const result = await cloudinary.uploader.upload(image, {
       folder: 'User Profile',
       transformation: [
-        { gravity: 'face', height: 900, width: 900, crop: 'thumb' },
+        { gravity: 'face', height: 600, width: 900, crop: 'thumb' },
         { crop: 'scale' },
       ],
     })

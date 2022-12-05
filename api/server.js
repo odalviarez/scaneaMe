@@ -12,6 +12,9 @@ const port = process.env.PORT || 5000;
 
 const server = express();
 
+server.use(express.json({limit: "10mb", extended: true}))
+server.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
+
 server.name = "API";
 //server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 //server.use(bodyParser.json({ limit: "50mb" }));
