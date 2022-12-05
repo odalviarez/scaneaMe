@@ -13,37 +13,41 @@ export default function Cards() {
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
-  const [currentPage, setcurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(9);
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
   let location = useLocation()
-  const pagination = (pageNumber) => {setcurrentPage(pageNumber);
-  };
+  
 
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
+  //* PAGINADO
+  const [currentPage, setcurrentPage] = useState(1);
+  const [cardsPerPage, setCardsPerPage] = useState(9);
+  const pagination = (pageNumber) => {setcurrentPage(pageNumber)};
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
+  
 
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
 
+    //* Actualiza el número de articulos en el carrito en la navbar cada vez que se agreguen productos al carrito.
     if (cart) dispatch(getTotalProducts(cart.length));
 
   }, [cart]);
 
   useEffect(() => {
 
+    //* Al ingresar desde el componente HOME con una de las imágenes de la temporada, filtra segun el estado que tiene el componente "Link" que se use 
     if (filters.filtersApplied.length === 0 && location.state !== null && productsOnStore.length > 0) {
-      console.log("se ejecutó esto");
       setFilters((filters) => ({
         filtersApplied: [location.state],
       }));
       dispatch(filterProducts([location.state]))
     }
 
+    //* Al salir del componente, se vuelven a cargar todos los productos a la store. Caso contrario al volver al catálogo desde otra página quedaban los productos filtrados aún sin filtros aplicados.
     return () => {
       dispatch(loadAllProducts())
     }
