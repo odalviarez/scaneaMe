@@ -18,15 +18,16 @@ router.post("/login/:email", async (req, res) => {
     picture,
   } = req.body
   if (!email) {
-    return res.status(400).send('Sorry!, Email is required')
+    return res.status(400).send('Sorry!, Email is required');
   }
-  //busca el usuario por el email y si existe retorna la informacion, de lo contrario lo crea
+  //busca el usuario logeado por el email y si existe retorna la informacion, de lo contrario lo crea
   try {
-    let userData = await User.findOne({ email })
+    let userData = await User.findOne({ email });
     if (userData) {
       res.json(userData)
-    } else {
-      if (sub) {
+    } 
+    else {
+      console.log("entro a crear usaurio")
         userData = new User({
           firtsName,
           lastName,
@@ -38,19 +39,16 @@ router.post("/login/:email", async (req, res) => {
           sub,
           image: { public_id: picture, url: picture },
         });
-
-        userData = await userData.save()
+        userData = await userData.save();
         res.json(userData)
-      } else {
-        res.send({ message: 'data is required' })
-      }
     }
   } catch (error) {
-    res.status(400).send('Could not create user', error.message)
+    res.status(400).json(error.message)
   }
 })
 
 
+//Busca el perfil de usuario y retorna todos sus datos
 router.get('/:email', async (req, res) => {
   const { email } = req.params
   if (!email) {
@@ -69,6 +67,8 @@ router.get('/:email', async (req, res) => {
   }
 })
 
+
+//acrtualiza los datos del usuario logeado
 router.put('/:email', async (req, res) => {
   const { email } = req.params
   // console.log('body: ', req.body)

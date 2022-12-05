@@ -82,7 +82,7 @@ export const getUser = (email) => {
         payload: json.data,
       });
     } catch (error) {
-      alert("Could not get user");
+      alert("Could not get user profile", error.message);
     }
   };
 };
@@ -97,7 +97,8 @@ export const getUserLogin = (email, payload) => {
         payload: json.data,
       });
     } catch (error) {
-      alert("Could not get user");
+      console.log(error);
+      alert("Could not get user login", error.message);
     }
   };
 };

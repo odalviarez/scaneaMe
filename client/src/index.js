@@ -29,7 +29,7 @@ const providerConfig = {
 };
 
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Auth0Provider {...providerConfig}>
@@ -37,7 +37,7 @@ root.render(
         </Auth0Provider>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 serviceWorker.unregister();
 // If you want to start measuring performance in your app, pass a function

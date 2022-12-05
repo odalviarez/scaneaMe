@@ -30,10 +30,8 @@ export default function Navbar() {
 const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
-
     if (cart) dispatch(getTotalProducts(cart.length));
     if (user) dispatch(getUserLogin(user.email, user));
-    
   }, [cart, dispatch, user]);
 
   const totalItems = useSelector((state) => state.totalProducts);
