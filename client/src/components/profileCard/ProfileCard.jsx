@@ -7,6 +7,7 @@ import Socials from "../socials/Socials";
 import styles from "./ProfileCard.module.css";
 import imgPlaceholder from "../../Logo/imgPlaceholder.png";
 import { useState } from "react";
+import UserDisable from "../userDisable/UserDisable";
 
 export default function ProfileCard() {
   const description =
@@ -34,23 +35,29 @@ export default function ProfileCard() {
   const [userImg, setUserImg] = useState(imgPlaceholder);
 
   return (
-    <div className={styles.container}>
-      <img src={userImg} className={styles.userImg} alt="User" />
-      <div className={styles.descriptionSocials}>
-        <div className={styles.description}>{description}</div>
-        <div className={styles.socialsContainer}>
-          {socials ? (
-            <Socials
-              facebook={socials.facebook}
-              instagram={socials.instagram}
-              twitter={socials.twitter}
-              linkedin={socials.linkedin}
-            />
-          ) : (
-            <></>
-          )}
+    <div>
+      {userDB.isActive ? (
+        <div className={styles.container}>
+          <img src={userImg} className={styles.userImg} alt="User" />
+          <div className={styles.descriptionSocials}>
+            <div className={styles.description}>{description}</div>
+            <div className={styles.socialsContainer}>
+              {socials ? (
+                <Socials
+                  facebook={socials.facebook}
+                  instagram={socials.instagram}
+                  twitter={socials.twitter}
+                  linkedin={socials.linkedin}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <UserDisable user = {userDB}/>
+      )}
     </div>
   );
 }
