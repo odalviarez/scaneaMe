@@ -29,15 +29,11 @@ const userSchema = new mongoose.Schema(
       ref: "Product",
     },
     image: {
-      public_id:{
-        type: String,
-        required: true
+      type: Object,
+      default: {
+        public_id: "",
+        url: "http://drive.google.com/uc?export=view&id=1TLPMjhBDhoYehi6SzTvR7g8Bx_yx-HB_",
       },
-      url: {
-        type: String,
-        required: true
-      },
-      required: false
     },
     sub: {
       type: String,

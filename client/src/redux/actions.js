@@ -80,7 +80,7 @@ export const getUser = (email) => {
         payload: json.data,
       });
     } catch (error) {
-      alert("Could not get user");
+      alert("Could not get user profile", error.message);
     }
   };
 };
@@ -95,7 +95,8 @@ export const getUserLogin = (email, payload) => {
         payload: json.data,
       });
     } catch (error) {
-      alert("Could not get user");
+      console.log(error);
+      alert("Could not get user login", error.message);
     }
   };
 };
@@ -109,6 +110,21 @@ export const userUpdate = (payload, user) => {
       alert("No se pudo actualizar los datos del usuario");
     }
   };
+};
+
+export const handleCheckout = (cartProp, user) => {
+  console.log(cartProp.cartItems);
+  axios
+    .post(`/stripe/create-checkout-session`, {
+      cartItems: cartProp.cartItems,
+      userId: user.id,
+    })
+    .then((res) => {
+      if (res.data.url) {
+        window.location.href = res.data.url;
+      }
+    })
+    .catch((err) => console.log(err.message));
 };
 
 // export const getRecipeDetail = (id) => {

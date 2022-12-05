@@ -26,14 +26,13 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
+  const userLogin = useSelector((state) => state.userLogin);
 
 const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
-
     if (cart) dispatch(getTotalProducts(cart.length));
     if (user) dispatch(getUserLogin(user.email, user));
-    
   }, [cart, dispatch, user]);
 
   const totalItems = useSelector((state) => state.totalProducts);
@@ -173,6 +172,9 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
             <img src={cartImg} className={styles.cart} alt="cart" />
           </Link>
         </li>
+        {userLogin.isAdmin?<li> <Link to={"/dashboard"} className={styles.anchor}>
+            Dashboard
+          </Link></li> : null}
         <li>
           <Link to={"/catalogue"} className={styles.anchor}>
             Catalogue
