@@ -5,8 +5,18 @@
   color: aliceblue;
 }
 
-ul { 
-  list-style: none;
-  list-style-type: none; 
+.footer-icons{ 
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+  padding: 0 !important;
+}
+
+
+
+.social-icons{
+  display: flex;
+  float: right;
+  align-items: center;
+  width: 3em;
 }
 
