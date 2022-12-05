@@ -12,10 +12,10 @@ export default function Footer() {
       <Container fluid className="footer">
       <Row>
         <Col md="4" className="footer-copywright">
-          <h3>Designed and Developed by: Scaneame Team</h3>
+          <p>Designed and Developed by: Scaneame Team</p>
           </Col>
           <Col md="4" className="footer-copywright">
-          <h3>Copyright © {year} SCANEAME</h3>
+          <p>Copyright © {year} SCANEAME</p>
         </Col>
         <Col md="4" className="footer-body">
           <ul className="footer-icons">
