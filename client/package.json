@@ -1,7 +1,6 @@
 {
   "name": "scaneame",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.12.0",
