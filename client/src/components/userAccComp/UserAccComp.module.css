@@ -39,3 +39,17 @@
     position:absolute;
     right: 0px;
 }
+
+.submitProfile{
+  
+}
+
+.imgUpContainer{
+  display: flex;
+  
+  
+}
+
+.imgUpload{
+  cursor: pointer;
+}

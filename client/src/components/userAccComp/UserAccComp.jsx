@@ -24,7 +24,6 @@ export default function UserAccComp() {
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
   }, [dispatch])
 
-
   const handleChangeSocials = e => {
     setSocials({
       ...socials,
@@ -40,10 +39,9 @@ export default function UserAccComp() {
       userUpdate(
         {
           socials,
-          image
+          image,
         },
-        userLogin.email,
-        
+        userLogin.email
       )
     )
   }
@@ -127,20 +125,23 @@ export default function UserAccComp() {
             placeholder={userLogin?.socials?.twitter}
           />
         </div>
-        <div>
-          <label>Image:</label>
+
+        <div className={style.imgUpContainer}>
+          <div>Update Image:</div>
           <input
             onChange={handleImage}
             type='file'
             id='formupload'
             name='image'
             className={style.imgUpload}
+            placeholder='Select file...'
           />
         </div>
-
-        <button type='text'>SUBMIT</button>
+        <button type='text' className={style.submitProfile}>
+          SUBMIT
+        </button>
       </form>
-
+      <br></br>
       <button> DELETE ACCOUNT </button>
     </div>
   )
