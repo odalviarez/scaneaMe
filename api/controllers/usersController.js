@@ -4,6 +4,9 @@ const { db } = require('../models/userModel')
 const router = express.Router()
 const cloudinary = require('../Utils/cloudinary')
 
+
+//* GET USER LOGIN: recibe el mail al hacer login en el cliente. Si el usuario ya existe en la DB, lo trae (GET), y si no existe en la DB, lo crea (POST).
+//? Funciona la ruta creando un usuario manualmente, sin el log in de google?
 router.post("/login/:email", async (req, res) => {
   const { email } = req.params;
   const {
@@ -46,10 +49,11 @@ router.post("/login/:email", async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send('Could not create user', error.message)
+    res.status(400).send('Could not get or create user', error.message)
   }
 })
 
+//* GET USER: esta ruta se utiliza para ingresar a la página de perfil con las RRSS de un usuario registrado. Es la URL que devolvería el código QR al escanearse.
 router.get('/:email', async (req, res) => {
   const { email } = req.params
   if (!email) {
@@ -64,10 +68,11 @@ router.get('/:email', async (req, res) => {
       res.json({ message: 'profile not found' })
     }
   } catch (error) {
-    res.status(400).send('Could not create user', error.message)
+    res.status(400).send('Could not get user', error.message)
   }
 })
 
+//* USER UPDATE: actualiza las redes sociales y la imágen del usuario (EMAIL Y CONTRASEÑA REQUIEREN AUTH0).
 router.put('/:email', async (req, res) => {
   const { email } = req.params
   // console.log('body: ', req.body)

@@ -5,13 +5,11 @@ export const LOAD_ALL_PRODUCTS = "LOAD_ALL_PRODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const SORT_PRODUCTS = "SORT_PRODUCTS";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
-export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
-export const CLEAN_PRODUCT_DETAIL = "CLEAN_PRODUCT_DETAIL";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const GET_USER = "GET_USER";
 export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
-// export const LOGIN = 'LOGIN';
+
 
 export const getAllProducts = () => {
   return async function (dispatch) {

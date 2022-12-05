@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const { MONGOHOST, MONGOPASSWORD, MONGOPORT, MONGOUSER } = process.env;
 
-
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect( //MONGO_URI no existe asi que la vamos a sacar

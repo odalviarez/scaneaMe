@@ -44,6 +44,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           products: sortedProducts,
         };
+
       case FILTER_PRODUCTS:
         console.log("se despacho accion");
         let productsFiltered = [];
