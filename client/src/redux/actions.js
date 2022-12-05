@@ -114,6 +114,21 @@ export const userUpdate = (payload, user) => {
   };
 };
 
+export const handleCheckout = (cartProp, user) => {
+  console.log(cartProp.cartItems);
+  axios
+    .post(`/stripe/create-checkout-session`, {
+      cartItems: cartProp.cartItems,
+      userId: user.id,
+    })
+    .then((res) => {
+      if (res.data.url) {
+        window.location.href = res.data.url;
+      }
+    })
+    .catch((err) => console.log(err.message));
+};
+
 // export const getRecipeDetail = (id) => {
 //     return async function(dispatch) {
 //         try {
