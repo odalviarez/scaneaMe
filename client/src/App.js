@@ -13,6 +13,7 @@ import Login from "./pages/login/Login";
 import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
 import Profile from "./pages/profile/Profile";
+import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -38,6 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path= "/dashboard" element={<Dashboard/>}/>
         <Route path="/catalogue" element={<Catalogue />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
