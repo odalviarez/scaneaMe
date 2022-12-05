@@ -18,8 +18,8 @@ export default function Footer() {
           <p>Copyright © {year} SCANEAME</p>
         </Col>
         <Col md="4" className="footer-body">
-          <ul className="footer-icons">
-            <li className="social-icons">
+          <ul>
+            <li>
               <a
                 href="https://github.com/scanneame"
                 style={{ color: "white" }}
@@ -29,7 +29,7 @@ export default function Footer() {
                 <AiFillGithub />
               </a>
             </li>
-            <li className="social-icons">
+            <li>
               <a
                 href="https://twitter.com/Scannme_"
                 style={{ color: "white" }}
@@ -39,7 +39,7 @@ export default function Footer() {
                 <AiOutlineTwitter />
               </a>
             </li>
-            <li className="social-icons">
+            <li>
               <a
                 href="https://www.linkedin.com/in/scannme-team/"
                 style={{ color: "white" }}
@@ -49,7 +49,7 @@ export default function Footer() {
                 <FaLinkedinIn />
               </a>
             </li>
-            <li className="social-icons">
+            <li>
               <a
                 href="https://www.instagram.com/scanneameqr/"
                 style={{ color: "white" }}
