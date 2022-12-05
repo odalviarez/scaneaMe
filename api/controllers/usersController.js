@@ -1,7 +1,8 @@
-const User = require("../models/userModel");
-const express = require("express");
-const { db } = require("../models/userModel");
-const router = express.Router();
+const User = require('../models/userModel')
+const express = require('express')
+const { db } = require('../models/userModel')
+const router = express.Router()
+const cloudinary = require('../Utils/cloudinary')
 
 router.post("/login/:email", async (req, res) => {
   const { email } = req.params;
@@ -14,18 +15,17 @@ router.post("/login/:email", async (req, res) => {
     socials,
     info,
     sub,
-    picture,
-  } = req.body;
+    public_id,
+  } = req.body
   if (!email) {
-    return res.status(400).send("Sorry!, Email is required");
+    return res.status(400).send('Sorry!, Email is required')
   }
   //busca el usuario por el email y si existe retorna la informacion, de lo contrario lo crea
   try {
-    let userData = await User.findOne({ email });
+    let userData = await User.findOne({ email })
     if (userData) {
-      res.json(userData);
-    } 
-    else {
+      res.json(userData)
+    } else {
       if (sub) {
         userData = new User({
           firtsName,
@@ -36,63 +36,63 @@ router.post("/login/:email", async (req, res) => {
           socials,
           info,
           sub,
-          image: picture,
-        });
+          image: public_id,
+        })
 
-        userData = await userData.save();
-        res.json(userData);
+        userData = await userData.save()
+        res.json(userData)
       } else {
-        res.send({ message: "data is required" });
+        res.send({ message: 'data is required' })
       }
     }
   } catch (error) {
-    res.status(400).send("Could not create user", error.message);
+    res.status(400).send('Could not create user', error.message)
   }
-});
+})
 
-router.get("/:email", async (req, res) => {
-  const { email } = req.params;
+router.get('/:email', async (req, res) => {
+  const { email } = req.params
   if (!email) {
-    return res.status(400).send("Sorry!, Email is required");
+    return res.status(400).send('Sorry!, Email is required')
   }
   //busca el usuario por el email y si existe retorna la informacion, de lo contrario lo crea
   try {
-    let userData = await User.findOne({ email });
+    let userData = await User.findOne({ email })
     if (userData) {
-      res.json(userData);
+      res.json(userData)
     } else {
-      res.json({message: "profile not found"});
+      res.json({ message: 'profile not found' })
     }
   } catch (error) {
-    res.status(400).send("Could not create user", error.message);
+    res.status(400).send('Could not create user', error.message)
   }
-});
+})
 
-router.put("/:email", async (req, res) => {
-  const { email } = req.params;
-  const { socials } = req.body;
+router.put('/:email', async (req, res) => {
+  const { email } = req.params
+  // console.log('body: ', req.body)
+  const { socials, image } = req.body
+  console.log(req.body)
   try {
-    // verificamos que el usuario no exista ya en la BDD
-    // let user = await User.findOne({ email });
-    // console.log("este es el user sin actualizar", user);
-    // if (!user) return res.status(202).send("User not found...");
+    const result = await cloudinary.uploader.upload(image, {
+      folder: 'User Profile',
+      transformation: [
+        { gravity: 'face', height: 900, width: 900, crop: 'thumb' },
+        { crop: 'scale' },
+      ],
+    })
+    const updateUser = await User.updateOne(
+      { email },
+      {
+        socials,
+        image: { public_id: result.public_id, url: result.secure_url },
+      }
+    )
 
-    // if(user){
-    // let updateUser = await db.scaneaMe.users.updateOne ({email: email},
-    //   {
-    //     $set: { socials: socials} })
-
-    //   // updatedUser = await user.save();
-    //   console.log("este es el user actualsizado", user);
-
-    //   res.status(200).send(user);
-
-    const updateUser = await User.updateOne({ email }, { socials: socials });
-    console.log("este es el console log", updateUser);
-    res.json(updateUser);
+    res.json(updateUser)
   } catch (error) {
-    res.status(400).send("Could not update user", error.message);
+    res.status(400).send('Could not update user MOFO', error.message)
   }
-});
+})
 
-module.exports = router;
+module.exports = router

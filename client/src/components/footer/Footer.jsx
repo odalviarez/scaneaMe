@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Footer.module.css'
-import { Container, Row, Col } from "react-bootstrap";
 import { AiFillGithub, AiOutlineTwitter, AiFillInstagram, } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function Footer() {
   let date = new Date();
@@ -12,10 +12,10 @@ export default function Footer() {
       <Container fluid className="footer">
       <Row>
         <Col md="4" className="footer-copywright">
-          <p>Designed and Developed by: Scaneame Team</p>
+          <h3>Designed and Developed by: Scaneame Team</h3>
           </Col>
           <Col md="4" className="footer-copywright">
-          <p>Copyright © {year} SCANEAME</p>
+          <h3>Copyright © {year} SCANEAME</h3>
         </Col>
         <Col md="4" className="footer-body">
           <ul className="footer-icons">
@@ -66,76 +66,3 @@ export default function Footer() {
     </div>
   )
 }
-
-
-/*
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
-} from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";
-
-export default function Footer() {
-  let date = new Date();
-  let year = date.getFullYear();
-  return (
-    <Container fluid className="footer">
-      <Row>
-        <Col md="4" className="footer-copywright">
-          <h3>Designed and Developed by Scanneame Team</h3>
-        </Col>
-        <Col md="4" className="footer-copywright">
-          <h3>Copyright © {year} SCANNEAME</h3>
-        </Col>
-        <Col md="4" className="footer-body">
-          <ul className="footer-icons">
-            <li className="social-icons">
-              <a
-                href="https://github.com/scanneame"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiFillGithub />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://twitter.com/Scannme_"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiOutlineTwitter />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.linkedin.com/in/scannme-team/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.instagram.com/scanneameqr/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiFillInstagram />
-              </a>
-            </li>
-          </ul>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-*/

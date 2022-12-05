@@ -7,6 +7,7 @@
   position: relative;
   left: 22.5%;
   margin-bottom: 5%;
+  border-radius: 30px;
   
 
 }
@@ -16,19 +17,35 @@
   grid-column: 1 / span 2 ;
   border: solid #333 2px;
   width:100%;
-  
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }
 
 .primaveraLink{
   grid-column: 1;
   border: solid #333 2px;
+  border-bottom-left-radius: 50px;
 }
 
 .otoñoLink{
   grid-column: 2;
   border: solid #333 2px;
+  border-bottom-right-radius: 50px;
+}
+
+.primaveraImg{
+  border-bottom-left-radius: 50px;
+  filter: saturate(3);
+}
+
+.otoñoImg{
+  border-bottom-right-radius: 50px;
+  filter: saturate(0.5);
+
 }
 
 .estacionesImg{
   width: 100%;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }

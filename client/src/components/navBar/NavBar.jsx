@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../Logo/LogoQR.png";
 import cartImg from "../../Logo/cart.png";
-//import profile from "../../Logo/profile.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -89,7 +88,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 </DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
-                  to="/profile"
+                  to={'/' + user.email}
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >

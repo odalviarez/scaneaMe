@@ -29,8 +29,15 @@ const userSchema = new mongoose.Schema(
       ref: "Product",
     },
     image: {
-      type: String,
-      required: false,
+      public_id:{
+        type: String,
+        required: true
+      },
+      url: {
+        type: String,
+        required: true
+      },
+      required: false
     },
     sub: {
       type: String,
