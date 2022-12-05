@@ -18,7 +18,7 @@ export default function Footer() {
           <p>Copyright © {year} SCANEAME</p>
         </Col>
         <Col md="4" className="footer-body">
-          <ul>
+          <ul className="ulVacio">
             <li>
               <a
                 href="https://github.com/scanneame"
