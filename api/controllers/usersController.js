@@ -15,7 +15,7 @@ router.post("/login/:email", async (req, res) => {
     socials,
     info,
     sub,
-    public_id,
+    picture,
   } = req.body
   if (!email) {
     return res.status(400).send('Sorry!, Email is required')
@@ -36,8 +36,8 @@ router.post("/login/:email", async (req, res) => {
           socials,
           info,
           sub,
-          image: public_id,
-        })
+          image: { public_id: picture, url: picture },
+        });
 
         userData = await userData.save()
         res.json(userData)
@@ -49,6 +49,7 @@ router.post("/login/:email", async (req, res) => {
     res.status(400).send('Could not create user', error.message)
   }
 })
+
 
 router.get('/:email', async (req, res) => {
   const { email } = req.params
