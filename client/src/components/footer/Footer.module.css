@@ -3,6 +3,9 @@
   width: 100%;
   height: 100px;
   color: aliceblue;
+  margin-top: 50px;
+  padding:10px;
+  position: relative;
 }
 
 .footer-icons{ 
@@ -11,8 +14,6 @@
   padding: 0 !important;
 }
 
-
-
 .social-icons{
   display: flex;
   float: right;
@@ -20,3 +21,39 @@
   width: 3em;
 }
 
+.container ul{
+  list-style: none;
+  position: absolute;
+  right: 5%;
+  top:10px;
+}
+.container li{
+  display: inline-block;
+  flex-direction: row;
+  background-color: aliceblue;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+ }
+
+ .igLogo{
+  height: 80px;
+}
+
+.twLogo{
+  height: 80px;
+}
+
+.githubLogo{
+  height: 80px;
+  width:80px;
+  
+}
+
+.liLogo{
+  height: 80px;
+}
+
+.designed{
+  height: 40px;
+}
