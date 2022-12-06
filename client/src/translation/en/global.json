@@ -1,0 +1,23 @@
+{
+    "header": {
+        "hello-world": "Hello World",
+        "season": "Season",
+        "t-shirt": "T-shirt",
+        "pants": "Pants",
+        "color": "Color",
+        "white": "White",
+        "black": "Black",
+        "red": "Red",
+        "blue": "Blue",
+        "green": "Green",
+        "yellow": "Yellow",
+        "type-of-clothing": "Type Of Clothing",
+        "all-year": "All Year",
+        "spring-summer": "Spring / Summer",
+        "fall-winter": "Fall / Winter",
+        "lower-price": "Lower Price",
+        "higher-price": "Higher Price",
+        "back-to-top": "Back to top"
+    }
+    
+}

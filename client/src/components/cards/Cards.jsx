@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import { useLocalStorage } from "../../useLocalStorage";
 import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { Button } from "reactstrap";
+
+import i18n from '../../i18n'
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -20,6 +23,8 @@ export default function Cards() {
   let location = useLocation()
   const pagination = (pageNumber) => {setcurrentPage(pageNumber);
   };
+
+  
 
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -50,7 +55,6 @@ export default function Cards() {
     
   }, [productsOnStore]);
 
-  
   const handleAddCart = function (e) {
     e.preventDefault(e);
     //verificamos que el id del producto exista en los productos cargados y traemos toda la info
@@ -71,13 +75,11 @@ export default function Cards() {
     }
   };
 
-
   const handleSorts = function (e) {
     e.preventDefault(e);
     dispatch(sortProducts(e.target.value));
     setSort(e.target.value);
   };
-
 
   const handleFilters = function (e) {
     e.preventDefault(e);
@@ -141,41 +143,41 @@ export default function Cards() {
       <div className={styles.CatalogueParent}>
         <div className={styles.filtersList}>
           <ul value="season">
-            <h3>Temporada</h3>
-            <li value="allyear" onClick={(e) => handleFilters(e)} >Todo el año</li>
-            <li value="spring" onClick={(e) => handleFilters(e)}>Primavera / Verano</li>
-            <li value="fall" onClick={(e) => handleFilters(e)}>Otoño / Invierno</li>
+            <h3>{i18n.t("header.season")}</h3>
+            <li value="allyear" onClick={(e) => handleFilters(e)} >{i18n.t("header.all-year")}</li>
+            <li value="spring" onClick={(e) => handleFilters(e)}>{i18n.t("header.spring-summer")}</li>
+            <li value="fall" onClick={(e) => handleFilters(e)}>{i18n.t("header.fall-winter")}</li>
           </ul>
-
+          
           <ul value="type">
-            <h3>Tipo de ropa</h3>
+            <h3>{i18n.t("header.type-of-clothing")}</h3>
             <li value="shirt" onClick={(e) => handleFilters(e)}>
-              Remera
+            {i18n.t("header.t-shirt")}
             </li>
             <li value="pants" onClick={(e) => handleFilters(e)}>
-              Pantalon
+            {i18n.t("header.pants")}
             </li>
           </ul>
 
           <ul value="color">
-            <h3>Color</h3>
+            <h3>{i18n.t("header.color")}</h3>
             <li value="white" onClick={(e) => handleFilters(e)}>
-              Blanco
+            {i18n.t("header.white")}
             </li>
             <li value="black" onClick={(e) => handleFilters(e)}>
-              Negro
+            {i18n.t("header.black")}
             </li>
             <li value="red" onClick={(e) => handleFilters(e)}>
-              Rojo
+            {i18n.t("header.red")}
             </li>
             <li value="blue" onClick={(e) => handleFilters(e)}>
-              Azul
+            {i18n.t("header.blue")}
             </li>
             <li value="green" onClick={(e) => handleFilters(e)}>
-              Verde
+            {i18n.t("header.green")}
             </li>
             <li value="yellow" onClick={(e) => handleFilters(e)}>
-              Amarillo
+            {i18n.t("header.yellow")}
             </li>
           </ul>
         </div>
@@ -183,8 +185,8 @@ export default function Cards() {
         <div className={styles.filtersApplied}>
           <div>
             <select onChange={(e) => handleSorts(e)}>
-              <option value="priceUp">Menor precio</option>
-              <option value="priceDown">Mayor precio</option>
+              <option value="priceUp">{i18n.t("header.lower-price")}</option>
+              <option value="priceDown">{i18n.t("header.higher-price")}</option>
             </select>
           </div>
 
@@ -226,7 +228,12 @@ export default function Cards() {
             productsTotal={productsLoaded.length}
             pagination={pagination}
           />
-          <button onClick={(e) => scrollToTop(e)}>Back to top</button>
+          <button onClick={(e) => scrollToTop(e)}>{i18n.t("header.back-to-top")}</button>
+        </div>
+        <div>
+        <Button as={Link} href="/catalogue/?lng=es">ES</Button>
+        <Button as={Link} href="/catalogue/?lng=en">EN</Button>
+        <br /> <br />
         </div>
       </div>
     );
