@@ -1,0 +1,23 @@
+{
+    "header": {
+        "hello-world": "Hola Mundo",
+        "season": "Temporada",
+        "t-shirt": "Remera",
+        "pants": "Pantalon",
+        "color": "Color",
+        "white": "Blanco",
+        "black": "Negro",
+        "red": "Rojo",
+        "blue": "Azul",
+        "green": "Verde",
+        "yellow": "Amarillo",
+        "type-of-clothing": "Tipo de Ropa",
+        "all-year": "Todo El Año",
+        "spring-summer": "Primavera / Verano",
+        "fall-winter": "Otoño / Invierno",
+        "lower-price": "Menor Precio",
+        "higher-price": "Mayor Precio",
+        "back-to-top": "Volver Arriba"
+    }
+    
+}
