@@ -11,9 +11,9 @@ export default function Home() {
     <div>
       <NavBar />
       <Carru />
-      <ProdCarru />
-      <ProdCarru />
-      <ProdCarru />
+      <ProdCarru productType={'trunks'}/>
+      <ProdCarru productType={'shirt'}/>
+      <ProdCarru productType={'pants'} />
       <SeasonalBanner />
       <Footer />
     </div>
