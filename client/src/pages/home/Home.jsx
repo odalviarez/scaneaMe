@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import {getProductDetails} from '../../redux/actions'
+import { useDispatch} from 'react-redux';
 import NavBar from '../../components/navBar/NavBar.jsx'
 import Carru from '../../components/homeBanners/HomeBanners'
 import ProdCarru from '../../components/productsCarousel/ProductsCarousel'
