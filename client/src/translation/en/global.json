@@ -24,12 +24,31 @@
     "navbar": {
         "log-in": "LogIn",
         "catalogue": "Catalogue",
-        "about-us": "About Us",
+        "about-us": "AboutUs",
         "contact": "Contact",
         "account": "Account",
         "profile": "Profile",
         "log-out": "LogOut",
         "dashboard": "Dashboard"
+    },
+
+    "dashboard": {
+        "create-product": "Create a Product",
+        "select-color": "Select Color",
+        "name": "Name",
+        "select-type": "Select Type",
+        "select-season": "Select Season",
+        "price": "Price $",
+        "stock-xs": "Stock 'XS'",
+        "stock-s": "Stock 'S'",
+        "stock-m": "Stock 'M'",
+        "stock-l": "Stock 'L'",
+        "stock-xl": "Stock 'XL'",
+        "stock-xxl": "Stock 'XXL'",
+        "load-stock": "Load Stock",
+        "submit": "Submit",
+        "image-preview-will-appear-here": "Image preview will appear here!"
+
     }
     
 }
