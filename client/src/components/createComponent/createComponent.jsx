@@ -111,6 +111,7 @@ const CreateComponent = () => {
               <option value="black">Negro</option>
               <option value="yellow">Amarillo</option>
               <option value="green">Verde</option>
+              <option value="gray">Gris</option>
             </select>
             <input
               type="text"
@@ -122,6 +123,7 @@ const CreateComponent = () => {
               <option value="">Select Type</option>
               <option value="shirt">Remera</option>
               <option value="pants">Pantalon</option>
+              <option value="trunks">Short de baño</option>
             </select>
             <select onChange={(e) => setSeason(e.target.value)} required>
               <option value="allyear">Select Season</option>
