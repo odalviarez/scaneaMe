@@ -1,19 +1,18 @@
 const express = require("express");
+//const Product = require("../models/productModel");
 const ProductosHardcode = require("../productos");
 const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
-const router = express.Router();
-const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
 
-checkJwt = auth({
-  audience: process.env.AUDIENCE || "https://scaneame.vercel.app/",
-  issuerBaseURL:
-    process.env.ISSUER_BASE_URL || `https://dev-a3kheszuwvfvuoad.us.auth0.com/`,
+const router = express.Router();
+
+//para que traiga los datos hardcodeado BORRAR LUEGO
+router.get("/test", async (req, res) => {
+  res.json(ProductosHardcode);
 });
 
-console.log(checkJwt);
 //Retorna todos los productos con la info necesaria para las cards
-router.get("/",checkJwt, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let allProducts = await Products.find({});
     //cuando los datos no estan vacios se adapta la respuesta con los datos requeridos
@@ -40,7 +39,7 @@ router.get("/",checkJwt, async (req, res) => {
 });
 
 //crea un producto
-router.post("/",  async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
@@ -50,20 +49,13 @@ router.post("/",  async (req, res) => {
     }
     //si recibe los campos obligatorios crea el producto
     if (name && type && price) {
-      const result = await cloudinary.uploader.upload(image, {
-        folder: 'Products',
-        transformation: [
-          { height: 900, width: 900},
-          { crop: 'scale' },
-        ],
-      })
       let productCreate = new Products({
         name,
         color,
         type,
         price,
         season,
-        image: result.secure_url,
+        image,
         stock,
       });
       console.log(productCreate);
