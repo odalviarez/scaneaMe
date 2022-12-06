@@ -36,24 +36,26 @@
   height: 80px;
  }
 
- .igLogo{
-  height: 80px;
-}
-
-.twLogo{
-  height: 80px;
-}
-
-.githubLogo{
-  height: 80px;
-  width:80px;
-  
-}
-
-.liLogo{
+ .Logo{
   height: 80px;
 }
 
 .designed{
   height: 40px;
+}
+
+.textContainer{
+  position: absolute;
+  left: 5%
+}
+
+@media only screen and (max-width: 850px) {
+  .Logo{
+    height: 40px;
+  }
+
+  .container li{
+    height: 40px;
+    width: 40px;
+   }
 }
