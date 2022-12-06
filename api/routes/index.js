@@ -5,7 +5,6 @@ const productControl = require('../controllers/productsController')
 const userControl = require('../controllers/usersController')
 const stripe = require('../controllers/stripe')
 
-const server = express()
 
 require("dotenv").config();
 

@@ -6,17 +6,13 @@ const dotenv = require('dotenv').config();
 const routes = require("./routes/index.js");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 5000;
-const { auth } = require("express-oauth2-jwt-bearer");
 
 
 
 
 const server = express();
 
-checkJwt = auth({
-  audience: process.env.AUDIENCE || "https://scaneame.vercel.app/",
-  issuerBaseURL: process.env.ISSUER_BASE_URL || `https://dev-a3kheszuwvfvuoad.us.auth0.com/`,
-});
+
 //server.use(express.json({ limit: "50mb", extended: true }));
 //server.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
 

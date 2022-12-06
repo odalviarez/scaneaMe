@@ -4,12 +4,16 @@ const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
 const router = express.Router();
 const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
-const checkJwt = auth();
 
+checkJwt = auth({
+  audience: process.env.AUDIENCE || "https://scaneame.vercel.app/",
+  issuerBaseURL:
+    process.env.ISSUER_BASE_URL || `https://dev-a3kheszuwvfvuoad.us.auth0.com/`,
+});
 
-
+console.log(checkJwt);
 //Retorna todos los productos con la info necesaria para las cards
-router.get("/", async (req, res) => {
+router.get("/",checkJwt, async (req, res) => {
   try {
     let allProducts = await Products.find({});
     //cuando los datos no estan vacios se adapta la respuesta con los datos requeridos
