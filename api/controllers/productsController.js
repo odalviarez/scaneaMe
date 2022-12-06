@@ -9,7 +9,7 @@ const checkJwt = auth();
 
 
 //Retorna todos los productos con la info necesaria para las cards
-router.get("/", checkJwt, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let allProducts = await Products.find({});
     //cuando los datos no estan vacios se adapta la respuesta con los datos requeridos
