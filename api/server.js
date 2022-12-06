@@ -6,16 +6,16 @@ const dotenv = require('dotenv').config();
 const routes = require("./routes/index.js");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 5000;
-
+const { auth } = require("express-oauth2-jwt-bearer");
 
 
 
 
 const server = express();
 
-export const checkJwt = auth({
-  audience: "https://scaneame.vercel.app/",
-  issuerBaseURL: `https://dev-a3kheszuwvfvuoad.us.auth0.com/`,
+checkJwt = auth({
+  audience: process.env.AUDIENCE || "https://scaneame.vercel.app/",
+  issuerBaseURL: process.env.ISSUER_BASE_URL || `https://dev-a3kheszuwvfvuoad.us.auth0.com/`,
 });
 //server.use(express.json({ limit: "50mb", extended: true }));
 //server.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
@@ -25,16 +25,16 @@ server.name = "API";
 //server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
-server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
+// server.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*"); //Luego poner que las peticiones solo las acepte desde el dominio de vercel
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   next();
+// });
 
 server.use("/", routes);
 

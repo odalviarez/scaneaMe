@@ -6,24 +6,22 @@ const userControl = require('../controllers/usersController')
 const stripe = require('../controllers/stripe')
 
 const server = express()
-const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+
 require("dotenv").config();
 
 router.use((req, res, next) => {
   if (req.originalUrl === "/stripe/webhook") {
-    next(); // Do nothing with the body because I need it in a raw state.
+    next(); // Si la peticion viene en la siguiente uri no parsea el body
   } else {
     express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000})
-    express.json({ limit: "50mb", extended: true })(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
+    express.json({ limit: "10mb", extended: true })(req, res, next);
   }
 });
 
 
-//router.use(express.json())
 router.use(cors())
 
 router.use('/products', productControl)
-//router.use("/order", ordersControl);
 router.use('/user', userControl)
 router.use('/stripe', stripe)
 

@@ -3,6 +3,8 @@ const express = require("express");
 const { db } = require("../models/userModel");
 const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
 
 router.post("/login/:email", async (req, res) => {
   const { email } = req.params;
@@ -66,7 +68,7 @@ router.get("/:email", async (req, res) => {
 });
 
 //acrtualiza los datos del usuario logeado
-router.put("/:email", async (req, res) => {
+router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
   const { socials, image } = req.body;

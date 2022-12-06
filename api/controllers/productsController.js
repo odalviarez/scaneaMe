@@ -1,15 +1,12 @@
 const express = require("express");
-//const Product = require("../models/productModel");
 const ProductosHardcode = require("../productos");
 const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
-
 const router = express.Router();
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
 
-//para que traiga los datos hardcodeado BORRAR LUEGO
-router.get("/test", async (req, res) => {
-  res.json(ProductosHardcode);
-});
+
 
 //Retorna todos los productos con la info necesaria para las cards
 router.get("/", async (req, res) => {
@@ -39,7 +36,7 @@ router.get("/", async (req, res) => {
 });
 
 //crea un producto
-router.post("/", async (req, res) => {
+router.post("/", checkJwt,  async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
@@ -92,7 +89,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //elimina un producto por el id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkJwt, async (req, res) => {
   let { id } = req.params;
   try {
     const deletedProduct = await Products.findByIdAndDelete(id);
@@ -108,7 +105,7 @@ router.delete("/:id", async (req, res) => {
 
 
 //actualiza un producto existente
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkJwt, async (req, res) => {
   let { id } = req.params;
   const { name, color, type, price, image, stock, season } = req.body;
   try {

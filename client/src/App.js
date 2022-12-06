@@ -59,6 +59,8 @@ function App() {
         domain="dev-a3kheszuwvfvuoad.us.auth0.com"
         clientId="zVBOjQQhQSTxp3S8KRXOfLaMVMruuk2u"
         redirectUri={window.location.origin}
+        audience="https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/"
+        scope="read:current_user update:current_user_metadata"
       >
         <Routes>
           <Route path="/" element={<Home />} />
