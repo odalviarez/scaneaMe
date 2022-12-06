@@ -68,7 +68,7 @@ router.get("/:email", async (req, res) => {
 });
 
 //acrtualiza los datos del usuario logeado
-router.put("/:email", checkJwt, async (req, res) => {
+router.put("/:email", async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
   const { socials, image } = req.body;

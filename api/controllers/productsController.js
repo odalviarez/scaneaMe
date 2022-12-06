@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 });
 
 //crea un producto
-router.post("/", checkJwt,  async (req, res) => {
+router.post("/",  async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
@@ -89,7 +89,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //elimina un producto por el id
-router.delete("/:id", checkJwt, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   let { id } = req.params;
   try {
     const deletedProduct = await Products.findByIdAndDelete(id);
@@ -105,7 +105,7 @@ router.delete("/:id", checkJwt, async (req, res) => {
 
 
 //actualiza un producto existente
-router.put("/:id", checkJwt, async (req, res) => {
+router.put("/:id", async (req, res) => {
   let { id } = req.params;
   const { name, color, type, price, image, stock, season } = req.body;
   try {
