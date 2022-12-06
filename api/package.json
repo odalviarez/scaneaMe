@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "express-oauth2-jwt-bearer": "^1.2.0",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
     "stripe": "^11.1.0"

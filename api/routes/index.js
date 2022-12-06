@@ -1,14 +1,13 @@
 const express = require('express')
-const { Router } = require('express')
 const cors = require('cors')
 const router = express.Router()
 const productControl = require('../controllers/productsController')
-//const ordersControl = require("../controllers/ordersController");
 const userControl = require('../controllers/usersController')
 const stripe = require('../controllers/stripe')
 
 const server = express()
-// const router = Router();
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+require("dotenv").config();
 
 router.use((req, res, next) => {
   if (req.originalUrl === "/stripe/webhook") {
