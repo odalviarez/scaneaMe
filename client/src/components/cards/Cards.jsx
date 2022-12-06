@@ -220,7 +220,7 @@ export default function Cards() {
                     />
                   );
                 })
-              : "No product was found"}
+              : i18n.t("header.no-product-was-found")}
           </div>
 
           <Pagination

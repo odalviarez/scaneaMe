@@ -17,7 +17,19 @@
         "fall-winter": "Otoño / Invierno",
         "lower-price": "Menor Precio",
         "higher-price": "Mayor Precio",
-        "back-to-top": "Volver Arriba"
+        "back-to-top": "Volver Arriba",
+        "no-product-was-found": "No se encontró ningún producto"
+    },
+
+    "navbar": {
+        "log-in": "Ingresar",
+        "catalogue": "Catálogo",
+        "about-us": "Conócenos",
+        "contact": "Contáctanos",
+        "account": "Cuenta",
+        "profile": "Perfil",
+        "log-out": "Salir",
+        "dashboard": "Administrar"
     }
     
 }
