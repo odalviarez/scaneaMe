@@ -7,6 +7,7 @@ import {
   GET_USER,
   GET_TOTAL_PRODUCTS,
   GET_USER_LOGIN,
+  USER_GET_ORDERS
 } from "./actions";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
     userDB: {},
     userLogin: {},
     totalProducts: 0,
+    userOrders: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,6 +46,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           products: sortedProducts,
         };
+
       case FILTER_PRODUCTS:
         console.log("se despacho accion");
         let productsFiltered = [];
@@ -104,6 +107,13 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           totalProducts: action.payload,
+        };
+      }
+
+      case USER_GET_ORDERS: {
+        return {
+          ...state,
+          userOrders: action.payload,
         };
       }
 

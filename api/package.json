@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js",
+    "railway": "node ./server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
@@ -13,15 +14,16 @@
   "license": "MIT",
   "dependencies": {
     "cloudinary": "^1.32.0",
-    "colors": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-async-handler": "^1.2.0",
+    "express-oauth2-jwt-bearer": "^1.2.0",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
-    "stripe": "^11.1.0"
+    "stripe": "^11.1.0",
+    "express-jwt": "^6.1.2",
+    "jwks-rsa": "^1.12.2"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
