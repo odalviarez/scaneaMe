@@ -11,7 +11,8 @@ const router = require("express").Router();
 //* CREATE ORDER
 //TODO: pendiente implementar.
 //? Cómo está funcionando el carrito hoy si esto no está implementado?
-router.post("/", auth, async (req, res) => {
+// router.post("/", auth, async (req, res) => {
+router.post("/", async (req, res) => {
   const newOrder = new Order(req.body);
 
   try {
@@ -43,7 +44,8 @@ router.post("/", auth, async (req, res) => {
 
 //* DELETE ORDER: exclusivo para ADMIN.
 //TODO: pendiente implementar.
-router.delete("/:id", isAdmin, async (req, res) => {
+// router.delete("/:id", isAdmin, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).send("Order has been deleted...");
@@ -54,7 +56,8 @@ router.delete("/:id", isAdmin, async (req, res) => {
 
 //* USER GET ORDERS: exclusivo para USUARIO.
 //TODO: pendiente implementar.
-router.get("/find/:userId", isUser, async (req, res) => {
+// router.get("/find/:userId", isUser, async (req, res) => {
+router.get("/find/:userId", async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId });
     res.status(200).send(orders);
@@ -65,7 +68,8 @@ router.get("/find/:userId", isUser, async (req, res) => {
 
 //* ADMIN GET ORDERS: exclusivo para ADMIN. Se utilizaría en el panel de control del admin para ver las órdenes del usuario.
 //TODO: pendiente implementar.
-router.get("/", isAdmin, async (req, res) => {
+// router.get("/", isAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const orders = await Order.find(); 
     res.status(200).send(orders);
@@ -76,7 +80,8 @@ router.get("/", isAdmin, async (req, res) => {
 
 //* GET MONTHLY INCOME: exclusivo para ADMIN. Se utilizaría en el panel de analíticas para ver ventas de la página.
 //TODO: pendiente implementar.
-router.get("/income", isAdmin, async (req, res) => {
+// router.get("/income", isAdmin, async (req, res) => {
+router.get("/income", async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));

@@ -9,6 +9,9 @@ export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const GET_USER = "GET_USER";
 export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
+export const UPDATE_USER = "UPDATE_USER";
+export const USER_GET_ORDERS = "USER_GET_ORDERS";
+
 
 
 export const getAllProducts = () => {
@@ -111,6 +114,22 @@ export const userUpdate = (payload, user) => {
     }
   };
 };
+
+export const userGetOrders = (userId) => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`order/find/${userId}`);
+      return dispatch({
+        type: USER_GET_ORDERS,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert("Could not get orders from user", error.message);
+    }
+  };
+};
+
 
 export const handleCheckout = (cartProp, user) => {
   console.log(cartProp.cartItems);

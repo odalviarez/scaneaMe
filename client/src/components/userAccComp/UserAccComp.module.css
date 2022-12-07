@@ -6,8 +6,8 @@
     align-items: center;
     align-content: stretch;
     position: absolute;
-    left:35%;
-    top: 150px;
+    left:30%;
+    top: 15%;
     width: 500px
     
 }
@@ -41,7 +41,7 @@
 }
 
 .submitProfile{
-  
+    margin-top: 20px;
 }
 
 .imgUpContainer{

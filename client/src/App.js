@@ -12,6 +12,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
+import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
@@ -49,6 +50,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
         <Route path="/user/account" element={<UserAccount />} />
+        <Route path="/user/purchases" element={<UserPurchases />} />
         <Route path="/:email" element={<Profile />} />
       </Routes>
     </div>
