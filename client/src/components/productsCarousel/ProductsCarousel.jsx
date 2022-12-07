@@ -7,7 +7,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import HomeCard from './HomeCard'
 
-export default function HomeBanners() {
+export default function HomeBanners({ productType }) {
   const dispatch = useDispatch()
 
   const allProducts = useSelector(state => state.allProducts)
@@ -15,6 +15,7 @@ export default function HomeBanners() {
     image: e.image,
     price: e.price,
     id: e.id,
+    type: e.type,
   }))
 
   useEffect(() => {
@@ -27,26 +28,37 @@ export default function HomeBanners() {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1600 },
       items: 5,
-      slidesToSlide: 2,
+      slidesToSlide: 4,
     },
     desktop: {
       breakpoint: { max: 1600, min: 1024 },
       items: 3,
-      slidesToSlide: 2,
+      slidesToSlide: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 689 },
       items: 2,
+      slidesToSlide: 2,
     },
     mobile: {
       breakpoint: { max: 689, min: 0 },
       items: 1,
+      slidesToSlide: 1,
     },
   }
 
-  const productCard = product.map(item => (
-    <HomeCard image={item.image} price={item.price} id={item.id} />
-  ))
+  console.log('ProDUct unfiltered: ', product)  
+
+  const productFiltered = product.filter(e => e.type === productType)
+  
+  const productCard = productFiltered
+    .map(item => (
+      <HomeCard image={item.image} price={item.price} id={item.id} />
+    ))
+    
+    
+  console.log('productType: ', productType)  
+  console.log('Product filtered: ', productCard)  
 
   return (
     <div className={styles.container}>

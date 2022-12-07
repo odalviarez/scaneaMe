@@ -131,6 +131,7 @@ const CreateComponent = () => {
               <option value="">{i18n.t('dashboard.select-type')}</option>
               <option value="shirt">{i18n.t("header.t-shirt")}</option>
               <option value="pants">{i18n.t("header.pants")}</option>
+              <option value="trunks">{i18n.t("header.trunks")}</option>
             </select>
             <select onChange={(e) => setSeason(e.target.value)} required>
               <option value="allyear">{i18n.t('dashboard.select-season')}</option>
