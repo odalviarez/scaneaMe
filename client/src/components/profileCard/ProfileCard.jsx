@@ -9,7 +9,7 @@ import imgPlaceholder from '../../Logo/imgPlaceholder.png'
 import { useState } from 'react'
 import UserDisable from '../userDisable/UserDisable'
 
-export default function ProfileCard({userImg}) {
+export default function ProfileCard() {
   const description =
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium saepe enim, animi tempore nemo nihil quas distinctio nulla commodi molestiae in quisquam consequatur, praesentium eum quidem ullam laborum tempora quo!'
 

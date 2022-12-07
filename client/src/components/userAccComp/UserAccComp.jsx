@@ -59,6 +59,10 @@ export default function UserAccComp() {
     }
   }
 
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
   return (
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
@@ -137,7 +141,11 @@ export default function UserAccComp() {
             placeholder='Select file...'
           />
         </div>
-        <button type='text' className={style.submitProfile}>
+        <button
+          type='text'
+          onClick={refreshPage}
+          className={style.submitProfile}
+        >
           SUBMIT
         </button>
       </form>
