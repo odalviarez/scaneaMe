@@ -6,6 +6,8 @@ import banner1 from '../../Logo/banner1.jpg'
 import banner2 from '../../Logo/banner2.jpg'
 import banner3 from '../../Logo/banner3.jpg'
 
+import i18n from '../../i18n';
+
 export default function HomeBanners() {
   
   const images = [banner1, banner2, banner3]

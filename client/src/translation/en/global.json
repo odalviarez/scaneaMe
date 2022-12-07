@@ -60,6 +60,10 @@
         "e-mail": "E-Mail",
         "your-message-here": "Your Message Here",
         "your-message-was-sent-successfully": "Your message was sent successfully!"
+    },
+
+    "home": {
+        "welcom-to-scaneaMe": "Welcom to ScaneaMe!"
     }
     
 }
