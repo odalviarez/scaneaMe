@@ -12,6 +12,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
+import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
@@ -59,7 +60,7 @@ function App() {
         domain="dev-a3kheszuwvfvuoad.us.auth0.com"
         clientId="zVBOjQQhQSTxp3S8KRXOfLaMVMruuk2u"
         redirectUri={window.location.origin}
-        audience="https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/"
+        audience="https://scaneame.vercel.app/"
         scope="read:current_user update:current_user_metadata"
       >
         <Routes>

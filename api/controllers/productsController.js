@@ -9,9 +9,8 @@ const checkClaims = claimCheck((claims) => {
 
 const router = express.Router();
 
-
-//Retorna todos los productos con la info necesaria para las cards
-router.get("/",checkJwt, async (req, res) => {
+//* GET ALL PRODUCTS: retorna todos los productos con la info necesaria para las cards.
+router.get("/", async (req, res) => {
   try {
     let allProducts = await Products.find({});
     //cuando los datos no estan vacios se adapta la respuesta con los datos requeridos
@@ -37,7 +36,7 @@ router.get("/",checkJwt, async (req, res) => {
   }
 });
 
-//crea un producto
+//* CREATE PRODUCT: crea un producto
 router.post("/", async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
   try {
@@ -68,7 +67,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//retorna toda la informacion del producto indicado por el id
+//* GET PRODUCT DETAILS: retorna toda la informacion del producto indicado por el id.
 router.get("/:id", async (req, res) => {
   let { id } = req.params;
   try {
@@ -83,7 +82,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//elimina un producto por el id
+//* DELETE PRODUCT: elimina un producto por el id.
+//TODO: falta implementar.
 router.delete("/:id", async (req, res) => {
   let { id } = req.params;
   try {
@@ -99,7 +99,8 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-//actualiza un producto existente
+//* UPDATE PRODUCT: actualiza un producto existente
+//TODO: falta implementar.
 router.put("/:id", async (req, res) => {
   let { id } = req.params;
   const { name, color, type, price, image, stock, season } = req.body;

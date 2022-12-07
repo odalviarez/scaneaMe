@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Container,
-  NavbarToggler,
+  NavbarToggler, 
   Nav,
   NavItem,
   Button,
@@ -20,6 +20,8 @@ import {
 } from "reactstrap";
 import {getUserLogin, getTotalProducts} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+
+import i18n from '../../i18n'
 
 export default function Navbar() {
 
@@ -48,7 +50,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   return (
     <nav className={styles.nav}>
       <Link to={"/home"}>
-        <img src={logo} className={styles.logo} alt="logo" />
+        <img src={logo} title="Home" className={styles.logo} alt="logo" />
       </Link>
       <Container className={styles.desplegable}>
         <NavbarToggler onClick={toggle} />
@@ -61,7 +63,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 className="btn-margin"
                 onClick={() => loginWithRedirect()}
               >
-                Log in
+                {i18n.t("navbar.log-in")}
               </Button>
             </NavItem>
           )}
@@ -83,7 +85,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="tools" className="mr-3" /> Account
+                  <FontAwesomeIcon icon="tools" className="mr-3" /> {i18n.t("navbar.account")}
                 </DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
@@ -91,13 +93,13 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="user" className="mr-3" /> Profile
+                  <FontAwesomeIcon icon="user" className="mr-3" /> {i18n.t("navbar.profile")}
                 </DropdownItem>
                 <DropdownItem
                   id="qsLogoutBtn"
                   onClick={() => logoutWithRedirect()}
                 >
-                  <FontAwesomeIcon icon="power-off" className="mr-3" /> Log out
+                  <FontAwesomeIcon icon="power-off" className="mr-3" /> {i18n.t("navbar.log-out")}
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -112,7 +114,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 block
                 onClick={() => loginWithRedirect({})}
               >
-                Log in
+                {i18n.t("navbar.log-in")}
               </Button>
             </NavItem>
           </Nav>
@@ -140,7 +142,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 to="/user/account"
                 activeclassname="router-link-exact-active"
               >
-                Account
+                {i18n.t("navbar.account")}
               </RouterNavLink>
             </NavItem>
             <NavItem>
@@ -149,7 +151,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 to="/profile"
                 activeclassname="router-link-exact-active"
               >
-                Profile
+                {i18n.t("navbar.profile")}
               </RouterNavLink>
             </NavItem>
             <NavItem>
@@ -159,7 +161,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
                 id="qsLogoutBtn"
                 onClick={() => logoutWithRedirect()}
               >
-                Log out
+                {i18n.t("navbar.log-out")}
               </RouterNavLink>
             </NavItem>
           </Nav>
@@ -167,27 +169,33 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
       </Container>
       <ul>
         <li>
+        <div>
+        <Button as={Link} href="/catalogue/?lng=es">ES</Button>
+        <Button as={Link} href="/catalogue/?lng=en">EN</Button>
+        </div>
+        </li>
+        <li>
           <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />
           </Link>
         </li>
         {userLogin.isAdmin?<li> <Link to={"/dashboard"} className={styles.anchor}>
-            Dashboard
+        {i18n.t("navbar.dashboard")}
           </Link></li> : null}
         <li>
           <Link to={"/catalogue"} className={styles.anchor}>
-            Catalogue
+          {i18n.t("navbar.catalogue")}
           </Link>
         </li>
         <li>
           <Link to={"/about"} className={styles.anchor}>
-            About us
+          {i18n.t("navbar.about-us")}
           </Link>
         </li>
         <li>
           <Link to={"/contact"} className={styles.anchor}>
-            Contact
+          {i18n.t("navbar.contact")}
           </Link>
         </li>
       </ul>
