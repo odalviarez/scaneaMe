@@ -78,13 +78,13 @@ router.put("/:email", async (req, res) => {
   try {
     let result = "";
     if (image) {
-      console.log(image);
       result = await cloudinary.uploader.upload(image, {
         folder: "User Profile",
-        transformation: [
-          { gravity: "face", height: 900, width: 900, crop: "thumb" },
-          { crop: "scale" },
-        ],
+        //ESTO ROMPE LA CARGA DE IMAGENES
+        // transformation: [
+        //   { gravity: "face", height: 900, width: 1200},
+        //   { crop: "scale" },
+        // ],
       });
     }
     const updateUser = await User.updateOne(
@@ -104,7 +104,7 @@ router.put("/:email", async (req, res) => {
 
     res.json(updateUser);
   } catch (error) {
-    res.status(400).send("Could not update user", error.message);
+    res.status(400).json(error.message);
   }
 });
 

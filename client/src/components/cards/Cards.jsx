@@ -224,7 +224,7 @@ export default function Cards() {
                     />
                   );
                 })
-              : "No product was found"}
+              : i18n.t("header.no-product-was-found")}
           </div>
 
           <Pagination
@@ -234,7 +234,6 @@ export default function Cards() {
           />
           <button onClick={(e) => scrollToTop(e)}>{i18n.t("header.back-to-top")}</button>
         </div>
-
       </div>
     );
 }

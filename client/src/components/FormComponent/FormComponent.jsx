@@ -6,6 +6,9 @@ import TextareaField from "./TextareaField";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
 
+import { Button } from "reactstrap";
+import i18n from '../../i18n';
+
 export default function Contact() {
   const [values, setValues] = useState({
     from_name: "",
@@ -31,7 +34,7 @@ export default function Contact() {
             email: "",
             message: "",
           });
-          setStatus("Su consulta fue enviada con exito!");
+          setStatus (i18n.t('contact.your-message-was-sent-successfully'))
         },
         (error) => {
           console.log("FAILED...", error);
@@ -47,10 +50,15 @@ export default function Contact() {
   };
   return (
     <Container fluid className="contact">
+      <div>
+    <Button as={Link} title="Español" href="/contact/?lng=es">ES</Button>
+    <Button as={Link} title="English" href="/contact/?lng=en">EN</Button>
+    <br /> <br />
+    </div>
       <Row style={{ justifyContent: "center", padding: "20px" }}></Row>
       {status}
       <form onSubmit={handleSubmit}>
-        <h4 className="text-info">Nombre Completo</h4>
+        <h4 className="text-info">{i18n.t('contact.full-name')}</h4>
         <InputField
           value={values.from_name}
           handleChange={handleChange}
@@ -58,7 +66,7 @@ export default function Contact() {
           type="text"
           placeholder="John Doe"
         />
-        <h4 className="text-info">E-Mail</h4>
+        <h4 className="text-info">{i18n.t('contact.e-mail')}</h4>
         <InputField
           value={values.email}
           handleChange={handleChange}
@@ -66,14 +74,14 @@ export default function Contact() {
           type="email"
           placeholder="jphn@example.com"
         />{" "}
-        <h4 className="text-info">Tu mensaje aqui</h4>
+        <h4 className="text-info">{i18n.t('contact.your-message-here')}</h4>
         <TextareaField
           value={values.message}
           handleChange={handleChange}
           name="message"
         />
         <button type="submit" className="fork-btn-inner bg-primary">
-          Enviar
+        {i18n.t('dashboard.submit')}
         </button>
         <Link to="/home">BACK HOME</Link>
       </form>

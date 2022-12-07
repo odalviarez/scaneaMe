@@ -44,13 +44,20 @@ router.post("/", async (req, res) => {
     }
     //si recibe los campos obligatorios crea el producto
     if (name && type && price) {
+      const result = await cloudinary.uploader.upload(image, {
+        folder: 'Products',
+        transformation: [
+          { height: 900, width: 900},
+          { crop: 'scale' },
+        ],
+      })
       let productCreate = new Products({
         name,
         color,
         type,
         price,
         season,
-        image,
+        image: result.secure_url,
         stock,
       });
       console.log(productCreate);

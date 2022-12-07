@@ -110,6 +110,7 @@ export const userUpdate = (payload, user) => {
       const res = await axios.put(`/user/${user}`, payload);
       return res;
     } catch (error) {
+      console.log(error);
       alert("No se pudo actualizar los datos del usuario");
     }
   };
