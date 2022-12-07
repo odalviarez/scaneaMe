@@ -17,7 +17,38 @@
         "fall-winter": "Fall / Winter",
         "lower-price": "Lower Price",
         "higher-price": "Higher Price",
-        "back-to-top": "Back to top"
+        "back-to-top": "Back to top",
+        "no-product-was-found": "No product was found"
+    },
+
+    "navbar": {
+        "log-in": "LogIn",
+        "catalogue": "Catalogue",
+        "about-us": "AboutUs",
+        "contact": "Contact",
+        "account": "Account",
+        "profile": "Profile",
+        "log-out": "LogOut",
+        "dashboard": "Dashboard"
+    },
+
+    "dashboard": {
+        "create-product": "Create a Product",
+        "select-color": "Select Color",
+        "name": "Name",
+        "select-type": "Select Type",
+        "select-season": "Select Season",
+        "price": "Price $",
+        "stock-xs": "Stock 'XS'",
+        "stock-s": "Stock 'S'",
+        "stock-m": "Stock 'M'",
+        "stock-l": "Stock 'L'",
+        "stock-xl": "Stock 'XL'",
+        "stock-xxl": "Stock 'XXL'",
+        "load-stock": "Load Stock",
+        "submit": "Submit",
+        "image-preview-will-appear-here": "Image preview will appear here!"
+
     }
     
 }

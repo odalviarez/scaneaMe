@@ -17,7 +17,38 @@
         "fall-winter": "Otoño / Invierno",
         "lower-price": "Menor Precio",
         "higher-price": "Mayor Precio",
-        "back-to-top": "Volver Arriba"
+        "back-to-top": "Volver Arriba",
+        "no-product-was-found": "No se encontró ningún producto"
+    },
+
+    "navbar": {
+        "log-in": "Ingresar",
+        "catalogue": "Catálogo",
+        "about-us": "Conócenos",
+        "contact": "Contáctanos",
+        "account": "Cuenta",
+        "profile": "Perfil",
+        "log-out": "Salir",
+        "dashboard": "Administrar"
+    },
+
+    "dashboard": {
+        "create-product": "Crear un Producto",
+        "select-color": "Seleccione un Color",
+        "name": "Nombre",
+        "select-type": "Seleccione un Tipo",
+        "select-season": "Seleccione Temporada",
+        "price": "Precio $",
+        "stock-xs": "Existencia 'XS'",
+        "stock-s": "Existencia 'S'",
+        "stock-m": "Existencia 'M'",
+        "stock-l": "Existencia 'L'",
+        "stock-xl": "Existencia 'XL'",
+        "stock-xxl": "Existencia 'XXL'",
+        "load-stock": "Cargar Existencia",
+        "submit": "Enviar",
+        "image-preview-will-appear-here": "¡La vista previa de la imagen aparecerá aquí!"
+
     }
     
 }
