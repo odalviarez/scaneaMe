@@ -49,6 +49,11 @@
         "submit": "Submit",
         "image-preview-will-appear-here": "Image preview will appear here!"
 
+    },
+
+    "footer": {
+        "designed-and-developed-by": "Designed and Developed by:",
+        "scaneame-team": "ScaneaMe Team"
     }
     
 }

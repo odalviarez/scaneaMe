@@ -231,8 +231,8 @@ export default function Cards() {
           <button onClick={(e) => scrollToTop(e)}>{i18n.t("header.back-to-top")}</button>
         </div>
         <div>
-        <Button as={Link} href="/catalogue/?lng=es">ES</Button>
-        <Button as={Link} href="/catalogue/?lng=en">EN</Button>
+        <Button as={Link} title="Español" href="/catalogue/?lng=es">ES</Button>
+        <Button as={Link} title="English" href="/catalogue/?lng=en">EN</Button>
         <br /> <br />
         </div>
       </div>

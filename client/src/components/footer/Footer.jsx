@@ -4,6 +4,8 @@ import { AiFillGithub, AiOutlineTwitter, AiFillInstagram, } from "react-icons/ai
 import { FaLinkedinIn } from "react-icons/fa";
 import { Container, Row, Col } from "react-bootstrap";
 
+import i18n from '../../i18n';
+
 export default function Footer() {
   let date = new Date();
   let year = date.getFullYear();
@@ -12,7 +14,7 @@ export default function Footer() {
       <Container fluid className="footer">
       <Row>
         <Col md="4" className="footer-copywright">
-          <p>Designed and Developed by: Scaneame Team</p>
+          <p>{i18n.t('footer.designed-and-developed-by')} {i18n.t('footer.scaneame-team')}</p>
           </Col>
           <Col md="4" className="footer-copywright">
           <p>Copyright © {year} SCANEAME</p>
