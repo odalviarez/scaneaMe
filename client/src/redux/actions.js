@@ -1,17 +1,20 @@
 import axios from "axios";
-
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const LOAD_ALL_PRODUCTS = "LOAD_ALL_PRODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const SORT_PRODUCTS = "SORT_PRODUCTS";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
-export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
-export const CLEAN_PRODUCT_DETAIL = "CLEAN_PRODUCT_DETAIL";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const GET_USER = "GET_USER";
 export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
-// export const LOGIN = 'LOGIN';
+export const UPDATE_USER = "UPDATE_USER";
+export const USER_GET_ORDERS = "USER_GET_ORDERS";
+
+
+
+
+
 
 export const getAllProducts = () => {
   return async function (dispatch) {
@@ -115,6 +118,22 @@ export const userUpdate = (payload, user) => {
   };
 };
 
+export const userGetOrders = (userId) => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`order/find/${userId}`);
+      return dispatch({
+        type: USER_GET_ORDERS,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert("Could not get orders from user", error.message);
+    }
+  };
+};
+
+
 export const handleCheckout = (cartProp, user) => {
   console.log(cartProp.cartItems);
   axios
@@ -129,6 +148,7 @@ export const handleCheckout = (cartProp, user) => {
     })
     .catch((err) => console.log(err.message));
 };
+
 
 // export const getRecipeDetail = (id) => {
 //     return async function(dispatch) {

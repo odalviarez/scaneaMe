@@ -18,6 +18,14 @@ const productSchema = mongoose.Schema(
       type: Array,
       require: [true, 'Please add a array value'],
     },
+    comments: {
+      type: Array,
+      require: false,
+    },
+    ratings: {
+      type: Array,
+      require: false,
+    },
     color: {
       type: String,
       required: [true, 'Please add a text value'],

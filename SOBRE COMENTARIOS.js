@@ -1,0 +1,7 @@
+//* Extensión: Better Comments
+
+//! : ALERTAS
+//* : IMPORTANTE
+//? : CONSULTAS
+//TODO : TAREAS PENDIENTES
+//// ESTE CÓDIGO DEBERÍA ELIMINARSE

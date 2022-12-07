@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
 import Home from "./pages/home/Home";
 import Catalogue from "./pages/catalogue/Catalogue";
@@ -12,15 +12,37 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
+import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
+
+// fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
 import Checkout from "./pages/checkout/Checkout";
 initFontAwesome();
+
+
+const ProtectedRoute = ({ component, ...args }) => {
+  const Component = withAuthenticationRequired(component, args);
+  return <Component />;
+};
+
+const Auth0ProviderWithRedirectCallback = ({ children, ...props }) => {
+  const navigate = useNavigate();
+  const onRedirectCallback = (appState) => {
+    navigate((appState && appState.returnTo) || window.location.pathname);
+  };
+  return (
+    <Auth0Provider onRedirectCallback={onRedirectCallback} {...props}>
+      {children}
+    </Auth0Provider>
+  );
+};
+
 
 function App() {
   const { isLoading, error } = useAuth0();
@@ -34,22 +56,32 @@ function App() {
   }
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path= "/dashboard" element={<Dashboard/>}/>
-        <Route path="/catalogue" element={<Catalogue />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/create" element={<Create />} />
-        <Route path="/user/account" element={<UserAccount />} />
-        <Route path="/:email" element={<Profile />} />
-        <Route path="/checkout" element={<Checkout />} />
-      </Routes>
+      <Auth0ProviderWithRedirectCallback
+        domain="dev-a3kheszuwvfvuoad.us.auth0.com"
+        clientId="zVBOjQQhQSTxp3S8KRXOfLaMVMruuk2u"
+        redirectUri={window.location.origin}
+        audience="https://scaneame.vercel.app/"
+        //scope="read:current_user update:current_user_metadata"
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route
+            path="/dashboard"
+            element={<ProtectedRoute component={Dashboard} />}
+          />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/user/account"
+            element={<ProtectedRoute component={UserAccount} />}
+          />
+          <Route path="/:email" element={<Profile />} />
+        </Routes>
+      </Auth0ProviderWithRedirectCallback>
     </div>
   );
 }
