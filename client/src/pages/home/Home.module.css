@@ -1,0 +1,30 @@
+.tituloCarru{
+  color: #666;
+  background-color: rgba(91, 205, 91, 0.214);
+  width: 25%;
+  position: relative;
+  left: 20%;
+  transform: translate(-50%);
+  border-top-right-radius: 20px ;
+  border-top-left-radius: 20px ;
+  margin:0px;
+  padding-left: 10px;
+  text-align: left;
+  box-shadow: 12px -4px 14px -1px rgba(94, 197, 96, 0.681)
+}
+
+.tituloSeason{
+  color: #666;
+  background-color: rgba(91, 205, 91, 0.391);
+  width: 25%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  border-top-right-radius: 20px ;
+  border-top-left-radius: 20px ;
+  margin:0px;
+  margin-top: 50px;
+  padding-left: 10px;
+  text-align: center;
+  box-shadow: 12px -4px 14px -1px rgba(94, 197, 96, 0.681)
+}
