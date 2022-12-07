@@ -78,11 +78,6 @@ router.put("/:email", async (req, res) => {
     if (image) {
       result = await cloudinary.uploader.upload(image, {
         folder: "User Profile",
-        //ESTO ROMPE LA CARGA DE IMAGENES
-        // transformation: [
-        //   { gravity: "face", height: 900, width: 1200},
-        //   { crop: "scale" },
-        // ],
       });
     }
     const updateUser = await User.updateOne(

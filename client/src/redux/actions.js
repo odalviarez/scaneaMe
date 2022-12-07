@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const LOAD_ALL_PRODUCTS = "LOAD_ALL_PRODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
@@ -12,6 +11,9 @@ export const GET_USER = "GET_USER";
 export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
 // export const LOGIN = 'LOGIN';
+
+
+
 
 export const getAllProducts = () => {
   return async function (dispatch) {
@@ -129,6 +131,7 @@ export const handleCheckout = (cartProp, user) => {
     })
     .catch((err) => console.log(err.message));
 };
+
 
 // export const getRecipeDetail = (id) => {
 //     return async function(dispatch) {
