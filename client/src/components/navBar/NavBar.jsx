@@ -50,7 +50,7 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   return (
     <nav className={styles.nav}>
       <Link to={"/home"}>
-        <img src={logo} className={styles.logo} alt="logo" />
+        <img src={logo} title="Home" className={styles.logo} alt="logo" />
       </Link>
       <Container className={styles.desplegable}>
         <NavbarToggler onClick={toggle} />

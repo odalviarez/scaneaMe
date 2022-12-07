@@ -60,6 +60,10 @@
         "e-mail": "Correo Electrónico",
         "your-message-here": "Tu mensaje aquí",
         "your-message-was-sent-successfully": "¡Su consulta fue enviada con éxito!"
+    },
+
+    "home": {
+        "welcom-to-scaneaMe": "¡Bienvenido a ScaneaMe!"
     }
     
 }

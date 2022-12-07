@@ -5,6 +5,8 @@ import otoñoInvierno from '../../Logo/otoñoInvierno.jpg'
 import estaciones from '../../Logo/estaciones.jpg'
 import styles from './SeasonalBanner.module.css'
 
+import i18n from '../../i18n';
+
 export default function SeasonalBanner() {
   return (
     <div className={styles.container}>
