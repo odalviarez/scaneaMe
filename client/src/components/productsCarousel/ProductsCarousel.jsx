@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProductsCarousel.module.css'
 import { getAllProducts } from '../../redux/actions'
@@ -47,18 +47,11 @@ export default function HomeBanners({ productType }) {
     },
   }
 
-  console.log('ProDUct unfiltered: ', product)  
-
   const productFiltered = product.filter(e => e.type === productType)
-  
-  const productCard = productFiltered
-    .map(item => (
-      <HomeCard image={item.image} price={item.price} id={item.id} />
-    ))
-    
-    
-  console.log('productType: ', productType)  
-  console.log('Product filtered: ', productCard)  
+
+  const productCard = productFiltered.map(item => (
+    <HomeCard image={item.image} price={item.price} id={item.id} />
+  ))
 
   return (
     <div className={styles.container}>
