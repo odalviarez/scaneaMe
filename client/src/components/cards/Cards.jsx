@@ -6,8 +6,6 @@ import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getT
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
 import { useLocation, Link } from 'react-router-dom';
-import { Button } from "reactstrap";
-
 import i18n from '../../i18n'
 
 export default function Cards() {
@@ -58,6 +56,12 @@ export default function Cards() {
     }
     
   }, [productsOnStore]);
+
+  // useEffect(() => {
+  //     dispatch(getAllProducts());
+    
+
+  // }, [filtersApplied]);
 
   const handleAddCart = function (e) {
     e.preventDefault(e);

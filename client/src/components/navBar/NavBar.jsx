@@ -170,8 +170,8 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
       <ul>
         <li>
         <div>
-        <Button as={Link} href="/catalogue/?lng=es">ES</Button>
-        <Button as={Link} href="/catalogue/?lng=en">EN</Button>
+        <Button as={Link} href="/?lng=es">ES</Button>
+        <Button as={Link} href="/?lng=en">EN</Button>
         </div>
         </li>
         <li>

@@ -31,42 +31,42 @@ export default function UserAccComp() {
   useEffect(() => {
     dispatch(getUserLogin(user.email))
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-
+    console.log(user);
 
   }, [dispatch])
 
 
   //* TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
-  useEffect(() => {
+  // useEffect(() => {
 
-    const getUserMetadata = async () => {
-      const domain = configJson.domain;
+  //   const getUserMetadata = async () => {
+  //     const domain = configJson.domain;
   
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
-        });
+  //     try {
+  //       const accessToken = await getAccessTokenSilently({
+  //         audience: `https://${domain}/api/v2/`,
+  //         scope: "read:current_user",
+  //       });
   
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+  //       const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
   
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+  //       const metadataResponse = await fetch(userDetailsByIdUrl, {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
   
-        const { user_metadata } = await metadataResponse.json();
-        console.log(user_metadata);
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log("Error: ", e.message);
-      }
-    };
+  //       const { user_metadata } = await metadataResponse.json();
+  //       console.log(user_metadata);
+  //       setUserMetadata(user_metadata);
+  //     } catch (e) {
+  //       console.log("Error: ", e.message);
+  //     }
+  //   };
   
-    getUserMetadata();
+  //   getUserMetadata();
 
-  }, [getUserLogin, getAccessTokenSilently, user?.sub])
+  // }, [getUserLogin, getAccessTokenSilently, user?.sub])
 
 
   
