@@ -8,19 +8,23 @@ import twLogo from '../../Logo/twitter.png'
 import linkedinLogo from '../../Logo/linkedin.png'
 import githubLogo from '../../Logo/github.png'
 
+import i18n from '../../i18n';
+
 export default function Footer() {
   let date = new Date()
   let year = date.getFullYear()
   return (
     <div className={styles.container}>
-      <div className={styles.textContainer}>
-        <div className={styles.designed}>
-          <p>Designed and Developed by: scaneaMe Team</p>
-        </div>
-        <div className={styles.copyright}>
+
+      <Container fluid className="footer">
+      <Row>
+        <Col md="4" className="footer-copywright">
+          <p>{i18n.t('footer.designed-and-developed-by')} {i18n.t('footer.scaneame-team')}</p>
+        </Col>
+        <Col md="4" className="footer-copywright">
           <p>Copyright © {year} SCANEAME</p>
-        </div>
-      </div>
+        </Col>
+      </Row>
       <ul className='footer-icons'>
         <li className='social-icons'>
           <a
