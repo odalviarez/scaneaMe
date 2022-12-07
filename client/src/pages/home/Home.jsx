@@ -5,9 +5,11 @@ import Carru from '../../components/homeBanners/HomeBanners'
 import ProdCarru from '../../components/productsCarousel/ProductsCarousel'
 import Footer from '../../components/footer/Footer'
 import SeasonalBanner from '../../components/homeBanners/SeasonalBanner.jsx'
-
 import { getAllProducts } from '../../redux/actions';
 import styles from './Home.module.css'
+import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
+import i18n from "../../i18n";
 
 export default function Home() {
 
