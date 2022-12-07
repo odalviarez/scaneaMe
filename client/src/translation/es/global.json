@@ -48,12 +48,18 @@
         "load-stock": "Cargar Existencia",
         "submit": "Enviar",
         "image-preview-will-appear-here": "¡La vista previa de la imagen aparecerá aquí!"
-
     },
     
     "footer": {
         "designed-and-developed-by": "Diseñado y desarrollado por:",
         "scaneame-team": "El Equipo ScaneaMe"
+    },
+
+    "contact": {
+        "full-name": "Nombre Completo",
+        "e-mail": "Correo Electrónico",
+        "your-message-here": "Tu mensaje aquí",
+        "your-message-was-sent-successfully": "¡Su consulta fue enviada con éxito!"
     }
     
 }

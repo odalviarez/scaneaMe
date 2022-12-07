@@ -48,12 +48,18 @@
         "load-stock": "Load Stock",
         "submit": "Submit",
         "image-preview-will-appear-here": "Image preview will appear here!"
-
     },
 
     "footer": {
         "designed-and-developed-by": "Designed and Developed by:",
         "scaneame-team": "ScaneaMe Team"
+    },
+
+    "contact": {
+        "full-name": "Full Name",
+        "e-mail": "E-Mail",
+        "your-message-here": "Your Message Here",
+        "your-message-was-sent-successfully": "Your message was sent successfully!"
     }
     
 }
