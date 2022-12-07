@@ -61,7 +61,7 @@ function App() {
         clientId="zVBOjQQhQSTxp3S8KRXOfLaMVMruuk2u"
         redirectUri={window.location.origin}
         audience="https://scaneame.vercel.app/"
-        scope="read:current_user update:current_user_metadata"
+        //scope="read:current_user update:current_user_metadata"
       >
         <Routes>
           <Route path="/" element={<Home />} />
