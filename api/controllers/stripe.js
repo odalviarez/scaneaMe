@@ -90,7 +90,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    success_url: `${process.env.CLIENT_URL}/`, //checkout-success
+    success_url: `${process.env.CLIENT_URL}/checkout`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
 
@@ -141,7 +141,7 @@ router.post(
         })
         .catch((err) => console.log(err.message));
     }
-
+    
     // Return a 200 res to acknowledge receipt of the event
     //res.send().end();
     res.json({ received: true });
