@@ -1,8 +1,11 @@
 const express = require("express");
-//const Product = require("../models/productModel");
-const ProductosHardcode = require("../productos");
 const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
+const { auth, claimCheck} = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
+const checkClaims = claimCheck((claims) => {
+  return claims.permissions.includes("read:users");
+});
 
 const router = express.Router();
 
@@ -44,20 +47,13 @@ router.post("/", async (req, res) => {
     }
     //si recibe los campos obligatorios crea el producto
     if (name && type && price) {
-      const result = await cloudinary.uploader.upload(image, {
-        folder: 'Products',
-        transformation: [
-          { height: 900, width: 900},
-          { crop: 'scale' },
-        ],
-      })
       let productCreate = new Products({
         name,
         color,
         type,
         price,
         season,
-        image: result.secure_url,
+        image,
         stock,
       });
       console.log(productCreate);

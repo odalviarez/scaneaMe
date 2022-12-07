@@ -11,6 +11,7 @@ import { Button } from "reactstrap";
 import { Link } from 'react-router-dom';
 import i18n from '../../i18n'
 
+
 export default function Home() {
 
   const dispatch = useDispatch();

@@ -3,6 +3,8 @@ const express = require("express");
 const { db } = require("../models/userModel");
 const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
 
 
 //* GET USER LOGIN: recibe el mail al hacer login en el cliente. Si el usuario ya existe en la DB, lo trae (GET), y si no existe en la DB, lo crea (POST).
@@ -80,11 +82,6 @@ router.put("/:email", async (req, res) => {
     if (image) {
       result = await cloudinary.uploader.upload(image, {
         folder: "User Profile",
-        //ESTO ROMPE LA CARGA DE IMAGENES
-        // transformation: [
-        //   { gravity: "face", height: 900, width: 1200},
-        //   { crop: "scale" },
-        // ],
       });
     }
     const updateUser = await User.updateOne(
