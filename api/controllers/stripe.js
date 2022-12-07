@@ -9,6 +9,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const router = express.Router();
 
+//* CREATE CHECKOUT SESSION: crea un usuario y una sesión para checkout de la compra (paso necesario de Stripe, no confundir con el usuario loggueado en la página).
 router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
@@ -16,7 +17,7 @@ router.post("/create-checkout-session", async (req, res) => {
     },
   });
   let { cartItems } = req.body;
-  console.log(cartItems);
+  console.log("se ejecutó CREATE CHECKOUT SESSION", cartItems);
   const line_items = cartItems.map((item) => {
     return {
       price_data: {
@@ -29,11 +30,12 @@ router.post("/create-checkout-session", async (req, res) => {
             id: item.id,
           },
         },
-        unit_amount: item.price * 100,
+        unit_amount: item.price * 100, //! Esto está bien?
       },
       quantity: item.cartTotalQuantity,
     };
   });
+
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -97,11 +99,8 @@ router.post("/create-checkout-session", async (req, res) => {
   res.send({ url: session.url });
 });
 
-
-router.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  (req, res) => {
+//? Qué hace esta ruta? Que action creator la ejecuta?
+router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
     const sig = req.headers["stripe-signature"];
     console.log("sig: ",sig);
     let data;
@@ -149,7 +148,7 @@ router.post(
 );
 
 
-// Create Order
+// Create Order para utilizar en la ruta anterior
 const createOrder = async (customer, data, lineItems) => {
   const newOrder = new Order({
     userId: customer.metadata.userId,

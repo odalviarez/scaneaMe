@@ -57,6 +57,7 @@ export default function HomeBanners() {
         src={selectedImage}
         className={loaded ? `${styles.img} ${styles.loaded}` : `${styles.img}`}
         alt='carru'
+        key='1'
         onLoad={() => setLoaded(true)}
       />
       <div className={styles.btnContainer}>

@@ -3,7 +3,7 @@ const { Router } = require('express')
 const cors = require('cors')
 const router = express.Router()
 const productControl = require('../controllers/productsController')
-//const ordersControl = require("../controllers/ordersController");
+const ordersControl = require("../controllers/ordersController");
 const userControl = require('../controllers/usersController')
 const stripe = require('../controllers/stripe')
 
@@ -24,7 +24,7 @@ router.use((req, res, next) => {
 router.use(cors())
 
 router.use('/products', productControl)
-//router.use("/order", ordersControl);
+router.use("/order", ordersControl);
 router.use('/user', userControl)
 router.use('/stripe', stripe)
 
