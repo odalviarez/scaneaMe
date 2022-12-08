@@ -117,7 +117,7 @@ const createOrder = async (customer, data, lineItems) => {
     //cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
-    products: lineItems,
+    products: lineItems.data,
     subtotal: data.amount_subtotal,
     total: data.amount_total,
     shipping: data.customer_details,
