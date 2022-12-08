@@ -26,15 +26,23 @@ import i18n from '../../i18n'
 export default function Navbar() {
 
 
+
+
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
+const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
 
-const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const getToken = async () => {
+    const token = await getAccessTokenSilently();
+    return `${token}`;
+  };
 
   useEffect(() => {
     if (cart) dispatch(getTotalProducts(cart.length));
-    if (user) dispatch(getUserLogin(user.email, user));
+    if (user) dispatch(getUserLogin(user, cart, getToken));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart, dispatch, user]);
 
   const totalItems = useSelector((state) => state.totalProducts);

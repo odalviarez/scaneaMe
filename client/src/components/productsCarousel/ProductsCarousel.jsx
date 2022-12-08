@@ -7,8 +7,12 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import HomeCard from './HomeCard'
 
+
+
+
 export default function HomeBanners({ productType }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
 
   const allProducts = useSelector(state => state.allProducts)
   const product = allProducts.map(e => ({
@@ -20,9 +24,9 @@ export default function HomeBanners({ productType }) {
 
   useEffect(() => {
     if (allProducts.length === 0) {
-      dispatch(getAllProducts())
+      dispatch(getAllProducts());
     }
-  }, [])
+  }, [dispatch, allProducts])
 
   const responsive = {
     superLargeDesktop: {
@@ -46,6 +50,8 @@ export default function HomeBanners({ productType }) {
       slidesToSlide: 1,
     },
   }
+
+
 
   const productFiltered = product.filter(e => e.type === productType)
 

@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
 import Home from "./pages/home/Home";
 import Catalogue from "./pages/catalogue/Catalogue";
@@ -8,9 +8,6 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import Cart from "./pages/cart/Cart";
 import Detail from "./pages/detail/Detail";
 import About from "./pages/about/About";
-import Register from "./pages/register/Register";
-import Login from "./pages/login/Login";
-import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
