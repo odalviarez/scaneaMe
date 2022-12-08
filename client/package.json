@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.12.2",
     "jwt-decode": "^3.1.2",
+    "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",

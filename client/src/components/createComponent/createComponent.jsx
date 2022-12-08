@@ -1,8 +1,7 @@
-import NavBar from '../navBar/NavBar.jsx'
 import { Link } from 'react-router-dom';
 import { Button } from "reactstrap";
-import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {useState} from 'react'
+import { useDispatch} from 'react-redux'
 import { productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
 import i18n from '../../i18n'
@@ -132,6 +131,7 @@ const getToken = async () => {
               <option value="black">{i18n.t("header.black")}</option>
               <option value="yellow">{i18n.t("header.yellow")}</option>
               <option value="green">{i18n.t("header.green")}</option>
+              <option value="gray">{i18n.t("Gray")}</option>
             </select>
             <input
               type="text"

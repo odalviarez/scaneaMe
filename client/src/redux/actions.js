@@ -59,7 +59,7 @@ export const productsCreate = (payload, getToken) => {
       let config = {
         method: "post",
         url:
-          process.env.REACT_APP_API + "/products/" ||
+          process.env.REACT_APP_API + "products/" ||
           "http://localhost:5000/products/",
         headers: {
           "content-type": "application/json",
@@ -113,7 +113,7 @@ export const getUserLogin = (user, cart, getToken) => {
       config = {
         method: "post",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/login/${user.email}`
+          ? process.env.REACT_APP_API + `user/login/${user.email}`
           : `http://localhost:5000/user/login/${user.email}`,
         headers: {
           "content-type": "application/json",
@@ -127,7 +127,7 @@ export const getUserLogin = (user, cart, getToken) => {
         config = {
           method: "post",
           url: process.env.REACT_APP_API
-            ? process.env.REACT_APP_API + `/user/login/${user.email}`
+            ? process.env.REACT_APP_API + `user/login/${user.email}`
             : `http://localhost:5000/user/login/${user.email}`,
           data,
         };
@@ -197,11 +197,11 @@ export const userGetOrders = (userId) => {
 };
 
 export const handleCheckout = (cartProp, user) => {
-  console.log(cartProp.cartItems);
+  console.log('User: ', user);
   axios
     .post(`/stripe/create-checkout-session`, {
       cartItems: cartProp.cartItems,
-      userId: user.id,
+      userEmail: user.email,
     })
     .then((res) => {
       if (res.data.url) {

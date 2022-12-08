@@ -18,7 +18,6 @@ export default function CartComponent() {
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const dispatch = useDispatch();
 
-    //const navigate = useNavigate();
 
     useEffect(() =>{
       let cartCopy = [0, ...cart];

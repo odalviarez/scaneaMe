@@ -45,7 +45,7 @@ export default function Navbar() {
     if (cart) dispatch(getTotalProducts(cart.length));
     if (user) dispatch(getUserLogin(user, cart, getToken));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart, dispatch, user]);
+  }, [dispatch, user]);
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +53,7 @@ export default function Navbar() {
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
+  //setCart([]);
     logout({
       returnTo: window.location.origin + "/home",
     });
@@ -95,21 +96,27 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="tools" className="mr-3" /> {i18n.t("navbar.account")}
+                  <FontAwesomeIcon icon="tools" className="mr-3" />{" "}
+                  {i18n.t("navbar.account")}
                 </DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
-                  to={'/' + user.email}
+                  to={"/" + user.email}
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="user" className="mr-3" /> {i18n.t("navbar.profile")}
+                  <FontAwesomeIcon icon="user" className="mr-3" />{" "}
+                  {i18n.t("navbar.profile")}
                 </DropdownItem>
                 <DropdownItem
                   id="qsLogoutBtn"
-                  onClick={() => logoutWithRedirect()}
+                  onClick={() => {
+                    logoutWithRedirect();
+                    setCart([]);
+                  }}
                 >
-                  <FontAwesomeIcon icon="power-off" className="mr-3" /> {i18n.t("navbar.log-out")}
+                  <FontAwesomeIcon icon="power-off" className="mr-3" />{" "}
+                  {i18n.t("navbar.log-out")}
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -147,7 +154,7 @@ export default function Navbar() {
               </span>
             </NavItem>
             <NavItem>
-            <FontAwesomeIcon icon="tools" className="mr-3" />
+              <FontAwesomeIcon icon="tools" className="mr-3" />
               <RouterNavLink
                 to="/user/account"
                 activeclassname="router-link-exact-active"
@@ -169,7 +176,10 @@ export default function Navbar() {
               <RouterNavLink
                 to="#"
                 id="qsLogoutBtn"
-                onClick={() => logoutWithRedirect()}
+                onClick={() => {
+                  logoutWithRedirect();
+                  setCart([]);
+                }}
               >
                 {i18n.t("navbar.log-out")}
               </RouterNavLink>
@@ -179,10 +189,16 @@ export default function Navbar() {
       </Container>
       <ul>
         <li>
-        <div>
-        <Button as={Link} href="/?lng=es">ES</Button>
-        <Button as={Link} href="/?lng=en">EN</Button>
-        </div>
+
+          <div>
+            <Button as={Link} href="/catalogue/?lng=es">
+              ES
+            </Button>
+            <Button as={Link} href="/catalogue/?lng=en">
+              EN
+            </Button>
+          </div>
+
         </li>
         <li>
           <div className={styles.itemsCart}>{totalItems}</div>
@@ -190,22 +206,27 @@ export default function Navbar() {
             <img src={cartImg} className={styles.cart} alt="cart" />
           </Link>
         </li>
-        {userLogin.isAdmin?<li> <Link to={"/dashboard"} className={styles.anchor}>
-        {i18n.t("navbar.dashboard")}
-          </Link></li> : null}
+        {userLogin.isAdmin ? (
+          <li>
+            {" "}
+            <Link to={"/dashboard"} className={styles.anchor}>
+              {i18n.t("navbar.dashboard")}
+            </Link>
+          </li>
+        ) : null}
         <li>
           <Link to={"/catalogue"} className={styles.anchor}>
-          {i18n.t("navbar.catalogue")}
+            {i18n.t("navbar.catalogue")}
           </Link>
         </li>
         <li>
           <Link to={"/about"} className={styles.anchor}>
-          {i18n.t("navbar.about-us")}
+            {i18n.t("navbar.about-us")}
           </Link>
         </li>
         <li>
           <Link to={"/contact"} className={styles.anchor}>
-          {i18n.t("navbar.contact")}
+            {i18n.t("navbar.contact")}
           </Link>
         </li>
       </ul>
