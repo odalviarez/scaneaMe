@@ -28,13 +28,13 @@ export default function UserAccComp() {
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
+    await console.log("se está consologueando el token", token);
     return `${token}`;
   };
 
   useEffect(() => {
     dispatch(getUserLogin(user.email))
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-    console.log(user);
 
   }, [dispatch])
 
@@ -105,45 +105,45 @@ export default function UserAccComp() {
 
     dispatch(
       userUpdate(
+        userLogin.email,
         {
           socials,
           image,
         },
-        userLogin.email,
         getToken
       )
     )
   }
 
-  const handleSubmitEmail = async (e) => {
-    e.preventDefault(e)
-    console.log(email);
-    validateEmail(email) 
-    if (errors.email !== "") {
+  // const handleSubmitEmail = async (e) => {
+  //   e.preventDefault(e)
+  //   console.log(email);
+  //   validateEmail(email) 
+  //   if (errors.email !== "") {
 
-      const accessToken = await getAccessTokenSilently({
-        audience: `https://${configJson.domain}/api/v2/`,
-        scope: "read:current_user",
-      });
+  //     const accessToken = await getAccessTokenSilently({
+  //       audience: `https://${configJson.domain}/api/v2/`,
+  //       scope: "read:current_user",
+  //     });
 
-      var options = {
-        method: 'PATCH',
-        url: `https://${configJson.domain}/api/v2/users/${user.id}`,
-        headers: {
-          'content-type': 'application/json',
-          authorization: 'Bearer '+ accessToken 
-        },
-        data: {email: email, connection: 'changedEmail'}
-      };
+  //     var options = {
+  //       method: 'PATCH',
+  //       url: `https://${configJson.domain}/api/v2/users/${user.id}`,
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         authorization: 'Bearer '+ accessToken 
+  //       },
+  //       data: {email: email, connection: 'changedEmail'}
+  //     };
       
-      axios.request(options).then(function (response) {
-        console.log(response.data);
-      }).catch(function (error) {
-        console.error(error);
-      });
+  //     axios.request(options).then(function (response) {
+  //       console.log(response.data);
+  //     }).catch(function (error) {
+  //       console.error(error);
+  //     });
   
-    }
-  }
+  //   }
+  // }
   
 
   const handleImage = e => {
@@ -170,7 +170,7 @@ export default function UserAccComp() {
           <label>Email:</label>
           <input type='email' value={userLogin.email} disabled />
         </div>
-        <form className={style.UserAccCompItem} onSubmit={(e) => handleSubmitEmail(e)}>
+        <form className={style.UserAccCompItem} >
           <label>Change Email:</label>
           <input type='email' onChange={e => setEmail(e.target.value)} />
           <button type='submit'>SUBMIT</button>

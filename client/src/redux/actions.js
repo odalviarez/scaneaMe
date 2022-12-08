@@ -105,7 +105,10 @@ export const getUser = (email) => {
 export const getUserLogin = (email, payload, getToken) => {
   return async function (dispatch) {
     try {
-      const token = await getToken(); 
+      console.log("esto es lo que llega a actions", getToken);
+      let token 
+      if(getToken) {
+      token = await getToken();} 
       let config = {
         method: "post",
         url: process.env.REACT_APP_API

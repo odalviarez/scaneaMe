@@ -84,7 +84,7 @@ router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
   const { socials, image } = req.body;
-  let userData = await User.findOne({ email });
+  let userData = await User.findOne({ email }); 
   try {
     let result = "";
     if (image) {
