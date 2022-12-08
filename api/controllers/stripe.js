@@ -151,8 +151,10 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
 
 // Create Order para utilizar en la ruta anterior
 const createOrder = async (customer, data, lineItems) => {
+  console.log("customer: ", customer);
+  console.log("data: ", data);
   const newOrder = new Order({
-    userId: customer.metadata.userId,
+    email: customer.metadata.email,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
