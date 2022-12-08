@@ -5,21 +5,20 @@ import style from './UserAccComp.module.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
 import tlds from 'tld-list'
-import configJson from "../../auth_config.json";
-import axios from "axios";
+
 
 
 export default function UserAccComp() {
   const { user, getAccessTokenSilently } = useAuth0()
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin);
-  console.log(userLogin);
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({ 
     email: "",
     password: []
   })
   const [image, setImage] = useState('')
+    // eslint-disable-next-line no-unused-vars
   const [email, setEmail] = useState('')
   const [socials, setSocials] = useState({
     facebook: '',
@@ -30,14 +29,13 @@ export default function UserAccComp() {
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
-    await console.log("se está consologueando el token", token);
     return `${token}`;
   };
 
   useEffect(() => {
     dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user])
 
 
@@ -74,7 +72,7 @@ export default function UserAccComp() {
 
 
 
-  
+    // eslint-disable-next-line no-unused-vars
   const validateEmail = (email) => {
   
     if (validator.isEmail(email, {domain_specific_validation: true}) === false || tlds.includes(email.split('.').pop()) === false) {
@@ -109,11 +107,11 @@ export default function UserAccComp() {
 
     dispatch(
       userUpdate(
-        userLogin.email,
         {
           socials,
           image,
         },
+        userLogin.email,
         getToken
       )
     )
