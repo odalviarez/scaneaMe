@@ -102,20 +102,22 @@ export const getUser = (email) => {
   };
 };
 
-export const getUserLogin = (email, payload, getToken) => {
+export const getUserLogin = (user, cart, getToken) => {
   return async function (dispatch) {
+    let data = { ...user, cart };
+    console.log("data userLogin: ", data)
     try {
       const token = await getToken(); 
       let config = {
         method: "post",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/login/${email}`
-          : `http://localhost:5000/user/login/${email}`,
+          ? process.env.REACT_APP_API + `/user/login/${user.email}`
+          : `http://localhost:5000/user/login/${user.email}`,
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: payload,
+        data,
       };
       axios(config)
         .then(function (response) {

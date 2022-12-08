@@ -31,7 +31,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
-  console.log(userLogin);
 const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
 
   const getToken = async () => {
@@ -41,7 +40,7 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
 
   useEffect(() => {
     if (cart) dispatch(getTotalProducts(cart.length));
-    if (user) dispatch(getUserLogin(user.email, user, getToken));
+    if (user) dispatch(getUserLogin(user, cart, getToken));
   }, [cart, dispatch, user]);
 
   const totalItems = useSelector((state) => state.totalProducts);

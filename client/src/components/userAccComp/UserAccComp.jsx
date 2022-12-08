@@ -32,7 +32,7 @@ export default function UserAccComp() {
   };
 
   useEffect(() => {
-    dispatch(getUserLogin(user.email))
+    dispatch(getUserLogin(user))
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
 
 

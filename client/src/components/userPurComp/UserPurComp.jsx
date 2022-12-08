@@ -11,7 +11,7 @@ const UserPurComp = () => {
     const userOrders = useSelector(state => state.userOrders)
 
     useEffect(() => {
-        dispatch(getUserLogin(user.email))
+        dispatch(getUserLogin(user))
         dispatch(userGetOrders(user.email))
 
     }, [dispatch])
