@@ -1,15 +1,13 @@
 const express = require("express");
-//const Product = require("../models/productModel");
-const ProductosHardcode = require("../productos");
 const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
+const { auth, claimCheck} = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
+const checkClaims = claimCheck((claims) => {
+  return claims.permissions.includes("read:users");
+});
 
 const router = express.Router();
-
-//para que traiga los datos hardcodeado BORRAR LUEGO
-router.get("/test", async (req, res) => {
-  res.json(ProductosHardcode);
-});
 
 //Retorna todos los productos con la info necesaria para las cards
 router.get("/", async (req, res) => {
@@ -39,7 +37,7 @@ router.get("/", async (req, res) => {
 });
 
 //crea un producto
-router.post("/", async (req, res) => {
+router.post("/", checkJwt, checkClaims, async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
@@ -98,12 +96,10 @@ router.delete("/:id", async (req, res) => {
     res.json(error.message);
   }
 });
-
+ 
 
 //actualiza un producto existente
-router.put("/:id", async (req, res) => {
-  let { id } = req.params;
-  const { name, color, type, price, image, stock, season } = req.body;
+router.put("/:id", checkJwt, async (req, res) => {  const { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -120,7 +116,7 @@ router.put("/:id", async (req, res) => {
         image,
         stock,
       };
-    const updateProduct = await Products.update({id}, query);
+    const updateProduct = await Products.update({ id }, query);
     res.json(updateProduct);
     }
     else{
