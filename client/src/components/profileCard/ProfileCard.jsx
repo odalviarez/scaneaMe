@@ -32,11 +32,8 @@ export default function ProfileCard() {
         setUserImg(userDB.image?.url)
       }
     }
-    return ()=>{
-      setUserImg(imgPlaceholder)
-      console.log('Me desmonté')
-    }
-  }, [dispatch, userDB])
+
+  }, [dispatch, userDB]);
 
   return (
     <div>

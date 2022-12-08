@@ -5,12 +5,20 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
-
 import i18n from '../../i18n'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const CreateComponent = () => {
     const dispatch = useDispatch();
     
+const { getAccessTokenSilently } = useAuth0();
+const getToken = async () => {
+  const token = await getAccessTokenSilently();
+  return `${token}`;
+};
+
+
     const [productImg, setProductImg] = useState("");
     const [color, setColor] = useState("");
     const [season, setSeason] = useState("allyear");
@@ -83,16 +91,20 @@ const CreateComponent = () => {
             image: productImg,
         });
     
-        await dispatch(productsCreate({
-        name,
-        color,
-        type,
-        season,
-        price,
-        stock,
-        image: productImg,
-    })
-    );
+        dispatch(
+          productsCreate(
+            {
+              name,
+              color,
+              type,
+              season,
+              price,
+              stock,
+              image: productImg,
+            },
+            getToken
+          )
+        );
     };
     
     return (

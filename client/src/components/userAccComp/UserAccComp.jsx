@@ -6,14 +6,15 @@ import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
 import tlds from 'tld-list'
 import configJson from "../../auth_config.json";
-import { toast } from 'react-toastify'
 import axios from "axios";
 
 
 export default function UserAccComp() {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const { user, getAccessTokenSilently } = useAuth0()
   const dispatch = useDispatch()
-  const userLogin = useSelector(state => state.userLogin)
+  const userLogin = useSelector(state => state.userLogin);
+  console.log(userLogin);
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({ 
     email: "",
     password: []
@@ -26,47 +27,16 @@ export default function UserAccComp() {
     twitter: '',
     instagram: '',
   })
-  const [userMetadata, setUserMetadata] = useState(null);
+
+  const getToken = async () => {
+    const token = await getAccessTokenSilently();
+    return `${token}`;
+  };
 
   useEffect(() => {
-    dispatch(getUserLogin(user.email))
+    dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-
-
-  }, [dispatch])
-
-
-  //* TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
-  useEffect(() => {
-
-    const getUserMetadata = async () => {
-      const domain = configJson.domain;
-  
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
-        });
-  
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-  
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-  
-        const { user_metadata } = await metadataResponse.json();
-        console.log(user_metadata);
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log("Error: ", e.message);
-      }
-    };
-  
-    getUserMetadata();
-
-  }, [getUserLogin, getAccessTokenSilently, user?.sub])
+  }, [dispatch, user])
 
 
   
@@ -79,6 +49,7 @@ export default function UserAccComp() {
     return errors
   }
 
+  // eslint-disable-next-line no-unused-vars
   const validatePassword = (password) => {
   
     if (password.length < 8) {
@@ -107,7 +78,8 @@ export default function UserAccComp() {
           socials,
           image,
         },
-        userLogin.email
+        userLogin.email,
+        getToken
       )
     )
   }
@@ -159,7 +131,7 @@ export default function UserAccComp() {
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
 
-      {userLogin.sub.includes('auth0')? 
+      {userLogin?.sub?.includes('auth0')? 
       
       <div> 
         <div className={style.UserAccCompItem}>

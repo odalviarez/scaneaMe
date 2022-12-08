@@ -11,7 +11,6 @@ export const GET_USER_LOGIN = "GET_USER_LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
 
-
 export const getAllProducts = () => {
   return async function (dispatch) {
     try {
@@ -53,14 +52,31 @@ export const getProductDetails = (id) => {
   };
 };
 
-export const productsCreate = (payload) => {
+export const productsCreate = (payload, getToken) => {
   return async function () {
+    const token = await getToken();
     try {
-      const res = await axios.post("/products", payload);
-      return res;
+      let config = {
+        method: "post",
+        url:
+          process.env.REACT_APP_API + "/products/" ||
+          "http://localhost:5000/products/",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: payload,
+      };
+
+      axios(config)
+        .then(function (response) {
+          return JSON.stringify(response.data);
+        })
+        .catch(function (error) {
+          return error;
+        });
     } catch (error) {
       alert("No se pudo crear el producto");
-      console.log(error);
     }
   };
 };
@@ -86,15 +102,49 @@ export const getUser = (email) => {
   };
 };
 
-
-export const getUserLogin = (email, payload) => {
+export const getUserLogin = (user, cart, getToken) => {
   return async function (dispatch) {
+    let data = { ...user, cart };
+    let token = '';
+    let config = "";
     try {
-      const json = await axios.post(`/user/login/${email}`, payload);
-      return dispatch({
-        type: GET_USER_LOGIN,
-        payload: json.data,
-      });
+      if(getToken) {
+        token = await getToken(); 
+      config = {
+        method: "post",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `/user/login/${user.email}`
+          : `http://localhost:5000/user/login/${user.email}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data,
+      };
+      console.log(config);
+      }
+      else{
+        config = {
+          method: "post",
+          url: process.env.REACT_APP_API
+            ? process.env.REACT_APP_API + `/user/login/${user.email}`
+            : `http://localhost:5000/user/login/${user.email}`,
+          data,
+        };
+        console.log(config);
+      }
+      
+      axios(config)
+        .then(function (response) {
+          return dispatch({
+            type: GET_USER_LOGIN,
+            payload: response.data,
+          });
+        })
+        .catch(function (error) {
+          console.log(error)
+          return error;
+        });
     } catch (error) {
       console.log(error);
       alert("Could not get user login", error.message);
@@ -102,11 +152,28 @@ export const getUserLogin = (email, payload) => {
   };
 };
 
-export const userUpdate = (payload, user) => {
+export const userUpdate = (payload, user, getToken) => {
   return async function () {
     try {
-      const res = await axios.put(`/user/${user}`, payload);
-      return res;
+      const token = await getToken();
+      let config = {
+        method: "put",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `/user/${user}`
+          : `http://localhost:5000/user/${user}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: payload,
+      };
+      axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          return error;
+        });
     } catch (error) {
       console.log(error);
       alert("No se pudo actualizar los datos del usuario");
@@ -129,7 +196,6 @@ export const userGetOrders = (userId) => {
   };
 };
 
-
 export const handleCheckout = (cartProp, user) => {
   console.log('User: ', user);
   axios
@@ -144,7 +210,6 @@ export const handleCheckout = (cartProp, user) => {
     })
     .catch((err) => console.log(err.message));
 };
-
 
 // export const getRecipeDetail = (id) => {
 //     return async function(dispatch) {
