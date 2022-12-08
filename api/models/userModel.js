@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       required: false,
       ref: "Product",
     },
+    cart: {
+      type: Array,
+      required: false
+    },
     image: {
       type: Object,
       default: {

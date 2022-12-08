@@ -10,9 +10,11 @@ import axios from "axios";
 
 
 export default function UserAccComp() {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const { user, getAccessTokenSilently } = useAuth0()
   const dispatch = useDispatch()
-  const userLogin = useSelector(state => state.userLogin)
+  const userLogin = useSelector(state => state.userLogin);
+  console.log(userLogin);
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({ 
     email: "",
     password: []
@@ -32,11 +34,9 @@ export default function UserAccComp() {
   };
 
   useEffect(() => {
-    dispatch(getUserLogin(user.email))
+    dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-
-
-  }, [dispatch])
+  }, [dispatch, user])
 
 
   
@@ -49,6 +49,7 @@ export default function UserAccComp() {
     return errors
   }
 
+  // eslint-disable-next-line no-unused-vars
   const validatePassword = (password) => {
   
     if (password.length < 8) {
@@ -126,7 +127,7 @@ export default function UserAccComp() {
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
 
-      {userLogin.sub.includes('auth0')? 
+      {userLogin?.sub?.includes('auth0')? 
       
       <div> 
         <div className={style.UserAccCompItem}>
