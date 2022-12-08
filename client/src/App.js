@@ -80,7 +80,7 @@ function App() {
             element={<ProtectedRoute component={UserAccount} />}
           />
           <Route path="/:email" element={<Profile />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>
       </Auth0ProviderWithRedirectCallback>
     </div>

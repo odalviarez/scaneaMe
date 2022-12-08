@@ -120,6 +120,7 @@ const CreateComponent = () => {
               <option value="black">{i18n.t("header.black")}</option>
               <option value="yellow">{i18n.t("header.yellow")}</option>
               <option value="green">{i18n.t("header.green")}</option>
+              <option value="gray">{i18n.t("Gray")}</option>
             </select>
             <input
               type="text"
