@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Container,
-  NavbarToggler, 
+  NavbarToggler,
   Nav,
   NavItem,
   Button,
@@ -18,42 +18,41 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import {getUserLogin, getTotalProducts} from "../../redux/actions";
+import { getUserLogin, getTotalProducts } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-import i18n from '../../i18n'
+import i18n from "../../i18n";
 
 export default function Navbar() {
-
-
-
-
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-  const userLogin = useSelector((state) => state.userLogin);  
-  const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
+  const userLogin = useSelector((state) => state.userLogin);
+const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
 
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
     return `${token}`;
   };
+  const setCartLogout = () =>{
+      console.log("setCartLogout");
+      setCart([]);
+  }
 
   useEffect(() => {
-    console.log(isAuthenticated);
     if (cart) dispatch(getTotalProducts(cart.length));
     if (user) dispatch(getUserLogin(user, cart, getToken));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, user, cart]);
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
-  //setCart([]);
     logout({
       returnTo: window.location.origin + "/home",
     });
@@ -112,7 +111,7 @@ export default function Navbar() {
                   id="qsLogoutBtn"
                   onClick={() => {
                     logoutWithRedirect();
-                    setCart([]);
+                    setCartLogout();
                   }}
                 >
                   <FontAwesomeIcon icon="power-off" className="mr-3" />{" "}
@@ -178,7 +177,7 @@ export default function Navbar() {
                 id="qsLogoutBtn"
                 onClick={() => {
                   logoutWithRedirect();
-                  setCart([]);
+                  setCartLogout();
                 }}
               >
                 {i18n.t("navbar.log-out")}
