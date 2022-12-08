@@ -15,7 +15,8 @@ const checkClaims = claimCheck((claims) => {
 //? Funciona la ruta creando un usuario manualmente, sin el log in de google?
 router.post("/login/:email", async (req, res) => {
 let { authorization } = req.headers;
-let isAdmin = Boolean(jwt_decode(authorization).permissions.length);
+let isAdmin = false;
+if(authorization) isAdmin = Boolean(jwt_decode(authorization).permissions.length);
 console.log("isAdmin: ", isAdmin);
   const { email } = req.params;
   const {
@@ -38,6 +39,7 @@ console.log("isAdmin: ", isAdmin);
     let response = "";
     if (userData && !cart) { //si existe y el carrito no tiene nada devuelve la info
       //res.json(userData);
+      response = userData;
     } 
     else if (!userData){ //si no existe lo crea 
       userData = new User({
@@ -53,13 +55,11 @@ console.log("isAdmin: ", isAdmin);
         cart
       });
       response = await userData.save();
-      console.log ("response create user: ", response)
       //res.json(userData);
     }
     else if (userData && cart) {  // si existe y tiene productos en el carrito lo actualiza
-      console.log("por actualizar el cart")
-      response = await User.updateOne({ email },{cart});
-      console.log("update user cart: ", response);
+      await User.updateOne({ email },{cart});
+      response = await User.findOne({ email });
     }
     if (userData) await User.updateOne({ email }, { isAdmin }); //si el usuario existe verifica actualiza siempre el esta de admin tomado desde auth0
     res.json(response);

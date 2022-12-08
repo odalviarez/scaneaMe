@@ -105,10 +105,12 @@ export const getUser = (email) => {
 export const getUserLogin = (user, cart, getToken) => {
   return async function (dispatch) {
     let data = { ...user, cart };
-    console.log("data userLogin: ", data)
+    let token = '';
+    let config = "";
     try {
-      const token = await getToken(); 
-      let config = {
+      if(getToken) {
+        token = await getToken(); 
+      config = {
         method: "post",
         url: process.env.REACT_APP_API
           ? process.env.REACT_APP_API + `/user/login/${user.email}`
@@ -119,6 +121,19 @@ export const getUserLogin = (user, cart, getToken) => {
         },
         data,
       };
+      console.log(config);
+      }
+      else{
+        config = {
+          method: "post",
+          url: process.env.REACT_APP_API
+            ? process.env.REACT_APP_API + `/user/login/${user.email}`
+            : `http://localhost:5000/user/login/${user.email}`,
+          data,
+        };
+        console.log(config);
+      }
+      
       axios(config)
         .then(function (response) {
           return dispatch({
@@ -127,6 +142,7 @@ export const getUserLogin = (user, cart, getToken) => {
           });
         })
         .catch(function (error) {
+          console.log(error)
           return error;
         });
     } catch (error) {

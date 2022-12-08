@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 const UserPurComp = () => {
 
-    const { user, isAuthenticated } = useAuth0()
+    const { user} = useAuth0()
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const userOrders = useSelector(state => state.userOrders)
@@ -14,7 +14,7 @@ const UserPurComp = () => {
         dispatch(getUserLogin(user))
         dispatch(userGetOrders(user.email))
 
-    }, [dispatch])
+    }, [dispatch, user])
 
 
 
