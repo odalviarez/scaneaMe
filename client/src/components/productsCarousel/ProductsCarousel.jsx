@@ -7,9 +7,6 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import HomeCard from './HomeCard'
 
-
-
-
 export default function HomeBanners({ productType }) {
   const dispatch = useDispatch();
 
@@ -58,15 +55,6 @@ export default function HomeBanners({ productType }) {
     <HomeCard image={item.image} price={item.price} id={item.id} />
   ))
 
-  const productFiltered = product.filter(e => e.type === productType)
-  
-  const productCard = productFiltered
-    .map(item => (
-      <HomeCard image={item.image} price={item.price} id={item.id} />
-    ))
-    
-    
->>>>>>>>> Temporary merge branch 2
 
   return (
     <div className={styles.container}>
