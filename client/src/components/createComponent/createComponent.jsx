@@ -1,8 +1,7 @@
-import NavBar from '../navBar/NavBar.jsx'
 import { Link } from 'react-router-dom';
 import { Button } from "reactstrap";
-import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {useState} from 'react'
+import { useDispatch} from 'react-redux'
 import { productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
 import i18n from '../../i18n'

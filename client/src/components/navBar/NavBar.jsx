@@ -51,6 +51,7 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
+  setCart([]);
     logout({
       returnTo: window.location.origin + "/home",
     });
