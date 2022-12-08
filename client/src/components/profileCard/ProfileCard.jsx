@@ -35,7 +35,6 @@ export default function ProfileCard() {
     }
   }, [dispatch, userDB]);
 
-  console.log("userDB: ", userDB);
 
   return (
     <div>

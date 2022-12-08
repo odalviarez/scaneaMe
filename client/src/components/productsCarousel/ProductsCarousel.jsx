@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './ProductsCarousel.module.css'
 import { getAllProducts } from '../../redux/actions'
@@ -7,8 +7,12 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import HomeCard from './HomeCard'
 
+
+
+
 export default function HomeBanners({ productType }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
 
   const allProducts = useSelector(state => state.allProducts)
   const product = allProducts.map(e => ({
@@ -20,9 +24,9 @@ export default function HomeBanners({ productType }) {
 
   useEffect(() => {
     if (allProducts.length === 0) {
-      dispatch(getAllProducts())
+      dispatch(getAllProducts());
     }
-  }, [])
+  }, [dispatch, allProducts])
 
   const responsive = {
     superLargeDesktop: {
@@ -47,7 +51,7 @@ export default function HomeBanners({ productType }) {
     },
   }
 
-  console.log('ProDUct unfiltered: ', product)  
+
 
   const productFiltered = product.filter(e => e.type === productType)
   
@@ -57,8 +61,6 @@ export default function HomeBanners({ productType }) {
     ))
     
     
-  console.log('productType: ', productType)  
-  console.log('Product filtered: ', productCard)  
 
   return (
     <div className={styles.container}>
