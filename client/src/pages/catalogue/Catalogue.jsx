@@ -24,7 +24,7 @@ export default function Catalogue() {
   return (
     <div >
       <NavBar/>
-      <div className={style.body}><Cards /></div>
+      <div className={style.CardsComponent}><Cards /></div>
       <Footer/>
     </div>
   )

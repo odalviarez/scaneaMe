@@ -36,17 +36,14 @@ export default function UserAccComp() {
   }, [dispatch])
 
 
-  //* TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
+  // * TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
   // useEffect(() => {
 
   //   const getUserMetadata = async () => {
   //     const domain = configJson.domain;
   
   //     try {
-  //       const accessToken = await getAccessTokenSilently({
-  //         audience: `https://${domain}/api/v2/`,
-  //         scope: "read:current_user",
-  //       });
+
   
   //       const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
   
@@ -118,12 +115,17 @@ export default function UserAccComp() {
     validateEmail(email) 
     if (errors.email !== "") {
 
+      const accessToken = await getAccessTokenSilently({
+        audience: `https://${configJson.domain}/api/v2/`,
+        scope: "read:current_user",
+      });
+
       var options = {
         method: 'PATCH',
         url: `https://${configJson.domain}/api/v2/users/${user.id}`,
         headers: {
           'content-type': 'application/json',
-          authorization: 'Bearer {yourMgmtApiAccessToken}' //! FALTA COMPLETAR
+          authorization: 'Bearer '+ accessToken 
         },
         data: {email: email, connection: 'changedEmail'}
       };

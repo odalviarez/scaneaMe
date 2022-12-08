@@ -14,6 +14,7 @@ export default function Cards() {
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const [sort, setSort] = useState("");
   const [filters, setFilters] = useState({ filtersApplied: [] });
+  const [newFilters, setNewFilters] = useState({});
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
   let location = useLocation()
@@ -91,14 +92,16 @@ export default function Cards() {
 
   const handleFilters = function (e) {
     e.preventDefault(e);
-    let filtersUsed = [
-      ...filters.filtersApplied,
-      {
-        filter: e.target.parentNode.attributes.value.value,
+
+    let newFiltersCreated = {
+      ...newFilters,
+      [e.target.parentNode.attributes.value.value] : {
         value: e.target.attributes.value.value,
         valor: e.target.innerHTML,
-      },
-    ];
+    }}
+
+    setNewFilters(newFiltersCreated)
+
     let filterUsed = {
       filter: e.target.parentNode.attributes.value.value,
       value: e.target.attributes.value.value,
@@ -106,40 +109,47 @@ export default function Cards() {
     };
     if (filters.filtersApplied.length > 0) {
       if (
-        filters.filtersApplied.find((f) => f.value === filterUsed.value) ===
+        filters.filtersApplied.find((f) => f.filter === filterUsed.filter) ===
         undefined
       ) {
         setFilters((filters) => ({
           filtersApplied: [...filters.filtersApplied, filterUsed],
         }));
         setcurrentPage(1)
-        dispatch(filterProducts(filtersUsed));
+        dispatch(filterProducts(newFiltersCreated));
       }
     } else {
       setFilters((filters) => ({
         filtersApplied: [filterUsed],
       }));
       setcurrentPage(1)
-      dispatch(filterProducts([filterUsed]));
+      dispatch(filterProducts(newFiltersCreated));
     }
   };
 
   const removeFilter = function (e) {
     e.preventDefault();
-    let newFilters = filters.filtersApplied.filter(
+    let newFilterss = filters.filtersApplied.filter(
       (filter) => filter.value !== e.target.attributes.value.value
     );
+    
+    let newFiltersCreated = {
+      ...newFilters,
+      [e.target.attributes.filter.value] : {}}
+
+    dispatch(loadAllProducts());
+    setNewFilters(newFiltersCreated)
     setFilters((filters) => ({
-      filtersApplied: newFilters,
+      filtersApplied: newFilterss,
     }));
-    if (newFilters.length === 0) {
+    if (newFilterss.length === 0) {
       dispatch(loadAllProducts());
     } else {
-      dispatch(filterProducts(newFilters));
+      dispatch(filterProducts(newFiltersCreated));
     }
   };
 
-  const scrollToTop = (e) => {
+  const scrollToTop = (e) => {  
     e.preventDefault();
     window.scrollTo({
       top: 0,
@@ -199,7 +209,7 @@ export default function Cards() {
           </div>
 
           {filters.filtersApplied?.map((f, index) => (
-            <p key={index} onClick={removeFilter} value={f.value}>
+            <p key={index} onClick={removeFilter} filter={f.filter} value={f.value}>
               X {f.valor}
             </p>
           ))}

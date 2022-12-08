@@ -48,36 +48,25 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case FILTER_PRODUCTS:
-        console.log("se despacho accion");
-        let productsFiltered = [];
+        console.log(action.payload);
+        let productsFiltered = []
 
-        for (let i = 0; i < action.payload.length; i++) {
-          let filter = action.payload[i];
-          for (let i = 0; i < state.allProducts.length; i++) {
-            const product = state.allProducts[i];
-            if (filter.filter === "type") {
-              if (product.type === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-            if (filter.filter === "color") {
-              if (product.color === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-            if (filter.filter === "season") {
-              if (product.season === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-          }
-        }
+
+        if (Object.hasOwn((action.payload), 'season')) {
+          if (Object.hasOwn((action.payload.season), 'value')){
+          productsFiltered = state.products.filter(product => product.season === action.payload.season.value)
+        }}
+
+        if (Object.hasOwn((action.payload), 'type')) {
+          if (Object.hasOwn((action.payload.type), 'value')){
+          productsFiltered = state.products.filter(product => product.type === action.payload.type.value)
+        }}
+
+        if (Object.hasOwn((action.payload), 'color')) {
+          if (Object.hasOwn((action.payload.color), 'value')){
+          productsFiltered = state.products.filter(product => product.color === action.payload.color.value)
+        }}
+        
         return {
           ...state,
           products: productsFiltered,
