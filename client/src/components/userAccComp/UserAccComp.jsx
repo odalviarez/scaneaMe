@@ -6,7 +6,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
 import tlds from 'tld-list'
 import configJson from "../../auth_config.json";
-import { toast } from 'react-toastify'
 import axios from "axios";
 
 
@@ -26,7 +25,11 @@ export default function UserAccComp() {
     twitter: '',
     instagram: '',
   })
-  const [userMetadata, setUserMetadata] = useState(null);
+
+  const getToken = async () => {
+    const token = await getAccessTokenSilently();
+    return `${token}`;
+  };
 
   useEffect(() => {
     dispatch(getUserLogin(user.email))
@@ -34,6 +37,7 @@ export default function UserAccComp() {
     console.log(user);
 
   }, [dispatch])
+
 
 
   // * TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
@@ -64,6 +68,7 @@ export default function UserAccComp() {
   //   getUserMetadata();
 
   // }, [getUserLogin, getAccessTokenSilently, user?.sub])
+
 
 
   
@@ -104,7 +109,8 @@ export default function UserAccComp() {
           socials,
           image,
         },
-        userLogin.email
+        userLogin.email,
+        getToken
       )
     )
   }
