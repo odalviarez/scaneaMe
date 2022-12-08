@@ -3,13 +3,20 @@ const express = require("express");
 const { db } = require("../models/userModel");
 const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
-const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
+const jwt_decode = require("jwt-decode");
 const checkJwt = auth();
+const checkClaims = claimCheck((claims) => {
+  return claims.permissions.includes("read:users");
+});
 
 
 //* GET USER LOGIN: recibe el mail al hacer login en el cliente. Si el usuario ya existe en la DB, lo trae (GET), y si no existe en la DB, lo crea (POST).
 //? Funciona la ruta creando un usuario manualmente, sin el log in de google?
 router.post("/login/:email", async (req, res) => {
+let { authorization } = req.headers;
+console.log(jwt_decode(authorization));
+let isAdmin = Boolean(jwt_decode(authorization).permissions);
   const { email } = req.params;
   const {
     firtsName,
@@ -31,7 +38,7 @@ router.post("/login/:email", async (req, res) => {
     if (userData) {
       res.json(userData);
     } else {
-      console.log("entro a crear usaurio");
+  
       userData = new User({
         firtsName,
         lastName,
@@ -42,6 +49,7 @@ router.post("/login/:email", async (req, res) => {
         info,
         sub,
         image: { public_id: picture, url: picture },
+        isAdmin
       });
       userData = await userData.save();
       res.json(userData);
@@ -71,8 +79,8 @@ router.get('/:email', async (req, res) => {
   }
 })
 
-//* USER UPDATE: actualiza las redes sociales y la imágen del usuario (EMAIL Y CONTRASEÑA REQUIEREN AUTH0).
-router.put("/:email", async (req, res) => {
+//* USER UPDATE: actualiza las redes sociales y la imágen del usuario
+router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
   const { socials, image } = req.body;
@@ -88,10 +96,16 @@ router.put("/:email", async (req, res) => {
       { email },
       {
         socials: {
-          instagram: socials.instagram? socials.instagram: userData.socials.instagram,
-          facebook: socials.facebook? socials.facebook: userData.socials.facebook,
-          twitter: socials.twitter? socials.twitter: userData.socials.twitter,
-          linkedin: socials.linkedin? socials.linkedin: userData.socials.linkedin,
+          instagram: socials.instagram
+            ? socials.instagram
+            : userData.socials.instagram,
+          facebook: socials.facebook
+            ? socials.facebook
+            : userData.socials.facebook,
+          twitter: socials.twitter ? socials.twitter : userData.socials.twitter,
+          linkedin: socials.linkedin
+            ? socials.linkedin
+            : userData.socials.linkedin,
         },
         image: image
           ? { public_id: result.public_id, url: result.secure_url }

@@ -6,7 +6,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
 import tlds from 'tld-list'
 import configJson from "../../auth_config.json";
-import { toast } from 'react-toastify'
 import axios from "axios";
 
 
@@ -26,7 +25,11 @@ export default function UserAccComp() {
     twitter: '',
     instagram: '',
   })
-  const [userMetadata, setUserMetadata] = useState(null);
+
+  const getToken = async () => {
+    const token = await getAccessTokenSilently();
+    return `${token}`;
+  };
 
   useEffect(() => {
     dispatch(getUserLogin(user.email))
@@ -34,39 +37,6 @@ export default function UserAccComp() {
 
 
   }, [dispatch])
-
-
-  //* TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
-  useEffect(() => {
-
-    const getUserMetadata = async () => {
-      const domain = configJson.domain;
-  
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
-        });
-  
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-  
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-  
-        const { user_metadata } = await metadataResponse.json();
-        console.log(user_metadata);
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log("Error: ", e.message);
-      }
-    };
-  
-    getUserMetadata();
-
-  }, [getUserLogin, getAccessTokenSilently, user?.sub])
 
 
   
@@ -107,7 +77,8 @@ export default function UserAccComp() {
           socials,
           image,
         },
-        userLogin.email
+        userLogin.email,
+        getToken
       )
     )
   }
