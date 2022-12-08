@@ -1,7 +1,7 @@
 const express = require("express");
 const Products = require("../models/productModel");
 const cloudinary = require('../Utils/cloudinary')
-const { auth, claimCheck} = require("express-oauth2-jwt-bearer");
+const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
 const checkJwt = auth();
 const checkClaims = claimCheck((claims) => {
   return claims.permissions.includes("read:users");
@@ -37,8 +37,9 @@ router.get("/", async (req, res) => {
 });
 
 //* CREATE PRODUCT: crea un producto
-router.post("/", async (req, res) => {
+router.post("/", checkJwt, checkClaims, async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
+  console.log(req.body);
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -47,13 +48,15 @@ router.post("/", async (req, res) => {
     }
     //si recibe los campos obligatorios crea el producto
     if (name && type && price) {
+      const result = await cloudinary.uploader.upload(image, {
+        folder: "Products"});
       let productCreate = new Products({
         name,
         color,
         type,
         price,
         season,
-        image,
+        image: result.secure_url,
         stock,
       });
       console.log(productCreate);
@@ -101,9 +104,10 @@ router.delete("/:id", async (req, res) => {
 
 //* UPDATE PRODUCT: actualiza un producto existente
 //TODO: falta implementar.
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkJwt, async (req, res) => {
   let { id } = req.params;
   const { name, color, type, price, image, stock, season } = req.body;
+  console.log(req.body);
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -120,10 +124,9 @@ router.put("/:id", async (req, res) => {
         image,
         stock,
       };
-    const updateProduct = await Products.update({id}, query);
-    res.json(updateProduct);
-    }
-    else{
+      const updateProduct = await Products.update({ id }, query);
+      res.json(updateProduct);
+    } else {
       res.send({ message: "please complete all fields" });
     }
   } catch (error) {

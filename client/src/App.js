@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
 import Home from "./pages/home/Home";
 import Catalogue from "./pages/catalogue/Catalogue";
@@ -8,21 +8,18 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import Cart from "./pages/cart/Cart";
 import Detail from "./pages/detail/Detail";
 import About from "./pages/about/About";
-import Register from "./pages/register/Register";
-import Login from "./pages/login/Login";
-import Create from "./pages/create/Create";
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
+import Checkout from "./pages/checkout/Checkout";
 initFontAwesome();
 
 
@@ -80,6 +77,7 @@ function App() {
             element={<ProtectedRoute component={UserAccount} />}
           />
           <Route path="/:email" element={<Profile />} />
+          <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>
       </Auth0ProviderWithRedirectCallback>
     </div>
