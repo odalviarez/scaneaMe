@@ -59,7 +59,7 @@ export const productsCreate = (payload, getToken) => {
       let config = {
         method: "post",
         url:
-          process.env.REACT_APP_API + "products/" ||
+          process.env.REACT_APP_API ?  process.env.REACT_APP_API + "products/" :
           "http://localhost:5000/products/",
         headers: {
           "content-type": "application/json",
