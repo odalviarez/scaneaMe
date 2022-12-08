@@ -12,14 +12,16 @@ const router = express.Router();
 //* CREATE CHECKOUT SESSION: crea un usuario y una sesión para checkout de la compra (paso necesario de Stripe, no confundir con el usuario loggueado en la página).
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
+  let purchase = cartItems.map((e) => {
+    return { id: e.id }; //, cartTotalQuantity: e.cartTotalQuantity
+  })
   console.log('User Id: ', userEmail)
+  console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
-      cartItems
     },
   });
-  console.log("Customer stripe: ", customer);
   const line_items = cartItems.map((item) => {
     return {
       price_data: {
@@ -92,6 +94,7 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
             {},
             function (err, lineItems) {
               console.log("Line_items", lineItems);
+              console.log("Data: ", data);
               createOrder(customer, data, lineItems);
             }
           );
@@ -111,7 +114,7 @@ const createOrder = async (customer, data, lineItems) => {
 
   const newOrder = new Order({
     email: customer.metadata.userEmail,
-    cartItems: customer.metadata.cartItems,
+    //cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
