@@ -7,6 +7,7 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import Cart from "./pages/cart/Cart";
 import Detail from "./pages/detail/Detail";
 import About from "./pages/about/About";
+
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";

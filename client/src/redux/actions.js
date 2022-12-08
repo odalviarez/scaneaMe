@@ -102,24 +102,38 @@ export const getUser = (email) => {
   };
 };
 
-export const getUserLogin = (email, payload, getToken) => {
+export const getUserLogin = (user, cart, getToken) => {
   return async function (dispatch) {
+    let data = { ...user, cart };
+    let token = '';
+    let config = "";
     try {
-      console.log("esto es lo que llega a actions", getToken);
-      let token 
       if(getToken) {
-      token = await getToken();} 
-      let config = {
+        token = await getToken(); 
+      config = {
         method: "post",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/login/${email}`
-          : `http://localhost:5000/user/login/${email}`,
+          ? process.env.REACT_APP_API + `/user/login/${user.email}`
+          : `http://localhost:5000/user/login/${user.email}`,
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: payload,
+        data,
       };
+      console.log(config);
+      }
+      else{
+        config = {
+          method: "post",
+          url: process.env.REACT_APP_API
+            ? process.env.REACT_APP_API + `/user/login/${user.email}`
+            : `http://localhost:5000/user/login/${user.email}`,
+          data,
+        };
+        console.log(config);
+      }
+      
       axios(config)
         .then(function (response) {
           return dispatch({
@@ -128,6 +142,7 @@ export const getUserLogin = (email, payload, getToken) => {
           });
         })
         .catch(function (error) {
+          console.log(error)
           return error;
         });
     } catch (error) {
