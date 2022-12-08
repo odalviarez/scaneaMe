@@ -11,13 +11,14 @@ const router = express.Router();
 
 //* CREATE CHECKOUT SESSION: crea un usuario y una sesión para checkout de la compra (paso necesario de Stripe, no confundir con el usuario loggueado en la página).
 router.post("/create-checkout-session", async (req, res) => {
+  let { cartItems, userEmail } = req.body;
+  console.log('User Id: ', userEmail)
   const customer = await stripe.customers.create({
     metadata: {
-      userId: req.body.userId,
+      userEmail
     },
   });
-  let { cartItems } = req.body;
-  console.log("se ejecutó CREATE CHECKOUT SESSION", cartItems);
+  console.log("Customer stripe: ", customer);
   const line_items = cartItems.map((item) => {
     return {
       price_data: {
@@ -92,7 +93,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    success_url: `${process.env.CLIENT_URL}/`, //checkout-success
+    success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
 
@@ -140,7 +141,7 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
         })
         .catch((err) => console.log(err.message));
     }
-
+    
     // Return a 200 res to acknowledge receipt of the event
     //res.send().end();
     res.json({ received: true });

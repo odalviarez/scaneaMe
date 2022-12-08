@@ -197,11 +197,11 @@ export const userGetOrders = (userId) => {
 };
 
 export const handleCheckout = (cartProp, user) => {
-  console.log(cartProp.cartItems);
+  console.log('User: ', user);
   axios
     .post(`/stripe/create-checkout-session`, {
       cartItems: cartProp.cartItems,
-      userId: user.id,
+      userEmail: user.email,
     })
     .then((res) => {
       if (res.data.url) {
