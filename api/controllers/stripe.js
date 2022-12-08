@@ -29,7 +29,7 @@ router.post("/create-checkout-session", async (req, res) => {
         product_data: {
           name: item.id,
           images: [item.image],
-          description: item.id,
+          description: item.name,
           metadata: {
             id: item.id,
           },
@@ -37,7 +37,6 @@ router.post("/create-checkout-session", async (req, res) => {
         unit_amount: item.price * 100, //! Esto está bien?
       },
       quantity: item.cartTotalQuantity,
-      itemID: item.id
     };
   });
 
@@ -53,6 +52,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
+    metadata: purchase,
     success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
