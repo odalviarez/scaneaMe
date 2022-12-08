@@ -14,12 +14,12 @@ import Profile from "./pages/profile/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
+import Checkout from "./pages/checkout/Checkout";
 initFontAwesome();
 
 
@@ -77,6 +77,7 @@ function App() {
             element={<ProtectedRoute component={UserAccount} />}
           />
           <Route path="/:email" element={<Profile />} />
+          <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>
       </Auth0ProviderWithRedirectCallback>
     </div>
