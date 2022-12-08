@@ -41,6 +41,12 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
   }
 
   useEffect(() => {
+
+    // if (userLogin.hasOwnProperty("cart")) {
+    //   if (userLogin.cart.length && !cart.length && isAuthenticated)
+    //     setCart(userLogin.cart);
+    // }
+
     if (cart) dispatch(getTotalProducts(cart.length));
     if (user) dispatch(getUserLogin(user, cart, getToken));
 
