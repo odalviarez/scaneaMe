@@ -48,7 +48,6 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case FILTER_PRODUCTS:
-        console.log(action.payload);
         let productsFiltered = []
 
 
