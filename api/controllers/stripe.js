@@ -26,13 +26,12 @@ router.post("/create-checkout-session", async (req, res) => {
     return {
       price_data: {
         currency: "usd",
+        product: item.id,
         product_data: {
           name: item.id,
           images: [item.image],
           description: item.name,
-          metadata: {
-            id: item.id,
-          },
+
         },
         unit_amount: item.price * 100, //! Esto está bien?
       },
@@ -52,7 +51,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    metadata: purchase,
+    metadata: JSON.stringify(purchase),
     success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
