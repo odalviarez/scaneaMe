@@ -12,13 +12,18 @@ const router = express.Router();
 //* CREATE CHECKOUT SESSION: crea un usuario y una sesión para checkout de la compra (paso necesario de Stripe, no confundir con el usuario loggueado en la página).
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
+  let purchase = cartItems.map((e) => {
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity }; // 
+  })
   console.log('User Id: ', userEmail)
+  //purchase = Object.assign({}, purchase),
+  console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
-      userEmail
+      userEmail,
+      cartItems: JSON.stringify(purchase),
     },
   });
-  console.log("Customer stripe: ", customer);
   const line_items = cartItems.map((item) => {
     return {
       price_data: {
@@ -27,9 +32,7 @@ router.post("/create-checkout-session", async (req, res) => {
           name: item.name,
           images: [item.image],
           description: item.name,
-          metadata: {
-            id: item.id,
-          },
+
         },
         unit_amount: item.price * 100, //! Esto está bien?
       },
@@ -43,50 +46,6 @@ router.post("/create-checkout-session", async (req, res) => {
     shipping_address_collection: {
       allowed_countries: ["US", "CA", "VE", "AR"],
     },
-    // shipping_options: [
-    //   {
-    //     shipping_rate_data: {
-    //       type: "fixed_amount",
-    //       fixed_amount: {
-    //         amount: 0,
-    //         currency: "usd",
-    //       },
-    //       display_name: "Free shipping",
-    //       // Delivers between 5-7 business days
-    //       delivery_estimate: {
-    //         minimum: {
-    //           unit: "business_day",
-    //           value: 5,
-    //         },
-    //         maximum: {
-    //           unit: "business_day",
-    //           value: 7,
-    //         },
-    //       },
-    //     },
-    //   },
-    //   {
-    //     shipping_rate_data: {
-    //       type: "fixed_amount",
-    //       fixed_amount: {
-    //         amount: 1500,
-    //         currency: "usd",
-    //       },
-    //       display_name: "Next day air",
-    //       // Delivers in exactly 1 business day
-    //       delivery_estimate: {
-    //         minimum: {
-    //           unit: "business_day",
-    //           value: 1,
-    //         },
-    //         maximum: {
-    //           unit: "business_day",
-    //           value: 1,
-    //         },
-    //       },
-    //     },
-    //   },
-    // ],
     phone_number_collection: {
       enabled: true,
     },
@@ -135,6 +94,7 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
             {},
             function (err, lineItems) {
               console.log("Line_items", lineItems);
+              console.log("Data: ", data);
               createOrder(customer, data, lineItems);
             }
           );
@@ -151,8 +111,10 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
 
 // Create Order para utilizar en la ruta anterior
 const createOrder = async (customer, data, lineItems) => {
+
   const newOrder = new Order({
-    userId: customer.metadata.userId,
+    email: customer.metadata.userEmail,
+    cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,

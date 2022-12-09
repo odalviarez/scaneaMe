@@ -36,11 +36,12 @@ export default function Cards() {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
-
     //* Actualiza el número de articulos en el carrito en la navbar cada vez que se agreguen productos al carrito.
-    if (cart) dispatch(getTotalProducts(cart.length));
-
-  }, [cart]);
+    if (cart) {
+      let cartTotal = cart.reduce((acc, currentValue) => acc + currentValue.cartTotalQuantity, 0);
+      dispatch(getTotalProducts(cartTotal));
+    }
+  }, [cart, dispatch, productsOnStore]);
 
   useEffect(() => {
 
