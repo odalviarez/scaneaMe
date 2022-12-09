@@ -29,12 +29,12 @@ export default function Cards() {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
   
-
-
+    
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
+
     //* Actualiza el número de articulos en el carrito en la navbar cada vez que se agreguen productos al carrito.
     if (cart) {
       //let cartTotal = cart.reduce((e) => )
@@ -59,11 +59,7 @@ export default function Cards() {
     
   }, [productsOnStore]);
 
-  // useEffect(() => {
-  //     dispatch(getAllProducts());
-    
-
-  // }, [filtersApplied]);
+  
 
   const handleAddCart = function (e) {
     e.preventDefault(e);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userUpdate, getUserLogin } from '../../redux/actions'
+import { userUpdate, getUserLogin, getUser } from '../../redux/actions'
 import style from './UserAccComp.module.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
@@ -20,6 +20,7 @@ export default function UserAccComp() {
   const [image, setImage] = useState('')
     // eslint-disable-next-line no-unused-vars
   const [email, setEmail] = useState('')
+  const [aboutUser, setAboutUser] = useState('')
   const [socials, setSocials] = useState({
     facebook: '',
     linkedin: '',
@@ -38,8 +39,11 @@ export default function UserAccComp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user])
 
-
-
+  useEffect(() => {
+    return () => {
+      dispatch(getUser(userLogin.email))
+    };
+  }, []);
 
   // * TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
   // useEffect(() => {
@@ -101,20 +105,26 @@ export default function UserAccComp() {
     })
   }
 
-  const handleSubmitSocials = async (e) => {
+  const handleSubmitProfile = async (e) => {
     e.preventDefault(e)
-    console.log('nuevas socials:', socials)
 
     dispatch(
       userUpdate(
         {
           socials,
           image,
+          aboutUser,
         },
         userLogin.email,
         getToken
       )
     )
+  }
+
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault(e)
+    
+
   }
 
   // const handleSubmitEmail = async (e) => {
@@ -150,7 +160,11 @@ export default function UserAccComp() {
 
   const handleImage = e => {
     const file = e.target.files[0]
+    if (file.size < 10000000) {
     setFileToBase(file)
+    } else {
+      alert ('El tamaño de la imágen no debe superar los 10mb')
+    }
   }
 
   const setFileToBase = file => {
@@ -161,9 +175,7 @@ export default function UserAccComp() {
     }
   }
 
-  const refreshPage = () => {
-    window.location.reload(false)
-  }
+
 
   return (
     <div className={style.UserAccCompContainer}>
@@ -205,7 +217,18 @@ export default function UserAccComp() {
       }
 
 
-      <form onSubmit={e => handleSubmitSocials(e)}>
+      <form onSubmit={e => handleSubmitProfile(e)}>
+        <div className={style.UserAccCompAbout}>
+          <label>About me:</label>
+          <textarea 
+          type='text' 
+          maxLength="280"
+          rows='5'
+          placeholder={userLogin.info && userLogin.info}
+          value={aboutUser} 
+          onChange={(e) => setAboutUser(e.target.value)}
+          />
+        </div>
         <div className={style.UserAccCompItem}>
           <label>Instagram:</label>
           <input
@@ -254,19 +277,19 @@ export default function UserAccComp() {
             type='file'
             id='formupload'
             name='image'
+            accept=".png, .jpg, .jpeg"
             className={style.imgUpload}
             placeholder='Select file...'
           />
         </div>
         <button
           type='text'
-          onClick={refreshPage}
           className={style.submitProfile}
         >
           SUBMIT
         </button>
       </form>
-      <button className={style.submitProfile}> DELETE ACCOUNT </button>
+      <button className={style.submitProfile} onClick={handleDeleteAccount}> DELETE ACCOUNT </button>
     </div>
   )
 }
