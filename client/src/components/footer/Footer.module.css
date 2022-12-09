@@ -3,6 +3,9 @@
   width: 100%;
   height: 100px;
   color: aliceblue;
+  margin-top: 50px;
+  padding:10px;
+  position: relative;
 }
 
 .footer-icons{ 
@@ -11,8 +14,6 @@
   padding: 0 !important;
 }
 
-
-
 .social-icons{
   display: flex;
   float: right;
@@ -20,3 +21,41 @@
   width: 3em;
 }
 
+.container ul{
+  list-style: none;
+  position: absolute;
+  right: 5%;
+  top:10px;
+}
+.container li{
+  display: inline-block;
+  flex-direction: row;
+  background-color: aliceblue;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+ }
+
+ .Logo{
+  height: 80px;
+}
+
+.designed{
+  height: 40px;
+}
+
+.textContainer{
+  position: absolute;
+  left: 5%
+}
+
+@media only screen and (max-width: 850px) {
+  .Logo{
+    height: 40px;
+  }
+
+  .container li{
+    height: 40px;
+    width: 40px;
+   }
+}

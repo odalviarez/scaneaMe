@@ -3,13 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate, getUserLogin } from '../../redux/actions'
 import style from './UserAccComp.module.css'
 import { useAuth0 } from '@auth0/auth0-react'
-import { toast } from 'react-toastify'
+import validator from 'validator';
+import tlds from 'tld-list'
+import configJson from "../../auth_config.json";
+import axios from "axios";
+
 
 export default function UserAccComp() {
-  const { user, isAuthenticated } = useAuth0()
+  const { user, getAccessTokenSilently } = useAuth0()
   const dispatch = useDispatch()
-  const userLogin = useSelector(state => state.userLogin)
-
+  const userLogin = useSelector(state => state.userLogin);
+  // eslint-disable-next-line no-unused-vars
+  const [errors, setErrors] = useState({ 
+    email: "",
+    password: []
+  })
   const [image, setImage] = useState('')
   const [email, setEmail] = useState('')
   const [socials, setSocials] = useState({
@@ -19,10 +27,38 @@ export default function UserAccComp() {
     instagram: '',
   })
 
+  const getToken = async () => {
+    const token = await getAccessTokenSilently();
+    return `${token}`;
+  };
+
   useEffect(() => {
-    dispatch(getUserLogin(user.email))
+    dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-  }, [dispatch])
+  }, [dispatch, user])
+
+
+  
+  const validateEmail = (email) => {
+  
+    if (validator.isEmail(email, {domain_specific_validation: true}) === false || tlds.includes(email.split('.').pop()) === false) {
+      errors.email = 'Invalid Email'      
+    } 
+  
+    return errors
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const validatePassword = (password) => {
+  
+    if (password.length < 8) {
+      errors.password = 'Password must be at least 8 characters long'      
+    } 
+  
+    return errors
+  }
+
+
 
   const handleChangeSocials = e => {
     setSocials({
@@ -31,7 +67,7 @@ export default function UserAccComp() {
     })
   }
 
-  const handleSubmitSocials = async e => {
+  const handleSubmitSocials = async (e) => {
     e.preventDefault(e)
     console.log('nuevas socials:', socials)
 
@@ -41,10 +77,37 @@ export default function UserAccComp() {
           socials,
           image,
         },
-        userLogin.email
+        userLogin.email,
+        getToken
       )
     )
   }
+
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault(e)
+    console.log(email);
+    validateEmail(email) 
+    if (errors.email !== "") {
+
+      var options = {
+        method: 'PATCH',
+        url: `https://${configJson.domain}/api/v2/users/${user.id}`,
+        headers: {
+          'content-type': 'application/json',
+          authorization: 'Bearer {yourMgmtApiAccessToken}' //! FALTA COMPLETAR
+        },
+        data: {email: email, connection: 'changedEmail'}
+      };
+      
+      axios.request(options).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
+  
+    }
+  }
+  
 
   const handleImage = e => {
     const file = e.target.files[0]
@@ -59,30 +122,49 @@ export default function UserAccComp() {
     }
   }
 
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
   return (
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
 
-      <div className={style.UserAccCompItem}>
-        <label>Email:</label>
-        <input type='email' value={userLogin.email} />
-      </div>
-      <form className={style.UserAccCompItem}>
-        <label>Change Email:</label>
-        <input type='email' onChange={e => setEmail(e.target.value)} />
-        <button type='submit'>SUBMIT</button>
-      </form>
-      <form>
+      {userLogin?.sub?.includes('auth0')? 
+      
+      <div> 
         <div className={style.UserAccCompItem}>
-          <label>New password:</label>
-          <input type='password' />
+          <label>Email:</label>
+          <input type='email' value={userLogin.email} disabled />
         </div>
-        <div className={style.UserAccCompItem}>
-          <label>Repeat password:</label>
-          <input type='password' />
+        <form className={style.UserAccCompItem} onSubmit={(e) => handleSubmitEmail(e)}>
+          <label>Change Email:</label>
+          <input type='email' onChange={e => setEmail(e.target.value)} />
           <button type='submit'>SUBMIT</button>
+        </form>
+        <form>
+          <div className={style.UserAccCompItem}>
+            <label>New password:</label>
+            <input type='password' />
+          </div>
+          <div className={style.UserAccCompItem}>
+            <label>Repeat password:</label>
+            <input type='password' />
+            <button type='submit'>SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    
+      : 
+
+      <div> 
+        <div className={style.UserAccCompItem}>
+          <label>Email:</label>
+          <input type='email' value={userLogin.email} disabled />
         </div>
-      </form>
+      </div>
+      }
+
 
       <form onSubmit={e => handleSubmitSocials(e)}>
         <div className={style.UserAccCompItem}>
@@ -137,12 +219,15 @@ export default function UserAccComp() {
             placeholder='Select file...'
           />
         </div>
-        <button type='text' className={style.submitProfile}>
+        <button
+          type='text'
+          onClick={refreshPage}
+          className={style.submitProfile}
+        >
           SUBMIT
         </button>
       </form>
-      <br></br>
-      <button> DELETE ACCOUNT </button>
+      <button className={style.submitProfile}> DELETE ACCOUNT </button>
     </div>
   )
 }

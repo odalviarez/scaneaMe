@@ -1,12 +1,23 @@
-import NavBar from '../navBar/NavBar.jsx'
-import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { Button } from "reactstrap";
+import React, {useState} from 'react'
+import { useDispatch} from 'react-redux'
 import { productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
+import i18n from '../../i18n'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const CreateComponent = () => {
     const dispatch = useDispatch();
     
+const { getAccessTokenSilently } = useAuth0();
+const getToken = async () => {
+  const token = await getAccessTokenSilently();
+  return `${token}`;
+};
+
+
     const [productImg, setProductImg] = useState("");
     const [color, setColor] = useState("");
     const [season, setSeason] = useState("allyear");
@@ -79,23 +90,32 @@ const CreateComponent = () => {
             image: productImg,
         });
     
-        await dispatch(productsCreate({
-        name,
-        color,
-        type,
-        season,
-        price,
-        stock,
-        image: productImg,
-    })
-    );
+        dispatch(
+          productsCreate(
+            {
+              name,
+              color,
+              type,
+              season,
+              price,
+              stock,
+              image: productImg,
+            },
+            getToken
+          )
+        );
     };
     
     return (
       <div>
         <StyledCreateProduct>
           <StyledForm onSubmit={handleSubmit}>
-            <h3>Create a Product</h3>
+          <div>
+      <Button as={Link} title="Español" href="/dashboard/?lng=es">ES</Button>
+      <Button as={Link} title="English" href="/dashboard/?lng=en">EN</Button>
+      <br /> <br />
+      </div>
+            <h3>{i18n.t("dashboard.create-product")}</h3>
             <input
               id="imgUpload"
               accept="image/*"
@@ -104,79 +124,80 @@ const CreateComponent = () => {
               required
             />
             <select onChange={(e) => setColor(e.target.value)} required>
-              <option value="">Select Color</option>
-              <option value="red">Rojo</option>
-              <option value="blue">Azul</option>
-              <option value="white">Blanco</option>
-              <option value="black">Negro</option>
-              <option value="yellow">Amarillo</option>
-              <option value="green">Verde</option>
+              <option value="">{i18n.t("dashboard.select-color")}</option>
+              <option value="red">{i18n.t("header.red")}</option>
+              <option value="blue">{i18n.t("header.blue")}</option>
+              <option value="white">{i18n.t("header.white")}</option>
+              <option value="black">{i18n.t("header.black")}</option>
+              <option value="yellow">{i18n.t("header.yellow")}</option>
+              <option value="green">{i18n.t("header.green")}</option>
+              <option value="gray">{i18n.t("Gray")}</option>
             </select>
             <input
               type="text"
               required
-              placeholder="Name"
+              placeholder={i18n.t('dashboard.name')}
               onChange={(e) => setName(e.target.value)}
             />
             <select onChange={(e) => setType(e.target.value)} required>
-              <option value="">Select Type</option>
-              <option value="shirt">Remera</option>
-              <option value="pants">Pantalon</option>
+              <option value="">{i18n.t('dashboard.select-type')}</option>
+              <option value="shirt">{i18n.t("header.t-shirt")}</option>
+              <option value="pants">{i18n.t("header.pants")}</option>
+              <option value="trunks">{i18n.t("header.trunks")}</option>
             </select>
             <select onChange={(e) => setSeason(e.target.value)} required>
-              <option value="allyear">Select Season</option>
-              <option value="allyear">Todo el año</option>
-              <option value="fall">Otoño/Invierno</option>
-              <option value="spring">Primavera/Verano</option>
+              <option value="allyear">{i18n.t('dashboard.select-season')}</option>
+              <option value="allyear">{i18n.t("header.all-year")}</option>
+              <option value="fall">{i18n.t("header.fall-winter")}</option>
+              <option value="spring">{i18n.t("header.spring-summer")}</option>
             </select>
             <input
               type="number"
               required
-              placeholder="Price"
+              placeholder={i18n.t('dashboard.price')}
               onChange={(e) => setPrice(e.target.value)}
             />
-
             <div>
               <input
                 type="number"
                 required
-                placeholder="stock-xs"
+                placeholder={i18n.t('dashboard.stock-xs')}
                 onChange={(e) => setStockXS(e.target.value)}
               />
               <input
                 type="number"
                 required
-                placeholder="stock-s"
+                placeholder={i18n.t('dashboard.stock-s')}
                 onChange={(e) => setStockS(e.target.value)}
               />
               <input
                 type="number"
                 required
-                placeholder="stock-m"
+                placeholder={i18n.t('dashboard.stock-m')}
                 onChange={(e) => setStockM(e.target.value)}
               />
               <input
                 type="number"
                 required
-                placeholder="stock-l"
+                placeholder={i18n.t('dashboard.stock-l')}
                 onChange={(e) => setStockL(e.target.value)}
               />
               <input
                 type="number"
                 required
-                placeholder="stock-xl"
+                placeholder={i18n.t('dashboard.stock-xl')}
                 onChange={(e) => setStockXL(e.target.value)}
               />
               <input
                 type="number"
                 required
-                placeholder="stock-xxl"
+                placeholder={i18n.t('dashboard.stock-xxl')}
                 onChange={(e) => setStockXXL(e.target.value)}
               />
             </div>
-            <button onClick={(e) => createStockArray(e)}>CARGAR STOCK</button>
+            <button onClick={(e) => createStockArray(e)}>{i18n.t('dashboard.load-stock')}</button>
 
-            <button type="submit">Submit</button>
+            <button type="submit">{i18n.t('dashboard.submit')}</button>
           </StyledForm>
           <ImagePreview>
             {productImg ? (
@@ -184,7 +205,7 @@ const CreateComponent = () => {
                 <img src={productImg} alt="product!" />
               </>
             ) : (
-              <p>Image preview will appear here!</p>
+              <p>{i18n.t('dashboard.image-preview-will-appear-here')}</p>
             )}
           </ImagePreview>
         </StyledCreateProduct>

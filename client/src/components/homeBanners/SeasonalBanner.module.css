@@ -8,8 +8,6 @@
   left: 22.5%;
   margin-bottom: 5%;
   border-radius: 30px;
-  
-
 }
 
 .estacionesLink{
@@ -48,4 +46,60 @@
   width: 100%;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+}
+
+@media only screen and (max-width: 1081px) {
+  .container{
+    display: block;
+    
+    justify-content: stretch;
+    
+    position: relative;
+    left: 10%;
+    margin-bottom: 5%;
+    border-radius: 30px;
+  }
+
+  .primaveraImg{
+    width: 500px;
+    height: 200px;
+    border-bottom-left-radius: 0px;
+    filter: saturate(3);
+    object-fit: cover;
+  }
+  
+  .otoñoImg{
+    width: 500px;
+    height: 200px;
+    border-bottom-right-radius: 0px;
+    filter: saturate(0.5);
+    object-fit: cover;
+  }
+  
+  .estacionesImg{
+    width: 500px;
+    height: 200px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  .estacionesLink{
+  
+    
+    border: 0px;
+    width:100%;
+    
+  }
+  
+  .primaveraLink{
+    
+    border: 0px;
+    
+  }
+  
+  .otoñoLink{
+    
+    border: 0px;
+    
+  }
 }
