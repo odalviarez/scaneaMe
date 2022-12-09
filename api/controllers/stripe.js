@@ -50,7 +50,7 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    metadata: JSON.stringify(purchase),
+    metadata: {...purchase},
     success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
