@@ -91,7 +91,7 @@ export const getTotalProducts = (products) => {
 export const productDelete = (id) => {
   return async function () {
     try {
-      const res = await axios.put(`/delete/${id}, data`);
+      const res = await axios.put(`/delete/${id}`);
       return res;
     } catch (error) {
       alert("No se pudo eliminar el producto");
@@ -100,11 +100,11 @@ export const productDelete = (id) => {
 };
 
 /*
-export function priductUpdate(id, data) {
+export function updateProduct(id, data) {
   return async function (dispatch) {
     try {
-      const productCreado = await axios.put("/products/" + id, data);
-      return dispatch({ type: "UPDATE_PRODUCTS", payload: productCreado.data });
+      const editProduct = await axios.put("/products/" + id, data);
+      return dispatch({ type: "UPDATE_PRODUCTS", payload: editProduct.data });
     } catch (error) {
       console.log(error);
     }
@@ -112,17 +112,16 @@ export function priductUpdate(id, data) {
 }
 */
 
-export const updateProduct = (id) => {
+export const updateProduct = (id, data) => {
   return async function () {
     try {
-      const res = await axios.put(`/products/${id}`);
+      const res = await axios.put(`/products/${id}`, data);
       return res;
     } catch (error) {
       alert("No se pudo actualizar el producto");
     }
   };
 };
-
 
 export const getUser = (email) => {
   return async function (dispatch) {
