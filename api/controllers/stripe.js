@@ -16,10 +16,12 @@ router.post("/create-checkout-session", async (req, res) => {
     return { id: e.id }; //, cartTotalQuantity: e.cartTotalQuantity
   })
   console.log('User Id: ', userEmail)
+  purchase = Object.assign({}, purchase),
   console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
+      metadata: purchase,
     },
   });
   const line_items = cartItems.map((item) => {
@@ -50,7 +52,6 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    metadata: Object.assign({}, purchase),
     success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
