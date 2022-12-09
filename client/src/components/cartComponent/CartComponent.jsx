@@ -14,7 +14,6 @@ export default function CartComponent() {
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
-  console.log("auth0 ",user);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const dispatch = useDispatch();
 
@@ -26,7 +25,13 @@ export default function CartComponent() {
         return acc + total;
       });
       setCartTotalAmount(totalAmount);
-      if (cart) dispatch(getTotalProducts(cart.length));
+          if (cart) {
+            let cartTotal = cart.reduce(
+              (acc, currentValue) => acc + currentValue.cartTotalQuantity,
+              0
+            );
+            dispatch(getTotalProducts(cartTotal));
+          }
     }, [cart, dispatch])
 
   const handleAddToCart = (id) => {

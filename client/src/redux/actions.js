@@ -121,7 +121,6 @@ export const getUserLogin = (user, cart, getToken) => {
         },
         data,
       };
-      console.log(config);
       }
       else{
         config = {

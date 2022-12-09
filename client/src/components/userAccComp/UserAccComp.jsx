@@ -13,7 +13,6 @@ export default function UserAccComp() {
   const { user, getAccessTokenSilently } = useAuth0()
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin);
-  console.log(userLogin);
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({ 
     email: "",
