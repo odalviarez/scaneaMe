@@ -38,8 +38,8 @@ export default function Cards() {
     }
     //* Actualiza el número de articulos en el carrito en la navbar cada vez que se agreguen productos al carrito.
     if (cart) {
-      //let cartTotal = cart.reduce((e) => )
-      dispatch(getTotalProducts(cart.length));
+      let cartTotal = cart.reduce((acc, currentValue) => acc + currentValue.cartTotalQuantity, 0);
+      dispatch(getTotalProducts(cartTotal));
     }
   }, [cart, dispatch, productsOnStore]);
 
