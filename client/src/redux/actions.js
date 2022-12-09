@@ -88,6 +88,42 @@ export const getTotalProducts = (products) => {
   };
 };
 
+export const productDelete = (id) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/delete/${id}, data`);
+      return res;
+    } catch (error) {
+      alert("No se pudo eliminar el producto");
+    }
+  };
+};
+
+/*
+export function priductUpdate(id, data) {
+  return async function (dispatch) {
+    try {
+      const productCreado = await axios.put("/products/" + id, data);
+      return dispatch({ type: "UPDATE_PRODUCTS", payload: productCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+*/
+
+export const updateProduct = (id) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/products/${id}`);
+      return res;
+    } catch (error) {
+      alert("No se pudo actualizar el producto");
+    }
+  };
+};
+
+
 export const getUser = (email) => {
   return async function (dispatch) {
     try {
