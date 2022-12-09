@@ -35,6 +35,7 @@ export default function UserAccComp() {
   useEffect(() => {
     dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user])
 
 
