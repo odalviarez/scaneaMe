@@ -5,8 +5,6 @@ const productControl = require('../controllers/productsController')
 const ordersControl = require("../controllers/ordersController");
 const userControl = require('../controllers/usersController')
 const stripe = require('../controllers/stripe')
-const deletedProduct = require('../controllers/productsController');
-const putProduct = require("../controllers/productsController");
 
 
 require("dotenv").config();
@@ -27,7 +25,6 @@ router.use('/products', productControl)
 router.use("/order", ordersControl);
 router.use('/user', userControl)
 router.use('/stripe', stripe)
-router.put("/:id", putProduct);
-router.delete("/:id", deletedProduct);
+
 
 module.exports = router
