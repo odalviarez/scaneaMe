@@ -124,7 +124,7 @@ router.put("/:id", checkJwt, async (req, res) => {
         image,
         stock,
       };
-      const updateProduct = await Products.update({ id }, query);
+      const updateProduct = await Products.updateOne({ id }, query);
       res.json(updateProduct);
     } else {
       res.send({ message: "please complete all fields" });

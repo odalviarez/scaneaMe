@@ -16,20 +16,24 @@ const getAuth0Controller = (userID) => {
     if (error) throw new Error(error);
 
     const token = body.access_token;
+    /**
+ * para actualizar la pass necesitamos la siguiente ruta Update a User
+PATCH	/api/v2/users/{id}
+ * https://auth0.com/docs/api/management/v2#!/Users/patch_users_by_id
+ */
+    const options = {
+      method: "GET", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
+      url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/user/${userID}`, //hacer condicional para las distintas rutas
+      headers: { authorization: `Bearer ${token}` },
+    };
 
-  const options = {
-    method: "GET",//Hacer condicional para que pueda ser GET, UPDATE, DELETE
-    url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/user/${userID}`,//hacer condicional para las distintas rutas
-    headers: { authorization: `Bearer ${token}` },
-  };
-
-  axios(options)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    axios(options)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 }
   /**

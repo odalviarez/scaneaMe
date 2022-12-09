@@ -46,8 +46,13 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
     //   if (userLogin.cart.length && !cart.length && isAuthenticated)
     //     setCart(userLogin.cart);
     // }
-
-    if (cart) dispatch(getTotalProducts(cart.length));
+        if (cart) {
+          let cartTotal = cart.reduce(
+            (acc, currentValue) => acc + currentValue.cartTotalQuantity,
+            0
+          );
+          dispatch(getTotalProducts(cartTotal));
+        }
     if (user) dispatch(getUserLogin(user, cart, getToken));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
