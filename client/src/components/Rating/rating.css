@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stars{
+    display: flex;
+    flex-direction: row;
+}
+
+.text-area{
+    border: 1px solid #a9a9a9;
+    border-radius:5px ;
+    padding: 10px;
+    margin: 20px 0;
+    min-height: 100px;
+    width: 300px;
+}
+
+.btn-submit{
+    border: 1px solid #a9a9a9;
+    border-radius: 5px;
+    width: 300px;
+    padding: 10px;
+}
+
+.fa-star{
+    margin-right: 10px;
+    cursor: pointer
+}

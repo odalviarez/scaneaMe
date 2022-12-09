@@ -160,6 +160,7 @@
   
   /* Left img container stylling */
   .img-main {
+    border: solid 1px #000;
     height: 600px;
     object-fit: contain;
     max-width: 100%;

@@ -20,7 +20,7 @@ export default function Detail() {
   return (
     <div>
       <NavBar />
-      <Details name={name} type={type} stock={stock} color={color} price={price} image={image}/>
+      <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
     </div>
   )
 }
