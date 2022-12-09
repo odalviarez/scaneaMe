@@ -222,7 +222,7 @@ export default function UserAccComp() {
           <label>About me:</label>
           <textarea 
           type='text' 
-          maxLength="280"
+          maxLength="255"
           rows='5'
           placeholder={userLogin.info && userLogin.info}
           value={aboutUser} 
