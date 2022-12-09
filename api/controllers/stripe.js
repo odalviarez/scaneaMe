@@ -13,20 +13,21 @@ const router = express.Router();
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
   let purchase = cartItems.map((e) => {
-    return { id: e.id }; //, cartTotalQuantity: e.cartTotalQuantity
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity }; // 
   })
   console.log('User Id: ', userEmail)
+  purchase = Object.assign({}, purchase),
   console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
+      cartItems: JSON.stringify(purchase),
     },
   });
   const line_items = cartItems.map((item) => {
     return {
       price_data: {
         currency: "usd",
-        product: item.id,
         product_data: {
           name: item.id,
           images: [item.image],
@@ -51,7 +52,6 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    metadata: JSON.stringify(purchase),
     success_url: `${process.env.CLIENT_URL}/checkout/${customer.metadata.userEmail}`, //checkout-success
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
@@ -114,7 +114,7 @@ const createOrder = async (customer, data, lineItems) => {
 
   const newOrder = new Order({
     email: customer.metadata.userEmail,
-    //cartItems: customer.metadata.cartItems,
+    cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
