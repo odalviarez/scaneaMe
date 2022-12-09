@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
   let purchase = cartItems.map((e) => {
-    return { id: e.id }; //, cartTotalQuantity: e.cartTotalQuantity
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity }; // 
   })
   console.log('User Id: ', userEmail)
   purchase = Object.assign({}, purchase),
@@ -21,7 +21,7 @@ router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
-      metadata: purchase,
+      cartItems: JSON.stringify(purchase),
     },
   });
   const line_items = cartItems.map((item) => {
@@ -114,7 +114,7 @@ const createOrder = async (customer, data, lineItems) => {
 
   const newOrder = new Order({
     email: customer.metadata.userEmail,
-    //cartItems: customer.metadata.cartItems,
+    cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
