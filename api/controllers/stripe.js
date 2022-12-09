@@ -16,7 +16,7 @@ router.post("/create-checkout-session", async (req, res) => {
     return { id: e.id, cartTotalQuantity: e.cartTotalQuantity }; // 
   })
   console.log('User Id: ', userEmail)
-  purchase = Object.assign({}, purchase),
+  //purchase = Object.assign({}, purchase),
   console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
@@ -29,7 +29,7 @@ router.post("/create-checkout-session", async (req, res) => {
       price_data: {
         currency: "usd",
         product_data: {
-          name: item.id,
+          name: item.name,
           images: [item.image],
           description: item.name,
 
