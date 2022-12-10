@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userUpdate, getUserLogin, getUser } from '../../redux/actions'
+import { userUpdate, getUserLogin, getUser, userUpdateAuth0 } from '../../redux/actions'
 import style from './UserAccComp.module.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
 import tlds from 'tld-list'
+var passwordValidator = require('password-validator');
 
 
 
@@ -15,11 +16,14 @@ export default function UserAccComp() {
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({ 
     email: "",
-    password: []
+    password: [],
+    passwordRepeat: ""
   })
   const [image, setImage] = useState('')
     // eslint-disable-next-line no-unused-vars
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordRepeat, setPasswordRepeat] = useState('')
   const [aboutUser, setAboutUser] = useState('')
   const [socials, setSocials] = useState({
     facebook: '',
@@ -45,57 +49,54 @@ export default function UserAccComp() {
     };
   }, []);
 
-  // * TRAIGO LA METADATA DE AUTH0 PARA PROBAR FUNCIONAMIENTO
-  // useEffect(() => {
-
-  //   const getUserMetadata = async () => {
-  //     const domain = configJson.domain;
   
-  //     try {
-
-  
-  //       const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-  
-  //       const metadataResponse = await fetch(userDetailsByIdUrl, {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       });
-  
-  //       const { user_metadata } = await metadataResponse.json();
-  //       console.log(user_metadata);
-  //       setUserMetadata(user_metadata);
-  //     } catch (e) {
-  //       console.log("Error: ", e.message);
-  //     }
-  //   };
-  
-  //   getUserMetadata();
-
-  // }, [getUserLogin, getAccessTokenSilently, user?.sub])
 
 
-
-    // eslint-disable-next-line no-unused-vars
-  const validateEmail = (email) => {
+  const validateEmail = (e) => {
+    e.preventDefault(e)
   
     if (validator.isEmail(email, {domain_specific_validation: true}) === false || tlds.includes(email.split('.').pop()) === false) {
-      errors.email = 'Invalid Email'      
-    } 
+      setErrors({
+        ...errors,
+        email : 'Email is not valid'
+    })}
   
     return errors
   }
 
-  // eslint-disable-next-line no-unused-vars
-  const validatePassword = (password) => {
   
-    if (password.length < 8) {
-      errors.password = 'Password must be at least 8 characters long'      
-    } 
-  
-    return errors
-  }
 
+  let schema = new passwordValidator();
+  schema.is().min(8, 'Password must be at least 8 characters long')
+  schema.is().max(20, 'Password must be less than 20 characters long')
+  schema.has().uppercase(1, 'Password must have at least 1 uppercase letter')
+  schema.has().lowercase(1, 'Password must have at least 1 lowercase letter')
+  schema.has().digits(1, 'Password must have at least 1 number')
+  schema.has().symbols(1, 'Password must have at least 1 special character')
+  schema.has().not().spaces(1, 'Password must not have spaces')
+
+
+  const validatePassword = async (e) => {
+    e.preventDefault(e)
+
+    if (password !== passwordRepeat) {
+      setErrors({
+        ...errors,
+        password : schema.validate(password, {'details': true}).map(e => e.message),
+        passwordRepeat : 'Passwords do not match'
+      })} else {
+      setErrors({
+        ...errors,
+        password : schema.validate(password, {'details': true}).map(e => e.message),
+        passwordRepeat : '',
+      })
+      }
+
+    if (errors.password.length === 0 && errors.passwordRepeat.length === 0) {
+      
+      await dispatch(userUpdateAuth0(password, userLogin.sub, 'passwordChange', getToken))
+    }
+  }
 
 
   const handleChangeSocials = e => {
@@ -127,37 +128,6 @@ export default function UserAccComp() {
 
   }
 
-  // const handleSubmitEmail = async (e) => {
-  //   e.preventDefault(e)
-  //   console.log(email);
-  //   validateEmail(email) 
-  //   if (errors.email !== "") {
-
-  //     const accessToken = await getAccessTokenSilently({
-  //       audience: `https://${configJson.domain}/api/v2/`,
-  //       scope: "read:current_user",
-  //     });
-
-  //     var options = {
-  //       method: 'PATCH',
-  //       url: `https://${configJson.domain}/api/v2/users/${user.id}`,
-  //       headers: {
-  //         'content-type': 'application/json',
-  //         authorization: 'Bearer '+ accessToken 
-  //       },
-  //       data: {email: email, connection: 'changedEmail'}
-  //     };
-      
-  //     axios.request(options).then(function (response) {
-  //       console.log(response.data);
-  //     }).catch(function (error) {
-  //       console.error(error);
-  //     });
-  
-  //   }
-  // }
-  
-
   const handleImage = e => {
     const file = e.target.files[0]
     if (file.size < 10000000) {
@@ -176,7 +146,6 @@ export default function UserAccComp() {
   }
 
 
-
   return (
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
@@ -186,23 +155,27 @@ export default function UserAccComp() {
       <div> 
         <div className={style.UserAccCompItem}>
           <label>Email:</label>
-          <input type='email' value={userLogin.email} disabled />
+          <input type='email' value={userLogin?.email} disabled />
         </div>
-        <form className={style.UserAccCompItem} >
+        <form onSubmit={e => validateEmail(e)} className={style.UserAccCompItem} >
           <label>Change Email:</label>
           <input type='email' onChange={e => setEmail(e.target.value)} />
           <button type='submit'>SUBMIT</button>
         </form>
-        <form>
+        {errors.email? (<p>{errors.email}</p>) : "" }
+        <form onSubmit={e => validatePassword(e)}>
           <div className={style.UserAccCompItem}>
             <label>New password:</label>
-            <input type='password' />
+            <input type='password' value={password} onChange={e => setPassword(e.target.value)}/>
           </div>
+          {errors.password?.map(e => {
+            return (<p key={e}>{e}</p>)})}
           <div className={style.UserAccCompItem}>
             <label>Repeat password:</label>
-            <input type='password' />
+            <input type='password' value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} />
             <button type='submit'>SUBMIT</button>
           </div>
+            {errors.passwordRepeat? (<p>{errors.passwordRepeat}</p>) : "" }
         </form>
       </div>
     
@@ -211,7 +184,7 @@ export default function UserAccComp() {
       <div> 
         <div className={style.UserAccCompItem}>
           <label>Email:</label>
-          <input type='email' value={userLogin.email} disabled />
+          <input type='email' value={userLogin?.email} disabled />
         </div>
       </div>
       }
@@ -234,7 +207,7 @@ export default function UserAccComp() {
           <input
             type='text'
             name='instagram'
-            value={socials.instagram}
+            value={socials?.instagram}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.instagram}
           />
@@ -244,7 +217,7 @@ export default function UserAccComp() {
           <input
             type='text'
             name='facebook'
-            value={socials.facebook}
+            value={socials?.facebook}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.facebook}
           />
@@ -254,7 +227,7 @@ export default function UserAccComp() {
           <input
             type='text'
             name='linkedin'
-            value={socials.linkedin}
+            value={socials?.linkedin}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.linkedin}
           />
@@ -264,7 +237,7 @@ export default function UserAccComp() {
           <input
             type='text'
             name='twitter'
-            value={socials.twitter}
+            value={socials?.twitter}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.twitter}
           />

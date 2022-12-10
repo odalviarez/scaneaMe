@@ -26,6 +26,10 @@
     margin-bottom: 10px
 }
 
+.UserAccCompItem p {
+    color: red
+}
+
 .UserAccCompAbout {
     width: 400px;
     height: fit-content;

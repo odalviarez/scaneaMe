@@ -54,8 +54,22 @@ const getAuth0Controller = async (userID, action, data) => {
           data: { "password": data }
         }
 
+        break;
+
+        case 'emailChange':
+          config = {
+            method: "PATCH", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
+            url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`, //hacer condicional para las distintas rutas
+            headers: {
+              authorization: `Bearer ${token}`
+            },
+            data: { "email": data, "email_verified": false, "verify_email": true, }
+          }
+
+          break;
+
       default:
-        console.log('No se ejecutó nada');
+        console.log('No se ejecutó nada de Auth0');
     }
     await axios(config)
     .then((response) => {
