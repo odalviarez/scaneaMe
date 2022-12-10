@@ -1,6 +1,6 @@
 .CatalogueParent {
     display: grid ;
-    grid-template-columns: fit-content(0.3fr) 1fr;
+    grid-template-columns: 0.3fr 1fr;
     grid-template-rows: fit-content(0.1fr) 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -36,7 +36,7 @@
     align-items: flex-start;
     height: 40px;
     margin-left: 40px;
-    
+    position: absolute;
 }
 
 .filtersApplied p {
@@ -63,4 +63,5 @@
     justify-content: center;
     margin: 10px 30px 10px 30px;
     width: 70vw;
+    min-height: 60vh;
 }

@@ -5,9 +5,7 @@ import { useLocalStorage } from "../../useLocalStorage";
 import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation } from 'react-router-dom';
-
-
+import { useLocation, Link } from 'react-router-dom';
 import i18n from '../../i18n'
 
 export default function Cards() {
@@ -17,6 +15,7 @@ export default function Cards() {
   // eslint-disable-next-line no-unused-vars
   const [sort, setSort] = useState(""); //* como se ordenan si no se lee el valor de sort
   const [filters, setFilters] = useState({ filtersApplied: [] });
+  const [newFilters, setNewFilters] = useState({});
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
   let location = useLocation();
@@ -30,12 +29,14 @@ export default function Cards() {
   };
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = productsLoaded.slice(indexOfFirstCard, indexOfLastCard);
-
+  const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
+  
+    
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
     }
+
     //* Actualiza el número de articulos en el carrito en la navbar cada vez que se agreguen productos al carrito.
     if (cart) {
       let cartTotal = cart.reduce(
@@ -63,6 +64,8 @@ export default function Cards() {
       dispatch(loadAllProducts());
     };
   }, [cart, dispatch, productsOnStore, filters, location]);
+
+  
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
@@ -92,14 +95,16 @@ export default function Cards() {
 
   const handleFilters = function (e) {
     e.preventDefault(e);
-    let filtersUsed = [
-      ...filters.filtersApplied,
-      {
-        filter: e.target.parentNode.attributes.value.value,
+
+    let newFiltersCreated = {
+      ...newFilters,
+      [e.target.parentNode.attributes.value.value] : {
         value: e.target.attributes.value.value,
         valor: e.target.innerHTML,
-      },
-    ];
+    }}
+
+    setNewFilters(newFiltersCreated)
+
     let filterUsed = {
       filter: e.target.parentNode.attributes.value.value,
       value: e.target.attributes.value.value,
@@ -107,40 +112,47 @@ export default function Cards() {
     };
     if (filters.filtersApplied.length > 0) {
       if (
-        filters.filtersApplied.find((f) => f.value === filterUsed.value) ===
+        filters.filtersApplied.find((f) => f.filter === filterUsed.filter) ===
         undefined
       ) {
         setFilters((filters) => ({
           filtersApplied: [...filters.filtersApplied, filterUsed],
         }));
-        setcurrentPage(1);
-        dispatch(filterProducts(filtersUsed));
+        setcurrentPage(1)
+        dispatch(filterProducts(newFiltersCreated));
       }
     } else {
       setFilters((filters) => ({
         filtersApplied: [filterUsed],
       }));
-      setcurrentPage(1);
-      dispatch(filterProducts([filterUsed]));
+      setcurrentPage(1)
+      dispatch(filterProducts(newFiltersCreated));
     }
   };
 
   const removeFilter = function (e) {
     e.preventDefault();
-    let newFilters = filters.filtersApplied.filter(
+    let newFilterss = filters.filtersApplied.filter(
       (filter) => filter.value !== e.target.attributes.value.value
     );
+    
+    let newFiltersCreated = {
+      ...newFilters,
+      [e.target.attributes.filter.value] : {}}
+
+    dispatch(loadAllProducts());
+    setNewFilters(newFiltersCreated)
     setFilters((filters) => ({
-      filtersApplied: newFilters,
+      filtersApplied: newFilterss,
     }));
-    if (newFilters.length === 0) {
+    if (newFilterss.length === 0) {
       dispatch(loadAllProducts());
     } else {
-      dispatch(filterProducts(newFilters));
+      dispatch(filterProducts(newFiltersCreated));
     }
   };
 
-  const scrollToTop = (e) => {
+  const scrollToTop = (e) => {  
     e.preventDefault();
     window.scrollTo({
       top: 0,

@@ -234,6 +234,36 @@ export const userUpdate = (payload, user, getToken) => {
   };
 };
 
+export const userUpdateAuth0 = (payload, sub, action, getToken) => {
+  return async function () {
+    try {
+      const token = await getToken();
+      let config = {
+        method: "put",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `/user/${sub}/${action}`
+          : `http://localhost:5000/user/${sub}/${action}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: payload,
+      };
+      await axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log('Falló en el action creator');
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+      alert("No se pudo actualizar los datos del usuario en Auth0");
+    }
+  };
+};
+
 export const userGetOrders = (userId) => {
   return async function (dispatch) {
     try {
