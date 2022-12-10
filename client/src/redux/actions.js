@@ -247,14 +247,14 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: payload,
+        "data": {payload},
       };
-      await axios(config)
+      console.log(payload);
+      axios(config)
         .then(function (response) {
           return response.data;
         })
         .catch(function (error) {
-          console.log('Falló en el action creator');
           return error;
         });
     } catch (error) {
