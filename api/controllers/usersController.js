@@ -5,6 +5,7 @@ const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
 const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
 const jwt_decode = require("jwt-decode");
+const getAuth0Controller = require("./getAuth0Controller");
 const checkJwt = auth();
 const checkClaims = claimCheck((claims) => {
   return claims.permissions.includes("read:users");
@@ -126,6 +127,29 @@ router.put("/:email", checkJwt, async (req, res) => {
     res.json(updateUser);
   } catch (error) {
     res.status(400).json(error.message);
+  }
+});
+
+
+//* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
+router.put("/:sub/:action", async (req, res) => {
+  const { sub, action } = req.params;
+  const { data } = req.body;
+  try {
+    if (action === "delete") {
+    const updateUser = await User.updateOne(
+      { sub },
+      {
+        isActive: false,
+      }
+    );
+    }
+
+  let response = await getAuth0Controller(sub, action, data)
+
+    res.json(response);
+  } catch (error) {
+    res.status(400).json('No se pudo actualizar la información del usuario', error.message);
   }
 });
 
