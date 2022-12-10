@@ -87,7 +87,7 @@ router.get("/:id", async (req, res) => {
 
 //* DELETE PRODUCT: elimina un producto por el id.
 //TODO: falta implementar.
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
   let { id } = req.params;
   try {
     const deletedProduct = await Products.findByIdAndDelete(id);
