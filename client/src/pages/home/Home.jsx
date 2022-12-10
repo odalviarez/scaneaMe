@@ -8,8 +8,9 @@ import SeasonalBanner from '../../components/homeBanners/SeasonalBanner.jsx'
 import { getAllProducts } from '../../redux/actions';
 import styles from './Home.module.css'
 import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
-import i18n from "../../i18n";
+import { Link } from 'react-router-dom';
+import i18n from '../../i18n'
+
 
 export default function Home() {
 
@@ -25,11 +26,6 @@ export default function Home() {
     return (
     <div>
       <NavBar />
-        <div>
-          <Button as={Link} title="Español" href="/home/?lng=es">ES</Button>
-          <Button as={Link} title="English" href="/home/?lng=en">EN</Button>
-          <br /> <br />
-        </div>
         <div>
           <h1>{i18n.t("home.welcom-to-scaneaMe")}</h1>
         </div>

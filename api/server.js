@@ -23,16 +23,16 @@ const server = express();
 server.name = "API";
 server.use(cookieParser());
 server.use(morgan("dev"));
-// server.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*"); //Luego poner que las peticiones solo las acepte desde el dominio de vercel
-//   res.header("Access-Control-Allow-Credentials", "true");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-//   next();
-// });
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); //Luego poner que las peticiones solo las acepte desde el dominio de vercel
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
 server.use("/", routes);
 
