@@ -1,6 +1,9 @@
 import React from 'react'
 
 import {Tabs, Tab, TabPanel, TabList} from '../../lib'
+import CardsDashboard from '../cardsDashboard/Cards'
+import Card2 from '../cardsDashboard/CardsUpdate'
+import CreateComponent from '../createComponent/createComponent'
 import CustomTab from './CustomTab'
 
 class CustomTabExample extends React.Component {
@@ -15,30 +18,35 @@ class CustomTabExample extends React.Component {
 
                 <Tabs activeTab={activeTab}>
                     <TabList className='text-center bg-light indent-bottom--medium'>
-                        <Tab component={CustomTab} label='Update Product' id='info'/>
-                        <Tab component={CustomTab} label='Delete Product' id='about'/>
+                        <Tab component={CustomTab} label='Create Product' id='create'/>
+                        <Tab component={CustomTab} label='Update Product' id='update'/>
+                        <Tab component={CustomTab} label='Delete Product' id='delete'/>
                     </TabList>
                     <TabList>
+
+                        <TabPanel component={() => <div>
+                            Create Product Here
+                                <div>
+                                    <CreateComponent />
+                                </div>
+                            </div>}                                 
+                        id='create'/>
+                        
                         <TabPanel component={() => <div>
                             Update Here
                                 <div>
-                                   
-                                    <p>Product Price Stock Color</p>
-                                    
+                                    <Card2 />
                                 </div>
-                            </div>}
-                                                    
-                        id='info'/>
+                            </div>}                       
+                        id='update'/>
                         
                         <TabPanel component={() => <div>
                             Delete Here
-                            <div>
-
-                                    <p>Producto para borrar</p>
-
-                            </div>
+                                <div>
+                                    <CardsDashboard />
+                                </div>
                             </div>}
-                             id='about'/>
+                        id='delete'/>
                     </TabList>
                 </Tabs>
             </div>
@@ -47,14 +55,3 @@ class CustomTabExample extends React.Component {
 }
 
 export default CustomTabExample
-
-/*
-const Pestana = () => {
-  
-  return (
-     <div><h1>Pestaña</h1></div>
-  )
-}
-  
-export default Pestana;
-*/
