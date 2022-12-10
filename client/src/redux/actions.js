@@ -91,6 +91,7 @@ export const getTotalProducts = (products) => {
 export const productDelete = (id, getToken) => {
  return async function () {
    const token = await getToken();
+   console.log(token)
    try {
      let config = {
        method: "delete",
@@ -105,13 +106,13 @@ export const productDelete = (id, getToken) => {
 
      axios(config)
        .then(function (response) {
+        console.log(response.data)
          return JSON.stringify(response.data);
        })
        .catch(function (error) {
          return error;
        });
-     const res = await axios.delete(`/products/${id}`);
-     return res;
+
    } catch (error) {
      alert("No se pudo eliminar el producto");
    }
