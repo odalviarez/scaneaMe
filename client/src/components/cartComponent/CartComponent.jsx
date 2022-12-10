@@ -61,7 +61,6 @@ export default function CartComponent() {
   
   return (
     <div className="cart-container">
-      <h2>Shopping Cart</h2>
       {cart.length === 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
@@ -96,6 +95,7 @@ export default function CartComponent() {
             {cart?.map((cartItem) => (
               <div className="cart-item" key={cartItem.id}>
                 <div className="cart-product">
+                  <p>{cartItem.size}</p>
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
                     <h3>{cartItem.name}</h3>

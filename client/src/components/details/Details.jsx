@@ -10,7 +10,7 @@ export default function Details({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
 
-  const [productselect, setProductSelect] = useState("")
+  const [productselect, setProductSelect] = useState("");
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const productsLoaded = useSelector((state) => state.products);
   const productDetails = useSelector((state) => state.productDetail);
@@ -34,11 +34,20 @@ export default function Details({ id }) {
     //verificamos que el id del producto exista en los productos cargados y traemos toda la info
     let newProduct = productsLoaded.find((p) => p.id === e.target.value);
     //Verificamos si el producto de esa talla ya esta en el carrito y aumentamos el total. Si no esta iniciamos el total en 1.
-    let productInCart = cart.find((e) => e.id === newProduct.id && e.size === productselect);
+    let productInCart = cart.find(
+      (e) => e.id === newProduct.id && e.size === productselect
+    );
     if (productInCart) {
       let cartModified = cart.map((elem) => {
-        if (elem.id === productInCart.id) {
-          elem.cartTotalQuantity++;
+        //*Verificamos que el ID del producto exista
+        if (elem.id === productInCart.id) { 
+          stock.map((e) =>
+            e.size === productselect
+              ? e.quantity >= elem.cartTotalQuantity //*Luego verificamos que el stock del producto sea mayor a lo agregado al carrito para poder seguir agregando
+                ? elem.cartTotalQuantity++
+                : ""
+              : ""
+          );
         }
         return elem;
       });
@@ -51,16 +60,14 @@ export default function Details({ id }) {
   };
 
   const handleOnclick = (e) => {
-    setProductSelect (e.target.value);
-  }
-
+    setProductSelect(e.target.value);
+  };
 
   return (
     <main className="item">
       <section className="img">
         <img src={image} alt={name} className="img-main" />
       </section>
-
       <section className="price">
         <h1 className="price-main__heading">{name}</h1>
 
@@ -68,9 +75,14 @@ export default function Details({ id }) {
           <div className="price-box__main">
             <span className="price-box__main-new">${price}</span>
           </div>
-
           {stock?.map((e) => (
-            <button type="button" disabled={e.quantity < 1} onClick={handleOnclick} value={e.size} className= {productselect === e.size ? "btn-selected" : ""}>
+            <button
+              type="button"
+              disabled={e.quantity < 1}
+              onClick={handleOnclick}
+              value={e.size}
+              className={productselect === e.size ? "btn-selected" : ""}
+            >
               {e.size}
             </button>
           ))}
