@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
   let purchase = cartItems.map((e) => {
-    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity }; // 
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity, size: e.size}; // 
   })
   console.log('User Id: ', userEmail)
   //purchase = Object.assign({}, purchase),
