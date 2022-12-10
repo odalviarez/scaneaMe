@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
 import { getTotalProducts } from "../../redux/actions";
@@ -12,7 +12,7 @@ import {
 
 export default function CartComponent() {
 
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const dispatch = useDispatch();

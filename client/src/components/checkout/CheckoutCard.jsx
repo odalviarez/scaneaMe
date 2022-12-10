@@ -7,15 +7,18 @@ import { useEffect } from 'react'
 import { getUser } from '../../redux/actions'
 import { useState } from 'react'
 import QRCode from 'qrcode'
+import { useLocalStorage } from "../../useLocalStorage";
 
 export default function CheckoutCard() {
   const dispatch = useDispatch()
   const { email } = useParams()
   //const userDB = useSelector(state => state.userDB)
+  const [cart, setCart] = useLocalStorage("cartProducts", []);
 
   useEffect(() => {
     dispatch(getUser(email))
     GenerateQRCode()
+    setCart([]);
   }, [])
 
   const GenerateQRCode = () => {

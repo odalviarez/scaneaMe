@@ -1,14 +1,32 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
 import Coments from "../Comments/Coments";
-import './details.css'
-export default function Details({name, type, stock, color, price, image, id}) {
+import './details.css';
+import { getTotalProducts, getProductDetails } from "../../redux/actions";
+export default function Details({id}) {
+  //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
+  const dispatch = useDispatch();
 
-  
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const productsLoaded = useSelector((state) => state.products);
+  const productDetails = useSelector((state) => state.productDetail);
+  // eslint-disable-next-line no-unused-vars
+  const { name, image, price, stock, type, season, comments, ratings } =
+    productDetails;
+
+  useEffect(() => {
+    dispatch(getProductDetails(id));
+    if (cart) {
+      let cartTotal = cart.reduce(
+        (acc, currentValue) => acc + currentValue.cartTotalQuantity,
+        0
+      );
+      dispatch(getTotalProducts(cartTotal));
+    }
+  }, [dispatch, cart, id]);
+
   const handleAddCart = function (e) {
     e.preventDefault(e);
     //verificamos que el id del producto exista en los productos cargados y traemos toda la info
@@ -28,9 +46,8 @@ export default function Details({name, type, stock, color, price, image, id}) {
       setCart([...cart, { ...newProduct }]);
     }
   };
-  
-  return (
 
+  return (
     <main className="item">
       <section className="img">
         <img src={image} alt={name} className="img-main" />
@@ -40,57 +57,72 @@ export default function Details({name, type, stock, color, price, image, id}) {
         <h1 className="price-main__heading">{name}</h1>
 
         <div className="price-box">
-
           <div className="price-box__main">
             <span className="price-box__main-new">${price}</span>
           </div>
 
-          <div className='radio__group'>
-          <div className="radio__button">
-            <input checked type="radio" id="type1" name="type" value="small"/>
-            <label data-icon="S" for="type1"><p>Small</p></label>
-          </div>
-  
-          <div className="radio__button">
-            <input disabled type="radio" id="type2" name="type" value="medium"/>
-            <label data-icon="M" for="type2"><p>Medium</p></label>
-          </div>
-  
-          <div className="radio__button">
-            <input type="radio" id="type3" name="type" value="large"/>
-            <label data-icon="L" for="type3">
-              <p>Large</p>
-            </label>
-          </div>
-          
-          <div className="radio__button">
-            <input type="radio" id="type4" name="type" value="extra-large"/>
-            <label data-icon="XL" for="type4"><p>Extra Large</p></label>
-          </div>
-          </div>
+          <div className="radio__group">
+            <div className="radio__button">
+              <input
+                checked
+                type="radio"
+                id="type1"
+                name="type"
+                value="small"
+              />
+              <label data-icon="S" for="type1">
+                <p>Small</p>
+              </label>
+            </div>
 
+            <div className="radio__button">
+              <input
+                disabled
+                type="radio"
+                id="type2"
+                name="type"
+                value="medium"
+              />
+              <label data-icon="M" for="type2">
+                <p>Medium</p>
+              </label>
+            </div>
+
+            <div className="radio__button">
+              <input type="radio" id="type3" name="type" value="large" />
+              <label data-icon="L" for="type3">
+                <p>Large</p>
+              </label>
+            </div>
+
+            <div className="radio__button">
+              <input type="radio" id="type4" name="type" value="extra-large" />
+              <label data-icon="XL" for="type4">
+                <p>Extra Large</p>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className="price-btnbox">
-          
-          <button className="price-cart__btn btn--orange" value={id} onClick={(e) => handleAddCart(e)}>
+          <button
+            className="price-cart__btn btn--orange"
+            value={id}
+            onClick={handleAddCart}
+          >
             <img
-              height={'30px'}
+              height={"30px"}
               src="https://cdn4.iconfinder.com/data/icons/flat-pro-business-set-1/32/shopping-cart-grey-512.png"
-              alt="cart image"
+              alt="cart_image"
               className="price-cart__btn-img"
             />
             Add to cart
           </button>
-          <button className="price-cart__btn btn--orange">
-            Buy Now
-          </button>
-          
+          <button className="price-cart__btn btn--orange">Buy Now</button>
         </div>
-        
       </section>
-      <Raiting/>
-      <Coments/>
+      <Raiting />
+      <Coments />
     </main>
-  )
+  );
 }
