@@ -93,7 +93,7 @@ export default function CartComponent() {
           </div>
           <div className="cart-items">
             {cart?.map((cartItem) => (
-              <div className="cart-item" key={cartItem.id}>
+              <div className="cart-item" key={cartItem.id+cartItem.size}>
                 <div className="cart-product">
                   <p>{cartItem.size}</p>
                   <img src={cartItem.image} alt={cartItem.name} />
