@@ -88,15 +88,34 @@ export const getTotalProducts = (products) => {
   };
 };
 
-export const productDelete = (id) => {
-  return async function () {
-    try {
-      const res = await axios.put(`/delete/${id}`);
-      return res;
-    } catch (error) {
-      alert("No se pudo eliminar el producto");
-    }
-  };
+export const productDelete = (id, getToken) => {
+ return async function () {
+   const token = await getToken();
+   try {
+     let config = {
+       method: "delete",
+       url: process.env.REACT_APP_API
+         ? process.env.REACT_APP_API + `products/${id}`
+         : `http://localhost:5000/products/${id}`,
+       headers: {
+         "content-type": "application/json",
+         Authorization: `Bearer ${token}`,
+       },
+     };
+
+     axios(config)
+       .then(function (response) {
+         return JSON.stringify(response.data);
+       })
+       .catch(function (error) {
+         return error;
+       });
+     const res = await axios.delete(`/products/${id}`);
+     return res;
+   } catch (error) {
+     alert("No se pudo eliminar el producto");
+   }
+ };
 };
 
 /*
