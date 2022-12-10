@@ -50,11 +50,6 @@ export default function Contact() {
   };
   return (
     <Container fluid className="contact">
-      <div>
-    <Button as={Link} title="Español" href="/contact/?lng=es">ES</Button>
-    <Button as={Link} title="English" href="/contact/?lng=en">EN</Button>
-    <br /> <br />
-    </div>
       <Row style={{ justifyContent: "center", padding: "20px" }}></Row>
       {status}
       <form onSubmit={handleSubmit}>
