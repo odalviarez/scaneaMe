@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "../cardDashboard/Card";
+import Card from "../cardDashboard/CardDelete";
 import { useLocalStorage } from "../../useLocalStorage";
 import { getAllProducts, loadAllProducts, sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";

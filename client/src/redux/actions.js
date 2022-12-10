@@ -116,30 +116,7 @@ export const productDelete = (id, getToken) => {
      alert("No se pudo eliminar el producto");
    }
  };
-};
 
-/*
-export function updateProduct(id, data) {
-  return async function (dispatch) {
-    try {
-      const editProduct = await axios.put("/products/" + id, data);
-      return dispatch({ type: "UPDATE_PRODUCTS", payload: editProduct.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-*/
-
-export const updateProduct = (id, data) => {
-  return async function () {
-    try {
-      const res = await axios.put(`/products/${id}`, data);
-      return res;
-    } catch (error) {
-      alert("No se pudo actualizar el producto");
-    }
-  };
 };
 
 export const getUser = (email) => {
@@ -247,14 +224,14 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: payload,
+        "data": {payload},
       };
-      await axios(config)
+      console.log(payload);
+      axios(config)
         .then(function (response) {
           return response.data;
         })
         .catch(function (error) {
-          console.log('Falló en el action creator');
           return error;
         });
     } catch (error) {
