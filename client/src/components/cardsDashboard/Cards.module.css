@@ -1,0 +1,20 @@
+.CatalogueParent {
+    display: grid ;
+    grid-template-columns: fit-content(0.3fr) 1fr;
+    grid-template-rows: fit-content(0.1fr) 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.cardsPagination {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.CatalogueCards {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 30px 10px 30px;
+    width: 100vw;
+}
