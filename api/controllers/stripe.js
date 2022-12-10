@@ -143,7 +143,7 @@ const discountStock = async (customer) => {
     console.log(stock)
     stock.forEach((element, index) => {
       if (elem.size === element.size) {
-        stock[index] = stock[index].quantity - elem.cartTotalQuantity;
+        stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
         console.log(stock[index])
       }
     });
