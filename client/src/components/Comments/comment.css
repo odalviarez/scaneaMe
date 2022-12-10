@@ -1,0 +1,9 @@
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.txt-comment{
+    margin-top: 30px;
+}

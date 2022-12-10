@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../useLocalStorage";
 import { getTotalProducts } from "../../redux/actions";
@@ -12,7 +12,7 @@ import {
 
 export default function CartComponent() {
 
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const dispatch = useDispatch();
@@ -61,7 +61,6 @@ export default function CartComponent() {
   
   return (
     <div className="cart-container">
-      <h2>Shopping Cart</h2>
       {cart.length === 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
@@ -94,8 +93,9 @@ export default function CartComponent() {
           </div>
           <div className="cart-items">
             {cart?.map((cartItem) => (
-              <div className="cart-item" key={cartItem.id}>
+              <div className="cart-item" key={cartItem.id+cartItem.size}>
                 <div className="cart-product">
+                  <p>{cartItem.size}</p>
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
                     <h3>{cartItem.name}</h3>

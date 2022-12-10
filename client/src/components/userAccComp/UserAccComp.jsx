@@ -40,13 +40,14 @@ export default function UserAccComp() {
   useEffect(() => {
     dispatch(getUserLogin(user));
     if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user])
 
   useEffect(() => {
     return () => {
       dispatch(getUser(userLogin.email))
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   

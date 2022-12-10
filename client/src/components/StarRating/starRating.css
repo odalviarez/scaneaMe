@@ -1,0 +1,16 @@
+.star-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stars{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.fa-star{
+    margin-right: 10px;
+    cursor: pointer
+}
