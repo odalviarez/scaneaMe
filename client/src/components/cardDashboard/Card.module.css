@@ -19,6 +19,12 @@
   padding: 0 0 0 0;
 }
 
+.card h1{
+  text-decoration: none;
+  font-size: 3px;
+  color: black;
+}
+
 .card h5{
   margin: 0 0 0 0;
   padding: 0 0 0 0;

@@ -88,6 +88,17 @@ export const getTotalProducts = (products) => {
   };
 };
 
+export const productDelete = (id) => {
+  return async function () {
+    try {
+      const res = await axios.delete(`/products/${id}`);
+      return res;
+    } catch (error) {
+      alert("No se pudo eliminar el producto");
+    }
+  };
+};
+
 export const getUser = (email) => {
   return async function (dispatch) {
     try {

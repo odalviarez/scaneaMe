@@ -1,8 +1,9 @@
 import React from 'react'
 
 import {Tabs, Tab, TabPanel, TabList} from '../../lib'
-import CardsDashboard from '../cardsDashboard/Cards'
+import CardsDelete from '../cardsDashboard/CardsDelete'
 import Card2 from '../cardsDashboard/CardsUpdate'
+import EditProduct from '../cardsDashboard/CardsUpdate'
 import CreateComponent from '../createComponent/createComponent'
 import CustomTab from './CustomTab'
 
@@ -21,6 +22,7 @@ class CustomTabExample extends React.Component {
                         <Tab component={CustomTab} label='Create Product' id='create'/>
                         <Tab component={CustomTab} label='Update Product' id='update'/>
                         <Tab component={CustomTab} label='Delete Product' id='delete'/>
+                        <Tab component={CustomTab} label='Edit Product' id='edit'/>
                     </TabList>
                     <TabList>
 
@@ -43,10 +45,19 @@ class CustomTabExample extends React.Component {
                         <TabPanel component={() => <div>
                             Delete Here
                                 <div>
-                                    <CardsDashboard />
+                                    <CardsDelete />
                                 </div>
                             </div>}
                         id='delete'/>
+
+                        <TabPanel component={() => <div>
+                            Delete Here
+                                <div>
+                                    <EditProduct />
+                                </div>
+                            </div>}
+                        id='edit'/>
+
                     </TabList>
                 </Tabs>
             </div>
