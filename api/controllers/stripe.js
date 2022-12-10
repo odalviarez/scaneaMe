@@ -127,7 +127,7 @@ const createOrder = async (customer, data, lineItems) => {
   try {
     const savedOrder = await newOrder.save();
 
-    console.log("Processed Order:", savedOrder);
+
   } catch (err) {
     console.log(err);
   }
@@ -147,7 +147,10 @@ const discountStock = async (customer) => {
         console.log(stock[index])
       }
     });
-    const updateProduct = await Products.updateOne({ id: elem.id }, stock);
+    const updateProduct = await Products.updateOne(
+      { id: elem.id },
+      { stock: stock }
+    );
     console.log(updateProduct);
   });
 
