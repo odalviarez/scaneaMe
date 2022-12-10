@@ -43,7 +43,7 @@ export default function Details({ id }) {
         if (elem.id === productInCart.id) { 
           stock.map((e) =>
             e.size === productselect
-              ? e.quantity >= elem.cartTotalQuantity //*Luego verificamos que el stock del producto sea mayor a lo agregado al carrito para poder seguir agregando
+              ? e.quantity > elem.cartTotalQuantity //*Luego verificamos que el stock del producto sea mayor a lo agregado al carrito para poder seguir agregando
                 ? elem.cartTotalQuantity++
                 : ""
               : ""
