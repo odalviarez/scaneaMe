@@ -5,7 +5,7 @@ import { useLocalStorage } from "../../useLocalStorage";
 import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import i18n from '../../i18n'
 
 export default function Cards() {

@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
 import Coments from "../Comments/Coments";
-import './details.css';
+import "./details.css";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
-export default function Details({id}) {
+import { useState } from "react";
+export default function Details({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
 
+  const [productselect, setProductSelect] = useState("")
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const productsLoaded = useSelector((state) => state.products);
   const productDetails = useSelector((state) => state.productDetail);
@@ -31,8 +33,8 @@ export default function Details({id}) {
     e.preventDefault(e);
     //verificamos que el id del producto exista en los productos cargados y traemos toda la info
     let newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    //Verificamos si el producto ya esta en el carrito y aumentamos el total. Si no esta iniciamos el total en 1.
-    let productInCart = cart.find((elem) => elem.id === newProduct.id);
+    //Verificamos si el producto de esa talla ya esta en el carrito y aumentamos el total. Si no esta iniciamos el total en 1.
+    let productInCart = cart.find((e) => e.id === newProduct.id && e.size === productselect);
     if (productInCart) {
       let cartModified = cart.map((elem) => {
         if (elem.id === productInCart.id) {
@@ -42,10 +44,16 @@ export default function Details({id}) {
       });
       setCart(cartModified);
     } else {
-      newProduct = { ...newProduct, cartTotalQuantity: 1 };
+      newProduct = { ...newProduct, cartTotalQuantity: 1, size: productselect };
       setCart([...cart, { ...newProduct }]);
     }
+    console.log(cart);
   };
+
+  const handleOnclick = (e) => {
+    setProductSelect (e.target.value);
+  }
+
 
   return (
     <main className="item">
@@ -61,47 +69,11 @@ export default function Details({id}) {
             <span className="price-box__main-new">${price}</span>
           </div>
 
-          <div className="radio__group">
-            <div className="radio__button">
-              <input
-                checked
-                type="radio"
-                id="type1"
-                name="type"
-                value="small"
-              />
-              <label data-icon="S" for="type1">
-                <p>Small</p>
-              </label>
-            </div>
-
-            <div className="radio__button">
-              <input
-                disabled
-                type="radio"
-                id="type2"
-                name="type"
-                value="medium"
-              />
-              <label data-icon="M" for="type2">
-                <p>Medium</p>
-              </label>
-            </div>
-
-            <div className="radio__button">
-              <input type="radio" id="type3" name="type" value="large" />
-              <label data-icon="L" for="type3">
-                <p>Large</p>
-              </label>
-            </div>
-
-            <div className="radio__button">
-              <input type="radio" id="type4" name="type" value="extra-large" />
-              <label data-icon="XL" for="type4">
-                <p>Extra Large</p>
-              </label>
-            </div>
-          </div>
+          {stock?.map((e) => (
+            <button type="button" disabled={e.quantity < 1} onClick={handleOnclick} value={e.size} className= {productselect === e.size ? "btn-selected" : ""}>
+              {e.size}
+            </button>
+          ))}
         </div>
 
         <div className="price-btnbox">
@@ -109,6 +81,7 @@ export default function Details({id}) {
             className="price-cart__btn btn--orange"
             value={id}
             onClick={handleAddCart}
+            disabled={!productselect}
           >
             <img
               height={"30px"}
