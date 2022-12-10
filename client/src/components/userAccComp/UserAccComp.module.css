@@ -8,8 +8,7 @@
     position: absolute;
     left:30%;
     top: 15%;
-    width: 500px
-    
+    width: 500px;
 }
 
 .UserAccCompContainer h1{
@@ -69,10 +68,30 @@
 
 .imgUpContainer{
     display: flex;
+}
 
-  
+.showPassword{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.showPassword button{
+    position: relative;
+    left: 350%;
 }
 
 .imgUpload{
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.popupDelete{
+    background-color: rgba(255, 0, 0, 0.297);
+    display: flex;
+    flex-direction: column;
+}
+.popupDelete button{
+    background-color: rgba(255, 0, 0, 0.297);
 }
