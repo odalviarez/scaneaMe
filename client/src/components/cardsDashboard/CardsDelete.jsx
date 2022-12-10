@@ -41,9 +41,6 @@ export default function Cards() {
   }, [cart, dispatch, productsOnStore]);
 
   useEffect(() => {
-
-   
-
     //* Al salir del componente, se vuelven a cargar todos los productos a la store. Caso contrario al volver al catálogo desde otra página quedaban los productos filtrados aún sin filtros aplicados.
     return () => {
       dispatch(loadAllProducts())
@@ -51,25 +48,6 @@ export default function Cards() {
     
   }, [productsOnStore]);
 
-  const handleAddCart = function (e) {
-    e.preventDefault(e);
-    //verificamos que el id del producto exista en los productos cargados y traemos toda la info
-    let newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    //Verificamos si el producto ya esta en el carrito y aumentamos el total. Si no esta iniciamos el total en 1.
-    let productInCart = cart.find((elem) => elem.id === newProduct.id);
-    if (productInCart) {
-      let cartModified = cart.map((elem) => {
-        if (elem.id === productInCart.id) {
-          elem.cartTotalQuantity++;
-        }
-        return elem;
-      });
-      setCart(cartModified);
-    } else {
-      newProduct = { ...newProduct, cartTotalQuantity: 1 };
-      setCart([...cart, { ...newProduct }]);
-    }
-  };
 
   const handleSorts = function (e) {
     e.preventDefault(e);
@@ -117,7 +95,6 @@ export default function Cards() {
                       price={p.price}
                       type={p.type}
                       color={p.color}
-                      handleAddCart={handleAddCart}
                     />
                   );
                 })
