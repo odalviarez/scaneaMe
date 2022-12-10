@@ -28,13 +28,8 @@ export default function Navbar() {
   // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
+const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
+
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
@@ -46,11 +41,18 @@ export default function Navbar() {
   }
 
   useEffect(() => {
+
     // if (userLogin.hasOwnProperty("cart")) {
     //   if (userLogin.cart.length && !cart.length && isAuthenticated)
     //     setCart(userLogin.cart);
     // }
-    if (cart) dispatch(getTotalProducts(cart.length));
+        if (cart) {
+          let cartTotal = cart.reduce(
+            (acc, currentValue) => acc + currentValue.cartTotalQuantity,
+            0
+          );
+          dispatch(getTotalProducts(cartTotal));
+        }
     if (user) dispatch(getUserLogin(user, cart, getToken));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -197,6 +199,7 @@ export default function Navbar() {
       </Container>
       <ul>
         <li>
+
           <div>
             <Button as={Link} href="/catalogue/?lng=es">
               ES
@@ -205,6 +208,7 @@ export default function Navbar() {
               EN
             </Button>
           </div>
+
         </li>
         <li>
           <div className={styles.itemsCart}>{totalItems}</div>

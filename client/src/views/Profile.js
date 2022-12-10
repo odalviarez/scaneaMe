@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import Highlight from "../components/Highlight";
@@ -7,6 +7,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 export const ProfileComponent = () => {
   const { user } = useAuth0();
+
 
   return (
     <Container className="mb-5">

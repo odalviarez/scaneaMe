@@ -26,9 +26,32 @@
     margin-bottom: 10px
 }
 
+.UserAccCompItem p {
+    color: red
+}
+
+.UserAccCompAbout {
+    width: 400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.UserAccCompAbout textarea {
+    width: 300px;
+    resize: none;
+    position:relative;
+    left: 18%;
+
+}
+
 
 .UserAccCompContainer input{
-    width: 200px;
+    width: 300px;
     position:absolute;
     left: 45%;
 
@@ -45,8 +68,8 @@
 }
 
 .imgUpContainer{
-  display: flex;
-  
+    display: flex;
+
   
 }
 

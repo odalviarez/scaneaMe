@@ -52,7 +52,7 @@ export default function HomeBanners({ productType }) {
   const productFiltered = product.filter(e => e.type === productType)
 
   const productCard = productFiltered.map(item => (
-    <HomeCard image={item.image} price={item.price} id={item.id} />
+    <HomeCard image={item.image} key={item.id} price={item.price} id={item.id} />
   ))
 
 

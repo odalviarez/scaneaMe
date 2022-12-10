@@ -89,6 +89,60 @@ export const getTotalProducts = (products) => {
   };
 };
 
+export const productDelete = (id, getToken) => {
+ return async function () {
+   const token = await getToken();
+   try {
+     let config = {
+       method: "delete",
+       url: process.env.REACT_APP_API
+         ? process.env.REACT_APP_API + `products/${id}`
+         : `http://localhost:5000/products/${id}`,
+       headers: {
+         "content-type": "application/json",
+         Authorization: `Bearer ${token}`,
+       },
+     };
+
+     axios(config)
+       .then(function (response) {
+         return JSON.stringify(response.data);
+       })
+       .catch(function (error) {
+         return error;
+       });
+     const res = await axios.delete(`/products/${id}`);
+     return res;
+   } catch (error) {
+     alert("No se pudo eliminar el producto");
+   }
+ };
+};
+
+/*
+export function updateProduct(id, data) {
+  return async function (dispatch) {
+    try {
+      const editProduct = await axios.put("/products/" + id, data);
+      return dispatch({ type: "UPDATE_PRODUCTS", payload: editProduct.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+*/
+
+export const updateProduct = (id, data) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/products/${id}`, data);
+      return res;
+    } catch (error) {
+      alert("No se pudo actualizar el producto");
+    }
+  };
+};
+
 export const getUser = (email) => {
   return async function (dispatch) {
     try {
@@ -122,7 +176,6 @@ export const getUserLogin = (user, cart, getToken) => {
         },
         data,
       };
-      console.log(config);
       }
       else{
         config = {
@@ -178,6 +231,36 @@ export const userUpdate = (payload, user, getToken) => {
     } catch (error) {
       console.log(error);
       alert("No se pudo actualizar los datos del usuario");
+    }
+  };
+};
+
+export const userUpdateAuth0 = (payload, sub, action, getToken) => {
+  return async function () {
+    try {
+      const token = await getToken();
+      let config = {
+        method: "put",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `/user/${sub}/${action}`
+          : `http://localhost:5000/user/${sub}/${action}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: payload,
+      };
+      await axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log('Falló en el action creator');
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+      alert("No se pudo actualizar los datos del usuario en Auth0");
     }
   };
 };

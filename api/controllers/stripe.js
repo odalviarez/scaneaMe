@@ -13,13 +13,15 @@ const router = express.Router();
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
   let purchase = cartItems.map((e) => {
-    return { id: e.id }; //, cartTotalQuantity: e.cartTotalQuantity
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity, size: e.size}; // 
   })
   console.log('User Id: ', userEmail)
+  //purchase = Object.assign({}, purchase),
   console.log("cartItem: ", purchase);
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
+      cartItems: JSON.stringify(purchase),
     },
   });
   const line_items = cartItems.map((item) => {
@@ -29,10 +31,8 @@ router.post("/create-checkout-session", async (req, res) => {
         product_data: {
           name: item.name,
           images: [item.image],
-          description: item.id,
-          metadata: {
-            id: item.id,
-          },
+          description: item.name,
+
         },
         unit_amount: item.price * 100, //! Esto está bien?
       },
@@ -109,12 +109,12 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
 );
 
 
-// Create Order para utilizar en la ruta anterior
+//* CREATE ORDER para utilizar en la ruta anterior
 const createOrder = async (customer, data, lineItems) => {
 
   const newOrder = new Order({
     email: customer.metadata.userEmail,
-    //cartItems: customer.metadata.cartItems,
+    cartItems: customer.metadata.cartItems,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
