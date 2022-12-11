@@ -31,6 +31,7 @@ export default function Login() {
         // set the cookie
         cookies.set("TOKEN", result.data.token, {
           path: "/",
+          SameSite: 'Lax'
         });
         // redirect user to the auth page
         window.location.href = "/home";

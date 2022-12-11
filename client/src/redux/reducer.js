@@ -48,24 +48,34 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case FILTER_PRODUCTS:
-        let productsFiltered = []
-
-
-        if (Object.hasOwn((action.payload), 'season')) {
-          if (Object.hasOwn((action.payload.season), 'value')){
-          productsFiltered = state.products.filter(product => product.season === action.payload.season.value)
-        }}
-
-        if (Object.hasOwn((action.payload), 'type')) {
-          if (Object.hasOwn((action.payload.type), 'value')){
-          productsFiltered = state.products.filter(product => product.type === action.payload.type.value)
-        }}
-
-        if (Object.hasOwn((action.payload), 'color')) {
-          if (Object.hasOwn((action.payload.color), 'value')){
-          productsFiltered = state.products.filter(product => product.color === action.payload.color.value)
-        }}
+        let productsFiltered = state.allProducts
         
+        for (let i=0; i < action.payload.length; i++) {
+          let filter = action.payload[i]
+          
+            switch (filter.filter){
+              case 'season':
+                productsFiltered = productsFiltered.filter((product) => product.season === filter.value)
+
+              break;
+
+              case 'type':
+                productsFiltered = productsFiltered.filter((product) => product.type === filter.value)
+
+              break;
+
+              case 'color':
+                productsFiltered = productsFiltered.filter((product) => product.color === filter.value)
+
+              break;
+
+              default:
+                console.log('No se filtró nada');
+            }
+
+
+        }
+
         return {
           ...state,
           products: productsFiltered,

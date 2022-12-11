@@ -15,7 +15,6 @@ export default function Cards() {
   // eslint-disable-next-line no-unused-vars
   const [sort, setSort] = useState(""); //* como se ordenan si no se lee el valor de sort
   const [filters, setFilters] = useState({ filtersApplied: [] });
-  const [newFilters, setNewFilters] = useState({});
   const productsLoaded = useSelector((state) => state.products);
   const productsOnStore = useSelector((state) => state.allProducts);
   let location = useLocation();
@@ -31,7 +30,7 @@ export default function Cards() {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
   
-    
+
   useEffect(() => {
     if (productsOnStore.length === 0) {
       dispatch(getAllProducts());
@@ -46,24 +45,29 @@ export default function Cards() {
       dispatch(getTotalProducts(cartTotal));
     }
 
+    //* Al salir del componente, se vuelven a cargar todos los productos a la store. Caso contrario al volver al catálogo desde otra página quedaban los productos filtrados aún sin filtros aplicados.
+    return () => {
+      dispatch(loadAllProducts());
+    };
+
+  }, [cart, dispatch, productsOnStore]);
+
+  //! NO COMBINAR LOS USE EFFECTS, CAUSA QUE NO FUNCIONEN COMO SE PRETENDE
+
+  useEffect(() => {
+
     //* Al ingresar desde el componente HOME con una de las imágenes de la temporada, filtra segun el estado que tiene el componente "Link" que se use
     if (
-      filters.filtersApplied.length === 0 &&
-      location.state !== null &&
-      productsOnStore.length > 0
-    ) {
+      filters.filtersApplied.length === 0 && location.state !== null && productsOnStore.length > 0) 
+      {
       setFilters((filters) => ({
-        //*Filters no se usa, es neceasrio?
         filtersApplied: [location.state],
       }));
       dispatch(filterProducts([location.state]));
     }
 
-    //* Al salir del componente, se vuelven a cargar todos los productos a la store. Caso contrario al volver al catálogo desde otra página quedaban los productos filtrados aún sin filtros aplicados.
-    return () => {
-      dispatch(loadAllProducts());
-    };
-  }, [cart, dispatch, productsOnStore, filters, location]);
+    // eslint-disable-next-line
+  }, [location, dispatch, productsOnStore.length]);
 
   
 
@@ -96,14 +100,14 @@ export default function Cards() {
   const handleFilters = function (e) {
     e.preventDefault(e);
 
-    let newFiltersCreated = {
-      ...newFilters,
-      [e.target.parentNode.attributes.value.value] : {
+    let newFiltersCreated = [
+      ...filters.filtersApplied,
+      {
+        filter: e.target.parentNode.attributes.value.value,
         value: e.target.attributes.value.value,
         valor: e.target.innerHTML,
-    }}
-
-    setNewFilters(newFiltersCreated)
+      }
+    ]
 
     let filterUsed = {
       filter: e.target.parentNode.attributes.value.value,
@@ -126,29 +130,24 @@ export default function Cards() {
         filtersApplied: [filterUsed],
       }));
       setcurrentPage(1)
-      dispatch(filterProducts(newFiltersCreated));
+      dispatch(filterProducts([filterUsed]));
     }
   };
 
   const removeFilter = function (e) {
     e.preventDefault();
-    let newFilterss = filters.filtersApplied.filter(
-      (filter) => filter.value !== e.target.attributes.value.value
+    let newFilters = filters.filtersApplied.filter(
+      (filter) => filter.filter !== e.target.attributes[0].value
     );
-    
-    let newFiltersCreated = {
-      ...newFilters,
-      [e.target.attributes.filter.value] : {}}
 
-    dispatch(loadAllProducts());
-    setNewFilters(newFiltersCreated)
-    setFilters((filters) => ({
-      filtersApplied: newFilterss,
-    }));
-    if (newFilterss.length === 0) {
+    setFilters({
+      filtersApplied: newFilters,
+    });
+
+    if (newFilters.length === 0) {
       dispatch(loadAllProducts());
     } else {
-      dispatch(filterProducts(newFiltersCreated));
+      dispatch(filterProducts(newFilters));
     }
   };
 
@@ -218,7 +217,7 @@ export default function Cards() {
         </div>
 
         {filters.filtersApplied?.map((f, index) => (
-          <p key={index} onClick={removeFilter} value={f.value}>
+          <p key={index} onClick={removeFilter} value={f.filter}>
             X {f.valor}
           </p>
         ))}

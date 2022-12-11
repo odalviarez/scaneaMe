@@ -117,7 +117,7 @@ body {
 
 .head-cart__item-wrapper {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: 2.5rem;
 }
 

@@ -33,6 +33,7 @@ export default function Register() {
       .then((result) => {
         cookies.set("TOKEN", result.data.token, {
           path: "/",
+          SameSite: 'Lax'
         })
         window.location.href = "/home";
 
