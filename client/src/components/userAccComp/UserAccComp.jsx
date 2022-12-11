@@ -60,9 +60,10 @@ export default function UserAccComp() {
       setErrors({
         ...errors,
         email : 'Email is not valid'
-    })}
-  
-    return errors
+    })} else if (errors.email.length === 0) {
+      
+      dispatch(userUpdateAuth0(email, userLogin.sub, 'emailChange', getToken))
+    }
   }
 
   
@@ -95,7 +96,7 @@ export default function UserAccComp() {
 
     if (errors.password.length === 0 && errors.passwordRepeat.length === 0) {
       
-      await dispatch(userUpdateAuth0(password, userLogin.sub, 'passwordChange', getToken))
+      dispatch(userUpdateAuth0(password, userLogin.sub, 'passwordChange', getToken))
     }
   }
 

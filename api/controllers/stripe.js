@@ -1,6 +1,7 @@
 const express = require("express");
 const Stripe = require("stripe");
 const Order = require("../models/orderModel");
+const Products = require("../models/productModel");
 
 require("dotenv").config();
 
@@ -13,11 +14,9 @@ const router = express.Router();
 router.post("/create-checkout-session", async (req, res) => {
   let { cartItems, userEmail } = req.body;
   let purchase = cartItems.map((e) => {
-    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity, size: e.size}; // 
-  })
-  console.log('User Id: ', userEmail)
-  //purchase = Object.assign({}, purchase),
-  console.log("cartItem: ", purchase);
+    return { id: e.id, cartTotalQuantity: e.cartTotalQuantity, size: e.size }; //
+  });
+
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
@@ -32,14 +31,12 @@ router.post("/create-checkout-session", async (req, res) => {
           name: item.name,
           images: [item.image],
           description: item.name,
-
         },
         unit_amount: item.price * 100, //! Esto está bien?
       },
       quantity: item.cartTotalQuantity,
     };
   });
-
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -60,21 +57,25 @@ router.post("/create-checkout-session", async (req, res) => {
 });
 
 //? Qué hace esta ruta? Que action creator la ejecuta?
-router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
+//! ESTO SOLO FUNCIONA CUANDO ESTA EN DEPLOY
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  (req, res) => {
     const sig = req.headers["stripe-signature"];
-    console.log("sig: ",sig);
+    console.log("sig: ", sig);
     let data;
     let eventType;
 
     // Check if webhook signing is configured.
     let endpointSecret;
     endpointSecret = process.env.STRIPE_WEB_HOOK;
-    console.log("endpoint: ",endpointSecret);
+    console.log("endpoint: ", endpointSecret);
     let event;
 
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-      console.log("event: ", event)
+      console.log("event: ", event);
     } catch (err) {
       console.log(`❌ Webhook Error: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
@@ -93,25 +94,20 @@ router.post("/webhook", express.raw({ type: "application/json" }), (req, res) =>
             data.id,
             {},
             function (err, lineItems) {
-              console.log("Line_items", lineItems);
-              console.log("Data: ", data);
+              discountStock(customer);
               createOrder(customer, data, lineItems);
             }
           );
         })
         .catch((err) => console.log(err.message));
     }
-    
-    // Return a 200 res to acknowledge receipt of the event
-    //res.send().end();
+
     res.json({ received: true });
   }
 );
 
-
 //* CREATE ORDER para utilizar en la ruta anterior
 const createOrder = async (customer, data, lineItems) => {
-
   const newOrder = new Order({
     email: customer.metadata.userEmail,
     cartItems: customer.metadata.cartItems,
@@ -127,11 +123,27 @@ const createOrder = async (customer, data, lineItems) => {
   try {
     const savedOrder = await newOrder.save();
 
-    console.log("Processed Order:", savedOrder);
+
   } catch (err) {
     console.log(err);
   }
 };
 
+const discountStock = async (customer) => {
+  let product = JSON.parse(customer.metadata.cartItems);
 
+  product.map(async (elem) => {
+    let detailsProduct = await Products.findById(elem.id);
+    let { stock } = detailsProduct;
+    stock.forEach((element, index) => {
+      if (elem.size === element.size) {
+        stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
+      }
+    });
+    const updateProduct = await Products.updateOne(
+      { id: elem.id },
+      { stock: stock }
+    );
+  });
+};
 module.exports = router;

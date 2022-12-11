@@ -134,7 +134,8 @@ router.put("/:email", checkJwt, async (req, res) => {
 //* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
 router.put("/:sub/:action", checkJwt, async (req, res) => {
   const { sub, action } = req.params;
-  const { data } = req.body;
+  const { payload } = req.body;
+  console.log('llegamos al backend!', sub, action, payload, req.body);
   try {
     if (action === "delete") {
       const updateUser = await User.updateOne(
@@ -145,12 +146,12 @@ router.put("/:sub/:action", checkJwt, async (req, res) => {
       const updateUser = await User.updateOne(
         { sub },
         {
-        email: data,
+        email: payload,
         email_verified: false,
         }
       )}
 
-  let response = await getAuth0Controller(sub, action, data)
+  let response = await getAuth0Controller(sub, action, payload)
 
     res.json(response);
   } catch (error) {

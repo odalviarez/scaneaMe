@@ -34,26 +34,27 @@ export default function CartComponent() {
           }
     }, [cart, dispatch])
 
-  const handleAddToCart = (id) => {
+  const handleAddToCart = (id, size) => {
     let cartModified = cart.map((elem) => {
-      if (elem.id === id) {
+      if (elem.id === id && elem.size === size) {
         elem.cartTotalQuantity++;
       }
       return elem;
     });
     setCart(cartModified);
   };
-  const handleDecreaseCart = (id) => {
+  const handleDecreaseCart = (id, size) => {
     let cartModified = cart.map((elem) => {
-      if (elem.id === id) {
+      if (elem.id === id && elem.size === size) {
         if (elem.cartTotalQuantity > 0) elem.cartTotalQuantity--;
       }
       return elem;
     });
     setCart(cartModified);
   };
-  const handleRemoveFromCart = (id) => {
-    setCart(cart.filter((elem) => elem.id !== id))
+  const handleRemoveFromCart = (id, size) => {
+    console.log(cart)
+    setCart(cart.filter((elem) => (elem.id !== id || elem.size !== size))) //*En el filter es raro como funciona. Con el && ers si uno o el otro se cumplia lo filtraba
   };
   const handleClearCart = () => {
     setCart([]);
@@ -93,24 +94,34 @@ export default function CartComponent() {
           </div>
           <div className="cart-items">
             {cart?.map((cartItem) => (
-              <div className="cart-item" key={cartItem.id+cartItem.size}>
+              <div className="cart-item" key={cartItem.id + cartItem.size}>
                 <div className="cart-product">
                   <p>{cartItem.size}</p>
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
                     <h3>{cartItem.name}</h3>
-                    <button onClick={() => handleRemoveFromCart(cartItem.id)}>
+                    <button
+                      onClick={() =>
+                        handleRemoveFromCart(cartItem.id, cartItem.size)
+                      }
+                    >
                       Remove
                     </button>
                   </div>
                 </div>
                 <div className="cart-product-price">${cartItem.price}</div>
                 <div className="cart-product-quantity">
-                  <button onClick={() => handleDecreaseCart(cartItem.id)}>
+                  <button
+                    onClick={() =>
+                      handleDecreaseCart(cartItem.id, cartItem.size)
+                    }
+                  >
                     -
                   </button>
                   <div className="count">{cartItem.cartTotalQuantity}</div>
-                  <button onClick={() => handleAddToCart(cartItem.id)}>
+                  <button
+                    onClick={() => handleAddToCart(cartItem.id, cartItem.size)}
+                  >
                     +
                   </button>
                 </div>
