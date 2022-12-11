@@ -56,7 +56,6 @@ export default function Details({ id }) {
       newProduct = { ...newProduct, cartTotalQuantity: 1, size: productselect };
       setCart([...cart, { ...newProduct }]);
     }
-    console.log(cart);
   };
 
   const handleOnclick = (e) => {
@@ -75,9 +74,10 @@ export default function Details({ id }) {
           <div className="price-box__main">
             <span className="price-box__main-new">${price}</span>
           </div>
-          {stock?.map((e) => (
+          {stock?.map((e, index) => (
             <button
               type="button"
+              key={index}
               disabled={e.quantity < 1}
               onClick={handleOnclick}
               value={e.size}

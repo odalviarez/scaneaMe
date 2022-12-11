@@ -7,7 +7,7 @@ import common_es from "../src/translation/es/global.json"
 
 i18n.use(LanguageDetector).init({
   fallbackLng: "es",
-  debug: true,
+  debug: false,
   interpolation: {
     escapeValue: false, // not needed for react!!
   },

@@ -18,7 +18,6 @@ router.post("/login/:email", async (req, res) => {
 let { authorization } = req.headers;
 let isAdmin = false;
 if(authorization) isAdmin = Boolean(jwt_decode(authorization).permissions.length);
-console.log("isAdmin: ", isAdmin);
   const { email } = req.params;
   const {
     firtsName,

@@ -92,7 +92,6 @@ export const getTotalProducts = (products) => {
 export const productDelete = (id, getToken) => {
  return async function () {
    const token = await getToken();
-   console.log(token)
    try {
      let config = {
        method: "delete",
@@ -163,7 +162,6 @@ export const getUserLogin = (user, cart, getToken) => {
             : `http://localhost:5000/user/login/${user.email}`,
           data,
         };
-        console.log(config);
       }
       
       axios(config)
@@ -228,7 +226,6 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
         },
         "data": {payload},
       };
-      console.log(payload);
       axios(config)
         .then(function (response) {
           return response.data;
