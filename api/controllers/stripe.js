@@ -17,8 +17,6 @@ router.post("/create-checkout-session", async (req, res) => {
     return { id: e.id, cartTotalQuantity: e.cartTotalQuantity, size: e.size }; //
   });
 
-  //purchase = Object.assign({}, purchase),
-
   const customer = await stripe.customers.create({
     metadata: {
       userEmail,
@@ -104,8 +102,6 @@ router.post(
         .catch((err) => console.log(err.message));
     }
 
-    // Return a 200 res to acknowledge receipt of the event
-    //res.send().end();
     res.json({ received: true });
   }
 );
@@ -135,25 +131,19 @@ const createOrder = async (customer, data, lineItems) => {
 
 const discountStock = async (customer) => {
   let product = JSON.parse(customer.metadata.cartItems);
-  console.log("product: ", product);
 
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
     let { stock } = detailsProduct;
-    console.log(stock)
     stock.forEach((element, index) => {
       if (elem.size === element.size) {
         stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
-        console.log(stock[index])
       }
     });
     const updateProduct = await Products.updateOne(
       { id: elem.id },
       { stock: stock }
     );
-    console.log(updateProduct);
   });
-
-  //const updateProduct = await Products.updateOne({ id }, query);
 };
 module.exports = router;
