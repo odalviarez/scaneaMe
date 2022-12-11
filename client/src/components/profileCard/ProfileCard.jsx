@@ -16,7 +16,7 @@ export default function ProfileCard() {
   const dispatch = useDispatch()
   const { email } = useParams()
   const userDB = useSelector(state => state.userDB)
-  // const [userImg, setUserImg] = useState(imgPlaceholder)
+  const [userImg, setUserImg] = useState(imgPlaceholder)
   const [socials, setSocials] = useState({
     facebook: '',
     linkedin: '',
@@ -32,7 +32,9 @@ export default function ProfileCard() {
         setUserImg(userDB.image?.url)
       }
     }
+
   }, [dispatch, userDB]);
+
 
 
   return (
