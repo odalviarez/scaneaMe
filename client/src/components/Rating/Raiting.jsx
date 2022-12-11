@@ -13,10 +13,10 @@ export default function Raiting() {
 
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  // eslint-disable-next-line
   const [comment, setComment]=useState("")
 
   const stars = Array(5).fill(0)
-  console.log(currentValue)
   const handleClick = value => {
     setCurrentValue(value)
   }

@@ -48,8 +48,8 @@ export default function UserAccComp() {
     return () => {
       dispatch(getUser(userLogin.email))
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  }, [dispatch, userLogin.email]);
 
   
 

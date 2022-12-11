@@ -5,13 +5,14 @@ import { useLocalStorage } from "../../useLocalStorage";
 import { getAllProducts, loadAllProducts, sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation } from 'react-router-dom';
+
 
 import i18n from '../../i18n'
 
 export default function Cards() {
   const dispatch = useDispatch();
 
+    // eslint-disable-next-line
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const [setSort] = useState("");
   const productsLoaded = useSelector((state) => state.products);
@@ -38,6 +39,7 @@ export default function Cards() {
       let cartTotal = cart.reduce((acc, currentValue) => acc + currentValue.cartTotalQuantity, 0);
       dispatch(getTotalProducts(cartTotal));
     }
+    // eslint-disable-next-line
   }, [cart, dispatch, productsOnStore]);
 
   useEffect(() => {
@@ -45,10 +47,10 @@ export default function Cards() {
     return () => {
       dispatch(loadAllProducts())
     }
-    
+    // eslint-disable-next-line
   }, [productsOnStore]);
 
-
+  // eslint-disable-next-line
   const handleSorts = function (e) {
     e.preventDefault(e);
     dispatch(sortProducts(e.target.value));
