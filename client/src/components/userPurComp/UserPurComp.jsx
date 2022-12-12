@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserLogin, userGetOrders } from '../../redux/actions'
 import { useAuth0 } from '@auth0/auth0-react'
 import OrderCard from "./OrderCard";
-import {getAllProducts, loadAllProducts} from "../../redux/actions";
+import {getAllProducts} from "../../redux/actions";
 
 const UserPurComp = () => {
     const {user} = useAuth0()
