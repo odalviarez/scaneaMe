@@ -6,10 +6,13 @@ import Coments from "../Comments/Coments";
 import "./details.css";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 export default function Details({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const [productselect, setProductSelect] = useState("");
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const productsLoaded = useSelector((state) => state.products);
@@ -57,7 +60,12 @@ export default function Details({ id }) {
       newProduct = { ...newProduct, cartTotalQuantity: 1, size: productselect };
       setCart([...cart, { ...newProduct }]);
     }
+    console.log(cart)
+    if (e.target.name === "AddAndBuy"){
+      window.location.replace("http://localhost:3000/cart");
+    }
   };
+  
 
   const handleOnclick = (e) => {
     setProductSelect(e.target.value);
@@ -93,6 +101,7 @@ export default function Details({ id }) {
           <button
             className="price-cart__btn btn--orange"
             value={id}
+            name="AddCart"
             onClick={handleAddCart}
             disabled={!productselect}
           >
@@ -104,12 +113,18 @@ export default function Details({ id }) {
             />
             Add to cart
           </button>
-          <button className="price-cart__btn btn--orange">Buy Now</button>
+          <button
+            className="price-cart__btn btn--orange"
+            value={id}
+            name="AddAndBuy"
+            onClick={handleAddCart}
+          >
+            Buy Now
+          </button>
         </div>
       </section>
-      <Raiting/>
+      <Raiting />
       {/* <Coments/> */}
-
     </main>
   );
 }
