@@ -137,7 +137,7 @@ const discountStock = async (customer) => {
       }
     });
 
-    let stock = { stock: detailsProduct.stock };
+    let stock =  detailsProduct.stock;
     console.log("stock ", stock);
     console.log("elem id: ", elem.id);
     console.log("producto id: ", detailsProduct.id);
