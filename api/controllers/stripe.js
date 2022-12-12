@@ -142,20 +142,8 @@ const discountStock = async (customer) => {
     console.log("elem id: ", elem.id);
     console.log("producto id: ", detailsProduct.id);
     console.log("son iguales?: ",Boolean(elem.id === detailsProduct.id));
-    //const updateProduct = await Products.updateOne({ id: elem.id }, {stock});
-const updateProduct = await Products.updateOne(
-  { id: "639254491f89d0a4ffc60ae3" },
-  {
-    stock: [
-      { size: "xs", quantity: 0 },
-      { size: "s", quantity: 0 },
-      { size: "m", quantity: 0 },
-      { size: "l", quantity: 1 },
-      { size: "xl", quantity: 1 },
-      { size: "xxl", quantity: 1 },
-    ],
-  }
-);
+    const updateProduct = await Products.updateOne({ id: elem.id }, {stock});
+
     console.log(updateProduct);
   });
 };
