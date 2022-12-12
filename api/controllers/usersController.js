@@ -1,6 +1,5 @@
 const User = require("../models/userModel");
 const express = require("express");
-const { db } = require("../models/userModel");
 const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
 const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
