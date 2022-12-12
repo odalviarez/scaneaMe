@@ -119,8 +119,6 @@ const createOrder = async (customer, data, lineItems) => {
 
   try {
     const savedOrder = await newOrder.save();
-
-
   } catch (err) {
     console.log(err);
   }
@@ -132,17 +130,15 @@ const discountStock = async (customer) => {
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
     console.log("producto: ", detailsProduct);
-    let { stock } = detailsProduct;
-    stock.forEach((element, index) => {
+    detailsProduct.stock.forEach((element, index) => {
       if (elem.size === element.size) {
-        stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
+        detailsProduct.stock[index].quantity =
+          detailsProduct.stock[index].quantity - elem.cartTotalQuantity;
       }
     });
-    console.log("stock ", stock)
-    const updateProduct = await Products.updateOne(
-      { id: elem.id },
-      { stock }
-    );
+    let stock = { stock: detailsProduct.stock };
+    console.log("stock ", stock);
+    const updateProduct = await Products.updateOne({ id: elem.id }, stock);
     console.log(updateProduct);
   });
 };
