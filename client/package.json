@@ -38,6 +38,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.6",
+    "sweetalert2": "^11.6.15",
     "tld-list": "^1.0.1",
     "universal-cookie": "^4.0.4",
     "validator": "^13.7.0",

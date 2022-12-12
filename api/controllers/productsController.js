@@ -104,7 +104,7 @@ router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
 
 //* UPDATE PRODUCT: actualiza un producto existente
 //TODO: falta implementar.
-router.put("/:id", checkJwt, async (req, res) => {
+router.put("/:id", async (req, res) => {
   let { id } = req.params;
   const { name, color, type, price, image, stock, season } = req.body;
   console.log(req.body);

@@ -264,6 +264,7 @@ export default function Cards() {
           {i18n.t("header.back-to-top")}
         </button>
       </div>
-    </div>
-  );
+
+    );
 }
+
