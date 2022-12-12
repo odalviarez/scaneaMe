@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import styles from './Card.module.css'
+import styles from './Cardupdate.module.css'
 
-export default function Card({name, img, id, price, type, color}) {
-
-
+export default function CardUpdate({name, img, id, price, type, color, handleAddCart}) {
 
   return (
     <div className={styles.card} >
@@ -17,7 +15,7 @@ export default function Card({name, img, id, price, type, color}) {
         <p>${price}</p>
         <p>{type}</p>
         <p>{color}</p>
-        {/* <button value={id} onClick={(e) => handleAddCart(e)}>ADD TO CART</button> */}
+        <button value={id} onClick={(e) => handleAddCart(e)}>Update</button>
 
     </div>
   )

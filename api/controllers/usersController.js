@@ -5,6 +5,7 @@ const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
 const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
 const jwt_decode = require("jwt-decode");
+const getAuth0Controller = require("./getAuth0Controller");
 const checkJwt = auth();
 const checkClaims = claimCheck((claims) => {
   return claims.permissions.includes("read:users");
@@ -17,7 +18,6 @@ router.post("/login/:email", async (req, res) => {
 let { authorization } = req.headers;
 let isAdmin = false;
 if(authorization) isAdmin = Boolean(jwt_decode(authorization).permissions.length);
-console.log("isAdmin: ", isAdmin);
   const { email } = req.params;
   const {
     firtsName,
@@ -92,8 +92,8 @@ router.get('/:email', async (req, res) => {
 router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
-  const { socials, image } = req.body;
-  let userData = await User.findOne({ email });
+  const { socials, image, aboutUser } = req.body;
+  let userData = await User.findOne({ email }); 
   try {
     let result = "";
     if (image) {
@@ -119,12 +119,42 @@ router.put("/:email", checkJwt, async (req, res) => {
         image: image
           ? { public_id: result.public_id, url: result.secure_url }
           : userData.image,
+        info: aboutUser? aboutUser : userData.info
       }
     );
 
     res.json(updateUser);
   } catch (error) {
     res.status(400).json(error.message);
+  }
+});
+
+
+//* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
+router.put("/:sub/:action", checkJwt, async (req, res) => {
+  const { sub, action } = req.params;
+  const { payload } = req.body;
+  console.log('llegamos al backend!', sub, action, payload, req.body);
+  try {
+    if (action === "delete") {
+      const updateUser = await User.updateOne(
+        { sub },
+        {isActive: false,}
+      )}
+    if (action === "emailChange") {
+      const updateUser = await User.updateOne(
+        { sub },
+        {
+        email: payload,
+        email_verified: false,
+        }
+      )}
+
+  let response = await getAuth0Controller(sub, action, payload)
+
+    res.json(response);
+  } catch (error) {
+    res.status(400).json('No se pudo actualizar la información del usuario', error.message);
   }
 });
 

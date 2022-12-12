@@ -5,7 +5,6 @@ import otoñoInvierno from '../../Logo/otoñoInvierno.jpg'
 import estaciones from '../../Logo/estaciones.jpg'
 import styles from './SeasonalBanner.module.css'
 
-import i18n from '../../i18n';
 
 export default function SeasonalBanner() {
   return (
@@ -27,9 +26,10 @@ export default function SeasonalBanner() {
       <Link to={"/catalogue"}
       
       state={{
-        filter:'season',
-        value:'spring',
-        valor:'Primavera / Verano'}}
+          filter:'season',
+          value:'spring',
+          valor:'Primavera / Verano'
+          }}
 
       className={styles.primaveraLink}>
       <img

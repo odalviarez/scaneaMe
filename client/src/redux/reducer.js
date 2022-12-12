@@ -48,36 +48,34 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case FILTER_PRODUCTS:
-        console.log("se despacho accion");
-        let productsFiltered = [];
+        let productsFiltered = state.allProducts
+        
+        for (let i=0; i < action.payload.length; i++) {
+          let filter = action.payload[i]
+          
+            switch (filter.filter){
+              case 'season':
+                productsFiltered = productsFiltered.filter((product) => product.season === filter.value)
 
-        for (let i = 0; i < action.payload.length; i++) {
-          let filter = action.payload[i];
-          for (let i = 0; i < state.allProducts.length; i++) {
-            const product = state.allProducts[i];
-            if (filter.filter === "type") {
-              if (product.type === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
+              break;
+
+              case 'type':
+                productsFiltered = productsFiltered.filter((product) => product.type === filter.value)
+
+              break;
+
+              case 'color':
+                productsFiltered = productsFiltered.filter((product) => product.color === filter.value)
+
+              break;
+
+              default:
+                console.log('No se filtró nada');
             }
-            if (filter.filter === "color") {
-              if (product.color === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-            if (filter.filter === "season") {
-              if (product.season === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-          }
+
+
         }
+
         return {
           ...state,
           products: productsFiltered,

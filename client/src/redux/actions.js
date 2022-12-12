@@ -11,6 +11,7 @@ export const GET_USER_LOGIN = "GET_USER_LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
 
+
 export const getAllProducts = () => {
   return async function (dispatch) {
     try {
@@ -88,6 +89,37 @@ export const getTotalProducts = (products) => {
   };
 };
 
+export const productDelete = (id, getToken) => {
+ return async function () {
+   const token = await getToken();
+   try {
+     let config = {
+       method: "delete",
+       url: process.env.REACT_APP_API
+         ? process.env.REACT_APP_API + `products/${id}`
+         : `http://localhost:5000/products/${id}`,
+       headers: {
+         "content-type": "application/json",
+         Authorization: `Bearer ${token}`,
+       },
+     };
+
+     axios(config)
+       .then(function (response) {
+        console.log(response.data)
+         return JSON.stringify(response.data);
+       })
+       .catch(function (error) {
+         return error;
+       });
+
+   } catch (error) {
+     alert("No se pudo eliminar el producto");
+   }
+ };
+
+};
+
 export const getUser = (email) => {
   return async function (dispatch) {
     try {
@@ -130,7 +162,6 @@ export const getUserLogin = (user, cart, getToken) => {
             : `http://localhost:5000/user/login/${user.email}`,
           data,
         };
-        console.log(config);
       }
       
       axios(config)
@@ -176,6 +207,35 @@ export const userUpdate = (payload, user, getToken) => {
     } catch (error) {
       console.log(error);
       alert("No se pudo actualizar los datos del usuario");
+    }
+  };
+};
+
+export const userUpdateAuth0 = (payload, sub, action, getToken) => {
+  return async function () {
+    try {
+      const token = await getToken();
+      let config = {
+        method: "put",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `/user/${sub}/${action}`
+          : `http://localhost:5000/user/${sub}/${action}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        "data": {payload},
+      };
+      axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+      alert("No se pudo actualizar los datos del usuario en Auth0");
     }
   };
 };
