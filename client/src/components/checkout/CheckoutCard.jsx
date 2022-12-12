@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './CheckoutCard.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { getUser } from '../../redux/actions'
+import { userGetOrders } from '../../redux/actions'
 import { useState } from 'react'
 import QRCode from 'qrcode'
 import { useLocalStorage } from '../../useLocalStorage'
@@ -12,11 +12,12 @@ import emailjs, { init } from '@emailjs/browser'
 export default function CheckoutCard() {
   const dispatch = useDispatch()
   const { email } = useParams()
-  //const userDB = useSelector(state => state.userDB)
+  const userOrders = useSelector(state => state.userDB)
   const [cart, setCart] = useLocalStorage('cartProducts', [])
 
   useEffect(() => {
     emailjs.init('M32ow5bWNcrtlFZss')
+    dispatch(userGetOrders(email))
     GenerateQRCode()
     setCart([])
     sendEmail()
