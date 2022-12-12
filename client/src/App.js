@@ -17,9 +17,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 
+import { Ecommerce, Orders, Employees, Customers } from "../src/dashboard/src/pages";
+
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
 import Checkout from "./pages/checkout/Checkout";
+import Navbar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
 initFontAwesome();
 
 
@@ -60,6 +64,7 @@ function App() {
         audience="https://scaneame.vercel.app/"
         //scope="read:current_user update:current_user_metadata"
       >
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -72,11 +77,25 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<About />} />
-          <Route path="/user/account" element={<ProtectedRoute component={UserAccount} />} />
-          <Route path="/user/purchases" element={<ProtectedRoute component={UserPurchases} />} />
+          <Route
+            path="/user/account"
+            element={<ProtectedRoute component={UserAccount} />}
+          />
+          <Route
+            path="/user/purchases"
+            element={<ProtectedRoute component={UserPurchases} />}
+          />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
+          {/* <Route path="dashboard/" element={<Ecommerce />} /> */}
+          <Route path="dashboard/ecommerce" element={<Ecommerce />} />
+
+          {/* pages  */}
+          <Route path="dashboard/orders" element={<Orders />} />
+          <Route path="dashboard/employees" element={<Employees />} />
+          <Route path="dashboard/customers" element={<Customers />} />
         </Routes>
+        <Footer/>
       </Auth0ProviderWithRedirectCallback>
     </div>
   );
