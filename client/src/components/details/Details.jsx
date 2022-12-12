@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 export default function Details({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
-  const navigate = useNavigate()
   const [productselect, setProductSelect] = useState("");
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const productsLoaded = useSelector((state) => state.products);
@@ -62,7 +61,7 @@ export default function Details({ id }) {
     }
     console.log(cart)
     if (e.target.name === "AddAndBuy"){
-      window.location.replace("http://localhost:3000/cart");
+      window.location.replace( process.env.REACT_APP_URL? process.env.REACT_APP_URL+"cart" : "http://localhost:3000/cart");
     }
   };
   
@@ -118,6 +117,7 @@ export default function Details({ id }) {
             value={id}
             name="AddAndBuy"
             onClick={handleAddCart}
+            disabled={!productselect}
           >
             Buy Now
           </button>
