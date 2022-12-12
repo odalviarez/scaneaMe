@@ -51,7 +51,7 @@ export default function CheckoutCard() {
 
   setTimeout(() => {
     setTrigger(1)
-  }, 200);
+  }, 2000);
 
   const sendEmail = () => {
     let prodAndQty = lastPurchase?.products.map(e => ({
