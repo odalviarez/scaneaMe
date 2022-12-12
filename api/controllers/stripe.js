@@ -144,6 +144,7 @@ const discountStock = async (customer) => {
       { id: elem.id },
       { stock: stock }
     );
+    console.log(updateProduct);
   });
 };
 module.exports = router;

@@ -17,8 +17,6 @@ export default function Home() {
   const dispatch = useDispatch();
 
   
-
-    
   useEffect(() => {
     dispatch(getAllProducts())
     }, [dispatch])
@@ -26,9 +24,9 @@ export default function Home() {
     return (
     <div>
       <NavBar />
-        <div>
+        {/* <div>
           <h1>{i18n.t("home.welcom-to-scaneaMe")}</h1>
-        </div>
+        </div> */}
       <Carru />
       <h2 className={styles.tituloCarru}>Nuestras remeras:</h2>
       <ProdCarru productType={'shirt'}/>
