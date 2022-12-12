@@ -136,9 +136,11 @@ const discountStock = async (customer) => {
           detailsProduct.stock[index].quantity - elem.cartTotalQuantity;
       }
     });
+
     let stock = { stock: detailsProduct.stock };
     console.log("stock ", stock);
     const updateProduct = await Products.updateOne({ id: elem.id }, stock);
+
     console.log(updateProduct);
   });
 };

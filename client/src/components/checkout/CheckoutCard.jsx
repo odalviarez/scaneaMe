@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './CheckoutCard.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { getUser } from '../../redux/actions'
+import { userGetOrders } from '../../redux/actions'
 import { useState } from 'react'
 import QRCode from 'qrcode'
 import { useLocalStorage } from '../../useLocalStorage'
@@ -12,15 +12,22 @@ import emailjs, { init } from '@emailjs/browser'
 export default function CheckoutCard() {
   const dispatch = useDispatch()
   const { email } = useParams()
-  //const userDB = useSelector(state => state.userDB)
+  const userOrders = useSelector(state => state.userOrders)
   const [cart, setCart] = useLocalStorage('cartProducts', [])
 
+  console.log('User Order: ', userOrders)
+  let lastPurchase = userOrders[userOrders.length - 1]
+  const [trigger, setTrigger] = useState(0)
+
   useEffect(() => {
-    emailjs.init('M32ow5bWNcrtlFZss')
+    emailjs.init('vGQTOpiT1rYKFB3ox')
+    dispatch(userGetOrders(email))
     GenerateQRCode()
     setCart([])
-    sendEmail()
-  }, [])
+    if (lastPurchase?.hasOwnProperty('products')) {
+      sendEmail()
+    }
+  }, [trigger])
 
   const [Qr, setQr] = useState('')
 
@@ -37,21 +44,42 @@ export default function CheckoutCard() {
       },
       (err, url) => {
         if (err) return console.error(err)
-
-        console.log(url)
         setQr(url)
       }
     )
   }
 
-  const sendEmail = () => {
-    let indice = email.indexOf('@')
-    let emailName = email.substring(0, indice)
+  setTimeout(() => {
+    setTrigger(1)
+  }, 200);
 
-    const emailFields = { to_name: emailName, to_email: email }
+  const sendEmail = () => {
+    let prodAndQty = lastPurchase?.products.map(e => ({
+      item: e.description,
+      quantity: e.quantity,
+    }))
+
+    let amount = `$${lastPurchase?.total / 100}`
+    let name = lastPurchase?.shipping.name
+    let adress = `${lastPurchase?.shipping.address?.country}, ${lastPurchase?.shipping.address?.state}, ${lastPurchase?.shipping.address?.city}, ${lastPurchase?.shipping.address?.line1}`
+
+    let purchaseText = ''
+    prodAndQty?.map(e => {
+      purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
+    })
+    console.log('Purchase text: ', purchaseText)
+
+    let emailFields = {
+      to_name: name,
+      to_email: email,
+      products: purchaseText,
+      amount: amount,
+      name: name,
+      adress: adress,
+    }
 
     console.log('email fields: ', emailFields)
-    emailjs.send('service_rc9xa04', 'template_1s4wf1s', emailFields).then(
+    emailjs.send('service_0hpnim5', 'template_7cgjln7', emailFields).then(
       response => {
         console.log('SUCCESS!', response)
       },
