@@ -140,10 +140,12 @@ const discountStock = async (customer) => {
         stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
       }
     });
+    console.log("stock ", stock)
     const updateProduct = await Products.updateOne(
       { id: elem.id },
       { stock: stock }
     );
+    console.log(updateProduct);
   });
 };
 module.exports = router;

@@ -1,15 +1,4 @@
-const { Order } = require("../models/orderModel");
-const User = require("../models/userModel");
-const express = require("express");
-const router = express.Router();
-const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
-const jwt_decode = require("jwt-decode");
-const getAuth0Controller = require("./getAuth0Controller");
-const checkJwt = auth();
-const checkClaims = claimCheck((claims) => {
-  return claims.permissions.includes("read:users");
-});
-
+const Order = require("../models/orderModel");
 //const { auth, isUser, isAdmin } = require("../middleware/auth");
 
 // const router = require("express").Router();
