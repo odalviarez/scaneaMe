@@ -16,20 +16,18 @@ export default function CheckoutCard() {
   const [cart, setCart] = useLocalStorage('cartProducts', [])
 
   console.log('User Order: ', userOrders)
-
   let lastPurchase = userOrders[userOrders.length - 1]
-  
+  const [trigger, setTrigger] = useState(0)
+
   useEffect(() => {
-    emailjs.init('M32ow5bWNcrtlFZss')
+    emailjs.init('vGQTOpiT1rYKFB3ox')
     dispatch(userGetOrders(email))
     GenerateQRCode()
     setCart([])
-    setTimeout(() => {
+    if (lastPurchase?.hasOwnProperty('products')) {
       sendEmail()
-    }, 1000); 
-  }, [])
-
-  
+    }
+  }, [trigger])
 
   const [Qr, setQr] = useState('')
 
@@ -51,25 +49,27 @@ export default function CheckoutCard() {
     )
   }
 
-  
+  setTimeout(() => {
+    setTrigger(1)
+  }, 200);
 
   const sendEmail = () => {
-    const prodAndQty = lastPurchase?.products.map(e => ({
+    let prodAndQty = lastPurchase?.products.map(e => ({
       item: e.description,
       quantity: e.quantity,
     }))
-  
-    const amount = `$${(lastPurchase?.total)/100}`
-    const name = lastPurchase?.shipping.mail
-    const adress = `${lastPurchase?.shipping.adress?.country}, ${lastPurchase?.shipping.adress?.state}, ${lastPurchase?.shipping.adress?.city}, ${lastPurchase?.shipping.adress?.line1}`
-  
+
+    let amount = `$${lastPurchase?.total / 100}`
+    let name = lastPurchase?.shipping.name
+    let adress = `${lastPurchase?.shipping.address?.country}, ${lastPurchase?.shipping.address?.state}, ${lastPurchase?.shipping.address?.city}, ${lastPurchase?.shipping.address?.line1}`
+
     let purchaseText = ''
     prodAndQty?.map(e => {
       purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
     })
-    console.log('Purchase text: ', purchaseText) 
-    
-    const emailFields = {
+    console.log('Purchase text: ', purchaseText)
+
+    let emailFields = {
       to_name: name,
       to_email: email,
       products: purchaseText,
@@ -79,7 +79,7 @@ export default function CheckoutCard() {
     }
 
     console.log('email fields: ', emailFields)
-    emailjs.send('service_rc9xa04', 'template_1s4wf1s', emailFields).then(
+    emailjs.send('service_0hpnim5', 'template_7cgjln7', emailFields).then(
       response => {
         console.log('SUCCESS!', response)
       },
@@ -87,7 +87,6 @@ export default function CheckoutCard() {
         console.log('FAILED...', error)
       }
     )
-    
   }
 
   return (
