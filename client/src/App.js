@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Catalogue from "./pages/catalogue/Catalogue";
 import ContactForm from "./pages/contactForm/ContactForm";
@@ -72,14 +72,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<About />} />
-          <Route
-            path="/user/account"
-            element={<ProtectedRoute component={UserAccount} />}
-          />
-          <Route
-            path="/user/purchases"
-            element={<ProtectedRoute component={UserPurchases} />}
-          />
+          <Route path="/user/account" element={<ProtectedRoute component={UserAccount} />} />
+          <Route path="/user/purchases" element={<ProtectedRoute component={UserPurchases} />} />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>

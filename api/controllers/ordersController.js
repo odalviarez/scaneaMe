@@ -1,7 +1,9 @@
+const express = require("express");
 const Order = require("../models/orderModel");
+const router = express.Router();
 //const { auth, isUser, isAdmin } = require("../middleware/auth");
 
-const router = require("express").Router();
+// const router = require("express").Router();
 
 //CREATE
 
@@ -50,7 +52,7 @@ router.get("/find/:email", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const orders = await Order.find(); 
+    const orders = await Order.find();
     res.status(200).send(orders);
   } catch (err) {
     res.status(500).send(err);

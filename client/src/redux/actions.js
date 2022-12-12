@@ -240,17 +240,16 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
   };
 };
 
-export const userGetOrders = (userId) => {
+export const userGetOrders = (email) => {
   return async function (dispatch) {
     try {
-      const json = await axios.get(`order/find/${userId}`);
+      const json = await axios.get(`order/find/${email}`);
       return dispatch({
         type: USER_GET_ORDERS,
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
-      alert("Could not get orders from user", error.message);
+      console.log("Could not get orders from user", error);
     }
   };
 };

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "reactstrap";
 import React, {useState, useEffect} from 'react'
 import { useDispatch} from 'react-redux'
-import { getAllProducts, loadAllProducts, productsCreate } from '../../redux/actions.js';
+import { getAllProducts, productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
 import i18n from '../../i18n'
 import { useAuth0 } from "@auth0/auth0-react";
