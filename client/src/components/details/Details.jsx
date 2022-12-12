@@ -107,8 +107,9 @@ export default function Details({ id }) {
           <button className="price-cart__btn btn--orange">Buy Now</button>
         </div>
       </section>
-      <Raiting />
-      <Coments />
+      <Raiting/>
+      {/* <Coments/> */}
+
     </main>
   );
 }

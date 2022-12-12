@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import './rating.css'
 import comentarios from "../../comentarios";
+import StarRating from '../StarRating/StarRating'
 
 const colors = {
   orange: "#FFBA5A",
@@ -11,12 +12,19 @@ const colors = {
 
 export default function Raiting() {
 
+  const [comments, setComments] = useState(comentarios);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   // eslint-disable-next-line
   const [comment, setComment]=useState("")
 
   const stars = Array(5).fill(0)
+
+  // useEffect(()=>{
+  //   setComments()
+  // })
+
+
   const handleClick = value => {
     setCurrentValue(value)
   }
@@ -24,19 +32,21 @@ export default function Raiting() {
   const handleMouseOver = newHoverValue => {
     setHoverValue(newHoverValue)
   };
-
+  
   const handleMouseLeave = () => {
     setHoverValue(undefined)
   }
 
   const addComment=()=>{
-    comentarios.unshift({
-      comment:'Fachero',
-      rating:5
-    })
+    console.log(comments.unshift(
+    {comment:'Fachero',
+    rating: currentValue}
+    ))
+    
+
   }
 
-  return (
+  return (<>
     <div className="container">
       <div className="stars">
         {stars.map((_, index) => {
@@ -67,5 +77,21 @@ export default function Raiting() {
       </button>
       
     </div>
+
+    <div className='comment-container'>
+        
+        {comments.map(c=>{
+          return(
+            <>
+            <StarRating value={c.rating}/>
+            <div className='txt-comment'>
+            <p>{c.comment}</p>
+            </div>
+            </>
+          )
+        })}
+        
+    </div>
+    </>
   )
 }
