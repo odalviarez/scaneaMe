@@ -90,7 +90,7 @@ export default function Details({name, type, stock, color, price, image, id}) {
         
       </section>
       <Raiting/>
-      <Coments/>
+      {/* <Coments/> */}
     </main>
   )
 }

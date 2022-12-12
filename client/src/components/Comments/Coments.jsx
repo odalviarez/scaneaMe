@@ -5,17 +5,17 @@ import comentarios from '../../comentarios'
 
 export default function Coments({comment, stars}) {
 
-  const [comments, setComments] = useState(...comentarios);
-
-  // useEffect(()=>{
-  //   console.log(comments)
-  // },...comments)
+  const [comments, setComments] = useState(comentarios);
+  console.log(comments)
+  useEffect(()=>{
+    console.log(comments)
+  })
   
 
   return (
     <div className='comment-container'>
         
-        {comentarios.map(c=>{
+        {comments.map(c=>{
           return(
             <>
             <StarRating value={c.rating}/>
