@@ -2,8 +2,7 @@ import React from 'react'
 
 import {Tabs, Tab, TabPanel, TabList} from '../../lib'
 import CardsDelete from '../cardsDashboard/CardsDelete'
-import Card2 from '../cardsDashboard/CardsUpdate'
-import EditProduct from '../cardsDashboard/CardsUpdate'
+import CardUpdate from '../cardsDashboard/CardsUpdate'
 import CreateComponent from '../createComponent/createComponent'
 import CustomTab from './CustomTab'
 
@@ -22,12 +21,11 @@ class CustomTabExample extends React.Component {
                         <Tab component={CustomTab} label='Create Product' id='create'/>
                         <Tab component={CustomTab} label='Update Product' id='update'/>
                         <Tab component={CustomTab} label='Delete Product' id='delete'/>
-                        <Tab component={CustomTab} label='Edit Product' id='edit'/>
                     </TabList>
                     <TabList>
 
                         <TabPanel component={() => <div>
-                            Create Product Here
+                            <h3>Create Product Here</h3>
                                 <div>
                                     <CreateComponent />
                                 </div>
@@ -35,28 +33,20 @@ class CustomTabExample extends React.Component {
                         id='create'/>
                         
                         <TabPanel component={() => <div>
-                            Update Here
+                            <h3>Update Product Here</h3>
                                 <div>
-                                    <Card2 />
+                                    <CardUpdate />
                                 </div>
                             </div>}                       
                         id='update'/>
                         
                         <TabPanel component={() => <div>
-                            Delete Here
+                            <h3>Delete Product Here</h3>
                                 <div>
                                     <CardsDelete />
                                 </div>
                             </div>}
                         id='delete'/>
-
-                        <TabPanel component={() => <div>
-                            Delete Here
-                                <div>
-                                    <EditProduct />
-                                </div>
-                            </div>}
-                        id='edit'/>
 
                     </TabList>
                 </Tabs>

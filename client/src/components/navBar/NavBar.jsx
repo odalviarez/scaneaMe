@@ -203,16 +203,6 @@ export default function Navbar() {
       </Container>
       <ul>
         <li>
-          <div>
-            <Button as={Link} href="/catalogue/?lng=es">
-              ES
-            </Button>
-            <Button as={Link} href="/catalogue/?lng=en">
-              EN
-            </Button>
-          </div>
-        </li>
-        <li>
           <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />

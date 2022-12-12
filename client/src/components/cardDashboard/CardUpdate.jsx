@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Cardupdate.module.css'
 
-export default function CardUpdate({name, img, id, price, type, color, handleAddCart}) {
+export default function CardUpdate({name, img, id, price, type, color, handleUpdate}) {
 
   return (
     <div className={styles.card} >
@@ -11,12 +11,12 @@ export default function CardUpdate({name, img, id, price, type, color, handleAdd
           <img src={img} alt="imagen" />
         </div>
   
-        <Link to={`/detail/${id}`} className={styles.title}>{name}</Link>
-        <p>${price}</p>
+        <h3 className={styles.title}>{name}</h3>
+        <p>{name}</p>
         <p>{type}</p>
-        <p>{color}</p>
-        <button value={id} onClick={(e) => handleAddCart(e)}>Update</button>
-
+        <p>${price}</p>
+        <Link to={`detail/${id}`} className={styles.title}>Edit</Link>
+        
     </div>
   )
 }

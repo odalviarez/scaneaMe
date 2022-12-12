@@ -110,11 +110,6 @@ const getToken = async () => {
       <div>
         <StyledCreateProduct>
           <StyledForm onSubmit={handleSubmit}>
-          <div>
-      <Button as={Link} title="Español" href="/dashboard/?lng=es">ES</Button>
-      <Button as={Link} title="English" href="/dashboard/?lng=en">EN</Button>
-      <br /> <br />
-      </div>
             <h3>{i18n.t("dashboard.create-product")}</h3>
             <input
               id="imgUpload"
