@@ -1,0 +1,10 @@
+.imageContainer img {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 20vw;
+    height:  200px;
+    object-fit: cover;
+    border-top-left-radius:40px;
+    border-top-right-radius:40px;
+}

@@ -119,6 +119,15 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
                   {i18n.t("navbar.profile")}
                 </DropdownItem>
                 <DropdownItem
+                  tag={RouterNavLink}
+                  to="/user/purchases"
+                  className="dropdown-profile"
+                  activeclassname="router-link-exact-active"
+                >
+                  <FontAwesomeIcon icon="box" className="mr-3" />{" "}
+                  {i18n.t("navbar.purchases")}
+                </DropdownItem>
+                <DropdownItem
                   id="qsLogoutBtn"
                   onClick={() => {
                     logoutWithRedirect();
@@ -179,6 +188,15 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
                 activeclassname="router-link-exact-active"
               >
                 {i18n.t("navbar.profile")}
+              </RouterNavLink>
+            </NavItem>
+            <NavItem>
+              <FontAwesomeIcon icon="box" className="mr-3" />
+              <RouterNavLink
+                to="/user/purchases"
+                activeclassname="router-link-exact-active"
+              >
+                {i18n.t("navbar.purchases")}
               </RouterNavLink>
             </NavItem>
             <NavItem>
