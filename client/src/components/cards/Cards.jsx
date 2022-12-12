@@ -183,6 +183,9 @@ export default function Cards() {
           <li value="pants" onClick={(e) => handleFilters(e)}>
             {i18n.t("header.pants")}
           </li>
+          <li value="trunks" onClick={(e) => handleFilters(e)}>
+            Shorts de baño
+          </li>
         </ul>
 
         <ul value="color">
@@ -204,6 +207,9 @@ export default function Cards() {
           </li>
           <li value="yellow" onClick={(e) => handleFilters(e)}>
             {i18n.t("header.yellow")}
+          </li>
+          <li value="gray" onClick={(e) => handleFilters(e)}>
+            Gris
           </li>
         </ul>
       </div>
