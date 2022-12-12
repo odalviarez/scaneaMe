@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { Ecommerce, Orders, Employees, Customers } from "../src/pages";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { Sidebar, ThemeSettings } from "./components";
 
@@ -63,11 +65,19 @@ const DashboardComponent = () => {
             {themeSettings && <ThemeSettings />}
 
           </div>
-
+          <Routes>
+            <Route path="dashboard/ecommerce" element={<Ecommerce />} />
+            <Route path="dashboard/orders" element={<Orders />} />
+            <Route path="dashboard/employees" element={<Employees />} />
+            <Route path="dashboard/customers" element={<Customers />} />
+          </Routes>
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 export default DashboardComponent;

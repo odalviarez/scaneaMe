@@ -17,7 +17,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 
-import { Ecommerce, Orders, Employees, Customers } from "../src/dashboard/src/pages";
+
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
@@ -69,8 +69,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route
-            path="/dashboard"
-            element={<ProtectedRoute component={Dashboard} />}
+            path="/dashboard/*" element={<ProtectedRoute component={Dashboard} />}
           />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/detail/:id" element={<Detail />} />
@@ -87,13 +86,7 @@ function App() {
           />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
-          {/* <Route path="dashboard/" element={<Ecommerce />} /> */}
-          <Route path="dashboard/ecommerce" element={<Ecommerce />} />
 
-          {/* pages  */}
-          <Route path="dashboard/orders" element={<Orders />} />
-          <Route path="dashboard/employees" element={<Employees />} />
-          <Route path="dashboard/customers" element={<Customers />} />
         </Routes>
         <Footer/>
       </Auth0ProviderWithRedirectCallback>
