@@ -6,10 +6,8 @@ import OrderCard from "./OrderCard";
 import {getAllProducts, loadAllProducts} from "../../redux/actions";
 
 const UserPurComp = () => {
-
-    const { user} = useAuth0()
+    const {user} = useAuth0()
     const dispatch = useDispatch()
-    const userLogin = useSelector(state => state.userLogin)
     const userOrders = useSelector(state => state.userOrders)
     const productsOnStore = useSelector((state) => state.allProducts);
 

@@ -30,7 +30,5 @@ export default function Coments({comment, stars}) {
         })}
         
         </div>
-
-    
   )
 }

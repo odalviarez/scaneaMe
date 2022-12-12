@@ -63,19 +63,16 @@ router.post(
   express.raw({ type: "application/json" }),
   (req, res) => {
     const sig = req.headers["stripe-signature"];
-    console.log("sig: ", sig);
     let data;
     let eventType;
 
     // Check if webhook signing is configured.
     let endpointSecret;
     endpointSecret = process.env.STRIPE_WEB_HOOK;
-    console.log("endpoint: ", endpointSecret);
     let event;
 
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-      console.log("event: ", event);
     } catch (err) {
       console.log(`❌ Webhook Error: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
@@ -122,8 +119,6 @@ const createOrder = async (customer, data, lineItems) => {
 
   try {
     const savedOrder = await newOrder.save();
-
-
   } catch (err) {
     console.log(err);
   }
@@ -134,17 +129,21 @@ const discountStock = async (customer) => {
 
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
-    let { stock } = detailsProduct;
-    stock.forEach((element, index) => {
+    console.log("producto: ", detailsProduct);
+    detailsProduct.stock.forEach((element, index) => {
       if (elem.size === element.size) {
-        stock[index].quantity = stock[index].quantity - elem.cartTotalQuantity;
+        detailsProduct.stock[index].quantity =
+          detailsProduct.stock[index].quantity - elem.cartTotalQuantity;
       }
     });
-    console.log("stock ", stock)
-    const updateProduct = await Products.updateOne(
-      { id: elem.id },
-      { stock: stock }
-    );
+
+    let stock = { stock: detailsProduct.stock };
+    console.log("stock ", stock);
+    console.log("elem id: ", elem.id);
+    console.log("producto id: ", detailsProduct.id);
+    console.log("son iguales?: ",Boolean(elem.id === detailsProduct.id));
+    const updateProduct = await Products.updateOne({ id: elem.id }, stock);
+
     console.log(updateProduct);
   });
 };
