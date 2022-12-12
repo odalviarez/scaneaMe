@@ -8,8 +8,7 @@
     position: absolute;
     left:30%;
     top: 15%;
-    width: 500px
-    
+    width: 500px;
 }
 
 .UserAccCompContainer h1{
@@ -26,9 +25,32 @@
     margin-bottom: 10px
 }
 
+.UserAccCompItem p {
+    color: red
+}
+
+.UserAccCompAbout {
+    width: 400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.UserAccCompAbout textarea {
+    width: 300px;
+    resize: none;
+    position:relative;
+    left: 18%;
+
+}
+
 
 .UserAccCompContainer input{
-    width: 200px;
+    width: 300px;
     position:absolute;
     left: 45%;
 
@@ -45,11 +67,31 @@
 }
 
 .imgUpContainer{
-  display: flex;
-  
-  
+    display: flex;
+}
+
+.showPassword{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.showPassword button{
+    position: relative;
+    left: 350%;
 }
 
 .imgUpload{
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.popupDelete{
+    background-color: rgba(255, 0, 0, 0.297);
+    display: flex;
+    flex-direction: column;
+}
+.popupDelete button{
+    background-color: rgba(255, 0, 0, 0.297);
 }

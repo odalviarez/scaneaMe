@@ -30,7 +30,8 @@
         "account": "Cuenta",
         "profile": "Perfil",
         "log-out": "Salir",
-        "dashboard": "Administrar"
+        "dashboard": "Administrar",
+        "purchases": "Compras"
     },
 
     "dashboard": {

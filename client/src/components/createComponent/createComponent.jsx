@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button } from "reactstrap";
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch} from 'react-redux'
-import { productsCreate } from '../../redux/actions.js';
+import { getAllProducts, productsCreate } from '../../redux/actions.js';
 import styled from "styled-components";
 import i18n from '../../i18n'
 import { useAuth0 } from "@auth0/auth0-react";
@@ -57,6 +57,12 @@ const getToken = async () => {
         ])
     }
 
+    useEffect(() => {
+      
+      return () => {
+        dispatch(getAllProducts())
+      };
+    }, []);
     
     const handleProductImageUpload = (e) => {
         const file = e.target.files[0];
@@ -78,8 +84,7 @@ const getToken = async () => {
     };
     
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
+      e.preventDefault(e);
         console.log({
             name,
             color,
@@ -109,7 +114,9 @@ const getToken = async () => {
     return (
       <div>
         <StyledCreateProduct>
+
           <StyledForm onSubmit={handleSubmit}>
+
             <h3>{i18n.t("dashboard.create-product")}</h3>
             <input
               id="imgUpload"

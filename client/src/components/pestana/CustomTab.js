@@ -7,3 +7,4 @@ const CustomTab = ({children, isActive}) =>
     <span style={isActive ? activeStyle : style}>{children}</span>
 
 export default CustomTab
+

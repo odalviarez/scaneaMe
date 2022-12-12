@@ -5,13 +5,14 @@ import { useLocalStorage } from "../../useLocalStorage";
 import { getAllProducts, loadAllProducts, sortProducts, getTotalProducts} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation } from 'react-router-dom';
+
 
 import i18n from '../../i18n'
 
 export default function Cards() {
   const dispatch = useDispatch();
 
+    // eslint-disable-next-line
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const [setSort] = useState("");
   const productsLoaded = useSelector((state) => state.products);
@@ -38,39 +39,18 @@ export default function Cards() {
       let cartTotal = cart.reduce((acc, currentValue) => acc + currentValue.cartTotalQuantity, 0);
       dispatch(getTotalProducts(cartTotal));
     }
+    // eslint-disable-next-line
   }, [cart, dispatch, productsOnStore]);
 
   useEffect(() => {
-
-   
-
     //* Al salir del componente, se vuelven a cargar todos los productos a la store. Caso contrario al volver al catálogo desde otra página quedaban los productos filtrados aún sin filtros aplicados.
     return () => {
       dispatch(loadAllProducts())
     }
-    
+    // eslint-disable-next-line
   }, [productsOnStore]);
 
-  const handleAddCart = function (e) {
-    e.preventDefault(e);
-    //verificamos que el id del producto exista en los productos cargados y traemos toda la info
-    let newProduct = productsLoaded.find((p) => p.id === e.target.value);
-    //Verificamos si el producto ya esta en el carrito y aumentamos el total. Si no esta iniciamos el total en 1.
-    let productInCart = cart.find((elem) => elem.id === newProduct.id);
-    if (productInCart) {
-      let cartModified = cart.map((elem) => {
-        if (elem.id === productInCart.id) {
-          elem.cartTotalQuantity++;
-        }
-        return elem;
-      });
-      setCart(cartModified);
-    } else {
-      newProduct = { ...newProduct, cartTotalQuantity: 1 };
-      setCart([...cart, { ...newProduct }]);
-    }
-  };
-
+  // eslint-disable-next-line
   const handleSorts = function (e) {
     e.preventDefault(e);
     dispatch(sortProducts(e.target.value));
@@ -117,7 +97,6 @@ export default function Cards() {
                       price={p.price}
                       type={p.type}
                       color={p.color}
-                      handleAddCart={handleAddCart}
                     />
                   );
                 })

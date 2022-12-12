@@ -35,18 +35,20 @@ export default function ProfileCard() {
 
   }, [dispatch, userDB]);
 
+
+
   return (
     <div>
       {userDB.isActive ? (
         <div className={styles.container}>
           <img
             key={Date.now()}
-            src={userImg}
+            src={userDB? userDB.image.url : imgPlaceholder}
             className={styles.userImg}
             alt='User'
           />
           <div className={styles.descriptionSocials}>
-            <div className={styles.description}>{description}</div>
+            <div className={styles.description}>{userDB? userDB.info : ''}</div>
             <div className={styles.socialsContainer}>
               {socials ? (
                 <Socials

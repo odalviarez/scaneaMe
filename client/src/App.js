@@ -1,13 +1,13 @@
 import "./App.css";
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import logo from "./logo.svg";
 import Home from "./pages/home/Home";
 import Catalogue from "./pages/catalogue/Catalogue";
 import ContactForm from "./pages/contactForm/ContactForm";
 import Cart from "./pages/cart/Cart";
 import Detail from "./pages/detail/Detail";
 import About from "./pages/about/About";
+
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
@@ -72,10 +72,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<About />} />
-          <Route
-            path="/user/account"
-            element={<ProtectedRoute component={UserAccount} />}
-          />
+          <Route path="/user/account" element={<ProtectedRoute component={UserAccount} />} />
+          <Route path="/user/purchases" element={<ProtectedRoute component={UserPurchases} />} />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>

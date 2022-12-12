@@ -28,13 +28,8 @@ export default function Navbar() {
   // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
+const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
+
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
@@ -46,6 +41,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
+
     // if (userLogin.hasOwnProperty("cart")) {
     //   if (userLogin.cart.length && !cart.length && isAuthenticated)
     //     setCart(userLogin.cart);
@@ -123,6 +119,15 @@ export default function Navbar() {
                   {i18n.t("navbar.profile")}
                 </DropdownItem>
                 <DropdownItem
+                  tag={RouterNavLink}
+                  to="/user/purchases"
+                  className="dropdown-profile"
+                  activeclassname="router-link-exact-active"
+                >
+                  <FontAwesomeIcon icon="box" className="mr-3" />{" "}
+                  {i18n.t("navbar.purchases")}
+                </DropdownItem>
+                <DropdownItem
                   id="qsLogoutBtn"
                   onClick={() => {
                     logoutWithRedirect();
@@ -186,6 +191,15 @@ export default function Navbar() {
               </RouterNavLink>
             </NavItem>
             <NavItem>
+              <FontAwesomeIcon icon="box" className="mr-3" />
+              <RouterNavLink
+                to="/user/purchases"
+                activeclassname="router-link-exact-active"
+              >
+                {i18n.t("navbar.purchases")}
+              </RouterNavLink>
+            </NavItem>
+            <NavItem>
               <FontAwesomeIcon icon="power-off" className="mr-3" />
               <RouterNavLink
                 to="#"
@@ -203,6 +217,7 @@ export default function Navbar() {
       </Container>
       <ul>
         <li>
+
           <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />
