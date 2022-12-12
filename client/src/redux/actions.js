@@ -229,7 +229,7 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
       let config = {
         method: "put",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/${sub}/${action}`
+          ? process.env.REACT_APP_API + `user/${sub}/${action}`
           : `http://localhost:5000/user/${sub}/${action}`,
         headers: {
           "content-type": "application/json",
