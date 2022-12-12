@@ -40,7 +40,7 @@ export default function Details({ id }) {
     if (productInCart) {
       let cartModified = cart.map((elem) => {
         //*Verificamos que el ID del producto exista
-        if (elem.id === productInCart.id) { 
+        if (elem.id === productInCart.id && elem.size === productselect) { 
           stock.map((e) =>
             e.size === productselect
               ? e.quantity > elem.cartTotalQuantity //*Luego verificamos que el stock del producto sea mayor a lo agregado al carrito para poder seguir agregando
@@ -48,6 +48,7 @@ export default function Details({ id }) {
                 : ""
               : ""
           );
+          console.log(elem);
         }
         return elem;
       });
