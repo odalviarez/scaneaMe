@@ -6,7 +6,6 @@ import {Button} from 'react-bootstrap';
 export default function About() {
   return (
     <div>
-      <NavBar />
       <h1>Meet the team members</h1>
 
   
