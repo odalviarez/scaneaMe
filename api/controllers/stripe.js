@@ -140,8 +140,7 @@ const discountStock = async (customer) => {
     });
     console.log("stock ", stock)
     const updateProduct = await Products.updateOne(
-      { id: elem.id },
-      { stock }
+      { id: elem.id }, stock
     );
     console.log(updateProduct);
   });
