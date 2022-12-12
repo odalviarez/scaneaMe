@@ -134,6 +134,7 @@ const discountStock = async (customer) => {
 
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
+    console.log("producto: ", detailsProduct);
     let { stock } = detailsProduct;
     stock.forEach((element, index) => {
       if (elem.size === element.size) {
@@ -143,7 +144,7 @@ const discountStock = async (customer) => {
     console.log("stock ", stock)
     const updateProduct = await Products.updateOne(
       { id: elem.id },
-      { stock: stock }
+      { stock }
     );
     console.log(updateProduct);
   });
