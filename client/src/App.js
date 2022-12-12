@@ -76,6 +76,10 @@ function App() {
             path="/user/account"
             element={<ProtectedRoute component={UserAccount} />}
           />
+          <Route
+            path="/user/purchases"
+            element={<ProtectedRoute component={UserPurchases} />}
+          />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
         </Routes>

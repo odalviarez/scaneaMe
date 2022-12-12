@@ -1,17 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import StarRating from '../StarRating/StarRating'
 import './comment.css'
 import comentarios from '../../comentarios'
 
 export default function Coments({comment, stars}) {
 
-  // eslint-disable-next-line
-  const [comments, setComments] = useState(...comentarios);
+
+  const [comments, setComments] = useState(comentarios);
+  console.log(comments)
+  useEffect(()=>{
+    console.log(comments)
+  })
+  
 
 
   return (
     <div className='comment-container'>
         
+
         {comentarios.map((c, index)=>{
           return(
             <div key={index}>
@@ -24,7 +30,5 @@ export default function Coments({comment, stars}) {
         })}
         
         </div>
-
-    
   )
 }
