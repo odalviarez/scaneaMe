@@ -12,16 +12,24 @@ import emailjs, { init } from '@emailjs/browser'
 export default function CheckoutCard() {
   const dispatch = useDispatch()
   const { email } = useParams()
-  const userOrders = useSelector(state => state.userDB)
+  const userOrders = useSelector(state => state.userOrders)
   const [cart, setCart] = useLocalStorage('cartProducts', [])
 
+  console.log('User Order: ', userOrders)
+
+  let lastPurchase = userOrders[userOrders.length - 1]
+  
   useEffect(() => {
     emailjs.init('M32ow5bWNcrtlFZss')
     dispatch(userGetOrders(email))
     GenerateQRCode()
     setCart([])
-    sendEmail()
+    setTimeout(() => {
+      sendEmail()
+    }, 1000); 
   }, [])
+
+  
 
   const [Qr, setQr] = useState('')
 
@@ -38,18 +46,37 @@ export default function CheckoutCard() {
       },
       (err, url) => {
         if (err) return console.error(err)
-
-        console.log(url)
         setQr(url)
       }
     )
   }
 
-  const sendEmail = () => {
-    let indice = email.indexOf('@')
-    let emailName = email.substring(0, indice)
+  
 
-    const emailFields = { to_name: emailName, to_email: email }
+  const sendEmail = () => {
+    const prodAndQty = lastPurchase?.products.map(e => ({
+      item: e.description,
+      quantity: e.quantity,
+    }))
+  
+    const amount = `$${(lastPurchase?.total)/100}`
+    const name = lastPurchase?.shipping.mail
+    const adress = `${lastPurchase?.shipping.adress?.country}, ${lastPurchase?.shipping.adress?.state}, ${lastPurchase?.shipping.adress?.city}, ${lastPurchase?.shipping.adress?.line1}`
+  
+    let purchaseText = ''
+    prodAndQty?.map(e => {
+      purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
+    })
+    console.log('Purchase text: ', purchaseText) 
+    
+    const emailFields = {
+      to_name: name,
+      to_email: email,
+      products: purchaseText,
+      amount: amount,
+      name: name,
+      adress: adress,
+    }
 
     console.log('email fields: ', emailFields)
     emailjs.send('service_rc9xa04', 'template_1s4wf1s', emailFields).then(
@@ -60,6 +87,7 @@ export default function CheckoutCard() {
         console.log('FAILED...', error)
       }
     )
+    
   }
 
   return (
