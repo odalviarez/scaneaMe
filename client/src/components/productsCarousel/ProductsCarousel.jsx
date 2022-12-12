@@ -7,9 +7,6 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import HomeCard from './HomeCard'
 
-
-
-
 export default function HomeBanners({ productType }) {
   const dispatch = useDispatch();
 
