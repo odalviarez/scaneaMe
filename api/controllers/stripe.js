@@ -142,7 +142,7 @@ const discountStock = async (customer) => {
     console.log("elem id: ", elem.id);
     console.log("producto id: ", detailsProduct.id);
     console.log("son iguales?: ",Boolean(elem.id === detailsProduct.id));
-    const updateProduct = await Products.updateOne({ id: elem.id }, stock);
+    const updateProduct = await Products.updateOne({ id: elem.id }, {stock});
 
     console.log(updateProduct);
   });
