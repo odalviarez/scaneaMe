@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import StarRating from '../StarRating/StarRating'
 import './comment.css'
 import comentarios from '../../comentarios'
@@ -30,7 +30,5 @@ export default function Coments({comment, stars}) {
         })}
         
         </div>
-
-    
   )
 }
