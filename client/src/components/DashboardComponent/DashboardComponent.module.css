@@ -1,0 +1,38 @@
+.dashboardContainer {
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: 80vh;
+    margin-top: -50px;
+    margin-bottom: -50px;
+}
+
+.dashboardNavigator { 
+    padding-top: 20px;
+    grid-area: 1 / 1 / 2 / 2; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: lightgray;
+    height: 100%;
+}
+
+.dashboardNavigator p{ 
+    padding-left: 10px;
+    font-size: large;
+}
+
+.dashboardNavigator p:hover{ 
+    background-color: gray;
+    color: white;
+    cursor: pointer
+
+}
+
+.dashboardPage { 
+    grid-area: 1 / 2 / 2 / 3; 
+}
+
