@@ -1,9 +1,13 @@
 const express = require("express");
 const Order = require("../models/orderModel");
 const router = express.Router();
-//const { auth, isUser, isAdmin } = require("../middleware/auth");
+const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
+const checkClaims = claimCheck((claims) => {
+  return claims.permissions.includes("read:users");
+});
 
-// const router = require("express").Router();
+
 
 //CREATE
 
@@ -24,20 +28,10 @@ router.post("/", async (req, res) => {
 });
 
 
-//* DELETE ORDER: exclusivo para ADMIN.
-//TODO: pendiente implementar.
-router.delete("/:id", async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.status(200).send("Order has been deleted...");
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 
 //* USER GET ORDERS: exclusivo para USUARIO.
 //TODO: pendiente implementar.
-router.get("/find/:email", async (req, res) => {
+router.get("/find/:email",checkJwt, async (req, res) => {
   const { email } = req.params
   try {
     const orders = await Order.find({ email });
@@ -49,7 +43,7 @@ router.get("/find/:email", async (req, res) => {
 
 //* ADMIN GET ORDERS: exclusivo para ADMIN. Se utilizaría en el panel de control del admin para ver las órdenes del usuario.
 //TODO: pendiente implementar.
-
+//!debe estar protegida
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find();
