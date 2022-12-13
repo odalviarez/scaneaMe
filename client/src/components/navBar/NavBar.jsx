@@ -237,7 +237,7 @@ export default function Navbar() {
         {userLogin.isAdmin ? (
           <li>
             {" "}
-            <Link to={"/dashboard"} className={styles.anchor}>
+            <Link to={"/dashboard/products"} className={styles.anchor}>
               {i18n.t("navbar.dashboard")}
             </Link>
           </li>

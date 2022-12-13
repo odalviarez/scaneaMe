@@ -7,7 +7,7 @@ import CreateComponent from '../createComponent/createComponent'
 import CustomTab from './CustomTab'
 import i18n from '../../i18n'
 
-class AdminUsers extends React.Component {
+class AdminProducts extends React.Component {
     constructor () {
         super()
         this.state = {activeTab: 'about'}
@@ -65,4 +65,4 @@ class AdminUsers extends React.Component {
     }
 }
 
-export default AdminUsers
+export default AdminProducts

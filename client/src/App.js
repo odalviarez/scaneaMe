@@ -11,12 +11,11 @@ import About from "./pages/about/About";
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
-import Dashboard from "./pages/dashboard/Dashboard";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
-
 
 
 // fontawesome
@@ -24,6 +23,7 @@ import initFontAwesome from "./utils/initFontAwesome";
 import Checkout from "./pages/checkout/Checkout";
 import Navbar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
+import AdminUsers from "./pages/adminUsers/AdminUsers";
 initFontAwesome();
 
 
@@ -68,9 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route
-            path="/dashboard/*" element={<ProtectedRoute component={Dashboard} />}
-          />
+
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />
@@ -87,6 +85,9 @@ function App() {
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
 
+          <Route
+            path="/dashboard/adminUsers" element={<ProtectedRoute component={AdminUsers} />}
+          />
         </Routes>
         <Footer/>
       </Auth0ProviderWithRedirectCallback>

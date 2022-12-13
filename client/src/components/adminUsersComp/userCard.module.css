@@ -1,0 +1,42 @@
+.userCardContainer {
+    height: 30px;
+    background-color: antiquewhite;
+    display: grid;
+    grid-template-columns: 0.1fr repeat(2, 0.25fr) 0.2fr repeat(2, 0.1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.userCardImage {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.userCardImage img {
+    width: 20px;
+    height:  20px;
+    object-fit: cover;
+    border-radius:40px;
+
+}
+
+.userCardEmail {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.userCardId {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.userCardCreatedAt {
+    grid-area: 1 / 4 / 2 / 5;
+}
+
+.userCardIsActive {
+    grid-area: 1 / 5 / 2 / 6;
+}
+
+.userCardIsAdmin {
+    grid-area: 1 / 6 / 2 / 7;
+}
+

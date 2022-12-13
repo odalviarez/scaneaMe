@@ -1,6 +1,6 @@
 import styles from "./DashboardComponent.module.css";
 import React, { useEffect, useState } from "react";
-import Pestana from '../AdminUsers/AdminUsers.jsx';
+import AdminProducts from '../adminProducts/adminProducts.jsx';
 
 
 export default function DashboardComponent() {
@@ -18,7 +18,7 @@ export default function DashboardComponent() {
         </div>
         
         <div className={styles.dashboardPage}>
-            <Pestana  />
+            <AdminProducts  />
         </div>
 
     </div>
