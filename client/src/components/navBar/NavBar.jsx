@@ -50,7 +50,6 @@ export default function Navbar() {
         }
     if ((user) && (Object.hasOwn(userLogin, 'isAdmin') === false)) {
       dispatch(getUserLogin(user, cart, getToken));
-      console.log(userLogin);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

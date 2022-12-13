@@ -1,8 +1,9 @@
-
-import React from "react";
+import OrderProductCard from "./OrderProductCard"
 import styles from "./OrderCard.module.css";
 
-export default function OrderCard({id, cart, date, productsOnStore}) {
+
+
+export default function OrderCard({id, cart, date, productsOnStore, totalPrice, delivery}) {
 
     const ordersObject = (carts) => {
         let cartsTotal = JSON.parse(carts)
@@ -23,27 +24,32 @@ export default function OrderCard({id, cart, date, productsOnStore}) {
         return formattedDate;
     }
 
+
     return (
-    <div >
+    <div className={styles.OrderCardContainer} >
+      <div className={styles.OrderCardHeader}>
         <h4>Purchase ID: {id}</h4>
         <p>Date: {formatDate(date)}</p>
+      </div>
+      <div className={styles.OrderCardProducts}>
         {ordersObject(cart).map(item => {
             return (
-              <div key={item.id}>
-                <div className={styles.imageContainer}>
-                  <img
-                    src={getProductDetails(item.id)?.image}
-                    alt={getProductDetails(item.id)?.image}
-                  />
-                </div>
-                <p>{getProductDetails(item.id)?.name}</p>
-                <p>Color {getProductDetails(item.id)?.color}</p>
-                <p>
-                  Size {item.size} x {item.cartTotalQuantity} unit
-                </p>
-              </div>
-            );
+              <OrderProductCard
+                key={item.id}
+                id={item.id}
+                img={getProductDetails(item.id)?.image}
+                name={getProductDetails(item.id)?.name}
+                color={getProductDetails(item.id)?.color}
+                size={item.size}
+                quantity={item.cartTotalQuantity}
+                productsOnStore={productsOnStore}
+              />)
         })}
+      </div>
+      <div className={styles.OrderCardFooter} >
+        <p>Delivery status: {delivery}</p>
+        <h4>TOTAL: ${totalPrice / 100}</h4>
+      </div>
     </div>
   )
 }
