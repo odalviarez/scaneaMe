@@ -15,17 +15,18 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     background-color: lightgray;
     height: 100%;
 }
 
-.dashboardNavigator p{ 
+.dashboardNavigator a{ 
     padding-left: 10px;
     font-size: x-large;
+    color: black;
 }
 
-.dashboardNavigator p:hover{ 
+.dashboardNavigator a:hover{ 
     background-color: gray;
     color: white;
     cursor: pointer

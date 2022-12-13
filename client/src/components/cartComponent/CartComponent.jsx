@@ -15,6 +15,8 @@ export default function CartComponent() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [cart, setCart] = useLocalStorage("cartProducts", []);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
+
+
     const dispatch = useDispatch();
 
 
@@ -35,9 +37,16 @@ export default function CartComponent() {
     }, [cart, dispatch])
 
   const handleAddToCart = (id, size) => {
+    console.log(cart)
     let cartModified = cart.map((elem) => {
       if (elem.id === id && elem.size === size) {
-        elem.cartTotalQuantity++;
+         elem.stock.map((e) =>
+           e.size === size
+             ? e.quantity > elem.cartTotalQuantity //*Luego verificamos que el stock del producto sea mayor a lo agregado al carrito para poder seguir agregando
+               ? elem.cartTotalQuantity++
+               : ""
+             : ""
+         );
       }
       return elem;
     });
