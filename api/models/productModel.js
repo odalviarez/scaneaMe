@@ -22,10 +22,6 @@ const productSchema = mongoose.Schema(
       type: Array,
       require: false,
     },
-    ratings: {
-      type: Array,
-      require: false,
-    },
     color: {
       type: String,
       required: [true, 'Please add a text value'],

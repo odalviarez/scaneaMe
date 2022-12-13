@@ -8,20 +8,26 @@ import { useState } from 'react'
 import QRCode from 'qrcode'
 import { useLocalStorage } from '../../useLocalStorage'
 import emailjs, { init } from '@emailjs/browser'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CheckoutCard() {
+   const { user, getAccessTokenSilently } = useAuth0();
   const dispatch = useDispatch()
   const { email } = useParams()
   const userOrders = useSelector(state => state.userOrders)
   const [cart, setCart] = useLocalStorage('cartProducts', [])
 
-  console.log('User Order: ', userOrders)
+    const getToken = async () => {
+      const token = await getAccessTokenSilently();
+      return `${token}`;
+    };
+
   let lastPurchase = userOrders[userOrders.length - 1]
   const [trigger, setTrigger] = useState(0)
 
   useEffect(() => {
     emailjs.init('vGQTOpiT1rYKFB3ox')
-    dispatch(userGetOrders(email))
+    dispatch(userGetOrders(email, getToken))
     GenerateQRCode()
     setCart([])
     if (lastPurchase?.hasOwnProperty('products')) {
