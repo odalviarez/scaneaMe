@@ -1,12 +1,18 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import { useLocalStorage } from "../../useLocalStorage";
-import {  filterProducts,  getAllProducts,  loadAllProducts,  sortProducts, getTotalProducts} from "../../redux/actions";
+import {
+  filterProducts,
+  getAllProducts,
+  loadAllProducts,
+  sortProducts,
+  getTotalProducts,
+} from "../../redux/actions";
 import styles from "./Cards.module.css";
 import Pagination from "../pagination/Pagination";
-import { useLocation } from 'react-router-dom';
-import i18n from '../../i18n'
+import { useLocation } from "react-router-dom";
+import i18n from "../../i18n";
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -28,8 +34,7 @@ export default function Cards() {
   };
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = productsLoaded.slice(indexOfFirstCard,indexOfLastCard);
-  
+  const currentCards = productsLoaded.slice(indexOfFirstCard, indexOfLastCard);
 
   useEffect(() => {
     if (productsOnStore.length === 0) {
@@ -49,17 +54,17 @@ export default function Cards() {
     return () => {
       dispatch(loadAllProducts());
     };
-
   }, [cart, dispatch, productsOnStore]);
 
   //! NO COMBINAR LOS USE EFFECTS, CAUSA QUE NO FUNCIONEN COMO SE PRETENDE
 
   useEffect(() => {
-
     //* Al ingresar desde el componente HOME con una de las imágenes de la temporada, filtra segun el estado que tiene el componente "Link" que se use
     if (
-      filters.filtersApplied.length === 0 && location.state !== null && productsOnStore.length > 0) 
-      {
+      filters.filtersApplied.length === 0 &&
+      location.state !== null &&
+      productsOnStore.length > 0
+    ) {
       setFilters((filters) => ({
         filtersApplied: [location.state],
       }));
@@ -68,8 +73,6 @@ export default function Cards() {
 
     // eslint-disable-next-line
   }, [location, dispatch, productsOnStore.length]);
-
-  
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
@@ -106,8 +109,8 @@ export default function Cards() {
         filter: e.target.parentNode.attributes.value.value,
         value: e.target.attributes.value.value,
         valor: e.target.innerHTML,
-      }
-    ]
+      },
+    ];
 
     let filterUsed = {
       filter: e.target.parentNode.attributes.value.value,
@@ -122,14 +125,14 @@ export default function Cards() {
         setFilters((filters) => ({
           filtersApplied: [...filters.filtersApplied, filterUsed],
         }));
-        setcurrentPage(1)
+        setcurrentPage(1);
         dispatch(filterProducts(newFiltersCreated));
       }
     } else {
       setFilters((filters) => ({
         filtersApplied: [filterUsed],
       }));
-      setcurrentPage(1)
+      setcurrentPage(1);
       dispatch(filterProducts([filterUsed]));
     }
   };
@@ -151,7 +154,7 @@ export default function Cards() {
     }
   };
 
-  const scrollToTop = (e) => {  
+  const scrollToTop = (e) => {
     e.preventDefault();
     window.scrollTo({
       top: 0,
@@ -257,8 +260,9 @@ export default function Cards() {
 
         <Pagination
           cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
+          cardsTotal={productsLoaded.length}
           pagination={pagination}
+          currentPage={currentPage}
         />
         <button onClick={(e) => scrollToTop(e)}>
           {i18n.t("header.back-to-top")}

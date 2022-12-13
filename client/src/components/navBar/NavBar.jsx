@@ -28,7 +28,7 @@ export default function Navbar() {
   // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
-const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
 
 
   const getToken = async () => {
@@ -218,9 +218,6 @@ const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently
       <ul>
         <li>
 
-          
-        </li>
-        <li>
           <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />

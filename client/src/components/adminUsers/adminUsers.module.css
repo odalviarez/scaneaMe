@@ -1,0 +1,64 @@
+.adminUsersContainer{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.3fr 0.2fr 2fr 0.3fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+
+
+.adminUsersHeaders {
+    grid-area: 2 / 1 / 3 / 2;
+    height: 40px;
+    align-items: center;
+    background-color: antiquewhite;
+    display: grid;
+    grid-template-columns: 0.1fr repeat(2, 0.25fr) 0.2fr repeat(2, 0.1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.adminUsersHeaders p {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.adminUsersCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    grid-area: 3 / 1 / 4 / 2;
+    }
+
+.adminUserImage {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.adminUserEmail {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.adminUserId {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.adminUserCreatedAt {
+    grid-area: 1 / 4 / 2 / 5;
+}
+
+.adminUserIsActive {
+    grid-area: 1 / 5 / 2 / 6;
+}
+
+.adminUserIsAdmin {
+    grid-area: 1 / 6 / 2 / 7;
+}
+
+.adminUserPagination{
+    grid-area: 4 / 1 / 5 / 2;
+}

@@ -7,21 +7,24 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import Cart from "./pages/cart/Cart";
 import Detail from "./pages/detail/Detail";
 import About from "./pages/about/About";
-
 import UserAccount from "./pages/userAccount/UserAccount";
 import UserPurchases from "./pages/userPurchases/UserPurchases";
 import Profile from "./pages/profile/Profile";
-import Dashboard from "./pages/dashboard/Dashboard";
+import EditProduct from "./pages/edit/DetailUpdate"
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
-
-// fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
 import Checkout from "./pages/checkout/Checkout";
-initFontAwesome();
+import Navbar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
+import AdminUsers from "./pages/adminUsers/AdminUsers";
+import Dashboard from "./pages/dashboard/Dashboard";
 
+
+
+initFontAwesome();
 
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
@@ -60,23 +63,34 @@ function App() {
         audience="https://scaneame.vercel.app/"
         //scope="read:current_user update:current_user_metadata"
       >
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route
-            path="/dashboard"
-            element={<ProtectedRoute component={Dashboard} />}
-          />
+
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/dashboard/" element={<Dashboard />} />
+          <Route path="/dashboard/detail/:id" element={<EditProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<About />} />
-          <Route path="/user/account" element={<ProtectedRoute component={UserAccount} />} />
-          <Route path="/user/purchases" element={<ProtectedRoute component={UserPurchases} />} />
+          <Route
+            path="/user/account"
+            element={<ProtectedRoute component={UserAccount} />}
+          />
+          <Route
+            path="/user/purchases"
+            element={<ProtectedRoute component={UserPurchases} />}
+          />
           <Route path="/:email" element={<Profile />} />
           <Route path="/checkout/:email" element={<Checkout />} />
+
+          <Route
+            path="/dashboard/adminUsers" element={<ProtectedRoute component={AdminUsers} />}
+          />
         </Routes>
+        <Footer/>
       </Auth0ProviderWithRedirectCallback>
     </div>
   );

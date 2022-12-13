@@ -5,8 +5,7 @@ import {Button} from 'react-bootstrap';
 
 export default function About() {
   return (
-    <div>
-      <NavBar />
+    <div style={{minHeight: "80vh"}}>
       <h1>Meet the team members</h1>
 
   

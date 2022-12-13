@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import {getProductDetails} from '../../redux/actions'
-import Details from '../../components/details/Details.jsx'
+import Details from '../../components/cardsDashboard/DetailsUpdate.jsx'
 
 export default function Detail() {
   const dispatch = useDispatch();
@@ -12,13 +12,13 @@ export default function Detail() {
     
   useEffect(() => {
     dispatch(getProductDetails(id))
-    }, [dispatch, id])
+    }, [dispatch])
 
-  const {name, type, stock, color, price, image} = productDetail;
+  const {name, type, color, price} = productDetail;
 
   return (
-    <div style={{minHeight: "150vh"}}>
-      <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
+    <div style={{minHeight: "80vh"}}>
+      <Details name={name} type={type} color={color} price={price} id={id}/>
     </div>
   )
 }

@@ -7,7 +7,9 @@ import {
   GET_USER,
   GET_TOTAL_PRODUCTS,
   GET_USER_LOGIN,
-  USER_GET_ORDERS
+  USER_GET_ORDERS,
+  ADMIN_GET_USERS,
+  ADMIN_LOAD_USERS
 } from "./actions";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
     userLogin: {},
     totalProducts: 0,
     userOrders: [],
+    allUsers: [],
+    usersLoaded: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -114,6 +118,21 @@ const rootReducer = (state = initialState, action) => {
           userOrders: action.payload,
         };
       }
+
+      case ADMIN_GET_USERS: {
+        return {
+          ...state,
+          allUsers: action.payload,
+          usersLoaded: action.payload,
+        };
+      }
+
+      case ADMIN_LOAD_USERS:
+        let allUsers = state.allUsers;
+        return {
+          ...state,
+          usersLoaded: allUsers,
+        };
 
       default:
         return {

@@ -87,6 +87,17 @@ router.get('/:email', async (req, res) => {
   }
 })
 
+
+//* GET ALL USERS: esta ruta se utiliza para traer a todos los usuarios.
+router.get('/admin/allUsers', async (req, res) => {
+  try {
+    let userData = await User.find()
+    res.json(userData)
+  } catch (error) {
+    res.status(500).send('Could not get users from DB', error.message)
+  }
+})
+
 //* USER UPDATE: actualiza las redes sociales y la imágen del usuario
 router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
@@ -128,17 +139,34 @@ router.put("/:email", checkJwt, async (req, res) => {
   }
 });
 
+//* ADMIN MAKE ADMIN: hace admin a un usuario.
+router.put("/admin/:sub", checkJwt, async (req, res) => {
+  const { sub } = req.params;
+  try {
+    const updateUser = await User.updateOne(
+      { sub },
+      [
+      {$set: {isAdmin: { $not : "$isAdmin" }}}
+      ]
+    )
+    res.json(updateUser);
+  } catch (error) {
+    res.status(400).json('No se pudo hacer admin al usuario', error.message);
+  }
+});
+
 
 //* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
 router.put("/:sub/:action", checkJwt, async (req, res) => {
   const { sub, action } = req.params;
   const { payload } = req.body;
-  console.log('llegamos al backend!', sub, action, payload, req.body);
   try {
     if (action === "delete") {
       const updateUser = await User.updateOne(
         { sub },
-        {isActive: false,}
+        [
+        {$set: {isActive: { $not : "$isActive" }}}
+        ]
       )}
     if (action === "emailChange") {
       const updateUser = await User.updateOne(
