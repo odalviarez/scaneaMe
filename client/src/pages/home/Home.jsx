@@ -33,7 +33,8 @@ export default function Home() {
       <br></br>
       <ProdCarru productType={'pants'} />
       <br></br>
-      <h2 className={styles.tituloSeason}>Selección por temporadas:</h2>
+      <h2 className={styles.tituloSeason}>Colecciones:</h2>
+      <br></br>
       <SeasonalBanner />
     </div>
   )

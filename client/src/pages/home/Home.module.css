@@ -15,7 +15,7 @@
 
 .tituloSeason{
   color: #666;
-  background-color: rgba(91, 205, 91, 0.391);
+  background-color:rgba(255, 255, 255, 0.662);
   width: 25%;
   position: relative;
   left: 50%;
@@ -26,5 +26,4 @@
   margin-top: 50px;
   padding-left: 10px;
   text-align: center;
-  box-shadow: 12px -4px 14px -1px rgba(94, 197, 96, 0.681)
 }
