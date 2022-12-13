@@ -20,6 +20,7 @@ const UserPurComp = () => {
 
     }, [dispatch, user, productsOnStore])
 
+    console.log('userOrders: ', userOrders);
 
     return (
         <div>

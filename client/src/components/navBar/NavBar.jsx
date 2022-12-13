@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import logo from "../../Logo/LogoQR.png";
+import logo from "../../Logo/LogoOficial.png";
 import cartImg from "../../Logo/cart.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
