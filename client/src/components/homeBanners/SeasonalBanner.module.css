@@ -13,8 +13,8 @@
 .estacionesLink{
   
   grid-column: 1 / span 2 ;
-  border: solid #333 2px;
-  width:100%;
+  border: solid #333 3px;
+  width:50%;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 }

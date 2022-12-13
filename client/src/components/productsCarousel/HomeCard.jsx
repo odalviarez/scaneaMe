@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom'
 
 export default function HomeCard(props) {
   return (
-    <div className={styles.container}>
-      <Link to={'/detail/' + props.id}>
+    <Link to={'/detail/' + props.id}>
+      <div className={styles.card}>
         <img className={styles.image} src={props.image} alt='product' />
         <div className={styles.price}>${props.price}</div>
-      </Link>
-    </div>
+
+      </div>
+    </Link>
+    /*<div className={styles.container}>
+    </div>*/
   )
 }
+
