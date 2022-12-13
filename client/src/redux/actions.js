@@ -10,6 +10,9 @@ export const GET_TOTAL_PRODUCTS = "GET_TOTAL_PRODUCTS";
 export const GET_USER_LOGIN = "GET_USER_LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
+export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
+export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
+
 
 
 export const getAllProducts = () => {
@@ -200,7 +203,7 @@ export const userUpdate = (payload, user, getToken) => {
       let config = {
         method: "put",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/${user}`
+          ? process.env.REACT_APP_API + `user/${user}`
           : `http://localhost:5000/user/${user}`,
         headers: {
           "content-type": "application/json",
@@ -229,7 +232,7 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
       let config = {
         method: "put",
         url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `/user/${sub}/${action}`
+          ? process.env.REACT_APP_API + `user/${sub}/${action}`
           : `http://localhost:5000/user/${sub}/${action}`,
         headers: {
           "content-type": "application/json",
@@ -251,6 +254,34 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
   };
 };
 
+export const adminMakeAdmin = (sub, getToken) => {
+  return async function () {
+    try {
+      const token = await getToken();
+      let config = {
+        method: "put",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `user/admin/${sub}`
+          : `http://localhost:5000/user/admin/${sub}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+      alert("No se pudo actualizar los datos del usuario");
+    }
+  };
+};
+
 export const userGetOrders = (email) => {
   return async function (dispatch) {
     try {
@@ -261,6 +292,20 @@ export const userGetOrders = (email) => {
       });
     } catch (error) {
       console.log("Could not get orders from user", error);
+    }
+  };
+};
+
+export const adminGetUsers = () => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`user/admin/allUsers`);
+      return dispatch({
+        type: ADMIN_GET_USERS,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log("Could not get users", error);
     }
   };
 };

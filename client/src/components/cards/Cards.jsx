@@ -59,6 +59,7 @@ export default function Cards() {
   //! NO COMBINAR LOS USE EFFECTS, CAUSA QUE NO FUNCIONEN COMO SE PRETENDE
 
   useEffect(() => {
+
     //* Al ingresar desde el componente HOME con una de las imágenes de la temporada, filtra segun el estado que tiene el componente "Link" que se use
     if (
       filters.filtersApplied.length === 0 &&
@@ -154,8 +155,8 @@ export default function Cards() {
     }
   }
 
-  const scrollToTop = e => {
-    e.preventDefault()
+  const scrollToTop = (e) => {  
+    e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -260,8 +261,9 @@ export default function Cards() {
 
         <Pagination
           cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
+          cardsTotal={productsLoaded.length}
           pagination={pagination}
+          currentPage={currentPage}
         />
         <button onClick={e => scrollToTop(e)}>
           {i18n.t('header.back-to-top')}
@@ -270,3 +272,4 @@ export default function Cards() {
     </div>
   )
 }
+

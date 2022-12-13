@@ -1,12 +1,12 @@
 import React from 'react'
-
 import {Tabs, Tab, TabPanel, TabList} from '../../lib'
 import CardsDelete from '../cardsDashboard/CardsDelete'
 import CardUpdate from '../cardsDashboard/CardsUpdate'
 import CreateComponent from '../createComponent/createComponent'
 import CustomTab from './CustomTab'
+import i18n from '../../i18n'
 
-class CustomTabExample extends React.Component {
+class AdminProducts extends React.Component {
     constructor () {
         super()
         this.state = {activeTab: 'about'}
@@ -15,7 +15,7 @@ class CustomTabExample extends React.Component {
         const {activeTab} = this.state
         return (
             <div>
-
+                <h1>{i18n.t("navbar.dashboard")}</h1>
                 <Tabs activeTab={activeTab}>
                     <TabList className='text-center bg-light indent-bottom--medium'>
                         <Tab component={CustomTab} label='Create Product' id='create'/>
@@ -25,7 +25,6 @@ class CustomTabExample extends React.Component {
                     <TabList>
 
                         <TabPanel component={() => <div>
-                            <h3>Create Product Here</h3>
                                 <div>
                                     <CreateComponent />
                                 </div>
@@ -55,4 +54,4 @@ class CustomTabExample extends React.Component {
     }
 }
 
-export default CustomTabExample
+export default AdminProducts

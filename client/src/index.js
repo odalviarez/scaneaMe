@@ -10,6 +10,7 @@ import { store } from "./redux/store";
 import { getConfig } from "./config";
 import "./index.css";
 import App from "./App";
+import { ContextProvider } from "./contexts/ContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -30,13 +31,15 @@ const providerConfig = {
 
 root.render(
   //<React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Auth0Provider {...providerConfig}>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Auth0Provider {...providerConfig}>
+        <ContextProvider>
           <App />
-        </Auth0Provider>
-      </BrowserRouter>
-    </Provider>
+        </ContextProvider>
+      </Auth0Provider>
+    </BrowserRouter>
+  </Provider>
   //</React.StrictMode>
 );
 serviceWorker.unregister();
