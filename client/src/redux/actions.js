@@ -103,6 +103,21 @@ export const updateProduct = (id, data) => {
   };
 };
 
+
+
+export const updateProductComments = (id, data) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/products/comments/${id}`,{comments: data});
+      return res;
+    } catch (error) {
+      alert("No se pudo actualizar el producto");
+    }
+  };
+};
+
+
+
 export const productDelete = (id, getToken) => {
   return async function () {
     const token = await getToken();
