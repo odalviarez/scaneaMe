@@ -16,11 +16,12 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
 import { Auth0Provider, withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
-
+import Checkout from "./pages/checkout/Checkout";
+import EditProduct from "./pages/edit/DetailUpdate";
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
-import Checkout from "./pages/checkout/Checkout";
-import EditProduct from "./pages/edit/DetailUpdate"
+initFontAwesome();
+
 
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
