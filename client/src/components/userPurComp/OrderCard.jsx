@@ -29,16 +29,20 @@ export default function OrderCard({id, cart, date, productsOnStore}) {
         <p>Date: {formatDate(date)}</p>
         {ordersObject(cart).map(item => {
             return (
-                <div key={item.id}>
-                    <div className={styles.imageContainer}>
-                        <img  src={getProductDetails(item.id).image}/>
-                    </div>
-                    <p>{getProductDetails(item.id).name}</p>
-                    <p>Color {getProductDetails(item.id).color}</p>
-                    <p>Size {item.size} x {item.cartTotalQuantity} unit</p>
-
+              <div key={item.id}>
+                <div className={styles.imageContainer}>
+                  <img
+                    src={getProductDetails(item.id)?.image}
+                    alt={getProductDetails(item.id)?.image}
+                  />
                 </div>
-            )
+                <p>{getProductDetails(item.id)?.name}</p>
+                <p>Color {getProductDetails(item.id)?.color}</p>
+                <p>
+                  Size {item.size} x {item.cartTotalQuantity} unit
+                </p>
+              </div>
+            );
         })}
     </div>
   )
