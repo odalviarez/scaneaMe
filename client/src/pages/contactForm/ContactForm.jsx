@@ -4,7 +4,7 @@ import FormComponent from '../../components/FormComponent/FormComponent.jsx'
 
 export default function Form() {
   return (
-    <div>
+    <div style={{minHeight: "80vh"}}>
       <FormComponent/>
     </div>
   )

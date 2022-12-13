@@ -260,8 +260,9 @@ export default function Cards() {
 
         <Pagination
           cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
+          cardsTotal={productsLoaded.length}
           pagination={pagination}
+          currentPage={currentPage}
         />
         <button onClick={(e) => scrollToTop(e)}>
           {i18n.t("header.back-to-top")}

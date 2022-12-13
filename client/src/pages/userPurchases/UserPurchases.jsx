@@ -5,7 +5,7 @@ import style from './UserPurchases.module.css'
 export default function UserPurchases() {
 
     return (
-    <div >
+    <div style={{minHeight: "80vh"}}>
         <div className={style.UserPurComp}><UserPurComp /></div>
     </div>
     )

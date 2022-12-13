@@ -11,6 +11,8 @@ export const GET_USER_LOGIN = "GET_USER_LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
 export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
+export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
+
 
 
 export const getAllProducts = () => {

@@ -12,12 +12,12 @@ export default function Detail() {
     
   useEffect(() => {
     dispatch(getProductDetails(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
   const {name, type, stock, color, price, image} = productDetail;
 
   return (
-    <div>
+    <div style={{minHeight: "150vh"}}>
       <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
     </div>
   )

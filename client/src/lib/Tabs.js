@@ -1,5 +1,3 @@
-'use strict';
-
 exports.__esModule = true;
 
 var _react = require('react');
@@ -51,7 +49,7 @@ var TabsContainer = function (_React$Component) {
         );
     };
 
-    TabsContainer.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    TabsContainer.prototype.UNSAFE_componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         var activeTab = this.props.activeTab;
 
         if (nextProps.activeTab !== activeTab) {

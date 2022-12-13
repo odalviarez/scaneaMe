@@ -25,7 +25,6 @@ class AdminProducts extends React.Component {
                     <TabList>
 
                         <TabPanel component={() => <div>
-                            <h3>Create Product Here</h3>
                                 <div>
                                     <CreateComponent />
                                 </div>

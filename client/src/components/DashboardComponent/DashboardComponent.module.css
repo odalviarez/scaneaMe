@@ -1,12 +1,12 @@
 .dashboardContainer {
     display: grid;
-    grid-template-columns: 0.2fr 0.8fr;
+    grid-template-columns: 0.15fr 0.85fr;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    height: 80vh;
     margin-top: -50px;
     margin-bottom: -50px;
+    min-height: 85vh;
 }
 
 .dashboardNavigator { 
@@ -22,7 +22,7 @@
 
 .dashboardNavigator p{ 
     padding-left: 10px;
-    font-size: large;
+    font-size: x-large;
 }
 
 .dashboardNavigator p:hover{ 
@@ -34,5 +34,10 @@
 
 .dashboardPage { 
     grid-area: 1 / 2 / 2 / 3; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 

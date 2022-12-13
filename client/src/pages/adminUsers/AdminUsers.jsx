@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminUsersComp from '../../components/adminUsersComp/adminUsersComp'
+import AdminUsersComp from '../../components/adminUsers/adminUsers'
 import style from './AdminUsers.module.css'
 
 export default function UserPurchases() {
