@@ -26,12 +26,10 @@ export default function CardDelete({
         <img src={img} alt="imagen" />
       </div>
 
-      <Link to={`/products/${id}`} className={styles.title}>
+      {/* <Link to={`/products/${id}`} className={styles.title}> */}
         {name}
-      </Link>
-      <h1>{id}</h1>
+      {/* </Link> */}
       <p>${price}</p>
-      <p>{type}</p>
       <p>{color}</p>
       <button
         value={id}

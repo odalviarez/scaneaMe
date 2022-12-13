@@ -15,7 +15,6 @@ export default function Card({name, img, id, price, type, color}) {
   
         <Link to={`/detail/${id}`} className={styles.title}>{name}</Link>
         <p>${price}</p>
-        <p>{type}</p>
         <p>{color}</p>
         {/* <button value={id} onClick={(e) => handleAddCart(e)}>ADD TO CART</button> */}
 

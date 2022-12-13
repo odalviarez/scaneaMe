@@ -39,9 +39,20 @@ body {
   z-index: 50;
 }
 
+.btn-noSelected{
+  height: 30px;
+  width: 30px;
+
+}
 
 .btn-selected {
   background: rgb(0, 195, 255);
+    height: 30px;
+      width: 30px;
+}
+.btn-div{
+  display: flex;
+  flex-direction: column;
 }
 
 /* Btn stylling */
