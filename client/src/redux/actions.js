@@ -90,6 +90,17 @@ export const getTotalProducts = (products) => {
   };
 };
 
+export const updateProduct = (id, data) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/products/${id}`, data);
+      return res;
+    } catch (error) {
+      alert("No se pudo actualizar el producto");
+    }
+  };
+};
+
 export const productDelete = (id, getToken) => {
  return async function () {
    const token = await getToken();

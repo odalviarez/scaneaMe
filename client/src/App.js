@@ -26,6 +26,7 @@ import Footer from "./components/footer/Footer";
 import AdminUsers from "./pages/adminUsers/AdminUsers";
 initFontAwesome();
 
+import EditProduct from "./pages/edit/DetailUpdate"
 
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
@@ -71,6 +72,7 @@ function App() {
 
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/dashboard/detail/:id" element={<EditProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<About />} />
