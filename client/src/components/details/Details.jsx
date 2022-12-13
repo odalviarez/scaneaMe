@@ -83,16 +83,19 @@ export default function Details({ id }) {
             <span className="price-box__main-new">${price}</span>
           </div>
           {stock?.map((e, index) => (
-            <button
-              type="button"
-              key={index}
-              disabled={e.quantity < 1}
-              onClick={handleOnclick}
-              value={e.size}
-              className={productselect === e.size ? "btn-selected" : ""}
-            >
-              {e.size}
-            </button>
+            <div>
+              <button
+                type="button"
+                key={index}
+                disabled={e.quantity < 1}
+                onClick={handleOnclick}
+                value={e.size}
+                className={productselect === e.size ? "btn-selected" : ""}
+              >
+                {e.size}
+              </button>
+              <span>Cantidad: {e.quantity}</span>
+            </div>
           ))}
         </div>
 

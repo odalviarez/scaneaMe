@@ -85,7 +85,7 @@ function App() {
           <Route path="/dashboard/adminUsers" element={<ProtectedRoute component={AdminUsersPage} />}/>
           <Route path="/dashboard/adminProducts" element={<ProtectedRoute component={AdminProductsPage} />}/>
           <Route path="/dashboard/adminAnalytics" element={<ProtectedRoute component={AdminAnalyticsPage} />}/>
-          <Route path="/dashboard/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
+          <Route path="/dashboard/adminProducts/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
 
         </Routes>
         <Footer/>
