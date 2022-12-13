@@ -11,3 +11,20 @@
     height: 30px;
     margin-right: 5px;
 }
+
+.paginationPage:hover {
+    border : 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    color: white;
+    background-color: darkgrey;
+}
+
+.paginationCurrentPage {
+    border : 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    background-color: darkgrey;
+}
