@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
 
 //* USER GET ORDERS: exclusivo para USUARIO.
 //TODO: pendiente implementar.
-router.get("/find/:email",checkJwt, async (req, res) => {
+router.get("/find/:email", async (req, res) => {
   const { email } = req.params
   try {
     const orders = await Order.find({ email });
