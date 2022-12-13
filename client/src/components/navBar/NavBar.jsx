@@ -48,10 +48,13 @@ export default function Navbar() {
           );
           dispatch(getTotalProducts(cartTotal));
         }
-    if (user) dispatch(getUserLogin(user, cart, getToken));
+    if ((user) && (Object.hasOwn(userLogin, 'isAdmin') === false)) {
+      dispatch(getUserLogin(user, cart, getToken));
+      console.log(userLogin);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user, cart]);
+  }, [dispatch, user, cart, userLogin.isAdmin]);
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);

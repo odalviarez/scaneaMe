@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userUpdate, getUserLogin, getUser, userUpdateAuth0 } from '../../redux/actions'
+import { userUpdate, getUser, userUpdateAuth0 } from '../../redux/actions'
 import style from './UserAccComp.module.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import validator from 'validator';
@@ -39,8 +39,7 @@ export default function UserAccComp() {
   };
 
   useEffect(() => {
-    dispatch(getUserLogin(user));
-    if (userLogin.hasOwnProperty('socials')) setSocials(userLogin.socials)
+    if (Object.hasOwn(userLogin, 'socials')) setSocials(userLogin.socials)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user])
 
