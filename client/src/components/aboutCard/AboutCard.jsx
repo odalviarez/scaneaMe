@@ -7,7 +7,7 @@ export default function AboutCard({ li, gh, ig, img, des }) {
     <div>
       <div className={styles.container}>
         <img src={img} className={styles.userImg} alt='User' />
-        <div className={styles.descriptionSocials}>
+        
           <div className={styles.description}>{des}</div>
           <div className={styles.socialsContainer}>
             <SocialsAbout
@@ -16,7 +16,7 @@ export default function AboutCard({ li, gh, ig, img, des }) {
               linkedin={li}
             />
           </div>
-        </div>
+        
       </div>
     </div>
   )
