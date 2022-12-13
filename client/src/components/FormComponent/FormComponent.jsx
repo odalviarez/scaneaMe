@@ -78,6 +78,8 @@ export default function Contact() {
         <button type="submit" className="fork-btn-inner bg-primary">
         {i18n.t('dashboard.submit')}
         </button>
+        <br></br>
+        <br></br>
         <Link to="/home">BACK HOME</Link>
       </form>
     </Container>
