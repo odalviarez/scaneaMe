@@ -15,7 +15,7 @@ export default function CardUpdate({name, img, id, price, type, color, handleUpd
         <p>{name}</p>
         <p>{type}</p>
         <p>${price}</p>
-        <Link to={`detail/${id}`} className={styles.title}>Edit</Link>
+        <Link to={`/dashboard/adminProducts/detail/:id${id}`} className={styles.title}>Edit</Link>
         
     </div>
   )

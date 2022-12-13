@@ -1,0 +1,53 @@
+.OrderCardProduct {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2.5fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.OrderCardProduct p {
+    margin-bottom: 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.OrderCardImage{
+grid-area: 1 / 1 / 4 / 2;
+}
+
+.OrderCardImage img {
+    width: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+.OrderCardName {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.OrderCardColor {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.OrderCardSize {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.OrderCardReview {
+    grid-area: 1 / 3 / 2 / 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.OrderCardTextarea {
+    grid-area: 2 / 3 / 4 / 4;
+}
+
+.OrderCardTextarea textarea {
+    width: 100%;
+    height: 100%;
+}
