@@ -32,12 +32,12 @@ export default function OrderCard({id, cart, date, productsOnStore}) {
               <div key={item.id}>
                 <div className={styles.imageContainer}>
                   <img
-                    src={getProductDetails(item.id).image}
-                    alt={getProductDetails(item.id).image}
+                    src={getProductDetails(item.id)?.image}
+                    alt={getProductDetails(item.id)?.image}
                   />
                 </div>
-                <p>{getProductDetails(item.id).name}</p>
-                <p>Color {getProductDetails(item.id).color}</p>
+                <p>{getProductDetails(item.id)?.name}</p>
+                <p>Color {getProductDetails(item.id)?.color}</p>
                 <p>
                   Size {item.size} x {item.cartTotalQuantity} unit
                 </p>

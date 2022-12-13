@@ -27,7 +27,7 @@ export default function CheckoutCard() {
 
   useEffect(() => {
     emailjs.init('vGQTOpiT1rYKFB3ox')
-    dispatch(userGetOrders(email))
+    dispatch(userGetOrders(email, getToken))
     GenerateQRCode()
     setCart([])
     if (lastPurchase?.hasOwnProperty('products')) {

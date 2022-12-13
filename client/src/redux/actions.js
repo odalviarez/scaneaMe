@@ -251,35 +251,35 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
   };
 };
 
-// export const userGetOrders = (email, getToken) => {
-//   return async function (dispatch) {
-//     const token = await getToken();
-//     try {
-//       let config = {
-//         method: "get",
-//         url: process.env.REACT_APP_API
-//           ? process.env.REACT_APP_API + `order/find/${email}`
-//           : `http://localhost:5000/order/find/${email}`,
-//         headers: {
-//           "content-type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       };
-//       axios(config)
-//         .then(function (json) {
-//           return dispatch({
-//             type: USER_GET_ORDERS,
-//             payload: json.data,
-//           });
-//         })
-//         .catch(function (error) {
-//           return error;
-//         });
-//     } catch (error) {
-//       console.log("Could not get orders from user", error);
-//     }
-//   };
-// };
+export const userGetOrders = (email, getToken) => {
+  return async function (dispatch) {
+    const token = await getToken();
+    try {
+      let config = {
+        method: "get",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `order/find/${email}`
+          : `http://localhost:5000/order/find/${email}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios(config)
+        .then(function (json) {
+          return dispatch({
+            type: USER_GET_ORDERS,
+            payload: json.data,
+          });
+        })
+        .catch(function (error) {
+          return error;
+        });
+    } catch (error) {
+      console.log("Could not get orders from user", error);
+    }
+  };
+};
 export const adminMakeAdmin = (sub, getToken) => {
   return async function () {
     try {
@@ -308,20 +308,20 @@ export const adminMakeAdmin = (sub, getToken) => {
   };
 };
 
-export const userGetOrders = (email) => {
-  return async function (dispatch) {
-    try {
-      let response = await axios.get(`order/find/${email}`)
-          return dispatch({
-            type: USER_GET_ORDERS,
-            payload: response.data,
-          });
+// export const userGetOrders = (email) => {
+//   return async function (dispatch) {
+//     try {
+//       let response = await axios.get(`order/find/${email}`)
+//           return dispatch({
+//             type: USER_GET_ORDERS,
+//             payload: response.data,
+//           });
     
-    } catch (error) {
-      console.log("Could not get orders from user", error);
-    }
-  };
-};
+//     } catch (error) {
+//       console.log("Could not get orders from user", error);
+//     }
+//   };
+// };
 
 export const adminGetUsers = () => {
   return async function (dispatch) {
