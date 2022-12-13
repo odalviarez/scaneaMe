@@ -1,14 +1,10 @@
 import React from 'react'
-import NavBar from '../../components/navBar/NavBar.jsx'
-import Footer from '../../components/footer/Footer.jsx'
 import ProfileCard from '../../components/profileCard/ProfileCard.jsx'
 
 export default function Profile() {
   return (
-    <div>
-      <NavBar />
+    <div style={{minHeight: "80vh"}}>
       <ProfileCard />
-      <Footer />
     </div>
   )
 }
