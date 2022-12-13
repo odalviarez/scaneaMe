@@ -62,9 +62,9 @@ export const productsCreate = (payload, getToken) => {
     try {
       let config = {
         method: "post",
-        url:
-          process.env.REACT_APP_API ?  process.env.REACT_APP_API + "products/" :
-          "http://localhost:5000/products/",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + "products/"
+          : "http://localhost:5000/products/",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -104,34 +104,32 @@ export const updateProduct = (id, data) => {
 };
 
 export const productDelete = (id, getToken) => {
- return async function () {
-   const token = await getToken();
-   try {
-     let config = {
-       method: "delete",
-       url: process.env.REACT_APP_API
-         ? process.env.REACT_APP_API + `products/${id}`
-         : `http://localhost:5000/products/${id}`,
-       headers: {
-         "content-type": "application/json",
-         Authorization: `Bearer ${token}`,
-       },
-     };
+  return async function () {
+    const token = await getToken();
+    try {
+      let config = {
+        method: "delete",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `products/${id}`
+          : `http://localhost:5000/products/${id}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-     axios(config)
-       .then(function (response) {
-        console.log(response.data)
-         return JSON.stringify(response.data);
-       })
-       .catch(function (error) {
-         return error;
-       });
-
-   } catch (error) {
-     alert("No se pudo eliminar el producto");
-   }
- };
-
+      axios(config)
+        .then(function (response) {
+          console.log(response.data);
+          return JSON.stringify(response.data);
+        })
+        .catch(function (error) {
+          return error;
+        });
+    } catch (error) {
+      alert("No se pudo eliminar el producto");
+    }
+  };
 };
 
 export const getUser = (email) => {
@@ -151,24 +149,23 @@ export const getUser = (email) => {
 export const getUserLogin = (user, cart, getToken) => {
   return async function (dispatch) {
     let data = { ...user, cart };
-    let token = '';
+    let token = "";
     let config = "";
     try {
-      if(getToken) {
-        token = await getToken(); 
-      config = {
-        method: "post",
-        url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `user/login/${user.email}`
-          : `http://localhost:5000/user/login/${user.email}`,
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        data,
-      };
-      }
-      else{
+      if (getToken) {
+        token = await getToken();
+        config = {
+          method: "post",
+          url: process.env.REACT_APP_API
+            ? process.env.REACT_APP_API + `user/login/${user.email}`
+            : `http://localhost:5000/user/login/${user.email}`,
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          data,
+        };
+      } else {
         config = {
           method: "post",
           url: process.env.REACT_APP_API
@@ -177,7 +174,7 @@ export const getUserLogin = (user, cart, getToken) => {
           data,
         };
       }
-      
+
       axios(config)
         .then(function (response) {
           return dispatch({
@@ -186,7 +183,7 @@ export const getUserLogin = (user, cart, getToken) => {
           });
         })
         .catch(function (error) {
-          console.log(error)
+          console.log(error);
           return error;
         });
     } catch (error) {
@@ -238,7 +235,7 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        "data": {payload},
+        data: { payload },
       };
       axios(config)
         .then(function (response) {
@@ -254,6 +251,35 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
   };
 };
 
+export const userGetOrders = (email, getToken) => {
+  return async function (dispatch) {
+    const token = await getToken();
+    try {
+      let config = {
+        method: "get",
+        url: process.env.REACT_APP_API
+          ? process.env.REACT_APP_API + `order/find/${email}`
+          : `http://localhost:5000/order/find/${email}`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios(config)
+        .then(function (json) {
+          return dispatch({
+            type: USER_GET_ORDERS,
+            payload: json.data,
+          });
+        })
+        .catch(function (error) {
+          return error;
+        });
+    } catch (error) {
+      console.log("Could not get orders from user", error);
+    }
+  };
+};
 export const adminMakeAdmin = (sub, getToken) => {
   return async function () {
     try {
@@ -282,19 +308,20 @@ export const adminMakeAdmin = (sub, getToken) => {
   };
 };
 
-export const userGetOrders = (email) => {
-  return async function (dispatch) {
-    try {
-      const json = await axios.get(`order/find/${email}`);
-      return dispatch({
-        type: USER_GET_ORDERS,
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log("Could not get orders from user", error);
-    }
-  };
-};
+// export const userGetOrders = (email) => {
+//   return async function (dispatch) {
+//     try {
+//       let response = await axios.get(`order/find/${email}`)
+//           return dispatch({
+//             type: USER_GET_ORDERS,
+//             payload: response.data,
+//           });
+    
+//     } catch (error) {
+//       console.log("Could not get orders from user", error);
+//     }
+//   };
+// };
 
 export const adminGetUsers = () => {
   return async function (dispatch) {
@@ -311,7 +338,7 @@ export const adminGetUsers = () => {
 };
 
 export const handleCheckout = (cartProp, user) => {
-  console.log('User: ', user);
+  console.log("User: ", user);
   axios
     .post(`/stripe/create-checkout-session`, {
       cartItems: cartProp.cartItems,
@@ -324,20 +351,3 @@ export const handleCheckout = (cartProp, user) => {
     })
     .catch((err) => console.log(err.message));
 };
-
-// export const getRecipeDetail = (id) => {
-//     return async function(dispatch) {
-//         try {
-//             await fetch(`http://localhost:3001/recipes/${id}`)
-//             .then(res => res.json())
-//             .then(data => dispatch({ type: GET_RECIPE_DETAIL, payload: data }))
-//         } catch (error) {
-//             alert('No se pudieron encontrar recetas con ese ID')
-//             console.log(error)
-//         }
-//     }
-// }
-
-// export const cleanRecipeDetail = (payload) => {
-//     return { type: 'CLEAN_RECIPE', payload: payload }
-// };

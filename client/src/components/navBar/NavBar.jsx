@@ -41,11 +41,6 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-
-    // if (userLogin.hasOwnProperty("cart")) {
-    //   if (userLogin.cart.length && !cart.length && isAuthenticated)
-    //     setCart(userLogin.cart);
-    // }
         if (cart) {
           let cartTotal = cart.reduce(
             (acc, currentValue) => acc + currentValue.cartTotalQuantity,
@@ -106,7 +101,7 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="tools" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="tools" className="mr-3" />
                   {i18n.t("navbar.account")}
                 </DropdownItem>
                 <DropdownItem
@@ -115,7 +110,7 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="user" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="user" className="mr-3" />
                   {i18n.t("navbar.profile")}
                 </DropdownItem>
                 <DropdownItem
@@ -124,7 +119,7 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="box" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="box" className="mr-3" />
                   {i18n.t("navbar.purchases")}
                 </DropdownItem>
                 <DropdownItem
@@ -134,7 +129,7 @@ export default function Navbar() {
                     setCartLogout();
                   }}
                 >
-                  <FontAwesomeIcon icon="power-off" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="power-off" className="mr-3" />
                   {i18n.t("navbar.log-out")}
                 </DropdownItem>
               </DropdownMenu>
