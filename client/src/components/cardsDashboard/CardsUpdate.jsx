@@ -21,7 +21,7 @@ export default function CardsUpdate() {
 
   //* PAGINADO
   const [currentPage, setcurrentPage] = useState(1);
-  const [cardsPerPage] = useState(50);
+  const [cardsPerPage] = useState(14);
   const pagination = (pageNumber) => {setcurrentPage(pageNumber)};
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -90,19 +90,14 @@ export default function CardsUpdate() {
 
     return (
       <div className={styles.CatalogueParent}>
-        <div className={styles.filtersList}>
-        
-          
-       
-        </div>
-
-        
+        <div className={styles.filtersList}></div>
 
         <div className={styles.cardsPagination}>
           <Pagination
             cardsPerPage={cardsPerPage}
-            productsTotal={productsLoaded.length}
+            cardsTotal={productsLoaded.length}
             pagination={pagination}
+            currentPage={currentPage}
           />
 
           <div className={styles.CatalogueCards}>
@@ -117,7 +112,7 @@ export default function CardsUpdate() {
                       price={p.price}
                       type={p.type}
                       color={p.color}
-                      handleAddCart={handleAddCart}
+                      stock={p.stock}
                     />
                   );
                 })
@@ -126,10 +121,13 @@ export default function CardsUpdate() {
 
           <Pagination
             cardsPerPage={cardsPerPage}
-            productsTotal={productsLoaded.length}
+            cardsTotal={productsLoaded.length}
             pagination={pagination}
+            currentPage={currentPage}
           />
-          <button onClick={(e) => scrollToTop(e)}>{i18n.t("header.back-to-top")}</button>
+          <button onClick={(e) => scrollToTop(e)}>
+            {i18n.t("header.back-to-top")}
+          </button>
         </div>
       </div>
     );

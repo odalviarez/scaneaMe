@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import { productDelete } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -26,12 +25,10 @@ export default function CardDelete({
         <img src={img} alt="imagen" />
       </div>
 
-      <Link to={`/products/${id}`} className={styles.title}>
+      {/* <Link to={`/products/${id}`} className={styles.title}> */}
         {name}
-      </Link>
-      <h1>{id}</h1>
+      {/* </Link> */}
       <p>${price}</p>
-      <p>{type}</p>
       <p>{color}</p>
       <button
         value={id}

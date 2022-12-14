@@ -22,7 +22,7 @@ export default function Cards() {
 
   //* PAGINADO
   const [currentPage, setcurrentPage] = useState(1);
-  const [cardsPerPage] = useState(50);
+  const [cardsPerPage] = useState(14);
   const pagination = (pageNumber) => {setcurrentPage(pageNumber)};
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -57,9 +57,6 @@ export default function Cards() {
     setSort(e.target.value);
   };
 
- 
-
-
   const scrollToTop = (e) => {
     e.preventDefault();
     window.scrollTo({
@@ -70,21 +67,15 @@ export default function Cards() {
 
     return (
       <div className={styles.CatalogueParent}>
-        <div className={styles.filtersList}>
-        
-          
-       
-        </div>
-
-        
+        <div className={styles.filtersList}></div>
+        <Pagination
+          cardsPerPage={cardsPerPage}
+          cardsTotal={productsLoaded.length}
+          pagination={pagination}
+          currentPage={currentPage}
+        />
 
         <div className={styles.cardsPagination}>
-          <Pagination
-            cardsPerPage={cardsPerPage}
-            productsTotal={productsLoaded.length}
-            pagination={pagination}
-          />
-
           <div className={styles.CatalogueCards}>
             {currentCards.length
               ? currentCards.map((p) => {
@@ -105,10 +96,13 @@ export default function Cards() {
 
           <Pagination
             cardsPerPage={cardsPerPage}
-            productsTotal={productsLoaded.length}
+            cardsTotal={productsLoaded.length}
             pagination={pagination}
+            currentPage={currentPage}
           />
-          <button onClick={(e) => scrollToTop(e)}>{i18n.t("header.back-to-top")}</button>
+          <button onClick={(e) => scrollToTop(e)}>
+            {i18n.t("header.back-to-top")}
+          </button>
         </div>
       </div>
     );

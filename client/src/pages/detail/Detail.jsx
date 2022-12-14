@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import {getProductDetails} from '../../redux/actions'
 import Details from '../../components/details/Details.jsx'
 
+
 export default function Detail() {
   const dispatch = useDispatch();
 
@@ -18,6 +19,7 @@ export default function Detail() {
 
   return (
     <div style={{minHeight: "150vh"}}>
+      {/* <PruebaDT name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/> */}
       <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
     </div>
   )
