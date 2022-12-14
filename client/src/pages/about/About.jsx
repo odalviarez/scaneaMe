@@ -28,5 +28,6 @@ export default function About() {
       <AboutCard li={vic.li} gh={vic.gh} ig={vic.ig} img={vic.img} des={vic.des} />     
       <AboutCard li={jonas.li} gh={jonas.gh} ig={jonas.ig} img={jonas.img} des={jonas.des} />     
     </div>
+    
   )
 }

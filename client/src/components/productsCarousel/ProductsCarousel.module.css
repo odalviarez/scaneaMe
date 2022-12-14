@@ -1,12 +1,12 @@
 .container{
-  background-color: rgba(91, 205, 91, 0.079);
+  
   width: 100%;
-  height: 250px;
+  height: 300px;
   border-radius: 0px;
   position:relative;
   align-items: center;
-  margin-bottom: 25px;
-  padding-top: 25px;
+  margin-bottom: auto ;
+  padding-top:revert ;
   
 }
 

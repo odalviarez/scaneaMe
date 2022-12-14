@@ -22,12 +22,19 @@ export default function Home() {
 
       <Carru />
       <h2 className={styles.tituloCarru}>Nuestras remeras:</h2>
+      <br></br>
       <ProdCarru productType={'shirt'}/>
+      <br></br>
       <h2 className={styles.tituloCarru}>Nuestros shorts de baño:</h2>
+      <br></br>
       <ProdCarru productType={'trunks'}/>
+      <br></br>
       <h2 className={styles.tituloCarru}>Nuestros pantalones:</h2>
+      <br></br>
       <ProdCarru productType={'pants'} />
-      <h2 className={styles.tituloSeason}>Selección por temporadas:</h2>
+      <br></br>
+      <h2 className={styles.tituloSeason}>Colecciones:</h2>
+      <br></br>
       <SeasonalBanner />
     </div>
   )
