@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import {getProductDetails} from '../../redux/actions'
 import Details from '../../components/details/Details.jsx'
-import PruebaDT from '../../components/PruebDT/PruebaDT ';
+
 
 export default function Detail() {
   const dispatch = useDispatch();
