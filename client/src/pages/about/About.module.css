@@ -1,5 +1,31 @@
 .container{
-  display:grid
-  
+  display: grid;
+  grid-template-columns: repeat(3, 500px);
+  grid-template-rows: repeat(2, 650px);
+  position: relative;
+  justify-content: center;
+  align-items: center bottom;
 
+}
+
+@media only screen and (max-width: 1440px) {
+  .container{
+    display: grid;
+  grid-template-columns: repeat(2, 500px);
+  grid-template-rows: repeat(3, 650px);
+  position: relative;
+  justify-content: center;
+  align-items: center bottom;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .container{
+    display: grid;
+  grid-template-columns: repeat(1, 500px);
+  grid-template-rows: repeat(6, 650px);
+  position: relative;
+  justify-content: center;
+  align-items: center bottom;
+  }
 }
