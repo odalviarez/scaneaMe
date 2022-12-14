@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-
 export default function PruebaDT({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
@@ -74,7 +73,7 @@ export default function PruebaDT({ id }) {
     <section className="text-gray-700 body-font overflow-hidden backdrop-blur-sm ">
     <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={image}/> 
+        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded-2xl border border-gray-200" src={image}/> 
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h1 className="text-gray-900 text-4xl title-font font-bold mb-1">{name}</h1>
                 <div className="flex mb-4">
@@ -82,25 +81,25 @@ export default function PruebaDT({ id }) {
                     <span className="title-font font-medium text-2xl text-gray-900">${price}</span>
                 </div>
                 {stock?.map((e, index) => (
-            <div>
+            <div className="btn-size">
                 <button 
                 type="button"
                 key={index}
                 disabled={e.quantity < 1}
                 onClick={handleOnclick}
                 value={e.size}
-                class="py-2 px-4 text-sm font-medium text-gray-900 rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white">
+                class="title-font font-medium text-2xl text-gray-900 py-2 px-4  rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white">
                     {e.size}
                 </button>
 
-              <span className="title-font font-medium text-2xl text-gray-900">   Cantidad: {e.quantity}</span>
+              <span className="text-sm title-font text-gray-700 tracking-widest">   Cantidad: {e.quantity}</span>
             </div>
             ))}
             
                 <div className="flex border-t border-gray-300 mt-5 pt-5">
                     
                     <button
-                            className="bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full"
+                            className="title-font font-medium text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full"
                             value={id}
                             name="AddCart"
                             onClick={handleAddCart}
@@ -113,7 +112,7 @@ export default function PruebaDT({ id }) {
                     name="AddAndBuy"
                     onClick={handleAddCart}
                     disabled={!productselect}
-                    className="bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full">
+                    className="title-font text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full">
                     buy Now
                   </button>
 
