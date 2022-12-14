@@ -12,6 +12,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
 export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
 export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 
 
 
@@ -29,6 +30,21 @@ export const getAllProducts = () => {
     }
   };
 };
+
+export const getAllOrders = ()=>{
+  return async function(dispatch){
+    try{
+      const json = await axios.get('/order')
+      return dispatch({
+        type:GET_ALL_ORDERS,
+        payload: json.data
+      })
+    } catch (error){
+      alert('Could not get orders')
+      console.log(error)
+    }
+  }
+}
 
 export const loadAllProducts = (payload) => {
   return { type: LOAD_ALL_PRODUCTS, payload: payload };
