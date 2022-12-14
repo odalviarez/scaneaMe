@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import logo from "../../Logo/LogoQR.png";
+import logo from "../../Logo/LogoOficial.png";
 import cartImg from "../../Logo/cart.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
@@ -48,10 +48,12 @@ export default function Navbar() {
           );
           dispatch(getTotalProducts(cartTotal));
         }
-    if (user) dispatch(getUserLogin(user, cart, getToken));
+    if ((user) && (Object.hasOwn(userLogin, 'isAdmin') === false)) {
+      dispatch(getUserLogin(user, cart, getToken));
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user, cart]);
+  }, [dispatch, user, cart, userLogin.isAdmin]);
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
