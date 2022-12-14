@@ -1,6 +1,6 @@
 .tituloCarru{
-  color: #666;
-  background-color: rgba(255, 255, 255, 0.662);
+  color: rgb(23, 22, 22);
+  
   width: 25%;
   position: relative;
   left: 20%;
@@ -10,12 +10,12 @@
   margin:0px;
   padding-left: 10px;
   text-align: left;
-  
+  font-style: italic;
 }
 
 .tituloSeason{
-  color: #666;
-  background-color:rgba(255, 255, 255, 0.662);
+  color: rgb(23, 22, 22);
+  font-style: italic;
   width: 25%;
   position: relative;
   left: 50%;
