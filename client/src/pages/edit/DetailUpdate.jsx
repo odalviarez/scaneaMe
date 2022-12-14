@@ -15,7 +15,7 @@ export default function Detail() {
   }, [dispatch, id]);
 
   const { name, type, color, price, stock } = productDetail;
-console.log(productDetail);
+
   return (
     <div style={{ minHeight: "80vh" }}>
       <Details

@@ -26,10 +26,9 @@ export default function DetailsUpdate({ id }) {
     price: "",
     stock: [],
   });
-console.log("img: ", productImg)
-
+  
   const [stock, setStock] = useState([]);
-
+  
   const handlePropChange = (e) => {
     e.preventDefault();
     setInput({
@@ -43,7 +42,6 @@ console.log("img: ", productImg)
     let stockEdit = [...stock];
     if(e.target.value >= 0) stockEdit[e.target.name].quantity = e.target.value;
     setStock(stockEdit);
-    console.log(stock)
   };
   const product = useSelector((state) => state.productDetail);
   useEffect(() => {
@@ -56,13 +54,15 @@ console.log("img: ", productImg)
       image: product.image,
       price: product.price,
     });
-    setStock(product.stock);
-    //setProductImg(product.image);
-  }, [dispatch, id, product, stock]);
-
+    if(!stock?.length)setStock(product.stock);
+    if (!productImg || productImg !== product.image)
+      setProductImg(product.image);
+  }, [dispatch, id, product, stock, productImg]);
+  
   useEffect(() => {
     return () => {
       dispatch(getAllProducts());
+      setProductImg("");
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -165,48 +165,48 @@ console.log("img: ", productImg)
             <input
               type="number"
               required
-              placeholder={stock[0]?.quantity}
-              value={stock[0]?.quantity}
+              placeholder={stock?.length ? stock[0]?.quantity : ""}
+              value={stock?.length ? stock[0]?.quantity : ""}
               name="0"
               onChange={createStockArray}
             />
             <input
               type="number"
               required
-              placeholder={stock[1]?.quantity}
-              value={stock[1]?.quantity}
+              placeholder={stock?.length ? stock[1]?.quantity : ""}
+              value={stock?.length ? stock[1]?.quantity : ""}
               name="1"
               onChange={createStockArray}
             />
             <input
               type="number"
               required
-              placeholder={stock[2]?.quantity}
-              value={stock[2]?.quantity}
+              placeholder={stock?.length ? stock[2]?.quantity : ""}
+              value={stock?.length ? stock[2]?.quantity : ""}
               name="2"
               onChange={createStockArray}
             />
             <input
               type="number"
               required
-              placeholder={stock[3]?.quantity}
-              value={stock[3]?.quantity}
+              placeholder={stock?.length ? stock[3]?.quantity : ""}
+              value={stock?.length ? stock[3]?.quantity : ""}
               name="3"
               onChange={createStockArray}
             />
             <input
               type="number"
               required
-              placeholder={stock[4]?.quantity}
-              value={stock[4]?.quantity}
+              placeholder={stock?.length ? stock[4]?.quantity : ""}
+              value={stock?.length ? stock[4]?.quantity : ""}
               name="4"
               onChange={createStockArray}
             />
             <input
               type="number"
               required
-              placeholder={stock[5]?.quantity}
-              value={stock[5]?.quantity}
+              placeholder={stock?.length ? stock[5]?.quantity : ""}
+              value={stock?.length ? stock[5]?.quantity : ""}
               name="5"
               onChange={createStockArray}
             />
