@@ -25,7 +25,8 @@ router.get("/", async (req, res) => {
             season: e.season,
             price: e.price,
             image: e.image,
-            stock: e.stock
+            stock: e.stock,
+            comments: e.comments,
           };
         })
       );
