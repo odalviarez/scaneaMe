@@ -26,10 +26,9 @@ export default function DetailsUpdate({ id }) {
     price: "",
     stock: [],
   });
-console.log("img: ", productImg)
-
+  
   const [stock, setStock] = useState([]);
-
+  
   const handlePropChange = (e) => {
     e.preventDefault();
     setInput({
@@ -43,7 +42,6 @@ console.log("img: ", productImg)
     let stockEdit = [...stock];
     if(e.target.value >= 0) stockEdit[e.target.name].quantity = e.target.value;
     setStock(stockEdit);
-    console.log(stock)
   };
   const product = useSelector((state) => state.productDetail);
   useEffect(() => {
@@ -56,13 +54,15 @@ console.log("img: ", productImg)
       image: product.image,
       price: product.price,
     });
-    setStock(product.stock);
-    //setProductImg(product.image);
-  }, [dispatch, id, product, stock]);
-
+    if(!stock.length)setStock(product.stock);
+    if (!productImg || productImg !== product.image)
+      setProductImg(product.image);
+  }, [dispatch, id, product, stock, productImg]);
+  
   useEffect(() => {
     return () => {
       dispatch(getAllProducts());
+      setProductImg("");
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

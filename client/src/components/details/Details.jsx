@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
-import Coments from "../Comments/Coments";
 import "./details.css";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 
 export default function Details({ id }) {
@@ -50,7 +48,6 @@ export default function Details({ id }) {
                 : ""
               : ""
           );
-          console.log(elem);
         }
         return elem;
       });
@@ -59,7 +56,7 @@ export default function Details({ id }) {
       newProduct = { ...newProduct, cartTotalQuantity: 1, size: productselect };
       setCart([...cart, { ...newProduct }]);
     }
-    console.log(cart)
+
     if (e.target.name === "AddAndBuy"){
       window.location.replace( process.env.REACT_APP_URL? process.env.REACT_APP_URL+"cart" : "http://localhost:3000/cart");
     }

@@ -1,6 +1,6 @@
 const express = require("express");
 const Products = require("../models/productModel");
-const cloudinary = require('../Utils/cloudinary')
+const cloudinary = require("../Utils/cloudinary");
 const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
 const checkJwt = auth();
 const checkClaims = claimCheck((claims) => {
@@ -50,7 +50,8 @@ router.post("/", checkJwt, checkClaims, async (req, res) => {
     //si recibe los campos obligatorios crea el producto
     if (name && type && price) {
       const result = await cloudinary.uploader.upload(image, {
-        folder: "Products"});
+        folder: "Products",
+      });
       let productCreate = new Products({
         name,
         color,
@@ -94,41 +95,39 @@ router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
     const deletedProduct = await Products.findByIdAndDelete(id);
     console.log(deletedProduct);
     if (deletedProduct) res.status(200).send(deletedProduct);
-    else res
-      .status(400)
-      .json({ message: "the product to be deleted does not exist" });
+    else
+      res
+        .status(400)
+        .json({ message: "the product to be deleted does not exist" });
   } catch (error) {
     res.json(error.message);
   }
 });
 
-
-
 //* UPDATE PRODUCT RATING: actualiza un producto existente
-  router.put("/comments/:id", async (req, res) => {
-    let { id } = req.params;
-    const { comments } = req.body;
-    try {
-      if (id && comments) {
-        let detailsProduct = await Products.findById(id); 
-        let query = {
-          comments: [...detailsProduct.comments, comments],
-        };
-        const updateProduct = await Products.updateOne({ _id: id }, query);
-        res.json(query);
-      } else {
-        res.send({ message: "please complete all fields" });
-      }
-    } catch (error) {
-      res.json(error.message);
+router.put("/comments/:id", async (req, res) => {
+  let { id } = req.params;
+  const { comments } = req.body;
+  try {
+    if (id && comments) {
+      let detailsProduct = await Products.findById(id);
+      let query = {
+        comments: [...detailsProduct.comments, comments],
+      };
+      const updateProduct = await Products.updateOne({ _id: id }, query);
+      res.json(query);
+    } else {
+      res.send({ message: "please complete all fields" });
     }
-  });
-
+  } catch (error) {
+    res.json(error.message);
+  }
+});
 
 //* UPDATE PRODUCT: actualiza un producto existente
 router.put("/:id", async (req, res) => {
   let { id } = req.params;
-  
+
   let { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
@@ -136,13 +135,12 @@ router.put("/:id", async (req, res) => {
       if (!Array.isArray(stock))
         return res.status(400).json({ message: "stock should be array type" });
     }
-if (image.includes("data:")){
+    if (image.includes("data:")) {
       const result = await cloudinary.uploader.upload(image, {
         folder: "Products",
       });
       image = result.secure_url;
-
-}
+    }
 
     if (name && type && price) {
       let query = {
@@ -163,6 +161,5 @@ if (image.includes("data:")){
     res.json(error.message);
   }
 });
-
 
 module.exports = router;
