@@ -69,7 +69,6 @@ export default function PruebaDT({ id }) {
   };
 
   return (
-
     <section className="text-gray-700 body-font overflow-hidden backdrop-blur-sm ">
     <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
@@ -116,7 +115,6 @@ export default function PruebaDT({ id }) {
                     buy Now
                   </button>
 
-
                   
                 </div>
             </div>
@@ -125,4 +123,3 @@ export default function PruebaDT({ id }) {
 </section>
   );
 }
-
