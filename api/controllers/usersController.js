@@ -101,7 +101,6 @@ router.get('/admin/allUsers', async (req, res) => {
 //* USER UPDATE: actualiza las redes sociales y la imágen del usuario
 router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
-   console.log('body: ', req.body)
   const { socials, image, aboutUser } = req.body;
   let userData = await User.findOne({ email }); 
   try {
