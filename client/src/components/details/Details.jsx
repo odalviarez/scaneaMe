@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
 import Coments from "../Comments/Coments";
-import "./details.css";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RadioGroup } from '@headlessui/react'
 
-
-export default function Details({ id }) {
+export default function PruebaDT({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
   const dispatch = useDispatch();
   const [productselect, setProductSelect] = useState("");
@@ -17,8 +16,7 @@ export default function Details({ id }) {
   const productsLoaded = useSelector((state) => state.products);
   const productDetails = useSelector((state) => state.productDetail);
   // eslint-disable-next-line no-unused-vars
-  const { name, image, price, stock, type, season, comments, ratings } =
-    productDetails;
+  const { name, image, price, stock, type, season, comments, ratings } = productDetails;
 
   useEffect(() => {
     dispatch(getProductDetails(id));
@@ -71,57 +69,58 @@ export default function Details({ id }) {
   };
 
   return (
-    <main className="item">
-      <section className="img">
-        <img src={image} alt={name} className="img-main" />
-      </section>
-      <section className="price">
-        <h1 className="price-main__heading">{name}</h1>
-
-        <div className="price-box">
-          <div className="price-box__main">
-            <span className="price-box__main-new">${price}</span>
-          </div>
-          {stock?.map((e, index) => (
+    <section className="text-gray-700 body-font overflow-hidden backdrop-blur-sm ">
+    <div className="container px-5 py-24 mx-auto">
+        <div className="lg:w-4/5 mx-auto flex flex-wrap">
+        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={image}/> 
+            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                <h1 className="text-gray-900 text-4xl title-font font-bold mb-1">{name}</h1>
+                <div className="flex mb-4">
+                    
+                    <span className="title-font font-medium text-2xl text-gray-900">${price}</span>
+                </div>
+                {stock?.map((e, index) => (
             <div>
-              <button
+                <button 
                 type="button"
                 key={index}
                 disabled={e.quantity < 1}
                 onClick={handleOnclick}
                 value={e.size}
-                className={productselect === e.size ? "btn-selected" : ""}
-              >
-                {e.size}
-              </button>
-              <span>Cantidad: {e.quantity}</span>
-            </div>
-          ))}
-        </div>
+                class="py-2 px-4 text-sm font-medium text-gray-900 rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white">
+                    {e.size}
+                </button>
 
-        <div className="price-btnbox">
-          <button
-            className="price-cart__btn btn--orange"
-            value={id}
-            name="AddCart"
-            onClick={handleAddCart}
-            disabled={!productselect}
-          >
-            Add to cart
-          </button>
-          <button
-            className="price-cart__btn btn--orange"
-            value={id}
-            name="AddAndBuy"
-            onClick={handleAddCart}
-            disabled={!productselect}
-          >
-            Buy Now
-          </button>
+              <span className="title-font font-medium text-2xl text-gray-900">   Cantidad: {e.quantity}</span>
+            </div>
+            ))}
+            
+                <div className="flex border-t border-gray-300 mt-5 pt-5">
+                    
+                    <button
+                            className="bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full"
+                            value={id}
+                            name="AddCart"
+                            onClick={handleAddCart}
+                            disabled={!productselect}>
+                        Add to Cart
+                    </button>
+                  
+                  <button   
+                    value={id}
+                    name="AddAndBuy"
+                    onClick={handleAddCart}
+                    disabled={!productselect}
+                    className="bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full">
+                    buy Now
+                  </button>
+
+                  
+                </div>
+            </div>
         </div>
-      </section>
-      <Raiting />
-      {/* <Coments/> */}
-    </main>
+    </div>
+</section>
   );
 }
+
