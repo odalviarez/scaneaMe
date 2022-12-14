@@ -1,17 +1,69 @@
-import React from 'react'
-import Footer from '../../components/footer/Footer.jsx'
-import NavBar from '../../components/navBar/NavBar.jsx'
-import CreateComponent from "../../components/createComponent/createComponent";
+import React, { useEffect, useState } from "react";
+import { __esModule } from "../../lib/Tab.js";
+import AdminProducts from  "../../components/adminProducts/adminProducts";
+import AdminUsers from "../../components/adminUsers/adminUsers";
+import styles from "./Dashboard.module.css";
+import { Link } from "react-router-dom";
 
-import i18n from '../../i18n'
 
-export default function Dashboard() {
-  return (
-    <div>
-      <NavBar />
-      <h1>{i18n.t("navbar.dashboard")}</h1>
-      <CreateComponent />
-      <Footer />
-    </div>
-  );
+export function AdminProductsPage() {
+
+    return (
+      <div className={styles.dashboardContainer}>
+  
+          <div className={styles.dashboardNavigator}>
+              <Link to={"/dashboard/adminUsers"}>ADMIN USERS</Link>
+              <Link to={"/dashboard/adminProducts"}>ADMIN PRODUCTS</Link>
+              <Link to={"/dashboard/adminAnalytics"}>PAGE ANALYTICS</Link>
+          </div>
+  
+          <div className={styles.dashboardPage}>
+          <AdminProducts/>
+          </div>
+  
+      </div>
+    );
 }
+
+
+export function AdminUsersPage() {
+
+    return (
+      <div className={styles.dashboardContainer}>
+  
+          <div className={styles.dashboardNavigator}>
+              <Link to={"/dashboard/adminUsers"}>ADMIN USERS</Link>
+              <Link to={"/dashboard/adminProducts"}>ADMIN PRODUCTS</Link>
+              <Link to={"/dashboard/adminAnalytics"}>PAGE ANALYTICS</Link>
+          </div>
+  
+          <div className={styles.dashboardPage}>
+          <AdminUsers/>
+          </div>
+  
+      </div>
+    );
+}
+
+
+
+export function AdminAnalyticsPage() {
+
+    return (
+      <div className={styles.dashboardContainer}>
+  
+          <div className={styles.dashboardNavigator}>
+              <Link to={"/dashboard/adminUsers"}>ADMIN USERS</Link>
+              <Link to={"/dashboard/adminProducts"}>ADMIN PRODUCTS</Link>
+              <Link to={"/dashboard/adminAnalytics"}>PAGE ANALYTICS</Link>
+          </div>
+  
+          <div className={styles.dashboardPage}>
+          <h1>Analytics</h1>
+          </div>
+  
+      </div>
+    );
+}
+
+

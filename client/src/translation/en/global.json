@@ -30,7 +30,8 @@
         "account": "Account",
         "profile": "Profile",
         "log-out": "LogOut",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "purchases": "Purchases"
     },
 
     "dashboard": {

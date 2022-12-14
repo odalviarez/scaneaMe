@@ -7,7 +7,9 @@ import {
   GET_USER,
   GET_TOTAL_PRODUCTS,
   GET_USER_LOGIN,
-  USER_GET_ORDERS
+  USER_GET_ORDERS,
+  ADMIN_GET_USERS,
+  ADMIN_LOAD_USERS
 } from "./actions";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
     userLogin: {},
     totalProducts: 0,
     userOrders: [],
+    allUsers: [],
+    usersLoaded: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -48,36 +52,34 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case FILTER_PRODUCTS:
-        console.log("se despacho accion");
-        let productsFiltered = [];
+        let productsFiltered = state.allProducts
+        
+        for (let i=0; i < action.payload.length; i++) {
+          let filter = action.payload[i]
+          
+            switch (filter.filter){
+              case 'season':
+                productsFiltered = productsFiltered.filter((product) => product.season === filter.value)
 
-        for (let i = 0; i < action.payload.length; i++) {
-          let filter = action.payload[i];
-          for (let i = 0; i < state.allProducts.length; i++) {
-            const product = state.allProducts[i];
-            if (filter.filter === "type") {
-              if (product.type === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
+              break;
+
+              case 'type':
+                productsFiltered = productsFiltered.filter((product) => product.type === filter.value)
+
+              break;
+
+              case 'color':
+                productsFiltered = productsFiltered.filter((product) => product.color === filter.value)
+
+              break;
+
+              default:
+                console.log('No se filtró nada');
             }
-            if (filter.filter === "color") {
-              if (product.color === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-            if (filter.filter === "season") {
-              if (product.season === filter.value) {
-                if (productsFiltered.includes(product) === false) {
-                  productsFiltered.push(product);
-                }
-              }
-            }
-          }
+
+
         }
+
         return {
           ...state,
           products: productsFiltered,
@@ -116,6 +118,21 @@ const rootReducer = (state = initialState, action) => {
           userOrders: action.payload,
         };
       }
+
+      case ADMIN_GET_USERS: {
+        return {
+          ...state,
+          allUsers: action.payload,
+          usersLoaded: action.payload,
+        };
+      }
+
+      case ADMIN_LOAD_USERS:
+        let allUsers = state.allUsers;
+        return {
+          ...state,
+          usersLoaded: allUsers,
+        };
 
       default:
         return {

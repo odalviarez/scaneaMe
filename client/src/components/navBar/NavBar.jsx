@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import logo from "../../Logo/LogoQR.png";
+import logo from "../../Logo/LogoOficial.png";
 import cartImg from "../../Logo/cart.png";
 import { useLocalStorage } from "../../useLocalStorage";
 import { NavLink as RouterNavLink } from "react-router-dom";
@@ -28,13 +28,8 @@ export default function Navbar() {
   // eslint-disable-next-line no-unused-vars
   const [cart, setCart] = useLocalStorage("cartProducts", []);
   const userLogin = useSelector((state) => state.userLogin);
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently  } = useAuth0();
+
 
   const getToken = async () => {
     const token = await getAccessTokenSilently();
@@ -46,10 +41,6 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    // if (userLogin.hasOwnProperty("cart")) {
-    //   if (userLogin.cart.length && !cart.length && isAuthenticated)
-    //     setCart(userLogin.cart);
-    // }
         if (cart) {
           let cartTotal = cart.reduce(
             (acc, currentValue) => acc + currentValue.cartTotalQuantity,
@@ -57,10 +48,12 @@ export default function Navbar() {
           );
           dispatch(getTotalProducts(cartTotal));
         }
-    if (user) dispatch(getUserLogin(user, cart, getToken));
+    if ((user) && (Object.hasOwn(userLogin, 'isAdmin') === false)) {
+      dispatch(getUserLogin(user, cart, getToken));
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user, cart]);
+  }, [dispatch, user, cart, userLogin.isAdmin]);
 
   const totalItems = useSelector((state) => state.totalProducts);
   const [isOpen, setIsOpen] = useState(false);
@@ -110,7 +103,7 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="tools" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="tools" className="mr-3" />
                   {i18n.t("navbar.account")}
                 </DropdownItem>
                 <DropdownItem
@@ -119,8 +112,17 @@ export default function Navbar() {
                   className="dropdown-profile"
                   activeclassname="router-link-exact-active"
                 >
-                  <FontAwesomeIcon icon="user" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="user" className="mr-3" />
                   {i18n.t("navbar.profile")}
+                </DropdownItem>
+                <DropdownItem
+                  tag={RouterNavLink}
+                  to="/user/purchases"
+                  className="dropdown-profile"
+                  activeclassname="router-link-exact-active"
+                >
+                  <FontAwesomeIcon icon="box" className="mr-3" />
+                  {i18n.t("navbar.purchases")}
                 </DropdownItem>
                 <DropdownItem
                   id="qsLogoutBtn"
@@ -129,7 +131,7 @@ export default function Navbar() {
                     setCartLogout();
                   }}
                 >
-                  <FontAwesomeIcon icon="power-off" className="mr-3" />{" "}
+                  <FontAwesomeIcon icon="power-off" className="mr-3" />
                   {i18n.t("navbar.log-out")}
                 </DropdownItem>
               </DropdownMenu>
@@ -186,6 +188,15 @@ export default function Navbar() {
               </RouterNavLink>
             </NavItem>
             <NavItem>
+              <FontAwesomeIcon icon="box" className="mr-3" />
+              <RouterNavLink
+                to="/user/purchases"
+                activeclassname="router-link-exact-active"
+              >
+                {i18n.t("navbar.purchases")}
+              </RouterNavLink>
+            </NavItem>
+            <NavItem>
               <FontAwesomeIcon icon="power-off" className="mr-3" />
               <RouterNavLink
                 to="#"
@@ -203,16 +214,7 @@ export default function Navbar() {
       </Container>
       <ul>
         <li>
-          <div>
-            <Button as={Link} href="/catalogue/?lng=es">
-              ES
-            </Button>
-            <Button as={Link} href="/catalogue/?lng=en">
-              EN
-            </Button>
-          </div>
-        </li>
-        <li>
+
           <div className={styles.itemsCart}>{totalItems}</div>
           <Link to={"/cart"}>
             <img src={cartImg} className={styles.cart} alt="cart" />
@@ -221,7 +223,7 @@ export default function Navbar() {
         {userLogin.isAdmin ? (
           <li>
             {" "}
-            <Link to={"/dashboard"} className={styles.anchor}>
+            <Link to={"/dashboard/adminProducts"} className={styles.anchor}>
               {i18n.t("navbar.dashboard")}
             </Link>
           </li>

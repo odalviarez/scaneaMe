@@ -1,10 +1,10 @@
 const User = require("../models/userModel");
 const express = require("express");
-const { db } = require("../models/userModel");
 const router = express.Router();
 const cloudinary = require("../Utils/cloudinary");
 const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
 const jwt_decode = require("jwt-decode");
+const getAuth0Controller = require("./getAuth0Controller");
 const checkJwt = auth();
 const checkClaims = claimCheck((claims) => {
   return claims.permissions.includes("read:users");
@@ -17,7 +17,6 @@ router.post("/login/:email", async (req, res) => {
 let { authorization } = req.headers;
 let isAdmin = false;
 if(authorization) isAdmin = Boolean(jwt_decode(authorization).permissions.length);
-console.log("isAdmin: ", isAdmin);
   const { email } = req.params;
   const {
     firtsName,
@@ -88,12 +87,23 @@ router.get('/:email', async (req, res) => {
   }
 })
 
+
+//* GET ALL USERS: esta ruta se utiliza para traer a todos los usuarios.
+router.get('/admin/allUsers', async (req, res) => {
+  try {
+    let userData = await User.find()
+    res.json(userData)
+  } catch (error) {
+    res.status(500).send('Could not get users from DB', error.message)
+  }
+})
+
 //* USER UPDATE: actualiza las redes sociales y la imágen del usuario
 router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
   // console.log('body: ', req.body)
-  const { socials, image } = req.body;
-  let userData = await User.findOne({ email });
+  const { socials, image, aboutUser } = req.body;
+  let userData = await User.findOne({ email }); 
   try {
     let result = "";
     if (image) {
@@ -119,12 +129,59 @@ router.put("/:email", checkJwt, async (req, res) => {
         image: image
           ? { public_id: result.public_id, url: result.secure_url }
           : userData.image,
+        info: aboutUser? aboutUser : userData.info
       }
     );
 
     res.json(updateUser);
   } catch (error) {
     res.status(400).json(error.message);
+  }
+});
+
+//* ADMIN MAKE ADMIN: hace admin a un usuario.
+router.put("/admin/:sub", checkJwt, async (req, res) => {
+  const { sub } = req.params;
+  try {
+    const updateUser = await User.updateOne(
+      { sub },
+      [
+      {$set: {isAdmin: { $not : "$isAdmin" }}}
+      ]
+    )
+    res.json(updateUser);
+  } catch (error) {
+    res.status(400).json('No se pudo hacer admin al usuario', error.message);
+  }
+});
+
+
+//* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
+router.put("/:sub/:action", checkJwt, async (req, res) => {
+  const { sub, action } = req.params;
+  const { payload } = req.body;
+  try {
+    if (action === "delete") {
+      const updateUser = await User.updateOne(
+        { sub },
+        [
+        {$set: {isActive: { $not : "$isActive" }}}
+        ]
+      )}
+    if (action === "emailChange") {
+      const updateUser = await User.updateOne(
+        { sub },
+        {
+        email: payload,
+        email_verified: false,
+        }
+      )}
+
+  let response = await getAuth0Controller(sub, action, payload)
+
+    res.json(response);
+  } catch (error) {
+    res.status(400).json('No se pudo actualizar la información del usuario', error.message);
   }
 });
 

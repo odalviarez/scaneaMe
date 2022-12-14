@@ -25,6 +25,8 @@ router.get("/", async (req, res) => {
             season: e.season,
             price: e.price,
             image: e.image,
+            stock: e.stock,
+            comments: e.comments,
           };
         })
       );
@@ -87,7 +89,7 @@ router.get("/:id", async (req, res) => {
 
 //* DELETE PRODUCT: elimina un producto por el id.
 //TODO: falta implementar.
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
   let { id } = req.params;
   try {
     const deletedProduct = await Products.findByIdAndDelete(id);
@@ -102,10 +104,33 @@ router.delete("/:id", async (req, res) => {
 });
 
 
+
+//* UPDATE PRODUCT RATING: actualiza un producto existente
+  router.put("/comments/:id", async (req, res) => {
+    let { id } = req.params;
+    const { comments } = req.body;
+    try {
+      if (id && comments) {
+        let detailsProduct = await Products.findById(id); 
+        let query = {
+          comments: [...detailsProduct.comments, comments],
+        };
+        const updateProduct = await Products.updateOne({ _id: id }, query);
+        res.json(query);
+      } else {
+        res.send({ message: "please complete all fields" });
+      }
+    } catch (error) {
+      res.json(error.message);
+    }
+  });
+
+
 //* UPDATE PRODUCT: actualiza un producto existente
 //TODO: falta implementar.
-router.put("/:id", checkJwt, async (req, res) => {
+router.put("/:id", async (req, res) => {
   let { id } = req.params;
+  
   const { name, color, type, price, image, stock, season } = req.body;
   console.log(req.body);
   try {
@@ -133,5 +158,6 @@ router.put("/:id", checkJwt, async (req, res) => {
     res.json(error.message);
   }
 });
+
 
 module.exports = router;

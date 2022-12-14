@@ -1,0 +1,41 @@
+.container{
+  background-color: antiquewhite;
+  display:flex;
+  justify-content: center;
+  width:70%;
+  height: auto;
+  min-height: 600px;
+  min-width: 300px;
+  border-radius: 40px;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  left:20%;
+  box-shadow: 12px 15px 18px -3px rgba(210, 121, 121, 0.3)
+}
+
+.userImg{
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  position:absolute
+}
+
+
+.socialsContainer{
+    margin-top: 50px;
+    position: relative;
+    align-self: flex-end;
+}
+
+.description{
+  font-size: 3em;
+  font-weight: bold;
+  width: 100%;
+  position: absolute;
+  bottom: 160px;
+  padding-top: 50px;
+}
+

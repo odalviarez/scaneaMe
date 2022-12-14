@@ -1,7 +1,13 @@
-const { Order } = require("../models/orderModel");
-//const { auth, isUser, isAdmin } = require("../middleware/auth");
+const express = require("express");
+const Order = require("../models/orderModel");
+const router = express.Router();
+const { auth, claimCheck } = require("express-oauth2-jwt-bearer");
+const checkJwt = auth();
+const checkClaims = claimCheck((claims) => {
+  return claims.permissions.includes("read:users");
+});
 
-const router = require("express").Router();
+
 
 //CREATE
 
@@ -9,9 +15,7 @@ const router = require("express").Router();
 // example endpoint
 
 //* CREATE ORDER
-//TODO: pendiente implementar.
-//? Cómo está funcionando el carrito hoy si esto no está implementado?
-// router.post("/", auth, async (req, res) => {
+
 router.post("/", async (req, res) => {
   const newOrder = new Order(req.body);
 
@@ -23,43 +27,14 @@ router.post("/", async (req, res) => {
   }
 });
 
-//* UPDATE ORDER: exclusivo para ADMIN. Actualiza una orden hecha. UTILIDAD? 
-//? Cuál es la utilidad, para qué un admin modificaría un pedido hecho por un cliente?
-//! ELIMINAR
-// // router.put("/:id", isAdmin, async (req, res) => {
-// //   try {
-// //     const updatedOrder = await Order.findByIdAndUpdate(
-// //       req.params.id,
-// //       {
-// //         $set: req.body,
-// //       },
-// //       { new: true }
-// //     );
-// //     res.status(200).send(updatedOrder);
-// //   } catch (err) {
-// //     res.status(500).send(err);
-// //   }
-// // });
 
-
-//* DELETE ORDER: exclusivo para ADMIN.
-//TODO: pendiente implementar.
-// router.delete("/:id", isAdmin, async (req, res) => {
-router.delete("/:id", async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.status(200).send("Order has been deleted...");
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 
 //* USER GET ORDERS: exclusivo para USUARIO.
 //TODO: pendiente implementar.
-// router.get("/find/:userId", isUser, async (req, res) => {
-router.get("/find/:userId", async (req, res) => {
+router.get("/find/:email", async (req, res) => {
+  const { email } = req.params
   try {
-    const orders = await Order.find({ userId: req.params.userId });
+    const orders = await Order.find({ email });
     res.status(200).send(orders);
   } catch (err) {
     res.status(500).send(err);
@@ -68,10 +43,10 @@ router.get("/find/:userId", async (req, res) => {
 
 //* ADMIN GET ORDERS: exclusivo para ADMIN. Se utilizaría en el panel de control del admin para ver las órdenes del usuario.
 //TODO: pendiente implementar.
-// router.get("/", isAdmin, async (req, res) => {
+//!debe estar protegida
 router.get("/", async (req, res) => {
   try {
-    const orders = await Order.find(); 
+    const orders = await Order.find();
     res.status(200).send(orders);
   } catch (err) {
     res.status(500).send(err);
@@ -80,7 +55,6 @@ router.get("/", async (req, res) => {
 
 //* GET MONTHLY INCOME: exclusivo para ADMIN. Se utilizaría en el panel de analíticas para ver ventas de la página.
 //TODO: pendiente implementar.
-// router.get("/income", isAdmin, async (req, res) => {
 router.get("/income", async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
