@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
+
 import Coments from "../Comments/Coments";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RadioGroup } from '@headlessui/react'
+
 
 export default function PruebaDT({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
@@ -48,7 +50,6 @@ export default function PruebaDT({ id }) {
                 : ""
               : ""
           );
-          console.log(elem);
         }
         return elem;
       });
@@ -57,7 +58,7 @@ export default function PruebaDT({ id }) {
       newProduct = { ...newProduct, cartTotalQuantity: 1, size: productselect };
       setCart([...cart, { ...newProduct }]);
     }
-    console.log(cart)
+
     if (e.target.name === "AddAndBuy"){
       window.location.replace( process.env.REACT_APP_URL? process.env.REACT_APP_URL+"cart" : "http://localhost:3000/cart");
     }

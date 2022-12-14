@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllProducts, productsCreate } from "../../redux/actions.js";
@@ -65,8 +63,8 @@ const CreateComponent = () => {
     return () => {
       dispatch(getAllProducts());
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-console.log(habilitaBoton)
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
 
