@@ -29,10 +29,5 @@ export default function About() {
       <AboutCard li={jonas.li} gh={jonas.gh} ig={jonas.ig} img={jonas.img} des={jonas.des} />     
     </div>
     
-     /*<div className={styles.card}>
-      <div className={styles.blob}></div>
-      
-      
-    </div>
   )
 }
