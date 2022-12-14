@@ -61,7 +61,7 @@
   border: 0;
   cursor: pointer;
   position: absolute;
-  right: -20px;
+  right: 0px;
   top: 50%;
   transform: translate(-50%, -50%);
 }

@@ -69,6 +69,7 @@ export default function PruebaDT({ id }) {
   };
 
   return (
+
     <section className="text-gray-700 body-font overflow-hidden backdrop-blur-sm ">
     <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
@@ -114,6 +115,7 @@ export default function PruebaDT({ id }) {
                     className="bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full">
                     buy Now
                   </button>
+
 
                   
                 </div>
