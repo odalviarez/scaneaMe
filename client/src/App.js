@@ -16,7 +16,7 @@ import Loading from "./components/Loading";
 import Checkout from "./pages/checkout/Checkout";
 import Navbar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
-import {AdminProductsPage, AdminUsersPage, AdminAnalyticsPage} from "./pages/dashboard/Dashboard";
+import {AdminProductsPage, AdminUsersPage, AdminAnalyticsPage, AdminOrdersPage} from "./pages/dashboard/Dashboard";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -86,6 +86,7 @@ function App() {
           <Route path="/dashboard/adminProducts" element={<ProtectedRoute component={AdminProductsPage} />}/>
           <Route path="/dashboard/adminAnalytics" element={<ProtectedRoute component={AdminAnalyticsPage} />}/>
           <Route path="/dashboard/adminProducts/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
+          <Route path="/dashboard/adminOrders/" element={<ProtectedRoute component={AdminOrdersPage} />}/>
 
         </Routes>
         <Footer/>
