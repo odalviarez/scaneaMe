@@ -93,9 +93,11 @@ export const getTotalProducts = (products) => {
 };
 
 export const updateProduct = (id, data) => {
+  console.log(data);  
   return async function () {
     try {
       const res = await axios.put(`/products/${id}`, data);
+      alert("Product updated")
       return res;
     } catch (error) {
       alert("No se pudo actualizar el producto");
