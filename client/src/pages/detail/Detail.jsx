@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import {getProductDetails} from '../../redux/actions'
 import Details from '../../components/details/Details.jsx'
+import PruebaDT from '../../components/PruebDT/PruebaDT ';
 
 export default function Detail() {
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ export default function Detail() {
 
   return (
     <div style={{minHeight: "150vh"}}>
-      <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
+      <PruebaDT name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/>
+      {/* <Details name={name} type={type} stock={stock} color={color} price={price} image={image} id ={id}/> */}
     </div>
   )
 }
