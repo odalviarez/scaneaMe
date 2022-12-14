@@ -26,9 +26,10 @@ import {
   AdminAnalyticsPage,
 } from './pages/dashboard/Dashboard'
 
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import initFontAwesome from './utils/initFontAwesome'
+
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import initFontAwesome from "./utils/initFontAwesome";
 
 
 initFontAwesome()
@@ -94,6 +95,7 @@ function App() {
           />
 
           {/* Rutas admin */}
+
           <Route
             path='/dashboard/adminUsers'
             element={<ProtectedRoute component={AdminUsersPage} />}
