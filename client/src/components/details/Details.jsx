@@ -6,7 +6,7 @@ import Coments from "../Comments/Coments";
 import { getTotalProducts, getProductDetails } from "../../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RadioGroup } from '@headlessui/react'
+
 
 export default function PruebaDT({ id }) {
   //estos datos no son necesarios, el id se recibe por params pero seguire trabajando con este id
