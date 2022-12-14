@@ -1,0 +1,19 @@
+.container{
+  display: flexbox;
+}
+
+.moneyText{
+  font-size: 1.5em;
+  align-self: baseline;
+}
+.moneyNumber{
+  font-weight: bold;
+}
+
+.userText{
+  font-size: 1.5em;
+  align-self: baseline;
+}
+.userNumber{
+  font-weight: bold;
+}

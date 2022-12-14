@@ -21,6 +21,7 @@ import {AdminProductsPage, AdminUsersPage, AdminAnalyticsPage} from "./pages/das
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import initFontAwesome from "./utils/initFontAwesome";
+import PruebaDT from "./components/PruebDT/PruebaDT ";
 
 
 initFontAwesome();
@@ -86,7 +87,7 @@ function App() {
           <Route path="/dashboard/adminProducts" element={<ProtectedRoute component={AdminProductsPage} />}/>
           <Route path="/dashboard/adminAnalytics" element={<ProtectedRoute component={AdminAnalyticsPage} />}/>
           <Route path="/dashboard/adminProducts/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
-
+          <Route path="/prueba/:id" element={<PruebaDT />} />
         </Routes>
         <Footer/>
       </Auth0ProviderWithRedirectCallback>
