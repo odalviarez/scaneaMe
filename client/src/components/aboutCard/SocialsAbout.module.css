@@ -1,9 +1,26 @@
 .container{
-  display:flex;
-  justify-content: center;
+  
+  display:inline-flex;
+  justify-content: space-between;
   
 }
 
-.container img{
-  width: 80%
+.link{
+  width: 30%;
+  height: 100px;
+  margin-bottom: 50px;
+}
+
+.liDiv{
+ width: 80%;
+
+}
+
+.ghDiv{
+  width: 80%;
+  
+}
+
+.igDiv{
+  width:80%;
 }
