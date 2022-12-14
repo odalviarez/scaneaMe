@@ -41,7 +41,6 @@ router.get("/", async (req, res) => {
 //* CREATE PRODUCT: crea un producto
 router.post("/", checkJwt, checkClaims, async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
-  console.log(req.body);
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {

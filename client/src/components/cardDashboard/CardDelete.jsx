@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import { productDelete } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";

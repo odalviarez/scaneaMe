@@ -1,14 +1,11 @@
 import "./detailsUpdate.css";
-import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, updateProduct } from "../../redux/actions.js";
-import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
 import React, { useState, useEffect } from "react";
-import { getAllProducts, productsCreate } from "../../redux/actions.js";
+import { getAllProducts } from "../../redux/actions.js";
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 export default function DetailsUpdate({ id }) {
   const dispatch = useDispatch();
@@ -67,6 +64,7 @@ console.log("img: ", productImg)
     return () => {
       dispatch(getAllProducts());
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleProductImageUpload = (e) => {
