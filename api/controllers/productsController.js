@@ -41,7 +41,6 @@ router.get("/", async (req, res) => {
 //* CREATE PRODUCT: crea un producto
 router.post("/", checkJwt, checkClaims, async (req, res) => {
   const { name, color, type, price, image, stock, season } = req.body;
-  console.log(req.body);
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
@@ -127,18 +126,24 @@ router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
 
 
 //* UPDATE PRODUCT: actualiza un producto existente
-//TODO: falta implementar.
 router.put("/:id", async (req, res) => {
   let { id } = req.params;
   
-  const { name, color, type, price, image, stock, season } = req.body;
-  console.log(req.body);
+  let { name, color, type, price, image, stock, season } = req.body;
   try {
     //si recibe stock y no es un arreglo retorna un error
     if (stock) {
       if (!Array.isArray(stock))
         return res.status(400).json({ message: "stock should be array type" });
     }
+if (image.includes("data:")){
+      const result = await cloudinary.uploader.upload(image, {
+        folder: "Products",
+      });
+      image = result.secure_url;
+
+}
+
     if (name && type && price) {
       let query = {
         name,
@@ -149,7 +154,7 @@ router.put("/:id", async (req, res) => {
         image,
         stock,
       };
-      const updateProduct = await Products.updateOne({ id }, query);
+      const updateProduct = await Products.updateOne({ _id: id }, query);
       res.json(updateProduct);
     } else {
       res.send({ message: "please complete all fields" });
