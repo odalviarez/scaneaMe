@@ -232,14 +232,13 @@ export default function Cards() {
           </p>
         ))}
       </div>
-
+      <Pagination
+        cardsPerPage={cardsPerPage}
+        cardsTotal={productsLoaded.length}
+        pagination={pagination}
+        currentPage={currentPage}
+      />
       <div className={styles.cardsPagination}>
-        <Pagination
-          cardsPerPage={cardsPerPage}
-          productsTotal={productsLoaded.length}
-          pagination={pagination}
-        />
-
         <div className={styles.CatalogueCards}>
           {currentCards.length
             ? currentCards.map((p) => {

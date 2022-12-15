@@ -57,7 +57,7 @@ export default function DetailsUpdate({ id }) {
     if(!stock?.length)setStock(product.stock);
     if (!productImg || productImg !== product.image)
       setProductImg(product.image);
-  }, [dispatch, id, product, stock, productImg]);
+  }, [dispatch, id, product, stock]);
   
   useEffect(() => {
     return () => {
