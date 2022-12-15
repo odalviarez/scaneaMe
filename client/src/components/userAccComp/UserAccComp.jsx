@@ -128,6 +128,7 @@ export default function UserAccComp() {
     alert("User information updated");
   };
 
+  
   const handleDeleteAccount = async (e) => {
     e.preventDefault(e);
 
