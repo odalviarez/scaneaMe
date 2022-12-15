@@ -44,19 +44,14 @@
 .cart{
   height: 50px;
   width: 50px;
-  background-color: antiquewhite;
   border-radius: 3%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   margin-top: 15px;
-  padding: 5px;
-  border-radius: 50%;
+  
+  
   max-width: none;
-}
-
-.cart:hover{
-  background-color: rgb(249, 216, 173);
 }
 
 .nav li.active{
