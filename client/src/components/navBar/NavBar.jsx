@@ -76,7 +76,7 @@ export default function Navbar() {
       </Link>
       <Container className={styles.desplegable}>
         <NavbarToggler onClick={toggle} />
-        <Nav className='d-none d-md-block' navbar>
+        <Nav navbar>
           {!isAuthenticated && (
             <NavItem>
               <Button
@@ -153,65 +153,6 @@ export default function Navbar() {
               >
                 {i18n.t('navbar.log-in')}
               </Button>
-            </NavItem>
-          </Nav>
-        )}
-        {isAuthenticated && (
-          <Nav
-            className='d-md-none justify-content-between'
-            navbar
-            style={{ minHeight: 170 }}
-          >
-            <NavItem>
-              <span className='user-info'>
-                <img
-                  src={user.picture}
-                  alt='Profile'
-                  className='nav-user-profile d-inline-block rounded-circle mr-3'
-                  width='50'
-                />
-                <h6 className='d-inline-block'>{user.name}</h6>
-              </span>
-            </NavItem>
-            <NavItem>
-              <FontAwesomeIcon icon='tools' className='mr-3' />
-              <RouterNavLink
-                to='/user/account'
-                activeclassname='router-link-exact-active'
-              >
-                {i18n.t('navbar.account')}
-              </RouterNavLink>
-            </NavItem>
-            <NavItem>
-              <FontAwesomeIcon icon='user' className='mr-3' />
-              <RouterNavLink
-                to='/profile'
-                activeclassname='router-link-exact-active'
-              >
-                {i18n.t('navbar.profile')}
-              </RouterNavLink>
-            </NavItem>
-            <NavItem>
-              <FontAwesomeIcon icon='box' className='mr-3' />
-              <RouterNavLink
-                to='/user/purchases'
-                activeclassname='router-link-exact-active'
-              >
-                {i18n.t('navbar.purchases')}
-              </RouterNavLink>
-            </NavItem>
-            <NavItem>
-              <FontAwesomeIcon icon='power-off' className='mr-3' />
-              <RouterNavLink
-                to='#'
-                id='qsLogoutBtn'
-                onClick={() => {
-                  logoutWithRedirect()
-                  setCartLogout()
-                }}
-              >
-                {i18n.t('navbar.log-out')}
-              </RouterNavLink>
             </NavItem>
           </Nav>
         )}
