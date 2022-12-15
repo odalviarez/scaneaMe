@@ -39,7 +39,7 @@ export default function CheckoutCard() {
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
-      `https://scaneame.vercel.app/${email}`,
+      `https://scaneame.vercel.app/userProfile/${email}`,
       {
         width: 800,
         margin: 2,

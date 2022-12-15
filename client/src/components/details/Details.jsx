@@ -32,6 +32,7 @@ export default function PruebaDT({ id }) {
       top: 0,
       behavior: "smooth",
     });
+
   }, [dispatch, cart, id]);
 
   useEffect(() =>{
