@@ -4,6 +4,7 @@
   padding-left: 5%;
   height: 92px;
   margin-bottom: 50px;
+  
 
 }
 
@@ -12,6 +13,7 @@
   width:200px;
   object-fit: contain;
   max-width: none;
+  
 }
 
 .nav ul{
@@ -50,6 +52,7 @@
   font-size: medium;
   padding: 0px 0px 0px 0px;
   justify-content: center;
+  
 }
 
 
@@ -78,5 +81,7 @@
 .desplegable{
   z-index: 100;
   padding: 0 0 0 0;
+
 }
+
 
