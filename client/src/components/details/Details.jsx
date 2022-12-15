@@ -101,7 +101,11 @@ export default function PruebaDT({ id }) {
                   disabled={e.quantity < 1}
                   onClick={handleOnclick}
                   value={e.size}
-                  className="title-font h-12 w-12  font-medium text-2xl text-gray-900 py-2 px-2  rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white"
+                  className={
+                    productselect !== e.size
+                      ? "title-font h-12 w-12  font-medium text-2xl text-gray-900 py-2 px-2  rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white disabled:opacity-25"
+                      : "title-font h-12 w-12  font-medium text-2xl bg-gray-800 py-2 px-2 text-white rounded-lg border bg-white/30 border-gray-700 hover:bg-gray-900 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white disabled:opacity-25"
+                  }
                 >
                   {e.size}
                 </button>
@@ -114,7 +118,7 @@ export default function PruebaDT({ id }) {
 
             <div className="flex border-t border-gray-300 mt-5 pt-5">
               <button
-                className="title-font font-medium text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full"
+                className="title-font font-medium text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-75 disabled: cursor-not-allowed"
                 value={id}
                 name="AddCart"
                 onClick={handleAddCart}
@@ -128,7 +132,7 @@ export default function PruebaDT({ id }) {
                 name="AddAndBuy"
                 onClick={handleAddCart}
                 disabled={!productselect}
-                className="title-font text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full"
+                className="title-font text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-75 disabled: cursor-not-allowed"
               >
                 buy Now
               </button>
