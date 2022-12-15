@@ -32,7 +32,10 @@ export default function PruebaDT({ id }) {
       top: 0,
       behavior: "smooth",
     });
+
   }, [dispatch, cart, id]);
+
+
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
