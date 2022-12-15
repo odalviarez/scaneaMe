@@ -35,12 +35,15 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
 
     const makeAdmin = async (e) => {
         e.preventDefault(e)
+        console.log('función makeAdmin', isAdmin, sub, getToken);
         if (isAdmin === true) {
+            console.log('entró al IF', isAdmin, sub, getToken);
             dispatch(userUpdateAuth0(null, sub, 'removeAdmin', getToken))
         } else {
+            console.log('entró al IF', isAdmin, sub, getToken);
             dispatch(userUpdateAuth0(null, sub, 'makeAdmin', getToken))
         }
-        window.location.reload()
+        // window.location.reload()
     }
 
     return (
