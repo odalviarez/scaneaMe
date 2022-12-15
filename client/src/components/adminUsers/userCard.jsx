@@ -36,7 +36,9 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
           dispatch(userUpdateAuth0(null, sub, 'unblock', getToken))
           }
         alert('Los cambios se verán reflejados luego de actualizar la página')
-        window.location.reload()
+        setTimeout(() => {
+          window.location.reload()
+        }, 4000);
     }
 
     const makeAdmin = async (e) => {
@@ -51,7 +53,9 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
             dispatch(userUpdateAuth0(null, sub, 'makeAdmin', getToken))
         }
         alert('Los cambios se verán reflejados luego de actualizar la página')
-        window.location.reload()
+        setTimeout(() => {
+          window.location.reload()
+        }, 4000);
     }
 
     return (
