@@ -1,7 +1,9 @@
 
 
 .nav{
+
   background-color:rgba(211, 25, 25, 0.087) ;
+
   display: flex;
   padding-left: 100px;
   height: 92px;
@@ -30,6 +32,8 @@
   display: flex;
   align-items: center;
   padding: .25rem;
+  font-style: oblique;
+  font-size: medium;
 }
 
 .itemsCart{
