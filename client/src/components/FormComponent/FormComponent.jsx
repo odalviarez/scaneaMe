@@ -4,10 +4,9 @@ import { Row, Container } from "react-bootstrap";
 import InputField from "./InputField";
 import TextareaField from "./TextareaField";
 import emailjs from "@emailjs/browser";
-import { Link } from "react-router-dom";
 
-import { Button } from "reactstrap";
-import i18n from '../../i18n';
+
+
 
 export default function Contact() {
   const [values, setValues] = useState({
@@ -34,7 +33,7 @@ export default function Contact() {
             email: "",
             message: "",
           });
-          setStatus (i18n.t('contact.your-message-was-sent-successfully'))
+          setStatus ('Su consulta fue enviada con exito!')
         },
         (error) => {
           console.log("FAILED...", error);
@@ -49,11 +48,14 @@ export default function Contact() {
     }));
   };
   return (
-    <Container fluid className="contact">
+    
+     <Container fluid className="contact">
       <Row style={{ justifyContent: "center", padding: "20px" }}></Row>
       {status}
       <form onSubmit={handleSubmit}>
-        <h4 className="text-info"> Name </h4>
+
+        <h3 className="text-info"> Nombre Completo </h3>
+
         <InputField
           value={values.from_name}
           handleChange={handleChange}
@@ -61,7 +63,7 @@ export default function Contact() {
           type="text"
           placeholder="John Doe"
         />
-        <h4 className="text-info">{i18n.t('contact.e-mail')}</h4>
+        <h3 className="text-info"> Email </h3>
         <InputField
           value={values.email}
           handleChange={handleChange}
@@ -69,19 +71,21 @@ export default function Contact() {
           type="email"
           placeholder="jphn@example.com"
         />{" "}
-        <h4 className="text-info">{i18n.t('contact.your-message-here')}</h4>
+        <h3 className="text-info"> ¿En que podemos ayudarle? </h3>
         <TextareaField
           value={values.message}
           handleChange={handleChange}
           name="message"
         />
-        <button type="submit" className="fork-btn-inner bg-primary">
-        {i18n.t('dashboard.submit')}
-        </button>
+        <button type="submit" class="btn btn-outline-success">Enviar</button>
+        
+        
         <br></br>
         <br></br>
-        <Link to="/home">BACK HOME</Link>
+
+        <a class="btn btn-primary" href="/home" role="button">Volver</a>
       </form>
     </Container>
+    
   );
 }
