@@ -173,25 +173,25 @@ export default function UserAccComp() {
     };
   };
 
-  const deleteSocials = (e) => {
-    e.preventDefault();
-    setSocials({
-      facebook: null,
-      linkedin: null,
-      twitter: null,
-      instagram: null,
-    });
-    dispatch(
-      userUpdate(
-        {
-          socials,
-        },
-        userLogin.email,
-        getToken
-      )
-    );
-    alert("User socials deleted")
-  };
+  // const deleteSocials = (e) => {
+  //   e.preventDefault();
+  //   setSocials({
+  //     facebook: null,
+  //     linkedin: null,
+  //     twitter: null,
+  //     instagram: null,
+  //   });
+  //   dispatch(
+  //     userUpdate(
+  //       {
+  //         socials,
+  //       },
+  //       userLogin.email,
+  //       getToken
+  //     )
+  //   );
+  //   alert("User socials deleted")
+  // };
 
   return (
     <div className={style.UserAccCompContainer}>
@@ -333,7 +333,7 @@ export default function UserAccComp() {
       <p></p>
       <div>
         <button
-          onClick={deleteSocials}
+          //onClick={deleteSocials}
           class="py-2 px-4 text-sm font-medium text-gray-900 rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white"
         >
           DELETE SOCIALS
