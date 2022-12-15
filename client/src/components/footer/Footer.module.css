@@ -19,25 +19,27 @@
   float: right;
   align-items: center;
   width: 3em;
+
 }
 
 .container ul{
   list-style: none;
   position: absolute;
   right: 5%;
-  top:10px;
+  top:50px;
 }
 .container li{
   display: inline-block;
   flex-direction: row;
   background-color: aliceblue;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
+  margin-left: 1em;
  }
 
  .Logo{
-  height: 80px;
+  height: 40px;
 }
 
 .designed{
