@@ -14,7 +14,8 @@ export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
 export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
 export const ADMIN_GET_ORDERS = "ADMIN_GET_ORDERS";
 export const ADMIN_LOAD_ORDERS = "ADMIN_LOAD_ORDERS";
-export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
+export const CLEAR_PRODUCT_DETAILS = "CLEAR_PRODUCT_DETAILS";
 
 
 
@@ -67,6 +68,19 @@ export const getProductDetails = (id) => {
       return dispatch({
         type: GET_PRODUCT_DETAILS,
         payload: product.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const clearProductDetails = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: CLEAR_PRODUCT_DETAILS,
+        payload: {},
       });
     } catch (error) {
       console.log(error);
