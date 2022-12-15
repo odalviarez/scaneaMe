@@ -29,9 +29,12 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
 
     const deactivateUser = async (e) => {
         e.preventDefault(e)
-        if (userLogin.sub !== sub) {
-        dispatch(userUpdateAuth0(null, sub, 'delete', getToken))
+        if (userLogin.sub !== sub && isActive === true) {
+        dispatch(userUpdateAuth0(null, sub, 'block', getToken))
         }
+        if (userLogin.sub !== sub && isActive === false) {
+          dispatch(userUpdateAuth0(null, sub, 'unblock', getToken))
+          }
         alert('Los cambios se verán reflejados luego de actualizar la página')
         window.location.reload()
     }
