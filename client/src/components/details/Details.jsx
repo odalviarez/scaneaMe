@@ -35,9 +35,6 @@ export default function PruebaDT({ id }) {
 
   }, [dispatch, cart, id]);
 
-  useEffect(() =>{
-    return dispatch(clearProductDetails());
-  })
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
