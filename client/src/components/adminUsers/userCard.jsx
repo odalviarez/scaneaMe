@@ -29,21 +29,26 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
 
     const deactivateUser = async (e) => {
         e.preventDefault(e)
+        if (userLogin.sub !== sub) {
         dispatch(userUpdateAuth0(null, sub, 'delete', getToken))
+        }
+        alert('Los cambios se verán reflejados luego de actualizar la página')
         window.location.reload()
     }
 
     const makeAdmin = async (e) => {
         e.preventDefault(e)
         console.log('función makeAdmin', isAdmin, sub, getToken);
-        if (isAdmin === true) {
+        if ((isAdmin === true) && (userLogin.sub !== sub)) {
             console.log('entró al IF', isAdmin, sub, getToken);
             dispatch(userUpdateAuth0(null, sub, 'removeAdmin', getToken))
-        } else {
+        } 
+        if ((isAdmin === false) && (userLogin.sub !== sub)) {
             console.log('entró al IF', isAdmin, sub, getToken);
             dispatch(userUpdateAuth0(null, sub, 'makeAdmin', getToken))
         }
-        // window.location.reload()
+        alert('Los cambios se verán reflejados luego de actualizar la página')
+        window.location.reload()
     }
 
     return (
