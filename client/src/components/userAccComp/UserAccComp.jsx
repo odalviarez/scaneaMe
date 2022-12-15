@@ -143,6 +143,26 @@ export default function UserAccComp() {
     window.location.href = window.location.origin + "/home";
   };
 
+  const deleteSocials = (e) => {
+    e.preventDefault();
+    setSocials({
+      facebook: null,
+      linkedin: null,
+      twitter: null,
+      instagram: null,
+    });
+    dispatch(
+      userUpdate(
+        {
+          socials,
+        },
+        userLogin.email,
+        getToken
+      )
+    );
+    alert("User socials deleted")
+  };
+
   const showPassword = (e) => {
     e.preventDefault(e);
     var x = document.getElementById("passwordInput");
@@ -173,6 +193,10 @@ export default function UserAccComp() {
     };
   };
 
+  const inputStyle= 'bg-inherit appearance-none rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none backdrop-blur-xl bg-white/50 '
+
+  const labelStyle = 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
+
   const deleteSocials = (e) => {
     e.preventDefault();
     setSocials({
@@ -193,15 +217,31 @@ export default function UserAccComp() {
     alert("User socials deleted")
   };
 
+  const buttonStyle = 'flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded'
+
+  const buttonStyle2='bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'
   return (
     <div className={style.UserAccCompContainer}>
       <h1>User Account Info</h1>
 
-      {userLogin?.sub?.includes("auth0") ? (
-        <div>
+      {userLogin?.sub?.includes('auth0')? 
+      
+      <div> 
+        <div className={style.UserAccCompItem}>
+          <label className={labelStyle}>Email:</label>
+          <input className={inputStyle}   type='email' value={userLogin?.email} disabled />
+        </div>
+        <form onSubmit={e => validateEmail(e)} className={style.UserAccCompItem} >
+          <label className={labelStyle} >Change Email:</label>
+          <input className={inputStyle} type='email' onChange={e => setEmail(e.target.value)} />
+          <button className={buttonStyle} type='submit'>SUBMIT</button>
+        </form>
+        {errors.email? (<p>{errors.email}</p>) : "" }
+        <form onSubmit={e => validatePassword(e)}>
           <div className={style.UserAccCompItem}>
-            <label>Email:</label>
-            <input type="email" value={userLogin?.email} disabled />
+            <label className={labelStyle}>New password:</label>
+            <input className={inputStyle} id='passwordInput' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
+
           </div>
           <form
             onSubmit={(e) => validateEmail(e)}
@@ -246,30 +286,48 @@ export default function UserAccComp() {
       ) : (
         <div>
           <div className={style.UserAccCompItem}>
-            <label>Email:</label>
-            <input type="email" value={userLogin?.email} disabled />
+            <label className={labelStyle} >Repeat password:</label>
+            <input className={inputStyle} id='passwordInputRepeat' type='password' value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} />
+            <button className={buttonStyle} type='submit'>SUBMIT</button>
           </div>
+          <div className={style.showPassword}>
+            <button  className=" bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="checkbox" onClick={(e) => showPassword(e)}>SHOW</button>
+          </div>
+            {errors.passwordRepeat? (<p>{errors.passwordRepeat}</p>) : "" }
+        </form>
+      </div>
+    
+      : 
+
+      <div> 
+        <div className={style.UserAccCompItem}>
+          <label className={labelStyle}>Email:</label>
+          <input className={inputStyle}type='email' value={userLogin?.email} disabled />
+
         </div>
       )}
 
       <form onSubmit={(e) => handleSubmitProfile(e)}>
         <div className={style.UserAccCompAbout}>
-          <label>About me:</label>
-          <textarea
-            type="text"
-            maxLength="255"
-            rows="5"
-            placeholder={userLogin.info && userLogin.info}
-            value={aboutUser}
-            onChange={(e) => setAboutUser(e.target.value)}
+          <label className={labelStyle}>About me:</label>
+          <textarea className={inputStyle}
+          type='text' 
+          maxLength="255"
+          rows='5'
+          placeholder={userLogin.info && userLogin.info}
+          value={aboutUser} 
+          onChange={(e) => setAboutUser(e.target.value)}
+
           />
         </div>
 
         <div className={style.UserAccCompItem}>
-          <label>Instagram:</label>
-          <input
-            type="text"
-            name="instagram"
+
+          <label className={labelStyle}>Instagram:</label>
+          <input className={inputStyle}
+            type='text'
+            name='instagram'
+
             value={socials?.instagram}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.instagram}
@@ -277,30 +335,36 @@ export default function UserAccComp() {
         </div>
 
         <div className={style.UserAccCompItem}>
-          <label>Facebook:</label>
+          <label className={labelStyle}>Facebook:</label>
           <input
-            type="text"
-            name="facebook"
+
+            className={inputStyle}
+            type='text'
+            name='facebook'
             value={socials?.facebook}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.facebook}
           />
         </div>
         <div className={style.UserAccCompItem}>
-          <label>LinkedIn:</label>
+          <label className={labelStyle} >LinkedIn:</label>
           <input
-            type="text"
-            name="linkedin"
+
+            className={inputStyle}
+            type='text'
+            name='linkedin'
             value={socials?.linkedin}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.linkedin}
           />
         </div>
         <div className={style.UserAccCompItem}>
-          <label>Twitter:</label>
+          <label className={labelStyle}>Twitter:</label>
           <input
-            type="text"
-            name="twitter"
+
+            className={inputStyle}
+            type='text'
+            name='twitter'
             value={socials?.twitter}
             onChange={handleChangeSocials}
             placeholder={userLogin?.socials?.twitter}
@@ -308,7 +372,7 @@ export default function UserAccComp() {
         </div>
 
         <div className={style.imgUpContainer}>
-          <div>Update Image:</div>
+          <div className={labelStyle}>Update Image:</div>
           <input
             onChange={handleImage}
             type="file"
@@ -320,15 +384,25 @@ export default function UserAccComp() {
           />
         </div>
 
-        <div>
-          <p></p>
+        
+        <div className={style.btnForm}>
           <button
-            type="text"
-            className="py-2 px-4 text-sm font-medium text-gray-900 rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white"
+            type='text'
+            className={buttonStyle2}
           >
             SUBMIT
           </button>
         </div>
+
+        
+
+      </form>
+
+    <Popup  trigger={<button className={buttonStyle2}>DELETE ACCOUNT</button>} position="right center">
+      <div className={style.popupDelete}>
+        <p>Delete account? This action cannot be reversed.</p>
+        <button className={style.submitProfile} onClick={handleDeleteAccount}> DELETE </button>
+
       </form>
       <p></p>
       <div>
@@ -338,6 +412,7 @@ export default function UserAccComp() {
         >
           DELETE SOCIALS
         </button>
+
       </div>
       <p></p>
       <Popup
