@@ -1,15 +1,16 @@
 import React from 'react'
 import styles from "./userCard.module.css";
 import profilePic from "../../Logo/profile.png"
-import { userUpdateAuth0, adminMakeAdmin} from '../../redux/actions'
+import { userUpdateAuth0} from '../../redux/actions'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
 
     const { getAccessTokenSilently } = useAuth0()
     const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
 
 
     const formatDate = (dateString) => {
@@ -34,7 +35,11 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
 
     const makeAdmin = async (e) => {
         e.preventDefault(e)
-        dispatch(adminMakeAdmin(sub, getToken))
+        if (isAdmin === true) {
+            dispatch(userUpdateAuth0(null, sub, 'removeAdmin', getToken))
+        } else {
+            dispatch(userUpdateAuth0(null, sub, 'makeAdmin', getToken))
+        }
         window.location.reload()
     }
 
@@ -61,9 +66,11 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
                 <input id='isActive' onChange={(e) => deactivateUser(e)} checked={isActive} type='checkbox'/>
             </div>
 
+            {userLogin?.role === 'superAdmin'?  
             <div className={styles.userCardIsAdmin}>
                 {isAdmin? <input id='isAdmin' checked onChange={(e) => makeAdmin(e)} type='checkbox'/> : <input name='isAdmin' onChange={(e) => makeAdmin(e)}  type='checkbox'/>}
             </div>
+            : ''}
 
         </div>
     );

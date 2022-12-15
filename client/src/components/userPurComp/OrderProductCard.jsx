@@ -20,10 +20,17 @@ export default function OrderProductCard({id, img, name, color, size, quantity, 
         user: ""
     });
 
+    const [ratedProduct, setRatedProduct] = useState(false);
+
     const currentRating = (userId) => {
         let [productRated] = productsOnStore.filter((product) => product.id === id)
         let userRating = productRated.comments.find(rating => rating.user === userId)
+
+        if (userRating?.comment) {
         setComments(userRating)
+        setRatedProduct(true)
+        }
+
     }
 
 
@@ -68,59 +75,109 @@ export default function OrderProductCard({id, img, name, color, size, quantity, 
 
     const addComment = async (e) => {
         e.preventDefault(e);
+        if (ratedProduct === false) {
         dispatch(updateProductComments(id, comments));
+        setRatedProduct(true)
         alert("Comment updated");
+      } else {
+          alert('A comment already exists under your User ID')
+        }
     };
 
     return (
               <div className={styles.OrderCardProduct} >
+
                 <div className={styles.OrderCardImage}>
                   <img
                     src={img}
                     alt={img}
                   />
                 </div>
+
                 <div className={styles.OrderCardName}>
                   <p>{name}</p>
                 </div>
+
                 <div className={styles.OrderCardColor}> 
                   <p>Color: {color}</p>
                 </div>
+
                 <div className={styles.OrderCardSize}>
                   <p>Size: {size} x {quantity} unit</p>
                 </div>
-                <div className={styles.OrderCardReview}> 
-                  <button onClick={addComment}>SUBMIT</button>
-                  <div className="stars">
-                    {stars.map((_, index) => {
-                      return (
-                        <FaStar
-                          className="fa-star"
-                          id={index}
-                          key={index}
-                          size={24}
-                          onClick={() => handleClick(index + 1)}
-                          onMouseOver={() => handleMouseOver(index + 1)}
-                          onMouseLeave={handleMouseLeave}
-                          color={
-                            (hoverValue || comments?.raiting) > index
-                              ? colors.orange
-                              : colors.grey
-                          }
-                        />
-                      );
-                    })}
-                  </div>
-                  <button>DELETE</button>
-                </div>
-                <div className={styles.OrderCardTextarea}>
-                <textarea
-                onChange={handleInputChange}
-                name="comment"
-                value={comments?.comment}
-                placeholder="What's your experience?"
-                />
-                </div>
+
+                {
+                  ratedProduct === false ?
+                
+                <>
+                      <div className={styles.OrderCardReview}> 
+                        <button  onClick={addComment}>SUBMIT</button>
+                        <div className="stars">
+                          {stars.map((_, index) => {
+                            return (
+                              <FaStar
+                                className="fa-star"
+                                id={index}
+                                key={index}
+                                size={24}
+                                onClick={() => handleClick(index + 1)}
+                                onMouseOver={() => handleMouseOver(index + 1)}
+                                onMouseLeave={handleMouseLeave}
+                                color={
+                                  (hoverValue || comments?.raiting) > index
+                                    ? colors.orange
+                                    : colors.grey
+                                }
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                      <div className={styles.OrderCardTextarea}>
+                      <textarea
+                      onChange={handleInputChange}
+                      name="comment"
+                      value={comments?.comment}
+                      placeholder="What's your experience?"
+                      />
+                      </div>
+                </>   
+
+                : 
+                
+                <>
+                      <div className={styles.OrderCardReview}> 
+                        <button disabled onClick={addComment}>SUBMIT</button>
+                        <div className="stars">
+                          {stars.map((_, index) => {
+                            return (
+                              <FaStar
+                                className="fa-star"
+                                id={index}
+                                key={index}
+                                size={24}
+                                color={
+                                  (hoverValue || comments?.raiting) > index
+                                    ? colors.orange
+                                    : colors.grey
+                                }
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                      <div className={styles.OrderCardTextarea}>
+                      <textarea
+                      onChange={handleInputChange}
+                      name="comment"
+                      value={comments?.comment}
+                      placeholder="What's your experience?"
+                      disabled
+                      />
+                      </div>
+                </>
+
+                }
               </div>
             );
 }

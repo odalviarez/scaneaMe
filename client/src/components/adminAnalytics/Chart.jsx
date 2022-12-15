@@ -12,6 +12,8 @@ import { getAllOrders, adminGetUsers } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import styles from './Chart.module.css'
+import { BsCurrencyDollar } from "react-icons/bs";
+import { HiOutlineUsers } from "react-icons/hi";
 
 export default function Chart() {
   const orders = useSelector(state => state.orders)
@@ -106,7 +108,7 @@ export default function Chart() {
     },
   ]
 
-  console.log('Users: ', users);
+  
 
   return (
     <div className={styles.container}>
@@ -122,26 +124,54 @@ export default function Chart() {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Line
-          type='monotone'
-          dataKey='NumberOfProductsSold'
-          stroke='#8884d8'
+          type="monotone"
+          dataKey="NumberOfProductsSold"
+          stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
-      </LineChart>
-      <p className={styles.moneyText}>
-        Total money income las month:
-        <span className={styles.moneyNumber}> ${moneyIncome/100}</span>
-      </p>
-      <p className={styles.userText}>
-        Total registered useres:{' '}
-        <span className={styles.userNumber}> {totalUsers}</span>
-      </p>
+      </LineChart> 
+
+
+      <div className="mt-24">
+        <div className="flex flex-wrap lg:flex-nowrap justify-center ">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-bold text-gray-400">Earnings</p>
+                <p className="text-2xl">${moneyIncome / 100}</p>
+              </div>
+              <button
+                type="button"
+                style={{ backgroundColor: "#03C9D7" }}
+                className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+              >
+                <BsCurrencyDollar />
+              </button>
+            </div>
+          </div>
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-bold text-gray-400">Users</p>
+                <p className="text-2xl">{totalUsers}</p>
+              </div>
+              <button
+                type="button"
+                style={{ backgroundColor: "#03C9D7" }}
+                className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+              >
+                <HiOutlineUsers />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

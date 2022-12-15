@@ -37,7 +37,7 @@ export default function CartComponent() {
     }, [cart, dispatch])
 
   const handleAddToCart = (id, size) => {
-    console.log(cart)
+
     let cartModified = cart.map((elem) => {
       if (elem.id === id && elem.size === size) {
          elem.stock.map((e) =>
@@ -62,7 +62,7 @@ export default function CartComponent() {
     setCart(cartModified);
   };
   const handleRemoveFromCart = (id, size) => {
-    console.log(cart)
+
     setCart(cart.filter((elem) => (elem.id !== id || elem.size !== size))) //*En el filter es raro como funciona. Con el && ers si uno o el otro se cumplia lo filtraba
   };
   const handleClearCart = () => {
@@ -105,10 +105,10 @@ export default function CartComponent() {
             {cart?.map((cartItem) => (
               <div className="cart-item" key={cartItem.id + cartItem.size}>
                 <div className="cart-product">
-                  <p>{cartItem.size}</p>
+
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
-                    <h3>{cartItem.name}</h3>
+                    <h3>{cartItem.name} ({(cartItem.size).toUpperCase()})</h3>
                     <button
                       onClick={() =>
                         handleRemoveFromCart(cartItem.id, cartItem.size)
