@@ -112,7 +112,7 @@ export default function Navbar() {
                 </DropdownItem>
                 <DropdownItem
                   tag={RouterNavLink}
-                  to={'/' + user.email}
+                  to={'/userProfile/' + user.email}
                   className='dropdown-profile'
                   activeclassname='router-link-exact-active'
                 >
