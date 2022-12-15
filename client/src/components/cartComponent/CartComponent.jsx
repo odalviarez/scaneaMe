@@ -105,10 +105,10 @@ export default function CartComponent() {
             {cart?.map((cartItem) => (
               <div className="cart-item" key={cartItem.id + cartItem.size}>
                 <div className="cart-product">
-                  <p>{cartItem.size}</p>
+
                   <img src={cartItem.image} alt={cartItem.name} />
                   <div>
-                    <h3>{cartItem.name}</h3>
+                    <h3>{cartItem.name} ({(cartItem.size).toUpperCase()})</h3>
                     <button
                       onClick={() =>
                         handleRemoveFromCart(cartItem.id, cartItem.size)
