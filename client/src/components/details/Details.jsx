@@ -4,7 +4,7 @@ import { useLocalStorage } from "../../useLocalStorage";
 import Raiting from "../Rating/Raiting";
 
 import Coments from "../Comments/Coments";
-import { getTotalProducts, getProductDetails } from "../../redux/actions";
+import { getTotalProducts, getProductDetails, clearProductDetails } from "../../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,9 @@ export default function PruebaDT({ id }) {
 
   }, [dispatch, cart, id]);
 
-
+  useEffect(() =>{
+    return dispatch(clearProductDetails());
+  })
 
   const handleAddCart = function (e) {
     e.preventDefault(e);
@@ -121,7 +123,7 @@ export default function PruebaDT({ id }) {
 
             <div className="flex border-t border-gray-300 mt-5 pt-5">
               <button
-                className="title-font font-medium text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-75 disabled: cursor-not-allowed"
+                className="title-font font-medium text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-25 disabled: cursor-not-allowed"
                 value={id}
                 name="AddCart"
                 onClick={handleAddCart}
@@ -135,7 +137,7 @@ export default function PruebaDT({ id }) {
                 name="AddAndBuy"
                 onClick={handleAddCart}
                 disabled={!productselect}
-                className="title-font text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-75 disabled: cursor-not-allowed"
+                className="title-font text-2xl bg-gray-800 duration-200 focus:outline-none focus:shadow-outline font-medium h-12 hover:bg-gray-900 inline-flex items-center justify-center px-6 text-white tracking-wide transition w-full disabled:opacity-25 disabled: cursor-not-allowed"
               >
                 buy Now
               </button>
