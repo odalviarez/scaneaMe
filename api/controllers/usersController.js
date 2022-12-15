@@ -149,7 +149,7 @@ router.put("/:sub/:action", checkJwt, async (req, res) => {
   console.log('ruta put en el Back', sub, action, payload);
   try {
 
-    if (action === "delete") {
+    if (action === "block" || action === "unblock") {
       const updateUser = await User.updateOne(
         { sub },
         [

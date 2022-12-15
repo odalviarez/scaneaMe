@@ -21,7 +21,7 @@ const getAuth0Controller = async (userID, action, data) => {
     let config = ""
     
     switch (action) {
-      case 'delete':
+      case 'block':
         config = {
           method: "PATCH", 
           url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`,
@@ -29,6 +29,18 @@ const getAuth0Controller = async (userID, action, data) => {
             authorization: `Bearer ${token}`
           },
           data: { "blocked": true }
+        }
+
+      break;
+
+      case 'unblock':
+        config = {
+          method: "PATCH", 
+          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`,
+          headers: {
+            authorization: `Bearer ${token}`
+          },
+          data: { "blocked": false }
         }
 
       break;
