@@ -299,35 +299,6 @@ export const userGetOrders = (email, getToken) => {
 };
 
 
-export const adminMakeAdmin = (sub, getToken) => {
-  return async function () {
-    try {
-      const token = await getToken();
-      let config = {
-        method: "put",
-        url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `user/admin/${sub}`
-          : `http://localhost:5000/user/admin/${sub}`,
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      axios(config)
-        .then(function (response) {
-          return response.data;
-        })
-        .catch(function (error) {
-          return error;
-        });
-    } catch (error) {
-      console.log(error);
-      alert("No se pudo actualizar los datos del usuario");
-    }
-  };
-};
-
-
 export const adminGetUsers = () => {
   return async function (dispatch) {
     try {

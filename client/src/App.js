@@ -21,6 +21,7 @@ import {AdminProductsPage, AdminUsersPage, AdminAnalyticsPage, AdminOrdersPage} 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import initFontAwesome from "./utils/initFontAwesome";
+import OrderDetail from "./components/adminOrders/orderDetail";
 
 
 initFontAwesome();
@@ -87,6 +88,7 @@ function App() {
           <Route path="/dashboard/adminAnalytics" element={<ProtectedRoute component={AdminAnalyticsPage} />}/>
           <Route path="/dashboard/adminProducts/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
           <Route path="/dashboard/adminOrders/" element={<ProtectedRoute component={AdminOrdersPage} />}/>
+          <Route path="/dashboard/adminOrders/:orderId" element={<ProtectedRoute component={OrderDetail} />}/>
 
         </Routes>
         <Footer/>

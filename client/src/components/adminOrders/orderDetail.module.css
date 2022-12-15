@@ -1,0 +1,66 @@
+.orderDetailsBack{
+    padding: 5px;
+    position: relative;
+    right: 600px;
+    height: 50px;
+    width: 100px;
+    font-size: x-large;
+}
+
+.orderDetailsBack:hover{
+    padding: 5px;
+    position: relative;
+    right: 600px;
+    height: 50px;
+    width: 100px;
+    font-size: x-large;
+    background-color: grey;
+}
+
+.OrderDetailContainer{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.OrderDetailContainer h5, .OrderDetailContainer h4, .OrderDetailContainer h3, .OrderDetailContainer p{
+    margin: 0;
+}
+
+.OrderDetailInputsContainer{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(255, 255, 255, 0.26);
+    padding: 20px;
+
+
+}
+
+.OrderDetailInput{
+    display: flex ;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+
+}
+
+.OrderDetailProducts{
+    display: flex ;
+    flex-direction: column;
+    width: 100%;
+    border: solid rgba(0, 0, 0, 0.465);
+    margin-bottom: 10px;
+
+}
+
+.OrderDetailProduct{
+    display: flex ;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+
+}

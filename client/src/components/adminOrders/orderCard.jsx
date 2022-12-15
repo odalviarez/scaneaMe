@@ -4,8 +4,9 @@ import { adminUpdateOrders } from '../../redux/actions'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import cart from '../../Logo/cart.png'
+import emailjs, { init } from '@emailjs/browser'
 
-const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, details}) => {
+const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, cartItems, shippingInfo, cartJSON, productsOnStore, order}) => {
 
     const dispatch = useDispatch()
 
@@ -21,11 +22,49 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, det
     const handleDeliveryStatus = (e) => {
         e.preventDefault()
         let deliveryStatus = e.target.value
-        console.log('front', orderId, deliveryStatus);
         dispatch(adminUpdateOrders(orderId, deliveryStatus))
+        if (e.target.value === 'delivered') {
+            sendEmail()
+        }
     }
 
+    console.log(order);
 
+    const sendEmail = () => {
+        let prodAndQty = order?.products.map(e => ({
+            item: e.description,
+            quantity: e.quantity,
+        }))
+    
+        let amount = `$${order?.total / 100}`
+        let name = order?.shipping.name
+        let adress = `${order?.shipping.address?.country}, ${order?.shipping.address?.state}, ${order?.shipping.address?.city}, ${order?.shipping.address?.line1}`
+    
+        let purchaseText = ''
+        prodAndQty?.map(e => {
+            purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
+        })
+        console.log('Purchase text: ', purchaseText)
+    
+        let emailFields = {
+            to_name: name,
+            to_email: userEmail,
+            products: purchaseText,
+            amount: amount,
+            name: name,
+            adress: adress,
+        }
+    
+        console.log('email fields: ', emailFields)
+        emailjs.send('service_0hpnim5', 'template_7cgjln7', emailFields, 'vGQTOpiT1rYKFB3ox').then(
+            response => {
+            console.log('SUCCESS!', response)
+            },
+        error => {
+            console.log('FAILED...', error)
+            }
+        )
+    }
 
     
 
@@ -59,12 +98,19 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, det
             <div className={styles.orderCardDetails}>
                 <Link       
                 state={{
-                filter:'season',
-                value:'spring',
-                valor:'Primavera / Verano'
+                    orderId,
+                    userEmail,
+                    date: formatDate(date),
+                    paymentStatus,
+                    deliveryStatus,
+                    shippingInfo,
+                    cartJSON,
+                    productsOnStore,
                 }}
+
+                to={`/dashboard/adminOrders/${orderId}`}
                 >
-                <img src={cart} />
+                    <img src={cart} />
                 </Link>
             </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminGetOrders } from '../../redux/actions'
+import { adminGetOrders, getAllProducts } from '../../redux/actions'
 import OrderCard from './orderCard'
 import styles from "./adminOrders.module.css"
 import Pagination from '../pagination/Pagination'
@@ -9,13 +9,16 @@ const AdminOrders = () => {
     const dispatch = useDispatch()
     const allOrders = useSelector(state => state.allOrders)
     const ordersLoaded = useSelector(state => state.orders)
+    const productsOnStore = useSelector((state) => state.allProducts);
 
     useEffect(() => {
         if (allOrders.length === 0){
-        dispatch(adminGetOrders())
+            dispatch(adminGetOrders())
         }
-        console.log(allOrders);
-    }, [dispatch, allOrders.length])
+        if (productsOnStore.length === 0) {
+            dispatch(getAllProducts());
+        }
+    }, [dispatch, allOrders.length, productsOnStore])
 
         //* PAGINADO
     const [currentPage, setcurrentPage] = useState(1);
@@ -57,13 +60,17 @@ const AdminOrders = () => {
                 {ordersLoaded.length? currentCards.map(order => {
                     return (
                         <OrderCard
-                            orderId= {order._id}
+                            orderId={order._id}
                             key={order._id}
                             userEmail={order.email}
                             date={order.createdAt}
                             paymentStatus={order.payment_status}
                             deliveryStatus={order.delivery_status}
-                            details={order.cartItems}
+                            cartItems={order.products}
+                            shippingInfo={order.shipping}
+                            cartJSON={order.cartItems}
+                            productsOnStore={productsOnStore}
+                            order={order}
                         />
                     )
                 }) : 'No orders were found'}
