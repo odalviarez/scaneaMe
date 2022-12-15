@@ -12,7 +12,6 @@ const checkClaims = claimCheck((claims) => {
 
 
 //* GET USER LOGIN: recibe el mail al hacer login en el cliente. Si el usuario ya existe en la DB, lo trae (GET), y si no existe en la DB, lo crea (POST).
-//? Funciona la ruta creando un usuario manualmente, sin el log in de google?
 router.post("/login/:email", async (req, res) => {
 let { authorization } = req.headers;
 let isAdmin = false;
@@ -143,35 +142,21 @@ router.put("/:email", checkJwt, async (req, res) => {
   }
 });
 
-//* ADMIN MAKE ADMIN: hace admin a un usuario.
-router.put("/admin/:sub", checkJwt, async (req, res) => {
-  const { sub } = req.params;
-  try {
-    const updateUser = await User.updateOne(
-      { sub },
-      [
-      {$set: {isAdmin: { $not : "$isAdmin" }}}
-      ]
-    )
-    res.json(updateUser);
-  } catch (error) {
-    res.status(400).json('No se pudo hacer admin al usuario', error.message);
-  }
-});
-
-
 //* USER UPDATE AUTH0: actualiza las redes sociales y la imágen del usuario
 router.put("/:sub/:action", checkJwt, async (req, res) => {
   const { sub, action } = req.params;
   const { payload } = req.body;
   try {
+
     if (action === "delete") {
       const updateUser = await User.updateOne(
         { sub },
         [
         {$set: {isActive: { $not : "$isActive" }}}
         ]
-      )}
+      )
+    }
+
     if (action === "emailChange") {
       const updateUser = await User.updateOne(
         { sub },
@@ -179,7 +164,17 @@ router.put("/:sub/:action", checkJwt, async (req, res) => {
         email: payload,
         email_verified: false,
         }
-      )}
+      )
+    }
+
+    if (action === "makeAdmin" || action === "removeAdmin") {
+      const updateUser = await User.updateOne(
+        { sub },
+        [
+        {$set: {isAdmin: { $not : "$isAdmin" }}}
+        ]
+      )
+    }
 
   let response = await getAuth0Controller(sub, action, payload)
 

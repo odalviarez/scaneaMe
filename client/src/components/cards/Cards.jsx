@@ -28,7 +28,7 @@ export default function Cards() {
   //* PAGINADO
   const [currentPage, setcurrentPage] = useState(1)
   // eslint-disable-next-line no-unused-vars
-  const [cardsPerPage, setCardsPerPage] = useState(9)
+  const [cardsPerPage, setCardsPerPage] = useState(12)
   const pagination = pageNumber => {
     setcurrentPage(pageNumber)
   }

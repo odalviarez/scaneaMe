@@ -10,7 +10,9 @@ import {
   USER_GET_ORDERS,
   ADMIN_GET_USERS,
   ADMIN_LOAD_USERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  ADMIN_GET_ORDERS,
+  ADMIN_LOAD_ORDERS
 } from "./actions";
 
 const initialState = {
@@ -23,7 +25,8 @@ const initialState = {
     userOrders: [],
     allUsers: [],
     usersLoaded: [],
-    orders: []
+    orders: [],
+    allOrders: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -140,6 +143,21 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           usersLoaded: allUsers,
         };
+
+        case ADMIN_GET_ORDERS: {
+          return {
+            ...state,
+            allOrders: action.payload,
+            orders: action.payload,
+          };
+        }
+  
+        case ADMIN_LOAD_ORDERS:
+          let allOrders = state.allUsers;
+          return {
+            ...state,
+            usersLoaded: allOrders,
+          };
 
       default:
         return {
