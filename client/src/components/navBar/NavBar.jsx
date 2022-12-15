@@ -142,20 +142,6 @@ export default function Navbar() {
             </UncontrolledDropdown>
           )}
         </Nav>
-        {!isAuthenticated && (
-          <Nav className='d-md-none' navbar>
-            <NavItem>
-              <Button
-                id='qsLoginBtn'
-                color='primary'
-                block
-                onClick={() => loginWithRedirect({})}
-              >
-                {i18n.t('navbar.log-in')}
-              </Button>
-            </NavItem>
-          </Nav>
-        )}
       </Container>
       <ul>
         <li className={styles.lista}>
