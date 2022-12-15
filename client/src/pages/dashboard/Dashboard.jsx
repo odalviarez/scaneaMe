@@ -5,6 +5,7 @@ import AdminUsers from "../../components/adminUsers/adminUsers";
 import AdminOrders from "../../components/adminOrders/adminOrders";
 import styles from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
+import AdminAnalytics from "../../components/adminAnalytics/AdminAnalytics.jsx";
 
 
 export function AdminProductsPage() {
@@ -84,7 +85,7 @@ export function AdminAnalyticsPage() {
           </div>
   
           <div className={styles.dashboardPage}>
-          <h1>Analytics</h1>
+          <AdminAnalytics/>
           </div>
   
       </div>
