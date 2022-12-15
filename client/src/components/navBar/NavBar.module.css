@@ -1,28 +1,20 @@
-/* *{
-  box-sizing: border-box;
-}
 
-body{
-  margin: 0;
-} */
 
 .nav{
-   
-  color:rgb(3, 3, 22);
+
+  background-color:rgba(211, 25, 25, 0.087) ;
+
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 2rem;
-  padding: 0 1rem;
-  height: 5%;
-  max-height: 92px;
+  padding-left: 100px;
+  height: 92px;
   margin-bottom: 50px;
 }
 
 .logo{
-  height: 80px;
+  height: 92px;
   width:200px;
-  object-fit: cover;
+  object-fit: contain;
+  max-width: none;
 }
 
 .nav ul{
@@ -52,18 +44,14 @@ body{
 .cart{
   height: 50px;
   width: 50px;
-  background-color: antiquewhite;
   border-radius: 3%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   margin-top: 15px;
-  padding: 5px;
-  border-radius: 50%;
-}
-
-.cart:hover{
-  background-color: rgb(249, 216, 173);
+  
+  
+  max-width: none;
 }
 
 .nav li.active{
@@ -76,5 +64,5 @@ body{
 
 .desplegable{
   z-index: 100;
-  
+  margin-top: -15px;
 }
