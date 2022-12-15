@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userUpdate, getUser, userUpdateAuth0 } from "../../redux/actions";
+import { userUpdate, getUser, userUpdateAuth0, getUserLogin } from "../../redux/actions";
 import style from "./UserAccComp.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import validator from "validator";
@@ -37,16 +37,23 @@ export default function UserAccComp() {
   };
 
   useEffect(() => {
-    if (Object.hasOwn(userLogin, "socials") && user) setSocials(userLogin.socials);
+    if(!userLogin) dispatch(getUserLogin(user.email))
+    if (Object.hasOwn(userLogin, "socials") && user) {
+    setSocials({
+      facebook: userLogin.socials? userLogin.socials.facebook : "",
+      linkedin: userLogin.socials? userLogin.socials.linkedin : "",
+      twitter: userLogin.socials? userLogin.socials.twitter : "",
+      instagram: userLogin.socials? userLogin.socials.instagram : "",
+    });
+  }
 
-
-  }, [dispatch, user]);
+  }, [dispatch, user, userLogin]);
 
   useEffect(() => {
     return () => {
       dispatch(getUser(userLogin.email));
     };
-  }, [dispatch, userLogin.email]);
+  }, [dispatch, userLogin.email, socials]);
 
   const validateEmail = (e) => {
     e.preventDefault(e);
@@ -128,7 +135,7 @@ export default function UserAccComp() {
     alert("User information updated");
   };
 
-  
+
   const handleDeleteAccount = async (e) => {
     e.preventDefault(e);
 
