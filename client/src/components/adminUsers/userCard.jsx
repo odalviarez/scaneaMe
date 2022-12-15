@@ -44,35 +44,57 @@ const UserCard = ({email, id, image, isActive, isAdmin, createdAt, sub}) => {
     }
 
     return (
-        <div className={styles.userCardContainer} >  
-
-            <div className={styles.userCardImage}>
-                {image.url? <img src={image.url}/> : <img src={profilePic}/>}
-            </div>
-
-            <div className={styles.userCardEmail}>
-                <p>{email}</p>
-            </div>
-
-            <div className={styles.userCardId}>
-                <p>ID: {id}</p>
-            </div>
-
-            <div className={styles.userCardCreatedAt}>
-                <p>{formatDate(createdAt)}</p>
-            </div>
-
-            <div className={styles.userCardIsActive}>
-                <input id='isActive' onChange={(e) => deactivateUser(e)} checked={isActive} type='checkbox'/>
-            </div>
-
-            {userLogin?.role === 'superAdmin'?  
-            <div className={styles.userCardIsAdmin}>
-                {isAdmin? <input id='isAdmin' checked onChange={(e) => makeAdmin(e)} type='checkbox'/> : <input name='isAdmin' onChange={(e) => makeAdmin(e)}  type='checkbox'/>}
-            </div>
-            : ''}
-
+      <div className={styles.userCardContainer}>
+        <div className={styles.userCardImage}>
+          {image.url ? (
+            <img src={image.url} />
+          ) : (
+            <img src={profilePic} />
+          )}
         </div>
+
+        <div className={styles.userCardEmail}>
+          <p>{email}</p>
+        </div>
+
+        <div className={styles.userCardId}>
+          <p>ID: {id}</p>
+        </div>
+
+        <div className={styles.userCardCreatedAt}>
+          <p>{formatDate(createdAt)}</p>
+        </div>
+
+        <div className={styles.userCardIsActive}>
+          <input
+            id="isActive"
+            onChange={(e) => deactivateUser(e)}
+            checked={isActive}
+            type="checkbox"
+          />
+        </div>
+
+        {userLogin?.role === "superAdmin" ? (
+          <div className={styles.userCardIsAdmin}>
+            {isAdmin ? (
+              <input
+                id="isAdmin"
+                checked
+                onChange={(e) => makeAdmin(e)}
+                type="checkbox"
+              />
+            ) : (
+              <input
+                name="isAdmin"
+                onChange={(e) => makeAdmin(e)}
+                type="checkbox"
+              />
+            )}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     );
 }
 
