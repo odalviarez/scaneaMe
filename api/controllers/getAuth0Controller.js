@@ -23,8 +23,8 @@ const getAuth0Controller = async (userID, action, data) => {
     switch (action) {
       case 'delete':
         config = {
-          method: "PATCH", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
-          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`, //hacer condicional para las distintas rutas
+          method: "PATCH", 
+          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`,
           headers: {
             authorization: `Bearer ${token}`
           },
@@ -35,8 +35,8 @@ const getAuth0Controller = async (userID, action, data) => {
 
       case 'get':
         config = {
-          method: "GET", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
-          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users`, //hacer condicional para las distintas rutas
+          method: "GET",
+          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users`,
           headers: {
             authorization: `Bearer ${token}`
           },
@@ -46,8 +46,8 @@ const getAuth0Controller = async (userID, action, data) => {
 
       case 'passwordChange':
         config = {
-          method: "PATCH", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
-          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`, //hacer condicional para las distintas rutas
+          method: "PATCH", 
+          url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`, 
           headers: {
             authorization: `Bearer ${token}`
           },
@@ -58,14 +58,39 @@ const getAuth0Controller = async (userID, action, data) => {
 
         case 'emailChange':
           config = {
-            method: "PATCH", //Hacer condicional para que pueda ser GET, UPDATE, DELETE
-            url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`, //hacer condicional para las distintas rutas
+            method: "PATCH", 
+            url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}`,
             headers: {
               authorization: `Bearer ${token}`
             },
             data: { "email": data, "email_verified": false, "verify_email": true, }
           }
 
+          break;
+
+          case 'makeAdmin':
+            console.log('LLEGÓ A MAKEADMIN EN AUTH0');
+            config = {
+              method: "POST", 
+              url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}/roles`, 
+              headers: {
+                authorization: `Bearer ${token}`
+              },
+              data: { "roles": ["rol_2luoUkZRWwbEa3HT"] }
+            }
+  
+          break;
+
+          case 'removeAdmin':
+            config = {
+              method: "DELETE",
+              url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}/roles`, 
+              headers: {
+                authorization: `Bearer ${token}`
+              },
+              data: { "roles": ["rol_2luoUkZRWwbEa3HT"] }
+            }
+  
           break;
 
       default:

@@ -1,4 +1,5 @@
-@tailwind base;
+/* @tailwind base; */
+/** GONZA: Comenté esta linea porque hacía que las imágenes tengan display block, lo que las posiciona a la izquierda. */
 @tailwind components;
 @tailwind utilities;
 body {
@@ -18,6 +19,7 @@ body {
 html{
   min-height: 100%;
   margin: 0;
+
 }
 
 code {
