@@ -28,6 +28,10 @@ export default function PruebaDT({ id }) {
       );
       dispatch(getTotalProducts(cartTotal));
     }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }, [dispatch, cart, id]);
 
   const handleAddCart = function (e) {
@@ -73,7 +77,7 @@ export default function PruebaDT({ id }) {
     <section className="text-gray-700 body-font overflow-hidden backdrop-blur-sm ">
     <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded-2xl border border-gray-200" src={image}/> 
+        <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded-2xl border border-gray-200" src={image}/> 
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h1 className="text-gray-900 text-4xl title-font font-bold mb-1">{name}</h1>
                 <div className="flex mb-4">
@@ -88,7 +92,7 @@ export default function PruebaDT({ id }) {
                 disabled={e.quantity < 1}
                 onClick={handleOnclick}
                 value={e.size}
-                class="title-font font-medium text-2xl text-gray-900 py-2 px-4  rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white">
+                className="title-font h-12 w-12  font-medium text-2xl text-gray-900 py-2 px-2  rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white">
                     {e.size}
                 </button>
 

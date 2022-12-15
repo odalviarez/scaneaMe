@@ -1,20 +1,30 @@
 .container{
-  display: inline-block;
-  background-color: aquamarine;
-  width: 40%;
-  aspect-ratio: 1 / 1;
-  position: relative;
+  display: flex;
+  background-color: rgba(127, 255, 212, 0.174);
   border-radius: 15px;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
 }
 
 .codigoQR{
-  width: 60%;
-  position: absolute;
-  transform: translate(-50%);
+  width: 50%;
+  align-self: center;
   bottom: 75px;
 }
 
+.qrContainer{
+  display: flex;
+  justify-content: center;
+}
+
 .gracias{
+  
+}
+
+.msjqr{
+  
   
 }

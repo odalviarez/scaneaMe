@@ -9,9 +9,11 @@ export default function Card({ name, img, id, price, color }) {
         <div className={styles.imageContainer}>
           <img src={img} alt='imagen' />
         </div>
-        <div className={styles.title}>{name}</div>
-        <p>${price}</p>
-        <p>Color: {color}</p>
+        <div className={styles.cardsDescription}>
+          <div className={styles.title}>{name}</div>
+          <p>${price}</p>
+          <p>Color: {color}</p>
+        </div>
       </Link>
     </div>
   )
