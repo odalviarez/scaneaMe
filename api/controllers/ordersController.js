@@ -46,13 +46,11 @@ router.put("/:orderId", async (req, res) => {
   const { orderId } = req.params
   const { deliveryStatus } = req.body;
   try {
-    console.log('controller', orderId, deliveryStatus);
     if (deliveryStatus) {
     let query = {
       delivery_status: deliveryStatus
     }
     let order = await Order.updateOne({_id: orderId}, query);
-    console.log(order);
     res.status(200).json(order);
     }
   } catch (err) {

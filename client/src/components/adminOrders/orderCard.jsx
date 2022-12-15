@@ -28,7 +28,7 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, car
         }
     }
 
-    console.log(order);
+   
 
     const sendEmail = () => {
         let prodAndQty = order?.products.map(e => ({
@@ -44,7 +44,7 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, car
         prodAndQty?.map(e => {
             purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
         })
-        console.log('Purchase text: ', purchaseText)
+
     
         let emailFields = {
             to_name: name,
@@ -55,7 +55,7 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, car
             adress: adress,
         }
     
-        console.log('email fields: ', emailFields)
+
         emailjs.send('service_0hpnim5', 'template_ts6yzru', emailFields, 'vGQTOpiT1rYKFB3ox').then(
             response => {
             console.log('SUCCESS!', response)

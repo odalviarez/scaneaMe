@@ -7,10 +7,7 @@ export default function Coments({comment, stars}) {
 
 
   const [comments, setComments] = useState(comentarios);
-  console.log(comments)
-  useEffect(()=>{
-    console.log(comments)
-  })
+
   
 
 

@@ -73,7 +73,7 @@ export default function CheckoutCard() {
     prodAndQty?.map(e => {
       purchaseText = purchaseText.concat(`${e.quantity} ${e.item}, `)
     })
-    console.log('Purchase text: ', purchaseText)
+
 
     let emailFields = {
       to_name: name,

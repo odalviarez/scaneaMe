@@ -41,7 +41,6 @@ export default function Navbar() {
     return `${token}`
   }
   const setCartLogout = () => {
-    console.log('setCartLogout')
     setCart([])
   }
 

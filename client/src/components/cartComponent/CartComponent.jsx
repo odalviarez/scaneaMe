@@ -37,7 +37,7 @@ export default function CartComponent() {
     }, [cart, dispatch])
 
   const handleAddToCart = (id, size) => {
-    console.log(cart)
+
     let cartModified = cart.map((elem) => {
       if (elem.id === id && elem.size === size) {
          elem.stock.map((e) =>
@@ -62,7 +62,7 @@ export default function CartComponent() {
     setCart(cartModified);
   };
   const handleRemoveFromCart = (id, size) => {
-    console.log(cart)
+
     setCart(cart.filter((elem) => (elem.id !== id || elem.size !== size))) //*En el filter es raro como funciona. Con el && ers si uno o el otro se cumplia lo filtraba
   };
   const handleClearCart = () => {

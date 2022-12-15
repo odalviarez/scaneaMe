@@ -69,7 +69,6 @@ const getAuth0Controller = async (userID, action, data) => {
           break;
 
           case 'makeAdmin':
-            console.log('LLEGÓ A MAKEADMIN EN AUTH0');
             config = {
               method: "POST", 
               url: `https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/users/${userID}/roles`, 
