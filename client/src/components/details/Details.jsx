@@ -123,6 +123,7 @@ export default function PruebaDT({ id }) {
 
                   
                 </div>
+                <Raiting/>
             </div>
         </div>
     </div>
