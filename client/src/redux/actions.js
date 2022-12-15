@@ -12,6 +12,8 @@ export const UPDATE_USER = "UPDATE_USER";
 export const USER_GET_ORDERS = "USER_GET_ORDERS";
 export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
 export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
+export const ADMIN_GET_ORDERS = "ADMIN_GET_ORDERS";
+export const ADMIN_LOAD_ORDERS = "ADMIN_LOAD_ORDERS";
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 
 
@@ -109,7 +111,7 @@ export const getTotalProducts = (products) => {
 };
 
 export const updateProduct = (id, data) => {
-  console.log(data);  
+
   return async function () {
     try {
       const res = await axios.put(`/products/${id}`, data);
@@ -270,8 +272,10 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
         },
         data: { payload },
       };
+      console.log('action cretor userUpdateAuth0', payload, sub, action, token, config);
       axios(config)
         .then(function (response) {
+          console.log('este es response.data en el action', response.data);
           return response.data;
         })
         .catch(function (error) {
@@ -313,53 +317,12 @@ export const userGetOrders = (email, getToken) => {
     }
   };
 };
-export const adminMakeAdmin = (sub, getToken) => {
-  return async function () {
-    try {
-      const token = await getToken();
-      let config = {
-        method: "put",
-        url: process.env.REACT_APP_API
-          ? process.env.REACT_APP_API + `user/admin/${sub}`
-          : `http://localhost:5000/user/admin/${sub}`,
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      axios(config)
-        .then(function (response) {
-          return response.data;
-        })
-        .catch(function (error) {
-          return error;
-        });
-    } catch (error) {
-      console.log(error);
-      alert("No se pudo actualizar los datos del usuario");
-    }
-  };
-};
 
-// export const userGetOrders = (email) => {
-//   return async function (dispatch) {
-//     try {
-//       let response = await axios.get(`order/find/${email}`)
-//           return dispatch({
-//             type: USER_GET_ORDERS,
-//             payload: response.data,
-//           });
-    
-//     } catch (error) {
-//       console.log("Could not get orders from user", error);
-//     }
-//   };
-// };
 
 export const adminGetUsers = () => {
   return async function (dispatch) {
     try {
-      const json = await axios.get(`user/admin/allUsers`);
+      const json = await axios.get(`/user/admin/allUsers`);
       return dispatch({
         type: ADMIN_GET_USERS,
         payload: json.data,
@@ -370,8 +333,35 @@ export const adminGetUsers = () => {
   };
 };
 
+export const adminGetOrders = () => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`/order/`);
+      return dispatch({
+        type: ADMIN_GET_ORDERS,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log("Could not get users", error);
+    }
+  };
+};
+
+export const adminUpdateOrders = (orderId, deliveryStatus) => {
+  return async function () {
+    try {
+      const res = await axios.put(`/order/${orderId}`, {deliveryStatus});
+      return res;
+    } catch (error) {
+      alert("No se pudo actualizar el producto");
+    }
+  };
+};
+
+
+
 export const handleCheckout = (cartProp, user) => {
-  console.log("User: ", user);
+
   axios
     .post(`/stripe/create-checkout-session`, {
       cartItems: cartProp.cartItems,

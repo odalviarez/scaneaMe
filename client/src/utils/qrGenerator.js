@@ -10,7 +10,6 @@ export default function qrGenerator(prompt) {
 			}
 		}, (err, url) => {
 			if (err) return console.error(err)
-      console.log(url);
       return url
 		}
     )

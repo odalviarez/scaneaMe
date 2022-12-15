@@ -6,30 +6,28 @@ import {
   useAuth0,
 } from '@auth0/auth0-react'
 
-import Home from './pages/home/Home'
-import Catalogue from './pages/catalogue/Catalogue'
-import ContactForm from './pages/contactForm/ContactForm'
-import Cart from './pages/cart/Cart'
-import Detail from './pages/detail/Detail'
-import About from './pages/about/About'
-import UserAccount from './pages/userAccount/UserAccount'
-import UserPurchases from './pages/userPurchases/UserPurchases'
-import Profile from './pages/profile/Profile'
-import EditProduct from './pages/edit/DetailUpdate'
-import Loading from './components/Loading'
-import Checkout from './pages/checkout/Checkout'
-import Navbar from './components/navBar/NavBar'
-import Footer from './components/footer/Footer'
-import {
-  AdminProductsPage,
-  AdminUsersPage,
-  AdminAnalyticsPage,
-} from './pages/dashboard/Dashboard'
 
+import Home from "./pages/home/Home";
+import Catalogue from "./pages/catalogue/Catalogue";
+import ContactForm from "./pages/contactForm/ContactForm";
+import Cart from "./pages/cart/Cart";
+import Detail from "./pages/detail/Detail";
+import About from "./pages/about/About";
+import UserAccount from "./pages/userAccount/UserAccount";
+import UserPurchases from "./pages/userPurchases/UserPurchases";
+import Profile from "./pages/profile/Profile";
+import EditProduct from "./pages/edit/DetailUpdate"
+import Loading from "./components/Loading";
+import Checkout from "./pages/checkout/Checkout";
+import Navbar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
+import {AdminProductsPage, AdminUsersPage, AdminAnalyticsPage, AdminOrdersPage} from "./pages/dashboard/Dashboard";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import initFontAwesome from "./utils/initFontAwesome";
+import OrderDetail from "./components/adminOrders/orderDetail";
+import NotFound from './pages/notFound/notFound';
 
 
 initFontAwesome()
@@ -74,6 +72,7 @@ function App() {
         <Navbar />
         <Routes>
           {/* Rutas general */}
+          <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/catalogue' element={<Catalogue />} />
@@ -84,7 +83,7 @@ function App() {
           <Route path='/checkout/:email' element={<Checkout />} />
 
           {/* Rutas usuario */}
-          <Route path='/:email' element={<Profile />} />
+          <Route path='/userProfile/:email' element={<Profile />} />
           <Route
             path='/user/account'
             element={<ProtectedRoute component={UserAccount} />}
@@ -95,6 +94,12 @@ function App() {
           />
 
           {/* Rutas admin */}
+          <Route path="/dashboard/adminUsers" element={<ProtectedRoute component={AdminUsersPage} />}/>
+          <Route path="/dashboard/adminProducts" element={<ProtectedRoute component={AdminProductsPage} />}/>
+          <Route path="/dashboard/adminAnalytics" element={<ProtectedRoute component={AdminAnalyticsPage} />}/>
+          <Route path="/dashboard/adminProducts/detail/:id" element={<ProtectedRoute component={EditProduct} />}/>
+          <Route path="/dashboard/adminOrders/" element={<ProtectedRoute component={AdminOrdersPage} />}/>
+          <Route path="/dashboard/adminOrders/:orderId" element={<ProtectedRoute component={OrderDetail} />}/>
 
           <Route
             path='/dashboard/adminUsers'

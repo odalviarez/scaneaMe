@@ -110,6 +110,7 @@ const CreateComponent = () => {
         getToken
       )
     );
+    alert("Product Created");
   };
 
   return (

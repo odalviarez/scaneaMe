@@ -105,7 +105,7 @@ export default function CardsUpdate() {
               ? currentCards.map((p) => {
                   return (
                     <Card
-                      key={p.id}
+                      key={p.id+p.name}
                       id={p.id}
                       name={p.name}
                       img={p.image}

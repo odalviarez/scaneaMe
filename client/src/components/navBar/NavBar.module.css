@@ -1,11 +1,7 @@
-
-
 .nav{
-
   background-color:rgba(211, 25, 25, 0.087) ;
-
   display: flex;
-  padding-left: 100px;
+  padding-left: 5%;
   height: 92px;
   margin-bottom: 50px;
 }
@@ -49,16 +45,10 @@
   justify-content: space-between;
   align-items: stretch;
   margin-top: 15px;
-  
-  
   max-width: none;
 }
 
-.nav li.active{
-  background-color: #555;
-}
-
-.nav li:hover{
+.lista:hover{
   background-color: #777;
 }
 

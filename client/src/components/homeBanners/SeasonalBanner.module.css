@@ -39,7 +39,6 @@
 
 .otoñoImg{
   border-top-right-radius: 50px;
-  filter: saturate(0.5);
   height: 400px;
   width:500px;
 }
@@ -61,7 +60,6 @@
     width: 500px;
     height: 200px;
     border-bottom-left-radius: 0px;
-    filter: saturate(3);
     object-fit: cover;
   }
   
@@ -69,7 +67,6 @@
     width: 500px;
     height: 200px;
     border-top-right-radius: 0px;
-    filter: saturate(0.5);
     object-fit: cover;
   }
   

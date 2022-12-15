@@ -3,7 +3,7 @@
   background-color: rgb(0, 0, 0);
   width: 60%;
   aspect-ratio: 2.5/1;
-  border-radius: 0px;
+  border-radius: 50px;
   position:relative;
   left:20%;
   align-items: center;
@@ -37,8 +37,8 @@
 }
 
 .buttonPrev{
-  color:antiquewhite;
-  background-color: #161616;
+  
+  background-color: #16161600;
   height: 99.9%;
   padding-left: 15px;
   margin: 0 0px;
@@ -52,8 +52,8 @@
 }
 
 .buttonNext{
-  color:antiquewhite;
-  background-color: #161616;
+  
+  background-color: #16161600;
   height: 99%;
   padding-right: 15px;
   margin: 0 0px;

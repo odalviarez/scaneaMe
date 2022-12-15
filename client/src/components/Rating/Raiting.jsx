@@ -28,7 +28,7 @@ export default function Raiting() {
     raiting: initialStarvalue,
   });
   
-  const [hoverValue, setHoverValue] = useState(undefined);
+  const [hoverValue, setHoverValue] = useState('');
   // eslint-disable-next-line
   
   const stars = Array(5).fill(0);
@@ -47,7 +47,7 @@ export default function Raiting() {
   };
 
   const handleMouseLeave = () => {
-    setHoverValue(undefined);
+    setHoverValue('');
   };
 
   const handleInputChange = (event) => {
