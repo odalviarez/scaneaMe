@@ -100,7 +100,6 @@ router.get('/admin/allUsers', async (req, res) => {
 //* USER UPDATE: actualiza las redes sociales y la imágen del usuario
 router.put("/:email", checkJwt, async (req, res) => {
   const { email } = req.params;
-  // console.log('body: ', req.body)
   const { socials, image, aboutUser } = req.body;
   let userData = await User.findOne({ email }); 
   try {
@@ -110,21 +109,26 @@ router.put("/:email", checkJwt, async (req, res) => {
         folder: "User Profile",
       });
     }
+    let socialsDelete = ""
+    if (Object.values(socials).includes(null)) socialsDelete = socials;
+    else {
+      socialsDelete = {
+        instagram: socials.instagram
+          ? socials.instagram
+          : userData.socials.instagram,
+        facebook: socials.facebook
+          ? socials.facebook
+          : userData.socials.facebook,
+        twitter: socials.twitter ? socials.twitter : userData.socials.twitter,
+        linkedin: socials.linkedin
+          ? socials.linkedin
+          : userData.socials.linkedin,
+      };
+    }
     const updateUser = await User.updateOne(
       { email },
       {
-        socials: {
-          instagram: socials.instagram
-            ? socials.instagram
-            : userData.socials.instagram,
-          facebook: socials.facebook
-            ? socials.facebook
-            : userData.socials.facebook,
-          twitter: socials.twitter ? socials.twitter : userData.socials.twitter,
-          linkedin: socials.linkedin
-            ? socials.linkedin
-            : userData.socials.linkedin,
-        },
+        socials: socialsDelete,
         image: image
           ? { public_id: result.public_id, url: result.secure_url }
           : userData.image,

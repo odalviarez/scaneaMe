@@ -166,53 +166,53 @@ export default function Cards() {
   return (
     <div className={styles.CatalogueParent}>
       <div className={styles.filtersList}>
-        <ul value='season'>
-          <h3>{i18n.t('header.season')}</h3>
-          <li value='allyear' onClick={e => handleFilters(e)}>
-            {i18n.t('header.all-year')}
+        <ul value="season">
+          <h3>{i18n.t("header.season")}</h3>
+          <li value="allyear" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.all-year")}
           </li>
-          <li value='spring' onClick={e => handleFilters(e)}>
-            {i18n.t('header.spring-summer')}
+          <li value="spring" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.spring-summer")}
           </li>
-          <li value='fall' onClick={e => handleFilters(e)}>
-            {i18n.t('header.fall-winter')}
+          <li value="fall" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.fall-winter")}
           </li>
         </ul>
 
-        <ul value='type'>
-          <h3>{i18n.t('header.type-of-clothing')}</h3>
-          <li value='shirt' onClick={e => handleFilters(e)}>
-            {i18n.t('header.t-shirt')}
+        <ul value="type">
+          <h3>{i18n.t("header.type-of-clothing")}</h3>
+          <li value="shirt" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.t-shirt")}
           </li>
-          <li value='pants' onClick={e => handleFilters(e)}>
-            {i18n.t('header.pants')}
+          <li value="pants" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.pants")}
           </li>
-          <li value='trunks' onClick={e => handleFilters(e)}>
+          <li value="trunks" onClick={(e) => handleFilters(e)}>
             Shorts de baño
           </li>
         </ul>
 
-        <ul value='color'>
-          <h3>{i18n.t('header.color')}</h3>
-          <li value='white' onClick={e => handleFilters(e)}>
-            {i18n.t('header.white')}
+        <ul value="color">
+          <h3>{i18n.t("header.color")}</h3>
+          <li value="white" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.white")}
           </li>
-          <li value='black' onClick={e => handleFilters(e)}>
-            {i18n.t('header.black')}
+          <li value="black" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.black")}
           </li>
-          <li value='red' onClick={e => handleFilters(e)}>
-            {i18n.t('header.red')}
+          <li value="red" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.red")}
           </li>
-          <li value='blue' onClick={e => handleFilters(e)}>
-            {i18n.t('header.blue')}
+          <li value="blue" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.blue")}
           </li>
-          <li value='green' onClick={e => handleFilters(e)}>
-            {i18n.t('header.green')}
+          <li value="green" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.green")}
           </li>
-          <li value='yellow' onClick={e => handleFilters(e)}>
-            {i18n.t('header.yellow')}
+          <li value="yellow" onClick={(e) => handleFilters(e)}>
+            {i18n.t("header.yellow")}
           </li>
-          <li value='gray' onClick={e => handleFilters(e)}>
+          <li value="gray" onClick={(e) => handleFilters(e)}>
             Gris
           </li>
         </ul>
@@ -220,9 +220,9 @@ export default function Cards() {
 
       <div className={styles.filtersApplied}>
         <div>
-          <select onChange={e => handleSorts(e)}>
-            <option value='priceUp'>{i18n.t('header.lower-price')}</option>
-            <option value='priceDown'>{i18n.t('header.higher-price')}</option>
+          <select onChange={(e) => handleSorts(e)}>
+            <option value="priceUp">{i18n.t("header.lower-price")}</option>
+            <option value="priceDown">{i18n.t("header.higher-price")}</option>
           </select>
         </div>
 
@@ -242,7 +242,7 @@ export default function Cards() {
 
         <div className={styles.CatalogueCards}>
           {currentCards.length
-            ? currentCards.map(p => {
+            ? currentCards.map((p) => {
                 return (
                   <Card
                     key={p.id}
@@ -254,9 +254,9 @@ export default function Cards() {
                     color={p.color}
                     handleAddCart={handleAddCart}
                   />
-                )
+                );
               })
-            : i18n.t('header.no-product-was-found')}
+            : i18n.t("header.no-product-was-found")}
         </div>
 
         <Pagination
@@ -265,11 +265,14 @@ export default function Cards() {
           pagination={pagination}
           currentPage={currentPage}
         />
-        <button onClick={e => scrollToTop(e)}>
-          {i18n.t('header.back-to-top')}
+        <button
+          class="py-2 px-4 text-sm font-medium text-gray-900 rounded-lg border bg-white/30 border-gray-700 hover:backdrop-blur-sm hover:bg-white/50 hover:text-slate-700 focus:z-10 focus:ring-2 focus:ring-slate-700 focus:text-slate-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-slate-500 dark:focus:text-white"
+          onClick={(e) => scrollToTop(e)}
+        >
+          {i18n.t("header.back-to-top")}
         </button>
       </div>
     </div>
-  )
+  );
 }
 
