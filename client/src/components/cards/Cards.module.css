@@ -12,6 +12,7 @@
 }
 
 .filtersList ul {
+    width: fit-content;
     list-style: none;
     text-align: left;
     margin-top: 80px;
@@ -20,9 +21,13 @@
     margin-left: 40px;
 }
 
+.filtersList li {
+    width: fit-content;
+}
+
 .filtersList li:hover {
     color: blue;
-    cursor: default;
+    cursor: pointer;
     background-color: rgba(127, 255, 212, 0.385);
     text-decoration: underline
 }

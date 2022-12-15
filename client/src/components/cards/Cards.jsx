@@ -70,6 +70,10 @@ export default function Cards() {
         filtersApplied: [location.state],
       }))
       dispatch(filterProducts([location.state]))
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
     }
 
     // eslint-disable-next-line

@@ -272,8 +272,10 @@ export const userUpdateAuth0 = (payload, sub, action, getToken) => {
         },
         data: { payload },
       };
+      console.log('action cretor userUpdateAuth0', payload, sub, action, token, config);
       axios(config)
         .then(function (response) {
+          console.log('este es response.data en el action', response.data);
           return response.data;
         })
         .catch(function (error) {

@@ -11,7 +11,7 @@ const getAuth0Controller = async (userID, action, data) => {
     headers: { 'content-type': 'application/json' },
     data: '{"client_id":"F460G9sIAQx5ZtHzzPgpAC0Nm509ClZ1","client_secret":"F8P-mIhXRggsNIEu4Qcra3RJHtveeBnNdSDRWOhEyjQO47WrxHZ7cmMx62HspplE","audience":"https://dev-a3kheszuwvfvuoad.us.auth0.com/api/v2/","grant_type":"client_credentials"}',
   };
-
+  console.log('getAuth0Controller en el Back', userID, action, data);
   let auth0Response = ''
 
   await axios(request)
@@ -95,6 +95,7 @@ const getAuth0Controller = async (userID, action, data) => {
       default:
         console.log('No se ejecutó nada de Auth0');
     }
+    console.log('getAuth0Controller despues del switch', config);
     await axios(config)
     .then((response) => {
       auth0Response = response.data;

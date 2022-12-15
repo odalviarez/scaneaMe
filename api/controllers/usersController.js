@@ -146,6 +146,7 @@ router.put("/:email", checkJwt, async (req, res) => {
 router.put("/:sub/:action", checkJwt, async (req, res) => {
   const { sub, action } = req.params;
   const { payload } = req.body;
+  console.log('ruta put en el Back', sub, action, payload);
   try {
 
     if (action === "delete") {
@@ -175,7 +176,7 @@ router.put("/:sub/:action", checkJwt, async (req, res) => {
         ]
       )
     }
-
+    console.log('ruta put en el Back pasados los IF', sub, action, payload);
   let response = await getAuth0Controller(sub, action, payload)
 
     res.json(response);
