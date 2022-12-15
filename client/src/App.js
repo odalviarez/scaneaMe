@@ -27,6 +27,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import initFontAwesome from "./utils/initFontAwesome";
 import OrderDetail from "./components/adminOrders/orderDetail";
+import NotFound from './pages/notFound/notFound';
 
 
 initFontAwesome()
@@ -71,6 +72,7 @@ function App() {
         <Navbar />
         <Routes>
           {/* Rutas general */}
+          <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/catalogue' element={<Catalogue />} />
@@ -81,7 +83,7 @@ function App() {
           <Route path='/checkout/:email' element={<Checkout />} />
 
           {/* Rutas usuario */}
-          <Route path='/:email' element={<Profile />} />
+          <Route path='/userProfile/:email' element={<Profile />} />
           <Route
             path='/user/account'
             element={<ProtectedRoute component={UserAccount} />}
