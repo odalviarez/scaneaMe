@@ -129,7 +129,6 @@ const discountStock = async (customer) => {
 
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
-    console.log("producto: ", detailsProduct);
     detailsProduct.stock.forEach((element, index) => {
       if (elem.size === element.size) {
         detailsProduct.stock[index].quantity =
@@ -140,7 +139,6 @@ const discountStock = async (customer) => {
     let stock = detailsProduct.stock;
     const updateProduct = await Products.updateOne({ _id: elem.id }, {stock});
 
-    console.log(updateProduct);
   });
 };
 module.exports = router;

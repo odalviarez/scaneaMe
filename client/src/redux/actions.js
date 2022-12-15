@@ -111,7 +111,7 @@ export const getTotalProducts = (products) => {
 };
 
 export const updateProduct = (id, data) => {
-  console.log(data);  
+
   return async function () {
     try {
       const res = await axios.put(`/products/${id}`, data);
@@ -348,7 +348,6 @@ export const adminGetOrders = () => {
 export const adminUpdateOrders = (orderId, deliveryStatus) => {
   return async function () {
     try {
-      console.log('action', orderId, deliveryStatus);
       const res = await axios.put(`/order/${orderId}`, {deliveryStatus});
       return res;
     } catch (error) {
@@ -360,7 +359,7 @@ export const adminUpdateOrders = (orderId, deliveryStatus) => {
 
 
 export const handleCheckout = (cartProp, user) => {
-  console.log("User: ", user);
+
   axios
     .post(`/stripe/create-checkout-session`, {
       cartItems: cartProp.cartItems,

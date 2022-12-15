@@ -61,7 +61,6 @@ router.post("/", checkJwt, checkClaims, async (req, res) => {
         image: result.secure_url,
         stock,
       });
-      console.log(productCreate);
       let saved = await productCreate.save();
       res.json(saved);
     } else {
@@ -93,7 +92,6 @@ router.delete("/:id", checkJwt, checkClaims, async (req, res) => {
   let { id } = req.params;
   try {
     const deletedProduct = await Products.findByIdAndDelete(id);
-    console.log(deletedProduct);
     if (deletedProduct) res.status(200).send(deletedProduct);
     else
       res
