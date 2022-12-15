@@ -165,7 +165,7 @@ export default function UserAccComp() {
     }
   }
 
-  const inputStyle="bg-inherit appearance-none rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none backdrop-blur-xl bg-white/50 "
+  const inputStyle= 'bg-inherit appearance-none rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none backdrop-blur-xl bg-white/50 '
 
   const labelStyle = 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
 
