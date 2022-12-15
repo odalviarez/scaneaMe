@@ -1,62 +1,53 @@
 
 .card {
-  height: 450px;
-  width: 20vw;
+  height: 25%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  margin-right: 50px;
   border-radius: 40px;
-  background-color: rgb(253, 234, 253);
+  background-color: rgba(253, 234, 253, 0.484);
   position: relative;
   margin-top: 40px;
-  box-shadow: 11px 13px 7px -9px rgba(175, 49, 49, 0.6)
+  box-shadow: 11px 13px 7px -9px rgba(175, 49, 49, 0.6);
+  transition: box-shadow 250ms;
+}
+
+.card:hover{
+  box-shadow: inset -13px -15px 11px -5px rgba(107, 0, 0, 0.4);
 }
 
 .card p{
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-}
-
-.card h5{
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  color: black;
-}
-
-.card h5:hover{
-  color: blue
+  margin: 0;
+  padding-bottom: 20px;
+  font-size: 1.2em;
+  color: rgb(119, 67, 0);
 }
 
 .imageContainer img {
   position: relative;
   top: 0px;
   left: 0px;
-  width: 20vw;
+  width: 300px;
   height:  200px;
   object-fit: cover;
   border-top-left-radius:40px;
   border-top-right-radius:40px;
 }
 
-.title{
+.link{
     text-decoration: none;
-    color: rgb(250, 158, 37);
+}
+
+.title{
+  color: rgb(161, 91, 0);
     font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 25px;
 }
 
-.card button{
-  background-color: aquamarine;
-  border: solid 1px rgb(255, 219, 178);
-  border-radius: 5px;
-  padding:5px;
-  color: rgb(252, 164, 49);
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
 
-.card p{
-  font-weight: 700;
-  margin: 5px
-} 
+

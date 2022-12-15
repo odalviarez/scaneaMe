@@ -61,7 +61,7 @@ export default function HomeBanners({ productType }) {
       <Carousel
         className={styles.carru}
         responsive={responsive}
-        showDots={true}
+        showDots={false}
         infinite={true}
         renderDotsOutside={true}
       >
