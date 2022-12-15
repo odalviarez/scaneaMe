@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import {getProductDetails} from '../../redux/actions'
 import Details from '../../components/details/Details.jsx'
 
+
 export default function Detail() {
   const dispatch = useDispatch();
 

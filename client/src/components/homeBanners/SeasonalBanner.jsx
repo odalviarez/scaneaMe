@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import primaverVerano from '../../Logo/primaveraVerano.jpg'
-import otoñoInvierno from '../../Logo/otoñoInvierno.jpg'
-import estaciones from '../../Logo/estaciones.jpg'
+import primaverVerano from '../../Logo/verano.jpeg'
+import otoñoInvierno from '../../Logo/invierno.jpeg'
 import styles from './SeasonalBanner.module.css'
 
 
@@ -11,19 +10,7 @@ export default function SeasonalBanner() {
     <div className={styles.container}>
       <Link to={"/catalogue"}
 
-      state={{
-        filter:'season',
-        value:'allyear',
-        valor:'Todo el año'}}
-
-      className={styles.estacionesLink}>
-      <img
-        src={estaciones}
-        className={styles.estacionesImg}
-        alt='All year catalogue'
-      />
-      </Link>
-      <Link to={"/catalogue"}
+      
       
       state={{
           filter:'season',

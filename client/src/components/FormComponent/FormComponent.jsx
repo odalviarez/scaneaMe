@@ -53,7 +53,7 @@ export default function Contact() {
       <Row style={{ justifyContent: "center", padding: "20px" }}></Row>
       {status}
       <form onSubmit={handleSubmit}>
-        <h4 className="text-info">{i18n.t('contact.full-name')}</h4>
+        <h4 className="text-info"> prueba</h4>
         <InputField
           value={values.from_name}
           handleChange={handleChange}
@@ -78,6 +78,8 @@ export default function Contact() {
         <button type="submit" className="fork-btn-inner bg-primary">
         {i18n.t('dashboard.submit')}
         </button>
+        <br></br>
+        <br></br>
         <Link to="/home">BACK HOME</Link>
       </form>
     </Container>

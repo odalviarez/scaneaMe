@@ -14,6 +14,7 @@ export const ADMIN_GET_USERS = "ADMIN_GET_USERS";
 export const ADMIN_LOAD_USERS = "ADMIN_LOAD_USERS";
 export const ADMIN_GET_ORDERS = "ADMIN_GET_ORDERS";
 export const ADMIN_LOAD_ORDERS = "ADMIN_LOAD_ORDERS";
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 
 
 
@@ -31,6 +32,21 @@ export const getAllProducts = () => {
     }
   };
 };
+
+export const getAllOrders = ()=>{
+  return async function(dispatch){
+    try{
+      const json = await axios.get('/order')
+      return dispatch({
+        type:GET_ALL_ORDERS,
+        payload: json.data
+      })
+    } catch (error){
+      alert('Could not get orders')
+      console.log(error)
+    }
+  }
+}
 
 export const loadAllProducts = (payload) => {
   return { type: LOAD_ALL_PRODUCTS, payload: payload };
@@ -95,9 +111,11 @@ export const getTotalProducts = (products) => {
 };
 
 export const updateProduct = (id, data) => {
+  console.log(data);  
   return async function () {
     try {
       const res = await axios.put(`/products/${id}`, data);
+      alert("Product updated")
       return res;
     } catch (error) {
       alert("No se pudo actualizar el producto");

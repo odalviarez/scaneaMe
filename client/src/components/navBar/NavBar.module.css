@@ -1,28 +1,20 @@
-/* *{
-  box-sizing: border-box;
-}
 
-body{
-  margin: 0;
-} */
 
 .nav{
-  background-color:#333 ;
-  color:antiquewhite;
+
+  background-color:rgba(211, 25, 25, 0.087) ;
+
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 2rem;
-  padding: 0 1rem;
-  height: 5%;
-  max-height: 92px;
+  padding-left: 100px;
+  height: 92px;
   margin-bottom: 50px;
 }
 
 .logo{
-  height: 80px;
+  height: 92px;
   width:200px;
-  object-fit: cover;
+  object-fit: contain;
+  max-width: none;
 }
 
 .nav ul{
@@ -40,6 +32,8 @@ body{
   display: flex;
   align-items: center;
   padding: .25rem;
+  font-style: oblique;
+  font-size: medium;
 }
 
 .itemsCart{
@@ -58,6 +52,7 @@ body{
   margin-top: 15px;
   padding: 5px;
   border-radius: 50%;
+  max-width: none;
 }
 
 .cart:hover{
@@ -74,5 +69,5 @@ body{
 
 .desplegable{
   z-index: 100;
-  
+  margin-top: -15px;
 }
