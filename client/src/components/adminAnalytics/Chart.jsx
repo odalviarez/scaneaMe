@@ -108,6 +108,7 @@ export default function Chart() {
     },
   ]
 
+  
 
   return (
     <div className={styles.container}>
@@ -134,7 +135,8 @@ export default function Chart() {
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
-      </LineChart>
+      </LineChart> 
+
 
       <div className="mt-24">
         <div className="flex flex-wrap lg:flex-nowrap justify-center ">
