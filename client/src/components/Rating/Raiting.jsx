@@ -95,7 +95,7 @@ export default function Raiting() {
       </div>
 
       <div className="comment-container">
-        {commentsBDD?.map((c) => {
+        {commentsBDD?.map((c, index) => {
           return (
             <>
               <StarRating value={c.raiting} />
