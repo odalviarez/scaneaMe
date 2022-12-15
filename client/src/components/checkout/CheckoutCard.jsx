@@ -97,15 +97,17 @@ export default function CheckoutCard() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.gracias}>Muchas gracias por su compra!</div>
-      <div className={styles.msjQR}>
+      <h2 className={styles.gracias}>Muchas gracias por su compra!</h2>
+      <h3 className={styles.msjQR}>
         Puedes compartir tu perfil de usuario con el siguiente código QR:
-      </div>
+      </h3>
+      <div className={styles.qrContainer}>
       <img src={Qr} id='qr_code' className={styles.codigoQR} alt='Código QR' />
-      <div>
+      </div>
+      <h3>
         Se le enviará un mail al correo {email} con los pasos a seguir para
         recibir su compra
-      </div>
+      </h3>
     </div>
   )
 }
