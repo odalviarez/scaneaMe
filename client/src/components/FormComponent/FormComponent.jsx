@@ -53,7 +53,7 @@ export default function Contact() {
       <Row style={{ justifyContent: "center", padding: "20px" }}></Row>
       {status}
       <form onSubmit={handleSubmit}>
-        <h4 className="text-info"> prueba</h4>
+        <h4 className="text-info"> Name </h4>
         <InputField
           value={values.from_name}
           handleChange={handleChange}
