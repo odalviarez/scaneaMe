@@ -49,7 +49,7 @@ export default function OrderProductCard({id, img, name, color, size, quantity, 
 
 
 
-    const [hoverValue, setHoverValue] = useState(undefined);
+    const [hoverValue, setHoverValue] = useState('');
 
     const stars = Array(5).fill(0);
 
@@ -70,7 +70,7 @@ export default function OrderProductCard({id, img, name, color, size, quantity, 
     };
 
     const handleMouseLeave = () => {
-        setHoverValue(undefined);
+        setHoverValue('');
     };
 
     const addComment = async (e) => {

@@ -13,7 +13,7 @@ export default function Raiting({value}) {
         value=0
     }
   const [currentValue, setCurrentValue] = useState(value);
-  const [hoverValue, setHoverValue] = useState(undefined);
+  const [hoverValue, setHoverValue] = useState('');
   const stars = Array(5).fill(0)
 
   return (
