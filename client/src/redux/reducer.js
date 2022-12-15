@@ -9,7 +9,11 @@ import {
   GET_USER_LOGIN,
   USER_GET_ORDERS,
   ADMIN_GET_USERS,
-  ADMIN_LOAD_USERS
+  ADMIN_LOAD_USERS,
+  GET_ALL_ORDERS,
+  ADMIN_GET_ORDERS,
+  ADMIN_LOAD_ORDERS,
+  CLEAR_PRODUCT_DETAILS,
 } from "./actions";
 
 const initialState = {
@@ -21,7 +25,9 @@ const initialState = {
     totalProducts: 0,
     userOrders: [],
     allUsers: [],
-    usersLoaded: []
+    usersLoaded: [],
+    orders: [],
+    allOrders: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +38,18 @@ const rootReducer = (state = initialState, action) => {
           products: action.payload,
           allProducts: action.payload,
         };
+
+      case CLEAR_PRODUCT_DETAILS:
+        return {
+          ...state,
+          productDetail: action.payload,
+        }; 
+        
+      case GET_ALL_ORDERS:
+        return{
+          ...state,
+          orders: action.payload,
+        }  
       case LOAD_ALL_PRODUCTS:
         let allproduct = state.allProducts;
         return {
@@ -133,6 +151,21 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           usersLoaded: allUsers,
         };
+
+        case ADMIN_GET_ORDERS: {
+          return {
+            ...state,
+            allOrders: action.payload,
+            orders: action.payload,
+          };
+        }
+  
+        case ADMIN_LOAD_ORDERS:
+          let allOrders = state.allUsers;
+          return {
+            ...state,
+            usersLoaded: allOrders,
+          };
 
       default:
         return {

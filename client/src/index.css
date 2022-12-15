@@ -1,3 +1,7 @@
+/* @tailwind base; */
+/** GONZA: Comenté esta linea porque hacía que las imágenes tengan display block, lo que las posiciona a la izquierda. */
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,8 +10,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #70e1f5;  /* fallback for old browsers */
- background: -webkit-linear-gradient(to right, rgb(255, 209, 148), #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
- background: linear-gradient(to right, hsl(34, 100%, 79%), #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ background: -webkit-linear-gradient(to right, hsla(34, 100%, 79%, 0.174), #70e1f56a);  /* Chrome 10-25, Safari 5.1-6 */
+ background: linear-gradient(to right, hsla(34, 100%, 79%, 0.162), #70e1f555); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -15,6 +19,7 @@ body {
 html{
   min-height: 100%;
   margin: 0;
+
 }
 
 code {

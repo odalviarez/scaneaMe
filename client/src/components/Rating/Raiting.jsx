@@ -28,7 +28,7 @@ export default function Raiting() {
     raiting: initialStarvalue,
   });
   
-  const [hoverValue, setHoverValue] = useState(undefined);
+  const [hoverValue, setHoverValue] = useState('');
   // eslint-disable-next-line
   
   const stars = Array(5).fill(0);
@@ -47,7 +47,7 @@ export default function Raiting() {
   };
 
   const handleMouseLeave = () => {
-    setHoverValue(undefined);
+    setHoverValue('');
   };
 
   const handleInputChange = (event) => {
@@ -61,8 +61,8 @@ export default function Raiting() {
   return (
     <>
       <div className="container">
+        {/* {stars.map((_, index) => {
         <div className="stars">
-          {stars.map((_, index) => {
             return (
               <FaStar
                 className="fa-star"
@@ -91,7 +91,7 @@ export default function Raiting() {
 
         <button className="btn-submit" onClick={addComment}>
           Submit
-        </button>
+        </button>*/}
       </div>
 
       <div className="comment-container">

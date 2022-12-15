@@ -1,28 +1,17 @@
-/* *{
-  box-sizing: border-box;
-}
-
-body{
-  margin: 0;
-} */
-
 .nav{
-  background-color:#333 ;
-  color:antiquewhite;
+  background-color:rgba(211, 25, 25, 0.087) ;
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 2rem;
-  padding: 0 1rem;
-  height: 5%;
-  max-height: 92px;
+  padding-left: 5%;
+  height: 92px;
   margin-bottom: 50px;
+
 }
 
 .logo{
-  height: 80px;
+  height: 92px;
   width:200px;
-  object-fit: cover;
+  object-fit: contain;
+  max-width: none;
 }
 
 .nav ul{
@@ -31,6 +20,24 @@ body{
   list-style: none;
   display: flex;
   gap: 1rem;
+  padding: 0px 0px 0px 0px;
+}
+
+.nav li{
+  width: 100px;
+  padding: 0px 0px 0px 0px;
+
+
+}
+
+
+
+.nav a{
+
+  align-items: center;
+  align-self: center;
+  align-content: center;
+
 }
 
 .nav .anchor{
@@ -38,9 +45,14 @@ body{
   text-decoration: none;
   height: 100%;
   display: flex;
-  align-items: center;
   padding: .25rem;
+  font-style: oblique;
+  font-size: medium;
+  padding: 0px 0px 0px 0px;
+  justify-content: center;
 }
+
+
 
 .itemsCart{
   padding: 0;
@@ -50,29 +62,21 @@ body{
 .cart{
   height: 50px;
   width: 50px;
-  background-color: antiquewhite;
   border-radius: 3%;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
   margin-top: 15px;
-  padding: 5px;
-  border-radius: 50%;
-}
 
-.cart:hover{
-  background-color: rgb(249, 216, 173);
-}
-
-.nav li.active{
-  background-color: #555;
 }
 
 .nav li:hover{
   background-color: #777;
 }
 
+.nav img{
+  align-self: center;
+}
+
 .desplegable{
   z-index: 100;
-  
+  padding: 0 0 0 0;
 }
+

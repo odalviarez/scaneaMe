@@ -1,0 +1,30 @@
+.OrderCardProduct {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+    margin-bottom: 10px;
+}
+
+.OrderCardProduct p {
+    margin-bottom: 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.OrderCardImage{
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.OrderCardImage img {
+    width: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+.OrderCardDetails{
+    grid-area: 1 / 2 / 2 / 3;
+}

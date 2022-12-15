@@ -8,14 +8,7 @@ const checkClaims = claimCheck((claims) => {
 });
 
 
-
-//CREATE
-
-// createOrder is fired by stripe webhook
-// example endpoint
-
 //* CREATE ORDER
-
 router.post("/", async (req, res) => {
   const newOrder = new Order(req.body);
 
@@ -27,10 +20,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-
 //* USER GET ORDERS: exclusivo para USUARIO.
-//TODO: pendiente implementar.
 router.get("/find/:email", async (req, res) => {
   const { email } = req.params
   try {
@@ -41,15 +31,30 @@ router.get("/find/:email", async (req, res) => {
   }
 });
 
-//* ADMIN GET ORDERS: exclusivo para ADMIN. Se utilizaría en el panel de control del admin para ver las órdenes del usuario.
-//TODO: pendiente implementar.
-//!debe estar protegida
+//* ADMIN GET ORDERS: exclusivo para ADMIN. Se utiliza en el panel de control del admin para ver las órdenes del usuario.
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).send(orders);
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+//* ADMIN UPDATE ORDERS: exclusivo para ADMIN. Se utiliza en el panel de control del admin para ver cambiar el estado de entrega de las ordenes del usuario.
+router.put("/:orderId", async (req, res) => {
+  const { orderId } = req.params
+  const { deliveryStatus } = req.body;
+  try {
+    if (deliveryStatus) {
+    let query = {
+      delivery_status: deliveryStatus
+    }
+    let order = await Order.updateOne({_id: orderId}, query);
+    res.status(200).json(order);
+    }
+  } catch (err) {
+    res.status(500).send('No se pudo actualizar el delivery status en DB', err);
   }
 });
 

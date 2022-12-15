@@ -9,6 +9,7 @@ export default function AdminUsers() {
     const dispatch = useDispatch()
     const allUsers = useSelector(state => state.allUsers)
     const usersLoaded = useSelector(state => state.usersLoaded)
+    const userLogin = useSelector(state => state.userLogin)
 
     useEffect(() => {
         if (allUsers.length === 0){
@@ -50,9 +51,11 @@ export default function AdminUsers() {
                     <div className={styles.adminUserIsActive}>
                         <p>is Active?</p>
                     </div>
+                    {userLogin?.role === 'superAdmin'?  
                     <div className={styles.adminUserIsAdmin}>
                         <p>is Admin?</p>
                     </div>
+                    : ''}
                 </div>
             <div className={styles.adminUsersCards}>
                 {usersLoaded.length? currentCards.map(user => {
