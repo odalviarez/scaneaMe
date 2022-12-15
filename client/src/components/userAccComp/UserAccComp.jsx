@@ -143,25 +143,25 @@ export default function UserAccComp() {
     window.location.href = window.location.origin + "/home";
   };
 
-  const deleteSocials = (e) => {
-    e.preventDefault();
-    setSocials({
-      facebook: null,
-      linkedin: null,
-      twitter: null,
-      instagram: null,
-    });
-    dispatch(
-      userUpdate(
-        {
-          socials,
-        },
-        userLogin.email,
-        getToken
-      )
-    );
-    alert("User socials deleted")
-  };
+  // const deleteSocials = (e) => {
+  //   e.preventDefault();
+  //   setSocials({
+  //     facebook: null,
+  //     linkedin: null,
+  //     twitter: null,
+  //     instagram: null,
+  //   });
+  //   dispatch(
+  //     userUpdate(
+  //       {
+  //         socials,
+  //       },
+  //       userLogin.email,
+  //       getToken
+  //     )
+  //   );
+  //   alert("User socials deleted")
+  // };
 
   const showPassword = (e) => {
     e.preventDefault(e);

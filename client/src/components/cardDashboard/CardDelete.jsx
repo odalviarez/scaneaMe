@@ -34,6 +34,7 @@ export default function CardDelete({
         value={id}
         onClick={() => {
           dispatch(productDelete(id, getToken));
+          alert("Product deleted")
         }}
         className="close"
       >
