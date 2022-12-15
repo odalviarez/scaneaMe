@@ -24,7 +24,7 @@ export function AdminProductsPage() {
           </div>
   
       </div>
-    </div>
+    
   )
 }
 
@@ -45,7 +45,7 @@ export function AdminUsersPage() {
           </div>
   
       </div>
-    </div>
+    
   )
 }
 
@@ -88,6 +88,6 @@ export function AdminAnalyticsPage() {
           </div>
   
       </div>
-    </div>
+    
   )
 }

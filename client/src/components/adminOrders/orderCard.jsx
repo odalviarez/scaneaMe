@@ -56,7 +56,7 @@ const OrderCard = ({orderId, userEmail, date, paymentStatus, deliveryStatus, car
         }
     
         console.log('email fields: ', emailFields)
-        emailjs.send('service_0hpnim5', 'template_7cgjln7', emailFields, 'vGQTOpiT1rYKFB3ox').then(
+        emailjs.send('service_0hpnim5', 'template_ts6yzru', emailFields, 'vGQTOpiT1rYKFB3ox').then(
             response => {
             console.log('SUCCESS!', response)
             },

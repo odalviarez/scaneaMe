@@ -20,6 +20,13 @@
   box-shadow: inset -13px -15px 11px -5px rgba(107, 0, 0, 0.4);
 }
 
+.cardsDescription{
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card p{
   margin: 0;
   padding-bottom: 20px;
@@ -48,6 +55,8 @@
     font-weight: bold;
     margin-bottom: 25px;
 }
+
+
 
 
 
