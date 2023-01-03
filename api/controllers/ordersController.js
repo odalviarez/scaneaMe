@@ -24,9 +24,11 @@ router.post("/", async (req, res) => {
 router.get("/find/:email", async (req, res) => {
   const { email } = req.params
   try {
-    const orders = await Order.find({ email });
+    const orders = await Order.find({ email: email });
+    console.log(orders);
     res.status(200).send(orders);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 });
