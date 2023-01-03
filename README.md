@@ -1,6 +1,7 @@
 BACKEND DEV EN RAILWAY: https://api-production-2f62.up.railway.app/
 
 Las rutas son las siguientes:
+
 GET http://localhost:5000/products
 GET http://localhost:5000/products/:id
 DELETE http://localhost:5000/products/:id
