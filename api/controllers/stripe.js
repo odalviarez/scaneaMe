@@ -129,7 +129,7 @@ const discountStock = async (customer) => {
 
   product.map(async (elem) => {
     let detailsProduct = await Products.findById(elem.id);
-    detailsProduct.stock.forEach((element, index) => {
+    detailsProduct?.stock?.forEach((element, index) => {
       if (elem.size === element.size) {
         detailsProduct.stock[index].quantity =
           detailsProduct.stock[index].quantity - elem.cartTotalQuantity;
