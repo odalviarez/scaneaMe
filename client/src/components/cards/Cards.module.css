@@ -62,10 +62,10 @@
 
 .CatalogueCards {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: center;
     margin: 10px 30px 10px 30px;
     width: 70vw;
-    min-height: 60vh;
+    min-height: 50vh;
 }

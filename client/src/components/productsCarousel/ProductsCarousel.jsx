@@ -28,23 +28,23 @@ export default function HomeBanners({ productType }) {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1600 },
-      items: 5,
-      slidesToSlide: 4,
+      items: 6,
+      slidesToSlide: 6,
     },
     desktop: {
       breakpoint: { max: 1600, min: 1024 },
-      items: 3,
-      slidesToSlide: 3,
+      items: 5,
+      slidesToSlide: 5,
     },
     tablet: {
       breakpoint: { max: 1024, min: 689 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 4,
+      slidesToSlide: 4,
     },
     mobile: {
       breakpoint: { max: 689, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
+      items: 3,
+      slidesToSlide: 3,
     },
   }
 

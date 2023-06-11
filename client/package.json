@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.1.4",
     "highlight.js": "^10.0.3",
     "i18next": "^22.1.5",
     "i18next-browser-languagedetector": "^7.0.1",

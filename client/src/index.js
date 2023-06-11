@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:5000/";
+axios.defaults.baseURL = "https://scaneame-production.up.railway.app/";
 
 
 const config = getConfig();

@@ -1,18 +1,14 @@
-.container{
-  
-  width: 100%;
-  height: 300px;
+.container {
+  min-height: 220px;
   border-radius: 0px;
-  position:relative;
+  position: relative;
   align-items: center;
-  margin-bottom: auto ;
-  padding: 20px ;
-
-  
+  margin-bottom: auto;
+  padding: 20px;
+  max-width: 840px;
+  margin-inline: auto;
 }
 
-.carru{
-  width: 70%;
-  position:absolute;
-  left: 15%;
+.carru {
+  margin-inline: auto;
 }

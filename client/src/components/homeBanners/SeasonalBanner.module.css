@@ -1,99 +1,75 @@
-.container{
+.container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 60%;
-  position: relative;
-  left: 22%;
-  margin-bottom: 5%;
+  margin-inline: auto;
   border-radius: 30px;
+  max-width: 720px;
+  flex-wrap: wrap;
 }
 
-.estacionesLink{
-  
-  
-  
-  width:50%;
+.estacionesLink {
+
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 }
 
-.primaveraLink{
-
-  
+.primaveraLink {
   border-bottom-left-radius: 50px;
 }
 
-.otoñoLink{
-  
-  
+.otoñoLink {
   border-bottom-right-radius: 50px;
 }
 
-.primaveraImg{
+.primaveraImg {
   border-bottom-left-radius: 50px;
-  
   height: 400px;
-  width:500px;
+  width: 500px;
 }
 
-.otoñoImg{
+.otoñoImg {
   border-top-right-radius: 50px;
   height: 400px;
-  width:500px;
+  width: 500px;
 }
 
-
 @media only screen and (max-width: 1081px) {
-  .container{
-    display: block;
-    
-    justify-content: stretch;
-    
-    position: relative;
-    left: 15%;
-    margin-bottom: 5%;
+  .container {
     border-radius: 30px;
   }
 
-  .primaveraImg{
+  .primaveraImg {
     width: 500px;
     height: 200px;
     border-bottom-left-radius: 0px;
     object-fit: cover;
   }
-  
-  .otoñoImg{
+
+  .otoñoImg {
     width: 500px;
     height: 200px;
     border-top-right-radius: 0px;
     object-fit: cover;
   }
-  
-  .estacionesImg{
+
+  .estacionesImg {
     width: 500px;
     height: 200px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
 
-  .estacionesLink{
-  
-    
+  .estacionesLink {
     border: 0px;
-    width:100%;
-    
+    width: 100%;
   }
-  
-  .primaveraLink{
-    
+
+  .primaveraLink {
     border: 0px;
-    
   }
-  
-  .otoñoLink{
-    
+
+  .otoñoLink {
     border: 0px;
-    
   }
 }
