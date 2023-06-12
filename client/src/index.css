@@ -2,6 +2,9 @@
 /** GONZA: Comenté esta linea porque hacía que las imágenes tengan display block, lo que las posiciona a la izquierda. */
 @tailwind components;
 @tailwind utilities;
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

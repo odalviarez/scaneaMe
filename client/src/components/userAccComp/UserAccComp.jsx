@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userUpdate, getUser, userUpdateAuth0, getUserLogin } from "../../redux/actions";
+import {
+  userUpdate,
+  getUser,
+  userUpdateAuth0,
+  getUserLogin,
+} from "../../redux/actions";
 import style from "./UserAccComp.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import validator from "validator";
@@ -37,16 +42,15 @@ export default function UserAccComp() {
   };
 
   useEffect(() => {
-    if(!userLogin) dispatch(getUserLogin(user.email))
+    if (!userLogin) dispatch(getUserLogin(user.email));
     if (Object.hasOwn(userLogin, "socials") && user) {
-    setSocials({
-      facebook: userLogin.socials? userLogin.socials.facebook : "",
-      linkedin: userLogin.socials? userLogin.socials.linkedin : "",
-      twitter: userLogin.socials? userLogin.socials.twitter : "",
-      instagram: userLogin.socials? userLogin.socials.instagram : "",
-    });
-  }
-
+      setSocials({
+        facebook: userLogin.socials ? userLogin.socials.facebook : "",
+        linkedin: userLogin.socials ? userLogin.socials.linkedin : "",
+        twitter: userLogin.socials ? userLogin.socials.twitter : "",
+        instagram: userLogin.socials ? userLogin.socials.instagram : "",
+      });
+    }
   }, [dispatch, user, userLogin]);
 
   useEffect(() => {
@@ -135,7 +139,6 @@ export default function UserAccComp() {
     alert("User information updated");
   };
 
-
   const handleDeleteAccount = async (e) => {
     e.preventDefault(e);
 
@@ -193,144 +196,199 @@ export default function UserAccComp() {
     };
   };
 
-  const inputStyle= 'bg-inherit appearance-none rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none backdrop-blur-xl bg-white/50 '
+  const inputStyle =
+    "bg-inherit appearance-none rounded py-2 px-4 text-gray-700  focus:outline-none backdrop-blur-xl bg-white/50 ";
 
-  const labelStyle = 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
+  const labelStyle =
+    "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4";
 
+  const buttonStyle =
+    " border-transparent border-4 absolute text-teal-600 hover:text-teal-800 text-sm py-1 px-2 rounded place-content-center";
 
-  const buttonStyle = 'flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded'
+  const buttonSubmit =
+    " border-transparent border-4 border-green-400 mb-2 place-self-center  text-teal-600 hover:text-teal-800 text-sm py-1 px-2 rounded ";
 
-  const buttonStyle2='bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'
-  return(
+  const buttonStyle2 =
+    "bg-teal-500 hover:bg-teal-700 place-content-center border-teal-500 hover:border-teal-700 text-sm border-4 w-fit mx-auto text-white py-1 px-2 rounded";
+  return (
     <div className={style.UserAccCompContainer}>
-      <h1>User Account Info</h1>
-
-      {userLogin?.sub?.includes('auth0')? 
-      
-      <div> 
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle} >Email:</label>
-          <input className={inputStyle} type='email' value={userLogin?.email} disabled />
-        </div>
-        <form onSubmit={e => validateEmail(e)} className={style.UserAccCompItem} >
-          <label className={labelStyle}>Change Email:</label>
-          <input className={inputStyle} type='email' onChange={e => setEmail(e.target.value)} />
-          <button className={buttonStyle} type='submit'>SUBMIT</button>
-        </form>
-        {errors.email? (<p>{errors.email}</p>) : "" }
-        <form onSubmit={e => validatePassword(e)}>
+      <div className={style.UserAccCompWrap}>
+        <h1>User Account Info</h1>
+        {userLogin?.sub?.includes("auth0") ? (
+          <div className={[style.flexCol, style.formMargin]}>
+            <div className={style.UserAccCompItem}>
+              <label className={labelStyle}>Email:</label>
+              <input
+                className={inputStyle}
+                type="email"
+                value={userLogin?.email}
+                disabled
+              />
+            </div>
+            <form
+              onSubmit={(e) => validateEmail(e)}
+              className={style.UserAccCompItem}
+            >
+              <label className={labelStyle}>Change Email:</label>
+              <input
+                className={inputStyle}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button className={buttonStyle} type="submit">
+                SUBMIT
+              </button>
+            </form>
+            {errors.email ? <p>{errors.email}</p> : ""}
+            <form
+              className={style.flexCol}
+              onSubmit={(e) => validatePassword(e)}
+            >
+              <div className={style.UserAccCompItem}>
+                <label className={labelStyle}>New password:</label>
+                <input
+                  className={inputStyle}
+                  id="passwordInput"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              {errors.password?.map((e) => {
+                return <p key={e}>{e}</p>;
+              })}
+              <div className={style.UserAccCompItem}>
+                <label className={labelStyle}>Repeat password:</label>
+                <input
+                  className={inputStyle}
+                  id="passwordInputRepeat"
+                  type="password"
+                  value={passwordRepeat}
+                  onChange={(e) => setPasswordRepeat(e.target.value)}
+                />
+                <button className={buttonStyle} type="submit">
+                  SUBMIT
+                </button>
+              </div>
+              <div className={style.showPassword}>
+                <button
+                  className={buttonStyle2}
+                  type="checkbox"
+                  onClick={(e) => showPassword(e)}
+                >
+                  SHOW
+                </button>
+              </div>
+              {errors.passwordRepeat ? <p>{errors.passwordRepeat}</p> : ""}
+            </form>
+          </div>
+        ) : (
+          <div className={[style.flexCol, style.formMargin]} >
+            <div className={style.UserAccCompItem}>
+              <label className={labelStyle}>Email:</label>
+              <input
+                className={inputStyle}
+                type="email"
+                value={userLogin?.email}
+                disabled
+              />
+            </div>
+          </div>
+        )}
+        <form
+          className={[style.flexCol, style.formMargin]}
+          onSubmit={(e) => handleSubmitProfile(e)}
+        >
+          <div className={style.UserAccCompAbout}>
+            <label className={labelStyle}>About me:</label>
+            <textarea
+              className={inputStyle}
+              type="text"
+              maxLength="255"
+              rows="5"
+              placeholder={userLogin.info && userLogin.info}
+              value={aboutUser}
+              onChange={(e) => setAboutUser(e.target.value)}
+            />
+          </div>
           <div className={style.UserAccCompItem}>
-            <label className={labelStyle}>New password:</label>
-            <input className={inputStyle} id='passwordInput' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
+            <label className={labelStyle}>Instagram:</label>
+            <input
+              className={inputStyle}
+              type="text"
+              name="instagram"
+              value={socials?.instagram}
+              onChange={handleChangeSocials}
+              placeholder={userLogin?.socials?.instagram}
+            />
           </div>
-          {errors.password?.map(e => {
-            return (<p key={e}>{e}</p>)})}
           <div className={style.UserAccCompItem}>
-            <label className={labelStyle}>Repeat password:</label>
-            <input className={inputStyle} id='passwordInputRepeat' type='password' value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} />
-            <button className={buttonStyle} type='submit'>SUBMIT</button>
+            <label className={labelStyle}>Facebook:</label>
+            <input
+              className={inputStyle}
+              type="text"
+              name="facebook"
+              value={socials?.facebook}
+              onChange={handleChangeSocials}
+              placeholder={userLogin?.socials?.facebook}
+            />
           </div>
-          <div className={style.showPassword}>
-            <button className={buttonStyle2}  type="checkbox" onClick={(e) => showPassword(e)}>SHOW</button>
+          <div className={style.UserAccCompItem}>
+            <label className={labelStyle}>LinkedIn:</label>
+            <input
+              className={inputStyle}
+              type="text"
+              name="linkedin"
+              value={socials?.linkedin}
+              onChange={handleChangeSocials}
+              placeholder={userLogin?.socials?.linkedin}
+            />
           </div>
-            {errors.passwordRepeat? (<p>{errors.passwordRepeat}</p>) : "" }
+          <div className={style.UserAccCompItem}>
+            <label className={labelStyle}>Twitter:</label>
+            <input
+              className={inputStyle}
+              type="text"
+              name="twitter"
+              value={socials?.twitter}
+              onChange={handleChangeSocials}
+              placeholder={userLogin?.socials?.twitter}
+            />
+          </div>
+          <div className={style.UserAccCompItem}>
+            <div className={labelStyle}>Update Image:</div>
+            <input
+              onChange={handleImage}
+              type="file"
+              id="formupload"
+              name="image"
+              accept=".png, .jpg, .jpeg"
+              className={style.imgUpload}
+              placeholder="Select file..."
+            />
+          </div>
+          <div className={style.btnForm}>
+            <button type="text" className={buttonSubmit}>
+              SUBMIT
+            </button>
+          </div>
         </form>
+        <Popup
+          trigger={<button className={buttonStyle2}>DELETE ACCOUNT</button>}
+          position="right center"
+        >
+          <div className={style.popupDelete}>
+            <p>Delete account? This action cannot be reversed.</p>
+            <button
+              className={style.submitProfile}
+              onClick={handleDeleteAccount}
+            >
+              {" "}
+              DELETE{" "}
+            </button>
+          </div>
+        </Popup>
       </div>
-    
-      : 
-
-      <div> 
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle}>Email:</label>
-          <input className={inputStyle} type='email' value={userLogin?.email} disabled />
-        </div>
-      </div>
-      }
-
-
-      <form onSubmit={e => handleSubmitProfile(e)}>
-        <div className={style.UserAccCompAbout}>
-          <label className={labelStyle}>About me:</label>
-          <textarea 
-          className={inputStyle}
-          type='text' 
-          maxLength="255"
-          rows='5'
-          placeholder={userLogin.info && userLogin.info}
-          value={aboutUser} 
-          onChange={(e) => setAboutUser(e.target.value)}
-          />
-        </div>
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle}>Instagram:</label>
-          <input className={inputStyle}
-            type='text'
-            name='instagram'
-            value={socials?.instagram}
-            onChange={handleChangeSocials}
-            placeholder={userLogin?.socials?.instagram}
-          />
-        </div>
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle}>Facebook:</label>
-          <input className={inputStyle}
-            type='text'
-            name='facebook'
-            value={socials?.facebook}
-            onChange={handleChangeSocials}
-            placeholder={userLogin?.socials?.facebook}
-          />
-        </div>
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle}>LinkedIn:</label>
-          <input className={inputStyle}
-            type='text'
-            name='linkedin'
-            value={socials?.linkedin}
-            onChange={handleChangeSocials}
-            placeholder={userLogin?.socials?.linkedin}
-          />
-        </div>
-        <div className={style.UserAccCompItem}>
-          <label className={labelStyle}>Twitter:</label>
-          <input className={inputStyle}
-            type='text'
-            name='twitter'
-            value={socials?.twitter}
-            onChange={handleChangeSocials}
-            placeholder={userLogin?.socials?.twitter}
-          />
-        </div>
-
-        <div className={style.imgUpContainer}>
-          <div className={labelStyle}>Update Image:</div>
-          <input
-            onChange={handleImage}
-            type='file'
-            id='formupload'
-            name='image'
-            accept=".png, .jpg, .jpeg"
-            className={style.imgUpload}
-            placeholder='Select file...'
-          />
-        </div>
-        <div className={style.btnForm}>
-          <button
-            type='text'
-            className={buttonStyle2}
-          >
-            SUBMIT
-          </button>
-        </div>
-        
-      </form>
-    <Popup  trigger={<button className={buttonStyle2}>DELETE ACCOUNT</button>} position="right center">
-      <div className={style.popupDelete}>
-        <p>Delete account? This action cannot be reversed.</p>
-        <button className={style.submitProfile} onClick={handleDeleteAccount}> DELETE </button>
-      </div>
-    </Popup>
     </div>
-  )
+  );
 }
-

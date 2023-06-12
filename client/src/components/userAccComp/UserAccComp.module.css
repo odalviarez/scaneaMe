@@ -1,101 +1,105 @@
-.UserAccCompContainer{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: stretch;
-    position: absolute;
-    left:30%;
-    top: 15%;
-    width: 500px;
+.UserAccCompContainer {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
 }
 
-.UserAccCompContainer h1{
-    margin-bottom: 20px;
+.formMargin{
+
+}
+
+.UserAccCompWrap {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  width: 40vw;
+  max-width: 1024px;
+  margin-inline: auto;
+}
+
+.UserAccCompWrap h1 {
+  margin-bottom: 20px;
 }
 
 .UserAccCompItem {
-    width: 400px;
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin-bottom: 10px
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
 }
 
 .UserAccCompItem p {
-    color: red
+  color: red;
 }
 
 .UserAccCompAbout {
-    width: 400px;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin-bottom: 10px;
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-right: 5rem;
 }
 
 .UserAccCompAbout textarea {
-    width: 300px;
-    resize: none;
-    position:relative;
-    left: 18%;
-
+  width: 300px;
+  resize: none;
 }
 
-
-.UserAccCompContainer input{
-    width: 300px;
-    position:absolute;
-    left: 45%;
-
+.UserAccCompContainer input {
+  width: 300px;
+  margin-right: 5rem;
+  margin-bottom: .5rem;
 }
 
-.UserAccCompItem button{
-    height: fit-content;
-    position:absolute;
-    right: 0px;
+.UserAccCompItem button {
 }
 
-.submitProfile{
-    margin-top: 20px;
+.submitProfile {
+  margin-top: 20px;
 }
 
-.imgUpContainer{
-    display: flex;
+.imgUpContainer {
+  display: flex;
 }
 
-.showPassword{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    margin-bottom: 10px;
+.showPassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 10px;
 }
 
-.showPassword button{
-    position: relative;
-    left: 270%;
+.showPassword button {
 }
 
-.imgUpload{
-    cursor: pointer;
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24px;
 }
 
-.popupDelete{
-    background-color: rgba(255, 0, 0, 0.297);
-    display: flex;
-    flex-direction: column;
-}
-.popupDelete button{
-    background-color: rgba(255, 0, 0, 0.297);
+.imgUpload {
+  cursor: pointer;
 }
 
-.btnForm{
-    margin: 30px;
+.popupDelete {
+  background-color: rgba(255, 0, 0, 0.297);
+  display: flex;
+  flex-direction: column;
+}
+.popupDelete button {
+  background-color: rgba(255, 0, 0, 0.297);
+}
+
+.btnForm {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  width: 100%;
 }

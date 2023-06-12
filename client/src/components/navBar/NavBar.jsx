@@ -105,7 +105,7 @@ export default function Navbar() {
                     
                   />
                 </DropdownToggle>
-                <DropdownMenu style={{ position: "absolute", width: "100px"}}>
+                <DropdownMenu style={{ position: "absolute", width: "fit-content"}}>
                   <DropdownItem header>{user.name}</DropdownItem>
                   <DropdownItem
                     tag={RouterNavLink}
